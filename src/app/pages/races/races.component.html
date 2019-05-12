@@ -1,0 +1,16 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Permalink</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let race of races">
+			<td>{{ race.id }}</td>
+			<td>{{ race.name }}</td>
+			<td>{{ race.permalink }}</td>
+		</tr>
+	</tbody>
+</table>
