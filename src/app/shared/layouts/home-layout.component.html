@@ -1,0 +1,67 @@
+<app-header></app-header>
+<main class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 col-xs-12 aside hidden-print">
+			<img src="assets/img/bloodbowl_mini.gif" title="Logo Bloodbowl" alt="Logo Bloodbowl" class="img-responsive center-block logo-aside" />
+			<div class="row">
+				<div class="col-md-12 col-sm-6 col-xs-12">
+					<nav>
+						<div class="list-group">
+							<a class="list-group-item" routerLink="/" title="P&aacute;gina principal de la web">Portada</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/coaches" title="La lista de los entrenadores de BB que participan en la comunidad">Entrenadores</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/photos" title="P&aacute;gina con las fotos que ilustran los torneos de la comunidad">Fotos</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/races" title="Muestra los jugadores de los equipos de cada raza">Razas en BB</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/skills" title="Lista de habilidades que los jugadores pueden usar en Bloodbowl">Habilidades en BB</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/hall-of-fame" title="Donde todos los jugadores quieren estar, pero solo los mejores tienen ese honor">The Hall Of Fame</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/hall-of-death" title="Aquellos que nos han dejado tambi&eacute;n tienen aqu&iacute; su sitio">The Hall Of Death</a>
+							<!--a class="list-group-item" routerLink="/foro" title="Accede a nuestro foro para comentar lo que quieras sobre la liga de Bloodbowl">Foro</a-->
+						</div>
+					</nav>
+				</div>
+				<div class="col-md-12 col-sm-6 col-xs-12">
+					<div id="menu-torneos" *ngIf="tournaments && !tournamentSelected">
+						<h3 class="seccion">Trofeos</h3>
+						<div class="list-group">
+							<a *ngFor="let tournament of tournaments" class="list-group-item" routerLink="tournaments/{{tournament.permalink}}" title="{{tournament.name}} Ria de Nurgle">{{tournament.name}}</a>
+						</div>
+					</div>
+
+					<div id="menu-torneo" *ngIf="tournamentSelected">
+						<h3 class="seccion"><button title="Volver a la lista de torneos" class="btn btn-default" id="ocultar-menu-torneo"><i class="fa fa-angle-left"></i><span class="text-hide">Lista</span></button> {{tournamentSelected.name}}</h3>
+						<div class="list-group">
+							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/teams" title="La lista de equipos que participan en el torneo">Equipos</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/stats" title="Estad&iacute;sticas por jugador, equipo y encuentro">Estad&iacute;sticas</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/experience" title="La experiencia acumulada por los jugadores de cada equipo">Experiencia</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/ranking" title="Los puntos de cada equipo">Clasificaci&oacute;n</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/journeys" title="Selecciona la jornada que quieres ver para echar un vistazo a los partidos que se jugaron" >Jornadas</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/matches" title="Todos los partidos de la copa">Emparejamientos</a>
+							<a *ngIf="tournamentSelected.playoffs" class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/playoffs" title="Los resultados de los playoffs de la liga">PlayOffs</a>
+						</div>
+					</div>
+
+					<?php if($links): ?>
+					<h3>Enlaces</h3>
+					<div id="related_links">
+						<div class="list-group">
+						<?php foreach($links as $link): ?>
+							<?php if($link->publicado==1): ?>
+							<a class="list-group-item" target="_blank" href="<?php echo $link->url; ?>" title="<?php echo $link->description; ?>">
+								<h4 class="list-group-item-heading"><?php echo $link->name; ?></h4>
+								<p class="list-group-item-text"><?php echo $link->description; ?></p>
+							</a>
+							<?php endif; ?>
+						<?php endforeach; ?>
+						</div>
+					</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9 col-xs-12 main-content">
+			<div class="c_body">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+</main>
+<app-footer></app-footer>

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_uri: 'http://localhost:64113/api/'
+  api_uri: 'http://localhost/bloodbowl-back/src/public/'
 };
 
 /*

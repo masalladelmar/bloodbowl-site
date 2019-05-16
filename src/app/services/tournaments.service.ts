@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { Race } from '../models/race.model';
+import { Tournament } from '../models/tournament.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RacesService {
+export class TournamentsService {
 
   constructor(
     private apiService: ApiService
   ) { }
 
-  public getRaces(): Observable<Race[]> {
-    return this.apiService.get('races');
+  getTournaments(): Observable<Tournament[]> {
+    return this.apiService.get('tournaments');
   }
 }

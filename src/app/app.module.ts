@@ -12,6 +12,7 @@ import { CoachesComponent } from './pages/coaches/coaches.component';
 import { TeamsComponent } from './pages/teams/teams.component';
 import { SkillsComponent } from './pages/skills/skills.component';
 import { SkillComponent } from './pages/skills/skill.component';
+import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SkillComponent } from './pages/skills/skill.component';
     CoachesComponent,
     TeamsComponent,
     SkillsComponent,
-    SkillComponent
+    SkillComponent,
+    HomeLayoutComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,16 @@
-export interface Race {
+export interface Tournament{
     id: number;
     name: string;
     permalink: string;
-    re_rolls_cost: number;
+    begin: string;
+    end: string;
     description: string;
-    coat_arms: string;
-    apothecary: boolean;
+    score: string;
+    playoffs: boolean;
+    groups: boolean;
+    page_title: string;
+    page_description: string;
+    page_keywords: string;
     created_at: string;
     updated_at: string;
     deleted_at: string;

@@ -6,14 +6,21 @@ import { CoachesComponent } from './pages/coaches/coaches.component';
 import { TeamsComponent } from './pages/teams/teams.component';
 import { SkillsComponent } from './pages/skills/skills.component';
 import { SkillComponent } from './pages/skills/skill.component';
+import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
 
 const routes: Routes = [
-  { path: 'races', component: RacesComponent },
-  { path: 'coaches', component: CoachesComponent },
-  { path: 'teams', component: TeamsComponent },
-  { path: 'skills', component: SkillsComponent },
-  { path: 'skills/:type', component: SkillComponent },
-  { path: '**', component: NotfoundComponent }
+  {
+    path: '',
+      component: HomeLayoutComponent,
+      children: [
+        { path: 'races', component: RacesComponent },
+        { path: 'coaches', component: CoachesComponent },
+        { path: 'teams', component: TeamsComponent },
+        { path: 'skills', component: SkillsComponent },
+        { path: 'skills/:type', component: SkillComponent },
+        { path: '**', component: NotfoundComponent }
+      ]
+  }
 ];
 
 @NgModule({
