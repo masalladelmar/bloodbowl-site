@@ -17,13 +17,11 @@ export class SkillComponent implements OnInit {
     private skillsService: SkillsService
   ) {
     this.route.paramMap.subscribe(
-      response => {
-        this.type = response.get('type');
-        console.log(this.type);
+      data => {
+        this.type = data.get('type');
         this.skillsService.getSkills(this.type).subscribe(
-          response2 => {
-            this.skills = response2;
-            console.log(this.skills);
+          response => {
+            this.skills = response;
           },
           error => console.log(error)
         );
