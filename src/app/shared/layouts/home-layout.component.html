@@ -1,10 +1,12 @@
 <app-header></app-header>
 <main class="container-fluid">
 	<div class="row">
-		<div class="col-md-3 col-xs-12 aside hidden-print">
-			<img src="assets/img/bloodbowl_mini.gif" title="Logo Bloodbowl" alt="Logo Bloodbowl" class="img-responsive center-block logo-aside" />
+		<div class="col-md-3 aside hidden-print">
+			<div class="text-center mb-2">
+				<img src="assets/img/bloodbowl_mini.gif" title="Logo Bloodbowl" alt="Logo Bloodbowl" class="img-responsive center-block logo-aside" />
+			</div>
 			<div class="row">
-				<div class="col-md-12 col-sm-6 col-xs-12">
+				<div class="col-md-12 col-sm-6">
 					<nav>
 						<div class="list-group">
 							<a class="list-group-item" routerLink="/" title="P&aacute;gina principal de la web">Portada</a>
@@ -18,7 +20,7 @@
 						</div>
 					</nav>
 				</div>
-				<div class="col-md-12 col-sm-6 col-xs-12">
+				<div class="col-md-12 col-sm-6">
 					<div id="menu-torneos" *ngIf="tournaments && !tournamentSelected">
 						<h3 class="seccion">Trofeos</h3>
 						<div class="list-group">
@@ -29,35 +31,29 @@
 					<div id="menu-torneo" *ngIf="tournamentSelected">
 						<h3 class="seccion"><button title="Volver a la lista de torneos" class="btn btn-default" id="ocultar-menu-torneo"><i class="fa fa-angle-left"></i><span class="text-hide">Lista</span></button> {{tournamentSelected.name}}</h3>
 						<div class="list-group">
-							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/teams" title="La lista de equipos que participan en el torneo">Equipos</a>
-							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/stats" title="Estad&iacute;sticas por jugador, equipo y encuentro">Estad&iacute;sticas</a>
-							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/experience" title="La experiencia acumulada por los jugadores de cada equipo">Experiencia</a>
-							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/ranking" title="Los puntos de cada equipo">Clasificaci&oacute;n</a>
-							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/journeys" title="Selecciona la jornada que quieres ver para echar un vistazo a los partidos que se jugaron" >Jornadas</a>
-							<a class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/matches" title="Todos los partidos de la copa">Emparejamientos</a>
-							<a *ngIf="tournamentSelected.playoffs" class="list-group-item" routerLinkActive="active" routerLink="tournaments/{{tournamentSelected.permalink}}/playoffs" title="Los resultados de los playoffs de la liga">PlayOffs</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/teams" title="La lista de equipos que participan en el torneo">Equipos</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/stats" title="Estad&iacute;sticas por jugador, equipo y encuentro">Estad&iacute;sticas</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/experience" title="La experiencia acumulada por los jugadores de cada equipo">Experiencia</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/ranking" title="Los puntos de cada equipo">Clasificaci&oacute;n</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/journeys" title="Selecciona la jornada que quieres ver para echar un vistazo a los partidos que se jugaron" >Jornadas</a>
+							<a class="list-group-item" routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/matches" title="Todos los partidos de la copa">Emparejamientos</a>
+							<a *ngIf="tournamentSelected.playoffs" class="list-group-item" routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/playoffs" title="Los resultados de los playoffs de la liga">PlayOffs</a>
 						</div>
 					</div>
 
-					<?php if($links): ?>
-					<h3>Enlaces</h3>
-					<div id="related_links">
+					<h3 *ngIf="links">Enlaces</h3>
+					<div id="related_links" *ngIf="links">
 						<div class="list-group">
-						<?php foreach($links as $link): ?>
-							<?php if($link->publicado==1): ?>
-							<a class="list-group-item" target="_blank" href="<?php echo $link->url; ?>" title="<?php echo $link->description; ?>">
-								<h4 class="list-group-item-heading"><?php echo $link->name; ?></h4>
-								<p class="list-group-item-text"><?php echo $link->description; ?></p>
+							<a *ngFor="let link of links" class="list-group-item" target="_blank" href="{{link.url}}" title="{{link.description}}">
+								<h4 class="list-group-item-heading">{{link.name}}</h4>
+								<p class="list-group-item-text">{{link.description}}</p>
 							</a>
-							<?php endif; ?>
-						<?php endforeach; ?>
 						</div>
 					</div>
-					<?php endif; ?>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9 col-xs-12 main-content">
+		<div class="col-md-9 main-content">
 			<div class="c_body">
 				<router-outlet></router-outlet>
 			</div>

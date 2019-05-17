@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TournamentsService } from 'src/app/services/tournaments.service';
 import { Tournament } from 'src/app/models/tournament.model';
+import { NavigationLink } from 'src/app/models/link.model';
+import { LinksService } from 'src/app/services/links.service';
 
 @Component({
   selector: 'app-home-layout',
@@ -10,9 +12,11 @@ import { Tournament } from 'src/app/models/tournament.model';
 export class HomeLayoutComponent implements OnInit {
   tournaments: Tournament[];
   tournamentSelected: Tournament;
+  links: NavigationLink[];
 
   constructor(
-    private tournamentService: TournamentsService
+    private tournamentService: TournamentsService,
+    private linksService: LinksService
   ) {
   }
 
@@ -21,6 +25,10 @@ export class HomeLayoutComponent implements OnInit {
       response => {this.tournaments = response; },
       error => {}
     );
-  }
 
+    this.linksService.getLinks().subscribe(
+      response => this.links = response.filter(el => el.published),
+      error => {}
+    );
+  }
 }
