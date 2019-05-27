@@ -1,8 +1,10 @@
-<div class="card-deck">
-  <div class="card" *ngFor="let skill of types">
-    <div class="card-body">
-      <h5 class="card-title">{{ skill.name }}</h5>
-      <a routerLink="/skills/{{ skill.link }}" class="btn btn-outline-success">Ver</a>
+<div class="columns">
+  <div class="column col-6 col-md-12" *ngFor="let skill of types">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ skill.name }}</h5>
+        <a routerLink="/skills/{{ skill.link }}" class="btn btn-outline-success">Ver</a>
+      </div>
     </div>
   </div>
 </div>

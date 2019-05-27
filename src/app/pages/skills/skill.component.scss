@@ -1,0 +1,23 @@
+.accordion-header{
+    cursor: pointer;
+}
+
+.accordion input:checked ~ .accordion-header .icon,
+.accordion[open] .accordion-header .icon {
+  transform: rotate(180deg);
+}
+
+.accordion .accordion-body{
+  margin-bottom: 0;
+}
+
+.card{
+  margin-bottom: .4rem;
+  
+  .card-header{
+    padding-bottom: .8rem;
+  }
+  .card-body{
+    padding-top: 0;
+  }
+}
