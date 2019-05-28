@@ -1,16 +1,14 @@
-<table class="table">
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Nombre</th>
-			<th>Permalink</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let race of races">
-			<td>{{ race.id }}</td>
-			<td>{{ race.name }}</td>
-			<td>{{ race.permalink }}</td>
-		</tr>
-	</tbody>
-</table>
+<div class="loading loading-lg" *ngIf="loading"></div>
+<div class="titulo_post" *ngIf="!loading">
+	<h2 class="text-center">Listado de razas</h2>
+</div>
+<div class="post" *ngIf="!loading">
+	<div class="columns">
+		<div class="column col-3 col-sm-6 col-xs-12" *ngFor="let race of races">
+			<a routerLink="/races/{{race.permalink}}" title="Ver los jugadores y detalles de la raza {{ race.name }}" class="btn-raza-item text-center">
+				<img *ngIf="race.coat_arms" src="assets/img/razas/{{race.coat_arms}}.jpg" alt="{{ race.name }}" class="img-responsive p-centered" /><br />
+				<span>{{ race.name }}</span>
+			</a>
+		</div>
+	</div>
+</div>

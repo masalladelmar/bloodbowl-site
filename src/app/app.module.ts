@@ -14,6 +14,8 @@ import { SkillsComponent } from './pages/skills/skills.component';
 import { SkillComponent } from './pages/skills/skill.component';
 import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
 import { RaceComponent } from './pages/races/race.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { RaceComponent } from './pages/races/race.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

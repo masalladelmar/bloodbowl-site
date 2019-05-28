@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/ngx-toastr/toastr.css",
               "src/assets/css/spectre.min.css",
               "src/assets/css/spectre-exp.min.css",
               "src/styles.scss"

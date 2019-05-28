@@ -8,6 +8,7 @@ import { Position } from 'src/app/models/position.model';
 import { StarplayersService } from 'src/app/services/starplayers.service';
 import { forkJoin } from 'rxjs';
 import { SkillsService } from 'src/app/services/skills.service';
+import { CommonsService } from 'src/app/services/commons.service';
 
 @Component({
   selector: 'app-race',
@@ -25,7 +26,8 @@ export class RaceComponent implements OnInit {
     private racesService: RacesService,
     private positionsService: PositionsService,
     private starplayersService: StarplayersService,
-    private skillsService: SkillsService
+    private skillsService: SkillsService,
+    private commonsService: CommonsService
   ) {
     this.loading = true;
     this.route.paramMap.subscribe(
@@ -64,13 +66,13 @@ export class RaceComponent implements OnInit {
                 this.loading = false;
               },
               error => {
-                console.error(error);
+                this.commonsService.handleError(error);
                 this.loading = false;
               }
             );
           },
           error => {
-            console.error(error);
+            this.commonsService.handleError(error);
             this.loading = false;
           }
         );
