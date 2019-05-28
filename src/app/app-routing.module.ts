@@ -7,6 +7,7 @@ import { TeamsComponent } from './pages/teams/teams.component';
 import { SkillsComponent } from './pages/skills/skills.component';
 import { SkillComponent } from './pages/skills/skill.component';
 import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
+import { RaceComponent } from './pages/races/race.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       component: HomeLayoutComponent,
       children: [
         { path: 'races', component: RacesComponent },
+        { path: 'races/:race', component: RaceComponent },
         { path: 'coaches', component: CoachesComponent },
         { path: 'teams', component: TeamsComponent },
         { path: 'skills', component: SkillsComponent },

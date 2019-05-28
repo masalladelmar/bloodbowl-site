@@ -1,0 +1,71 @@
+<div class="loading loading-lg" *ngIf="loading"></div>
+<div class="titulo_post" *ngIf="!loading">
+  <h2 class="text-center">Jugadores de los equipos de {{race?.name}}</h2>
+</div>
+<div class="post" *ngIf="!loading">
+  <div class="clearfix">
+    <figure class="float-right" *ngIf="race.coat_arms">
+      <img src="assets/img/razas/{{race.coat_arms}}.jpg" alt="{{race.name}}" class="img-responsive" /><br />
+    </figure>
+    <p>Pueden tener de 0-8 segundas oportunidades: {{race.reroll_cost/1000}}k MO cada una</p>
+    <p *ngIf="race.description">Apuntes importantes: {{race.description}}</p>
+  </div>
+  <table class="table table-condensed table-striped" *ngIf="positions">
+    <thead>
+      <tr>
+        <th title="L&iacute;mite" style="width:5%;">L&iacute;mite</th>
+        <th title="Denominaci&oacute;n" style="width:15%;">Denominaci&oacute;n</th>
+        <th title="Coste" style="width:10%;">Coste</th>
+        <th title="Movimiento" style="width:5%;">MO</th>
+        <th title="Fuerza" style="width:5%;">FU</th>
+        <th title="Agilidad" style="width:5%;">AG</th>
+        <th title="Armadura" style="width:5%;">AR</th>
+        <th title="Habilidades" style="width:30%;">Habilidades</th>
+        <th title="Habilidades disponibles con tirada normal" style="width:10%;">Normal</th>
+        <th title="Habilidades disponibles con tirada de dobles" style="width:10%;">Dobles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let position of positions">
+        <td class="text-center">0-{{position.limit}}</td>
+        <td>{{position.name}}</td>
+        <td class="text-center">{{position.price/1000}}k</td>
+        <td class="text-center">{{position.ma}}</td>
+        <td class="text-center">{{position.st}}</td>
+        <td class="text-center">{{position.ag}}</td>
+        <td class="text-center">{{position.av}}</td>
+        <td>{{position.skills}}</td>
+        <td>{{position.normal}}</td>
+        <td>{{position.doubles}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 *ngIf="star_players">Jugadores estrella que pueden alquilar</h2>
+  <table class="table table-condensed table-striped" *ngIf="star_players">
+    <thead>
+      <tr>
+        <th title="Nombre del jugador estrella" style="width:15%;">Nombre</th>
+        <th title="Habilidades" style="width:30%;">Habilidades</th>
+        <th title="Coste" style="width:10%;">Coste</th>
+        <th title="Movimiento" style="width:5%;">MO</th>
+        <th title="Fuerza" style="width:5%;">FU</th>
+        <th title="Agilidad" style="width:5%;">AG</th>
+        <th title="Armadura" style="width:5%;">AR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let star of star_players">
+        <td>{{star.name}}</td>
+        <td>{{star.skills}}</td>
+        <td class="text-center">{{star.price/1000}}k</td>
+        <td class="text-center">{{star.ma}}</td>
+        <td class="text-center">{{star.st}}</td>
+        <td class="text-center">{{star.ag}}</td>
+        <td class="text-center">{{star.av}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a routerLink="/races" title="Volver a la lista de razas" class="btn btn-primary">Volver a la lista</a>
+</div>

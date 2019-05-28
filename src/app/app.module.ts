@@ -13,6 +13,7 @@ import { TeamsComponent } from './pages/teams/teams.component';
 import { SkillsComponent } from './pages/skills/skills.component';
 import { SkillComponent } from './pages/skills/skill.component';
 import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
+import { RaceComponent } from './pages/races/race.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
     TeamsComponent,
     SkillsComponent,
     SkillComponent,
-    HomeLayoutComponent
+    HomeLayoutComponent,
+    RaceComponent
   ],
   imports: [
     BrowserModule,

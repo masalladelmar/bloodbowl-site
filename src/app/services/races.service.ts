@@ -15,4 +15,8 @@ export class RacesService {
   public getRaces(): Observable<Race[]> {
     return this.apiService.get('races');
   }
+
+  getRace(race: string): Observable<Race> {
+    return this.apiService.get(`races/${race}`);
+  }
 }
