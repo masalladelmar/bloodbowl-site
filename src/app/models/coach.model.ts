@@ -1,3 +1,5 @@
+import { Team } from './team.model';
+
 export interface Coach {
     id: number;
     name: string;
@@ -7,4 +9,5 @@ export interface Coach {
     created_by: number;
     updated_by: number;
     deleted_by: number;
+    teams: Team[];
 }

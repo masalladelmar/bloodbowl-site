@@ -38,7 +38,6 @@ export class ApiService {
   }
 
   private handleError (error: Response | any) {
-    console.error('ApiService::handleError', error);
-    return throwError(error.error);
+    return throwError(error);
   }
 }

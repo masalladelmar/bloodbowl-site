@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SkillsService } from 'src/app/services/skills.service';
 import { Skill } from 'src/app/models/skill.model';
+import { CommonsService } from 'src/app/services/commons.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-skill',
@@ -12,26 +14,34 @@ export class SkillComponent implements OnInit {
   type: string;
   skills: Skill[];
   title: string;
+  loading: boolean;
 
   constructor(
     private route: ActivatedRoute,
-    private skillsService: SkillsService
+    private skillsService: SkillsService,
+    private commonsService: CommonsService
   ) {
+    this.loading = true;
     this.route.paramMap.subscribe(
       data => {
         this.type = data.get('type');
 
-        this.skillsService.getTypes().subscribe(
+        forkJoin(
+          this.skillsService.getTypes(),
+          this.skillsService.getSkills(this.type)
+        )
+        .subscribe(
           response => {
-            this.title = response.find(el => el.link === this.type).name;
-          }
-        );
-
-        this.skillsService.getSkills(this.type).subscribe(
-          response => {
-            this.skills = response;
+            this.title = response[0].find(el => el.link === this.type).name;
+            this.skills = response[1];
+            this.loading = false;
           },
-          error => console.log(error)
+          error => {
+            this.commonsService.handleError(error.status === 500
+              ? 'Se ha producido un error al recuperar las habilidades'
+              : error.message);
+            this.loading = false;
+          }
         );
       }
     );

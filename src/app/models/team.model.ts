@@ -1,5 +1,3 @@
-import { Race } from './race.model';
-import { Coach } from './coach.model';
 import { Player } from './player.model';
 
 export interface Team {
@@ -13,7 +11,7 @@ export interface Team {
     apothecary: boolean;
     treasury: number;
     value: number;
-    race: Race;
-    coach: Coach;
+    race_id: number;
+    coach_id: number;
     players: Player[];
 }

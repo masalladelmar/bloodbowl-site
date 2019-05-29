@@ -27,7 +27,9 @@ export class TournamentComponent implements OnInit {
             this.loading = false;
           },
           error => {
-            this.commonsService.handleError(error);
+            this.commonsService.handleError(error.status === 500
+              ? 'Se ha producido un error al recuperar los datos del torneo'
+              : error.message);
             this.loading = false;
           }
         );

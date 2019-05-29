@@ -66,13 +66,17 @@ export class RaceComponent implements OnInit {
                 this.loading = false;
               },
               error => {
-                this.commonsService.handleError(error);
+                this.commonsService.handleError(error.status === 500
+                  ? 'Se ha producido un error al recuperar las posiciones y estrellas de la raza'
+                  : error.message);
                 this.loading = false;
               }
             );
           },
           error => {
-            this.commonsService.handleError(error);
+            this.commonsService.handleError(error.status === 500
+              ? 'Se ha producido un error al recuperar los datos de la raza'
+              : error.message);
             this.loading = false;
           }
         );

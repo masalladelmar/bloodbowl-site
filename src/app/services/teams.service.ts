@@ -13,19 +13,19 @@ export class TeamsService {
     private apiService: ApiService
   ) { }
 
-  get_teams(): Observable<Team[]> {
+  getTeams(): Observable<Team[]> {
     return this.apiService.get('teams');
   }
 
-  get_tournament_teams(tournament_name: string): Observable<Team[]> {
+  getTournamentTeams(tournament_name: string): Observable<Team[]> {
     return this.apiService.get('tournament_teams', new HttpParams().set('tournament_name', tournament_name));
   }
 
-  get_by_id(id: number): Observable<Team> {
+  getTeamById(id: number): Observable<Team> {
     return this.apiService.get('team', new HttpParams().set('id', id.toString()));
   }
 
-  get(name: string): Observable<Team> {
+  getTeam(name: string): Observable<Team> {
     return this.apiService.get('team', new HttpParams().set('name', name));
   }
 }
