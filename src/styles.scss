@@ -1,5 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+    font-family: Gutcruncher;
+    src: url("assets/fonts/Gutcruncher.otf") format("opentype");
+}
+
+body{
+    background: url(assets/img/background.jpg) top center no-repeat fixed;
+    background-size: cover;
+}
+
+h1, h2{
+	font-family: Gutcruncher, Helvetica, sans-serif;
+}
+
+h3, h4{
+	font-family: Candara, Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+}
+
 .toast{
     margin-bottom: 20px;
+}
+
+.c-body{
+    padding: .5rem 1rem;
+}
+
+.c-header{
+    padding: .5rem 1rem;
+    background: url(assets/img/c-header.jpg) left top no-repeat;
+    background-size: cover;
+
+    h2{
+        color: white;
+        margin: 0;
+    }
 }
