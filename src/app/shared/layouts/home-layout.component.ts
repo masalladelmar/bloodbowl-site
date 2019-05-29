@@ -1,26 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TournamentsService } from 'src/app/services/tournaments.service';
 import { Tournament } from 'src/app/models/tournament.model';
 import { NavigationLink } from 'src/app/models/link.model';
 import { LinksService } from 'src/app/services/links.service';
+import { CommonsService } from 'src/app/services/commons.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home-layout',
   templateUrl: './home-layout.component.html',
   styleUrls: ['./home-layout.component.scss']
 })
-export class HomeLayoutComponent implements OnInit {
+export class HomeLayoutComponent implements OnInit, OnDestroy {
   tournaments: Tournament[];
   tournamentSelected: Tournament;
   links: NavigationLink[];
+  title: string;
+  loading: boolean;
+  tourselected$: Subscription;
+  title$: Subscription;
+  loading$: Subscription;
 
   constructor(
     private tournamentService: TournamentsService,
-    private linksService: LinksService
+    private linksService: LinksService,
+    private commonsService: CommonsService
   ) {
+    this.loading = false;
   }
 
   ngOnInit() {
+    // Suscripciones del servicio común
+    this.tourselected$ = this.commonsService.getTournament().subscribe(
+      data => this.tournamentSelected = data
+    );
+    this.title$ = this.commonsService.getTitle().subscribe(
+      data => this.title = data
+    );
+    this.loading$ = this.commonsService.getLoading().subscribe(
+      data => this.loading = data
+    );
+
+    // Datos para la navegación
     this.tournamentService.getTournaments().subscribe(
       response => this.tournaments = response,
       error => {}
@@ -30,5 +51,15 @@ export class HomeLayoutComponent implements OnInit {
       response => this.links = response,
       error => {}
     );
+  }
+
+  ngOnDestroy() {
+    this.tourselected$.unsubscribe();
+    this.title$.unsubscribe();
+    this.loading$.unsubscribe();
+  }
+
+  clearTournament() {
+    this.tournamentSelected = null;
   }
 }

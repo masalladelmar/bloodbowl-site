@@ -12,14 +12,19 @@ import { TeamsService } from 'src/app/services/teams.service';
 })
 export class CoachesComponent implements OnInit {
   coaches: Coach[];
-  loading: boolean;
 
   constructor(
     private coachesService: CoachesService,
     private commonsService: CommonsService,
     private teamsService: TeamsService
   ) {
-    this.loading = true;
+
+  }
+
+  ngOnInit() {
+    console.log('activar');
+    this.commonsService.setLoading(true);
+    this.commonsService.setTitle('Listado de entrenadores');
     forkJoin(
       this.coachesService.getCoaches(),
       this.teamsService.getTeams()
@@ -37,18 +42,17 @@ export class CoachesComponent implements OnInit {
           }
         });
 
-        this.loading = false;
+        console.log('finalizada');
+        this.commonsService.setLoading(false);
       },
       error => {
         this.commonsService.handleError(error.status === 500
           ? 'Se ha producido un error al recuperar los entrenadores'
           : error.message);
-        this.loading = false;
+        console.log('error');
+        this.commonsService.setLoading(false);
       }
     );
-  }
-
-  ngOnInit() {
   }
 
 }

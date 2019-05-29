@@ -17,9 +17,9 @@ export class RacesComponent implements OnInit {
     private commonsService: CommonsService
   ) {
     this.loading = true;
-  }
+    this.commonsService.setTitle('Listado de razas');
 
-  ngOnInit() {
+
     this.raceService.getRaces().subscribe(
       data => {
         this.races = data;
@@ -32,5 +32,8 @@ export class RacesComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  ngOnInit() {
   }
 }

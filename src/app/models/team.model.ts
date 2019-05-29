@@ -12,6 +12,8 @@ export interface Team {
     treasury: number;
     value: number;
     race_id: number;
+    race_name: string;
     coach_id: number;
+    coach_name: string;
     players: Player[];
 }

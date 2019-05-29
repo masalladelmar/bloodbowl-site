@@ -17,6 +17,8 @@ import { RaceComponent } from './pages/races/race.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TournamentComponent } from './pages/tournaments/tournament.component';
+import { CoachComponent } from './pages/coaches/coach.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { TournamentComponent } from './pages/tournaments/tournament.component';
     SkillComponent,
     HomeLayoutComponent,
     RaceComponent,
-    TournamentComponent
+    TournamentComponent,
+    CoachComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

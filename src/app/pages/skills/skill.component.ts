@@ -13,7 +13,6 @@ import { forkJoin } from 'rxjs';
 export class SkillComponent implements OnInit {
   type: string;
   skills: Skill[];
-  title: string;
   loading: boolean;
 
   constructor(
@@ -32,7 +31,7 @@ export class SkillComponent implements OnInit {
         )
         .subscribe(
           response => {
-            this.title = response[0].find(el => el.link === this.type).name;
+            this.commonsService.setTitle(response[0].find(el => el.link === this.type).name);
             this.skills = response[1];
             this.loading = false;
           },

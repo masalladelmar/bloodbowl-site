@@ -8,6 +8,7 @@
     height: 3rem;
     width: 13rem;*/
     padding-top: .5rem;
+    height: 60px;
 }
 
 .menus{
@@ -19,7 +20,7 @@
     bottom: 1.5rem;
     width: 13rem;*/
     background-color: white;
-    background-color: rgba($color: #fff, $alpha: 0.8);
+    background-color: rgba($color: #fff, $alpha: 0.9);
 
     .menu{
         background: none;
@@ -31,8 +32,7 @@
 
 .off-canvas .off-canvas-content{
     background-color: white;
-    background-color: rgba($color: #fff, $alpha: 0.8);
+    background-color: rgba($color: #fff, $alpha: 0.9);
     margin-left: .4rem;
-    margin-right: .4rem;
     padding: 0;
 }

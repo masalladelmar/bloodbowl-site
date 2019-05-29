@@ -1,0 +1,102 @@
+<div *ngFor="let team of teams">
+  <h3 class="clearfix">{{team.name}}<a routerLink="/print-team/{{team.permalink}}" target="_blank" title="Versi&oacute;n del equipo para imprimir" class="btn btn-primary float-right"><i class="fa fa-print"></i> Versi&oacute;n para imprimir</a></h3>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th title="Raza del equipo">Raza</th>
+      <th title="Tesorer&iacute;a">Tesorer&iacute;a</th>
+      <th title="Segundas Oportunidades">Segundas</th>
+      <th title="Factor de Hinchas">Hinchas</th>
+      <th title="Ayudantes del entrenador">Ayudantes</th>
+      <th title="Animadoras">Animadoras</th>
+      <th title="Apotecario">Apotecario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">{{team.race_name}}</td>
+      <td class="text-center">{{number_format(team.treasury)}} mo</td>
+      <td class="text-center">{{team.rerolls}}</td>
+      <td class="text-center">{{team.fan_factor}}</td>
+      <td class="text-center">{{team.assistants}}</td>
+      <td class="text-center">{{team.cheerleaders}}</td>
+      <td class="text-center">{{team.apothecary==1 ? "Si" : "No"}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="7" class="text-right"><b>Coste de los extras: {{addons(team)/1000}}k</b></td>
+    </tr>
+  </tfoot>
+  </table>
+
+  <!--
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th title="Dorsal">#</th>
+      <th title="Nombre">Nombre</th>
+      <th title="Posici&oacute;n">Posici&oacute;n</th>
+      <th title="Movimiento">MO</th>
+      <th title="Fuerza">FU</th>
+      <th title="Agilidad">AG</th>
+      <th title="Armadura">AR</th>
+      <th title="Habilidades">Habilidades</th>
+      /****
+      <th title="Heridas">INJ</th>
+      <th title="Pases Completos">COM</th>
+      <th title="Touch Downs">TD</th>
+      <th title="Intercepciones">INT</th>
+      <th title="Bajas">CAS</th>
+      <th title="Mejor Jugador del Encuentro">MVP</th>
+      ****/
+      <th title="Puntos de Experiencia">SPP</th>
+      <th title="Coste">Coste</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php
+  $coste_jugadores = $num_jugadores = 0;
+  foreach($equipo->jugadores as $jugador){
+    if ($jugador->INJ=="") {
+      $num_jugadores++;
+      $coste_jugadores += $jugador->coste;
+    }
+    ?>
+    <tr>
+      <td class="text-center"><?php echo $jugador->dorsal?></td>
+      <td style="overflow: hidden; white-space: nowrap; max-width: 150px; text-overflow: ellipsis;" title="<?php echo $jugador->nombre?>"><?php echo $jugador->nombre?></td>
+      <td><?php echo $posiciones[$jugador->posicion_id]?></td>
+      <td class="text-center"><?php echo $jugador->MO?></td>
+      <td class="text-center"><?php echo $jugador->FU?></td>
+      <td class="text-center"><?php echo $jugador->AG?></td>
+      <td class="text-center"><?php echo $jugador->AR?></td>
+      <td><?php echo $jugador->SKI?></td>
+      /*****
+      <td><?php /* echo $jugador->INJ?></td>
+      <td class="text-center"><?php echo ($jugador->COM!=0) ? $jugador->COM : "-" ?></td>
+      <td class="text-center"><?php echo ($jugador->TD!=0) ? $jugador->TD : "-" ?></td>
+      <td class="text-center"><?php echo ($jugador->INT!=0) ? $jugador->INT : "-" ?></td>
+      <td class="text-center"><?php echo ($jugador->CAS!=0) ? $jugador->CAS : "-" ?></td>
+      <td class="text-center"><?php echo ($jugador->MVP!=0) ? $jugador->MVP : "-"*/ ?></td>
+      *****/
+      <td class="text-center"><?php echo ($jugador->SPP!=0) ? $jugador->SPP : "-" ?></td>
+      <td <?php echo ($jugador->INJ!="" ? 'style="text-decoration:line-through"' : '' )?>><?php echo ($jugador->coste/1000)."k"?></td>
+    </tr>
+  <?php
+  } //fin del bucle de la tabla
+  ?>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5">Total de jugadores: <?php echo $num_jugadores?></td>
+      <td colspan="4" class="text-right"><b>Coste jugadores:</b></td>
+      <td><b><?php echo ($coste_jugadores/1000)."k"?></b></td>
+    </tr>
+  </tfoot>
+  </table>
+  <div class="text-right"><b>Valor del equipo (VE): <?php echo number_format($extras + $coste_jugadores, 0, '', '.')?> monedas de oro</b></div>
+  <hr>
+  <?php endforeach; ?>
+  -->
+</div>

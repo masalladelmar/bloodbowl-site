@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SkillsService } from 'src/app/services/skills.service';
 import { SkillType } from 'src/app/models/skill.model';
+import { CommonsService } from 'src/app/services/commons.service';
 
 @Component({
   selector: 'app-skills',
@@ -11,8 +12,11 @@ export class SkillsComponent implements OnInit {
   types: SkillType[];
 
   constructor(
-    private skillsService: SkillsService
-  ) {}
+    private skillsService: SkillsService,
+    private commonsService: CommonsService
+  ) {
+    this.commonsService.setTitle('Tipos de habilidades');
+  }
 
   ngOnInit() {
     this.skillsService.getTypes().subscribe(

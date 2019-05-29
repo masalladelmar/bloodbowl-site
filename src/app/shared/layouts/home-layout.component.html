@@ -46,7 +46,7 @@
 			</div>
 
 			<div id="menu-torneo" *ngIf="tournamentSelected">
-				<h3 class="seccion"><button title="Volver a la lista de torneos" class="btn btn-default" id="ocultar-menu-torneo"><i class="fa fa-angle-left"></i><span class="text-hide">Lista</span></button> {{tournamentSelected.name}}</h3>
+				<h3 class="seccion"><button title="Volver a la lista de torneos" class="btn btn-default" (click)="clearTournament()"><i class="fa fa-angle-left"></i><span class="text-hide">Lista</span></button> {{tournamentSelected.name}}</h3>
 				<div class="menu">
 					<li class="menu-item">
 						<a routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/teams" title="La lista de equipos que participan en el torneo">Equipos</a>
@@ -89,7 +89,13 @@
 	<a class="off-canvas-overlay" href="#close"></a>
 
 	<div class="off-canvas-content">
-		<router-outlet></router-outlet>
+		<div class="loading loading-lg" *ngIf="loading"></div>
+		<div class="c-header" *ngIf="!loading">
+			<h2>{{title}}</h2>
+		</div>
+		<div class="c-body" *ngIf="!loading">
+			<router-outlet></router-outlet>
+		</div>
 	</div>
 </main>
 

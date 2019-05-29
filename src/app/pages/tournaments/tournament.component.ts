@@ -24,6 +24,8 @@ export class TournamentComponent implements OnInit {
         this.tournamentsService.getTournament(data.get('tournament')).subscribe(
           response => {
             this.tournament = response;
+            this.commonsService.setTournament(response);
+            this.commonsService.setTitle(response.name + ' Ria de Nurgle');
             this.loading = false;
           },
           error => {

@@ -1,20 +1,14 @@
-<div class="loading loading-lg" *ngIf="loading"></div>
-<div class="c-header" *ngIf="!loading">
-    <h2>{{title}}</h2>
-</div>
-<div class="c-body" *ngIf="!loading">
-  <div class="accordion card" *ngFor="let skill of skills">
-    <input type="checkbox" id="accordion-{{skill.id}}" name="accordion-checkbox" hidden>
-    <label class="accordion-header card-header" [for]="'accordion-' + skill.id">
-      {{ skill.name_es }} ({{skill.name_en}})
-      <i class="fa fa-chevron-down icon"></i>
-    </label>
-    <div class="accordion-body">
-      <div class="card-body">
-        {{ skill.description }}
-      </div>
+<div class="accordion card" *ngFor="let skill of skills">
+  <input type="checkbox" id="accordion-{{skill.id}}" name="accordion-checkbox" hidden>
+  <label class="accordion-header card-header" [for]="'accordion-' + skill.id">
+    {{ skill.name_es }} ({{skill.name_en}})
+    <i class="fa fa-chevron-down icon"></i>
+  </label>
+  <div class="accordion-body">
+    <div class="card-body">
+      {{ skill.description }}
     </div>
   </div>
-
-  <a routerLink="/skills" title="Volver a la lista de tipos" class="btn btn-primary">Volver a los tipos</a>
 </div>
+
+<a routerLink="/skills" title="Volver a la lista de tipos" class="btn btn-primary">Volver a los tipos</a>
