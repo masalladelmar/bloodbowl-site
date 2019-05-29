@@ -22,12 +22,12 @@ export class HomeLayoutComponent implements OnInit {
 
   ngOnInit() {
     this.tournamentService.getTournaments().subscribe(
-      response => {this.tournaments = response; },
+      response => this.tournaments = response,
       error => {}
     );
 
     this.linksService.getLinks().subscribe(
-      response => this.links = response.filter(el => el.published),
+      response => this.links = response,
       error => {}
     );
   }

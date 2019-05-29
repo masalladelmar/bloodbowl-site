@@ -1,22 +1,25 @@
 .off-canvas-sidebar{
     width: 13rem;
+    background: none;
 }
 
 .logo {
-    position: fixed;
+    /*position: fixed;
     height: 3rem;
-    padding-top: 1rem;
-    width: 13rem;
+    width: 13rem;*/
+    padding-top: .5rem;
 }
 
 .menus{
-    bottom: 1.5rem;
     -webkit-overflow-scrolling: touch;
     overflow-y: auto;
     padding: .5rem;
-    position: fixed;
+    /*position: fixed;
     top: 3rem;
-    width: 13rem;
+    bottom: 1.5rem;
+    width: 13rem;*/
+    background-color: white;
+    background-color: rgba($color: #fff, $alpha: 0.8);
 
     .menu{
         background: none;
@@ -27,5 +30,9 @@
 }
 
 .off-canvas .off-canvas-content{
-    padding: 0 1rem;
+    background-color: white;
+    background-color: rgba($color: #fff, $alpha: 0.8);
+    margin-left: .4rem;
+    margin-right: .4rem;
+    padding: 0;
 }

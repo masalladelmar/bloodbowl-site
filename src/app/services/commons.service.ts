@@ -11,8 +11,14 @@ export class CommonsService {
   ) {}
 
   handleError(message: string) {
-    this.toastr.success(message, null, {
+    this.toastr.error(message, null, {
       toastClass: 'toast toast-error'
+    });
+  }
+
+  handleSuccess(message: string) {
+    this.toastr.success(message, null, {
+      toastClass: 'toast toast-success'
     });
   }
 }

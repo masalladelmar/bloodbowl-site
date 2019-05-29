@@ -11,6 +11,7 @@ import { Skill } from 'src/app/models/skill.model';
 export class SkillComponent implements OnInit {
   type: string;
   skills: Skill[];
+  title: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,6 +20,13 @@ export class SkillComponent implements OnInit {
     this.route.paramMap.subscribe(
       data => {
         this.type = data.get('type');
+
+        this.skillsService.getTypes().subscribe(
+          response => {
+            this.title = response.find(el => el.link === this.type).name;
+          }
+        );
+
         this.skillsService.getSkills(this.type).subscribe(
           response => {
             this.skills = response;
