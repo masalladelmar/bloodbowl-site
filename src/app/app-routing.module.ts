@@ -8,6 +8,7 @@ import { SkillsComponent } from './pages/skills/skills.component';
 import { SkillComponent } from './pages/skills/skill.component';
 import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
 import { RaceComponent } from './pages/races/race.component';
+import { TournamentComponent } from './pages/tournaments/tournament.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,8 @@ const routes: Routes = [
         { path: 'teams', component: TeamsComponent },
         { path: 'skills', component: SkillsComponent },
         { path: 'skills/:type', component: SkillComponent },
+        // { path: 'tournaments', component: },
+        { path: 'tournaments/:tournament', component: TournamentComponent },
         { path: '**', component: NotfoundComponent }
       ]
   }

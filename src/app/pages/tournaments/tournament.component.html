@@ -1,0 +1,10 @@
+<div class="loading loading-lg" *ngIf="loading"></div>
+<div class="c-header" *ngIf="!loading">
+  <h2>{{tournament.name}} Ria de Nurgle</h2>
+</div>
+<section class="c-body" *ngIf="!loading">
+  <p><small>{{tournament.created_at | date: 'dd/MM/yyyy'}}</small></p>
+  <div [innerHtml]="tournament.description"></div>
+  <h3>Sistema de puntuación</h3>
+  <div [innerHtml]="tournament.score"></div>
+</section>

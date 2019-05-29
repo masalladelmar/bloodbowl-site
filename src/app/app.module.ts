@@ -16,6 +16,7 @@ import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
 import { RaceComponent } from './pages/races/race.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TournamentComponent } from './pages/tournaments/tournament.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SkillsComponent,
     SkillComponent,
     HomeLayoutComponent,
-    RaceComponent
+    RaceComponent,
+    TournamentComponent
   ],
   imports: [
     BrowserModule,

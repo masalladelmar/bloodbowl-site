@@ -15,4 +15,8 @@ export class TournamentsService {
   getTournaments(): Observable<Tournament[]> {
     return this.apiService.get('tournaments');
   }
+
+  getTournament(permalink: string): Observable<Tournament> {
+    return this.apiService.get(`tournaments/${permalink}`);
+  }
 }
