@@ -13,14 +13,13 @@ import { forkJoin } from 'rxjs';
 export class SkillComponent implements OnInit {
   type: string;
   skills: Skill[];
-  loading: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private skillsService: SkillsService,
     private commonsService: CommonsService
   ) {
-    this.loading = true;
+    this.commonsService.setLoading(true);
     this.route.paramMap.subscribe(
       data => {
         this.type = data.get('type');
@@ -33,13 +32,13 @@ export class SkillComponent implements OnInit {
           response => {
             this.commonsService.setTitle(response[0].find(el => el.link === this.type).name);
             this.skills = response[1];
-            this.loading = false;
+            this.commonsService.setLoading(false);
           },
           error => {
             this.commonsService.handleError(error.status === 500
               ? 'Se ha producido un error al recuperar las habilidades'
               : error.message);
-            this.loading = false;
+            this.commonsService.setLoading(false);
           }
         );
       }

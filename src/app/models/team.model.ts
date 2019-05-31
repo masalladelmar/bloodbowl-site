@@ -4,7 +4,8 @@ export interface Team {
     id: number;
     name: string;
     permalink: string;
-    re_rolls: number;
+    rerolls: number;
+    reroll_cost: number;
     fan_factor: number;
     assistants: number;
     cheerleaders: number;
@@ -16,4 +17,6 @@ export interface Team {
     coach_id: number;
     coach_name: string;
     players: Player[];
+    players_count: number;
+    players_value: number;
 }

@@ -2,14 +2,14 @@ import { Skill } from './skill.model';
 
 export interface Player {
     id: number;
-    dorsal: number;
+    number: number;
     state: number;
     name: string;
-    movement: number;
-    strength: number;
-    agility: number;
-    armour: number;
-    injured: boolean;
+    ma: number;
+    st: number;
+    ag: number;
+    av: number;
+    injuries: string;
     value: number;
     skills: Skill[];
 }

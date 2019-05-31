@@ -22,7 +22,6 @@ export class CoachesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('activar');
     this.commonsService.setLoading(true);
     this.commonsService.setTitle('Listado de entrenadores');
     forkJoin(
@@ -42,14 +41,12 @@ export class CoachesComponent implements OnInit {
           }
         });
 
-        console.log('finalizada');
         this.commonsService.setLoading(false);
       },
       error => {
         this.commonsService.handleError(error.status === 500
           ? 'Se ha producido un error al recuperar los entrenadores'
           : error.message);
-        console.log('error');
         this.commonsService.setLoading(false);
       }
     );

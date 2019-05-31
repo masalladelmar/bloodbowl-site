@@ -16,18 +16,14 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
   tournamentSelected: Tournament;
   links: NavigationLink[];
   title: string;
-  loading: boolean;
   tourselected$: Subscription;
   title$: Subscription;
-  loading$: Subscription;
 
   constructor(
     private tournamentService: TournamentsService,
     private linksService: LinksService,
     private commonsService: CommonsService
-  ) {
-    this.loading = false;
-  }
+  ) {}
 
   ngOnInit() {
     // Suscripciones del servicio común
@@ -36,9 +32,6 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
     );
     this.title$ = this.commonsService.getTitle().subscribe(
       data => this.title = data
-    );
-    this.loading$ = this.commonsService.getLoading().subscribe(
-      data => this.loading = data
     );
 
     // Datos para la navegación
@@ -56,7 +49,6 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.tourselected$.unsubscribe();
     this.title$.unsubscribe();
-    this.loading$.unsubscribe();
   }
 
   clearTournament() {

@@ -38,3 +38,14 @@ h3, h4{
         margin: 0;
     }
 }
+
+.strike-through{
+    text-decoration: line-through;
+}
+
+.name-col{
+    overflow: hidden; 
+    white-space: nowrap; 
+    max-width: 150px; 
+    text-overflow: ellipsis;
+}

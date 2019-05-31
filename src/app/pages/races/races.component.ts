@@ -10,26 +10,25 @@ import { CommonsService } from 'src/app/services/commons.service';
 })
 export class RacesComponent implements OnInit {
   races: Race[];
-  loading: boolean;
 
   constructor(
     private raceService: RacesService,
     private commonsService: CommonsService
   ) {
-    this.loading = true;
+    this.commonsService.setLoading(true);
     this.commonsService.setTitle('Listado de razas');
 
 
     this.raceService.getRaces().subscribe(
       data => {
         this.races = data;
-        this.loading = false;
+        this.commonsService.setLoading(false);
       },
       error => {
         this.commonsService.handleError(error.status === 500
           ? 'Se ha producido un error al recuperar las razas'
           : error.message);
-        this.loading = false;
+          this.commonsService.setLoading(false);
       }
     );
   }

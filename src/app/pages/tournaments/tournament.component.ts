@@ -11,14 +11,13 @@ import { CommonsService } from 'src/app/services/commons.service';
 })
 export class TournamentComponent implements OnInit {
   tournament: Tournament;
-  loading: boolean;
 
   constructor(
     private tournamentsService: TournamentsService,
     private route: ActivatedRoute,
     private commonsService: CommonsService
   ) {
-    this.loading = true;
+    this.commonsService.setLoading(true);
     this.route.paramMap.subscribe(
       data => {
         this.tournamentsService.getTournament(data.get('tournament')).subscribe(
@@ -26,13 +25,13 @@ export class TournamentComponent implements OnInit {
             this.tournament = response;
             this.commonsService.setTournament(response);
             this.commonsService.setTitle(response.name + ' Ria de Nurgle');
-            this.loading = false;
+            this.commonsService.setLoading(false);
           },
           error => {
             this.commonsService.handleError(error.status === 500
               ? 'Se ha producido un error al recuperar los datos del torneo'
               : error.message);
-            this.loading = false;
+            this.commonsService.setLoading(false);
           }
         );
       }

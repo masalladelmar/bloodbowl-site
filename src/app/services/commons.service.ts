@@ -37,7 +37,6 @@ export class CommonsService {
 
   setLoading(l: boolean) {
     if (l !== this.loading.value) {
-      console.log(l);
       this.loading.next(l);
     }
   }

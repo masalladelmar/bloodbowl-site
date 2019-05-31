@@ -19,7 +19,6 @@ export class RaceComponent implements OnInit {
   race: Race;
   positions: Position[];
   star_players: StarPlayer[];
-  loading: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +28,7 @@ export class RaceComponent implements OnInit {
     private skillsService: SkillsService,
     private commonsService: CommonsService
   ) {
-    this.loading = true;
+    this.commonsService.setLoading(true);
     this.route.paramMap.subscribe(
       data => {
         this.racesService.getRace(data.get('race')).subscribe(
@@ -64,13 +63,13 @@ export class RaceComponent implements OnInit {
                   });
                 });
                 this.star_players = response2[2];
-                this.loading = false;
+                this.commonsService.setLoading(false);
               },
               error => {
                 this.commonsService.handleError(error.status === 500
                   ? 'Se ha producido un error al recuperar las posiciones y estrellas de la raza'
                   : error.message);
-                this.loading = false;
+                this.commonsService.setLoading(false);
               }
             );
           },
@@ -78,7 +77,7 @@ export class RaceComponent implements OnInit {
             this.commonsService.handleError(error.status === 500
               ? 'Se ha producido un error al recuperar los datos de la raza'
               : error.message);
-            this.loading = false;
+            this.commonsService.setLoading(false);
           }
         );
       }

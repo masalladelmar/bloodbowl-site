@@ -29,6 +29,17 @@ export class CoachComponent implements OnInit {
         this.teamsService.getTeamsByCoach(response.id).subscribe(
           response2 => {
             this.teams = response2;
+            this.teams.forEach(te => {
+              te.players_count = 0;
+              te.players_value = 0;
+              te.players.forEach(pl => {
+                if (pl.injuries === '') {
+                  te.players_count++;
+                  te.players_value += pl.value;
+                }
+              });
+            });
+            this.commonsService.setLoading(false);
           },
           error => {
             this.commonsService.handleError(error.status === 500
@@ -57,9 +68,8 @@ export class CoachComponent implements OnInit {
   addons(t: Team): number {
     let total = 0;
     total += t.apothecary ? 50000 : 0;
-    total += t.cheerleaders * 10000;
-    total += t.assistants * 10000;
-    total += t.fan_factor * 10000;
+    total += (t.cheerleaders + t.assistants + t.fan_factor) * 10000;
+    total += t.rerolls * t.reroll_cost;
     return total;
   }
 }

@@ -2,7 +2,7 @@ export interface Race {
     id: number;
     name: string;
     permalink: string;
-    re_rolls_cost: number;
+    reroll_cost: number;
     description: string;
     coat_arms: string;
     apothecary: boolean;
