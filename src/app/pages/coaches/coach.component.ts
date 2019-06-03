@@ -5,6 +5,7 @@ import { TeamsService } from 'src/app/services/teams.service';
 import { ActivatedRoute } from '@angular/router';
 import { Coach } from 'src/app/models/coach.model';
 import { CommonsService } from 'src/app/services/commons.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-coach',
@@ -19,7 +20,8 @@ export class CoachComponent implements OnInit {
     private coachesService: CoachesService,
     private teamsService: TeamsService,
     private route: ActivatedRoute,
-    private commonsService: CommonsService
+    private commonsService: CommonsService,
+    public helper: HelperService
   ) {
     this.commonsService.setLoading(true);
     this.coachesService.getCoach(this.route.snapshot.paramMap.get('coach')).subscribe(
@@ -59,17 +61,5 @@ export class CoachComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  number_format(number: number): string {
-    return number.toLocaleString('es-ES');
-  }
-
-  addons(t: Team): number {
-    let total = 0;
-    total += t.apothecary ? 50000 : 0;
-    total += (t.cheerleaders + t.assistants + t.fan_factor) * 10000;
-    total += t.rerolls * t.reroll_cost;
-    return total;
   }
 }

@@ -1,3 +1,12 @@
-<p>
-  tournament-teams works!
-</p>
+<div class="columns">
+  <div class="column col-3 col-sm-6 col-xs-12" *ngFor="let team of teams">
+      <a routerLink="/tournaments/{{tournament.permalink}}/teams/{{team.permalink}}" title="Ver los datos del equipo" class="card baldosa">
+        <div class="card-header">
+          {{team.name}}
+        </div>
+        <div class="card-body">
+          Raza: {{team.race_name}}<br />Entrenador: {{team.coach_name}}
+        </div>
+      </a>
+  </div>
+</div>

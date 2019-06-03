@@ -11,6 +11,8 @@ import { NotfoundComponent } from '../notfound/notfound.component';
 import { TournamentComponent } from 'src/app/pages/tournaments/tournament.component';
 import { TournamentTeamsComponent } from 'src/app/pages/tournaments/tournament-teams.component';
 import { HomeLayoutComponent } from './home-layout.component';
+import { TournamentResolverService } from 'src/app/services/tournament-resolver.service';
+import { TournamentTeamComponent } from 'src/app/pages/tournaments/tournament-team.component';
 
 const homeRoutes: Routes = [
   {
@@ -26,16 +28,75 @@ const homeRoutes: Routes = [
       { path: 'teams/:team/print', component: TeamsComponent },
       { path: 'skills', component: SkillsComponent },
       { path: 'skills/:type', component: SkillComponent },
-      { path: 'tournaments/:tournament',
+      {
+        path: 'tournaments/:tournament',
+        resolve: {
+          tournament: TournamentResolverService
+        },
         children: [
-          { path: '', component: TournamentComponent },
-          { path: 'teams', component: TournamentTeamsComponent },
-          { path: 'stats', component: TournamentComponent },
-          { path: 'experience', component: TournamentComponent },
-          { path: 'ranking', component: TournamentComponent },
-          { path: 'journeys', component: TournamentComponent },
-          { path: 'matches', component: TournamentComponent },
-          { path: 'playoffs', component: TournamentComponent },
+          {
+            path: '',
+            component: TournamentComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'teams',
+            component: TournamentTeamsComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'teams/:team',
+            component: TournamentTeamComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'stats',
+            component: TournamentComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'experience',
+            component: TournamentComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'ranking',
+            component: TournamentComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'journeys',
+            component: TournamentComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'matches',
+            component: TournamentComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'playoffs',
+            component: TournamentComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
         ]
       }
     ]
@@ -45,6 +106,7 @@ const homeRoutes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(homeRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [TournamentResolverService]
 })
 export class HomeLayoutRoutingModule { }

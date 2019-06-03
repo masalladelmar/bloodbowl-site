@@ -1,4 +1,4 @@
-export interface Tournament{
+export interface Tournament {
     id: number;
     name: string;
     permalink: string;

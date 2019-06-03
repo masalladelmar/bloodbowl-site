@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { HomeLayoutModule } from './shared/layouts/home-layout.module';
+import { TournamentTeamComponent } from './pages/tournaments/tournament-team.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeLayoutModule } from './shared/layouts/home-layout.module';
     HeaderComponent,
     FooterComponent,
     HomeLayoutComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    TournamentTeamComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,224 @@
+<ul class="tab tab-block">
+  <li class="tab-item active">
+    <a (click)="viewTab($event.target, 'team')" role="tab" data-toggle="tab" title="Ver datos del equipo">Equipo</a>
+  </li>
+  <li class="tab-item">
+    <a (click)="viewTab($event.target, 'matches')" role="tab" data-toggle="tab" title="Ver partidos de liga">Partidos</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="team" *ngIf="team">
+    <h3 class="clearfix">Datos del equipo<a routerLink="/teams/{{team.permalink}}/print" target="_blank" title="Versi&oacute;n del equipo para imprimir" class="btn btn-primary float-right"><i class="fa fa-print"></i> Versi&oacute;n para imprimir</a></h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th title="Valor total del equipo para el pr&oacute;ximo encuentro sin contar la tesorer&iacute;a">Valor equipo</th>
+          <th title="Tesorer&iacute;a">Tesorer&iacute;a</th>
+          <th title="Segundas Oportunidades">Segundas Oportunidades</th>
+          <th title="Factor de Hinchas">Factor de Hinchas</th>
+          <th title="Ayudantes del entrenador">Ayudantes del entrenador</th>
+          <th title="Animadoras">Animadoras</th>
+          <th title="Apotecario">Apotecario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-center"><b>{{helper.number_format(team.value)}}</b></td>
+          <td class="text-center">{{helper.number_format(team.treasury)}}mo</td>
+          <td class="text-center">{{team.rerolls}} x {{team.reroll_cost}}</td>
+          <td class="text-center">{{team.fan_factor}}</td>
+          <td class="text-center">{{team.assistants}}</td>
+          <td class="text-center">{{team.cheerleaders}}</td>
+          <td class="text-center">{{team.apothecary==1 ? "Si" : "No"}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7" class="text-right"><b>Coste de los extras: {{helper.addons(team)/1000}}k</b></td>
+        </tr>
+      </tfoot>
+    </table>
+    <p><i>Recordad que la tesorer&iacute;a no cuenta para el valor de los extras. Adem&aacute;s no se suma en el valor del equipo en sexta edici&oacute;n.</i></p>
+    <h3>Jugadores del equipo</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th title="Dorsal">#</th>
+          <th title="Nombre">Nombre</th>
+          <th title="Posici&oacute;n">Posici&oacute;n</th>
+          <th title="Movimiento">MO</th>
+          <th title="Fuerza">FU</th>
+          <th title="Agilidad">AG</th>
+          <th title="Armadura">AR</th>
+          <th title="Habilidades">Hab</th>
+          <th title="Heridas">INJ</th>
+          <th title="Pases Completos">COM</th>
+          <th title="Touch Downs">TD</th>
+          <th title="Intercepciones">INT</th>
+          <th title="Bajas">CAS</th>
+          <th title="Mejor Jugador del Encuentro">MVP</th>
+          <th title="Puntos de Experiencia">SPP</th>
+          <th title="Coste">Coste</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of team.players">
+          <td class="text-center">{{player.number}}</td>
+          <td class="name-col" [title]="player.name">{{player.name}}</td>
+          <td>{{player.position_name}}</td>
+          <td class="text-center">{{player.ma}}</td>
+          <td class="text-center">{{player.st}}</td>
+          <td class="text-center">{{player.ag}}</td>
+          <td class="text-center">{{player.av}}</td>
+          <td>
+            <span *ngIf="player.skills" class="tooltip" [attr.data-tooltip]="player.skills">Ver</span>
+          </td>
+          <td>{{player.injuries}}</td>
+          <td class="text-center">{{player.com!=0 ? player.com : "-"}}</td>
+          <td class="text-center">{{player.td!=0 ? player.td : "-"}}</td>
+          <td class="text-center">{{player.itc!=0 ? player.itc : "-"}}</td>
+          <td class="text-center">{{player.cas!=0 ? player.cas : "-"}}</td>
+          <td class="text-center">{{player.mvp!=0 ? player.mvp : "-"}}</td>
+          <td class="text-center">{{player.spp!=0 ? player.spp : "-"}}</td>
+          <td [ngClass]="{'strike-through': player.injuries}">{{player.value/1000}}k</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="8">Total de jugadores: {{team.players_count}}</td>
+          <td colspan="7" class="text-right"><b>Coste jugadores:</b></td>
+          <td><b>{{team.players_value/1000}}k</b></td>
+        </tr>
+      </tfoot>
+    </table>
+    <p>Los jugadores que est&eacute;n heridos para el pr&oacute;ximo encuentro no se contabilizan para el coste total del equipo. Seg&uacute;n las normas de 6&ordf; edici&oacute;n: &quot;<i>Si tu equipo solo puede alinear 10 jugadores o menos para el siguiente encuentro, puedes añadir Independientes de forma gratuita hasta que puedas desplegar 11 jugadores el próximo partido. Un Independiente es siempre un jugador de la posición que permite 0-16 jugadores de tu lista de equipo; su precio base cuenta para el valor de equipo, pero tiene la habilidad Solitario ya que no está acostumbrado a jugar en tu equipo.</i>&quot;</p>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="matches">
+    <!--
+    <h3>Partidos del torneo</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th title="Jornada" style="width:10%">Jornada</th>
+          <th title="Local" style="width:15%">Local</th>
+          <th title="Visitante" style="width:15%">Visitante</th>
+          /**
+          <th title="Desventaja que tienes para el encuentro">Ajuste</th>
+          **/
+          <th title="Resultado" style="width:10%">Resultado</th>
+          <th title="Puntos ganados en el partido" style="width:10%">Puntos</th>
+          <th title="Bajas a favor" style="width:10%">CAS F</th>
+          <th title="Bajas en contra" style="width:10%">CAS C</th>
+          <th title="Bajas causadas por el p&uacute;blico o las ca&iacute;das">&quot;Accidentes&quot;</th>
+          <th title="Aforo del encuentro" style="width:10%">Aforo</th>
+          <th title="Dinero recaudado" style="width:10%">Recaud.</th>
+          <th title="Ver los detalles del encuentro, las fotos y la cr&oacute;nica">Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php
+      $cas_causadas=0;
+      $cas_recibidas=0;
+      $dinero=0;
+      $puntos=0;
+      $bajas=0;
+      $td=0;
+      $k=1;
+      $desventaja=0;
+      foreach($partidos as $partido){ ?>
+      <tr>
+      <td class="text-center"><?php echo $partido->jornada?></td>
+        <?php
+        if($partido->equipo_id_1==$equipo->id){?>
+        <td class="text-right"><strong><?php echo $partido->nombre_1?></strong></td>
+        <td><?php echo $partido->nombre_2?></td>
+        <?php
+          /*if($desventaja==0 && $partido->actualizado==0){
+            $query_des=sprintf('SELECT CAST((SELECT VE FROM Equipos WHERE Id=%u) - (SELECT VE FROM Equipos WHERE Id=%u)) AS SIGNED AS desventaja', $partido->Equipo_2"], $partido->Equipo_1"]);
+            $row=execute_query($query_des, 'bb');
+            if($row["desventaja"]>0)
+              echo '<td class="text-center">'.($row["desventaja"]/1000).'k</td>';
+            else
+              echo '<td class="text-center">-</td>';
+            $desventaja=1;
+          }
+          else
+            echo '<td class="text-center">-</td>';*/
+          if($partido->actualizado==1){
+            echo "<td class=\"text-center\"><strong>".$partido->touchdowns_1."</strong>-".$partido->touchdowns_2."</td>";
+            echo "<td class=\"text-center\">".$partido->puntos_1."</td>";
+            echo "<td class=\"text-center\">".$partido->bajas_1."</td>";
+            echo "<td class=\"text-center\">".$partido->bajas_2."</td>";
+            echo "<td class=\"text-center\">".$partido->bajas."</td>";
+            echo "<td class=\"text-center\">".$partido->aforo."</td>";
+            echo "<td class=\"text-center\">".$partido->recaudacion_1."</td>";
+            $cas_causadas+=$partido->bajas_1;
+            $cas_recibidas+=$partido->bajas_2;
+            $dinero+=$partido->recaudacion_1;
+            $puntos+=$partido->puntos_1;
+            $td+=$partido->touchdowns_1;
+          }
+          else{
+            for($i=0;$i<7;$i++)
+              echo "<td class=\"text-center\">-</td>";
+          }
+        }
+        else{?>
+        <td class="text-right"><?php echo $partido->nombre_1?></td>
+        <td><strong><?php echo $partido->nombre_2?></strong></td>
+        <?php
+          /*if($desventaja==0 && $partido->actualizado==0){
+            $query_des=sprintf('SELECT CAST((SELECT VE FROM Equipos WHERE Id=%u) - (SELECT VE FROM Equipos WHERE Id=%u)) AS SIGNED AS desventaja', $partido->Equipo_1"], $partido->Equipo_2"]);
+            $row=execute_query($query_des, 'bb');
+            if($row["desventaja"]>0)
+              echo '<td class="text-center">'.($row["desventaja"]/1000).'k</td>';
+            else
+              echo '<td class="text-center">-</td>';
+            $desventaja=1;
+          }
+          else
+            echo '<td class="text-center">-</td>';*/
+          if($partido->actualizado==1){
+            echo "<td class=\"text-center\">".$partido->touchdowns_1."-<strong>".$partido->touchdowns_2."</strong></td>";
+            echo "<td class=\"text-center\">".$partido->puntos_2."</td>";
+            echo "<td class=\"text-center\">".$partido->bajas_2."</td>";
+            echo "<td class=\"text-center\">".$partido->bajas_1."</td>";
+            echo "<td class=\"text-center\">".$partido->bajas."</td>";
+            echo "<td class=\"text-center\">".$partido->aforo."</td>";
+            echo "<td class=\"text-center\">".$partido->recaudacion_2."</td>";
+            $cas_causadas+=$partido->bajas_2;
+            $cas_recibidas+=$partido->bajas_1;
+            $dinero+=$partido->recaudacion_2;
+            $puntos+=$partido->puntos_2;
+            $td+=$partido->touchdowns_2;
+            }
+          else{
+            for($i=0;$i<7;$i++)
+              echo "<td class=\"text-center\">-</td>";
+            }
+        }
+        $bajas+=$partido->bajas;?>
+        <td class="text-center"><a href="encuentro.php?torneo=<?php //echo $torneo?>&amp;id=<?php //echo $partido->Id"]?>" title="Ver detalles del encuentro <?php echo $partido->nombre_1 . ' vs ' . $partido->nombre_2?>"><i class="fa fa-search"></i></a></td>
+      </tr>
+      <?php
+    $k++;
+  } //fin del bucle de la tabla ?>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="text-right"><strong>Totales:</strong></td>
+          <td class="text-center" title="Touch Downs a favor"><strong>TD F: <?php echo $td?></strong></td>
+          <td class="text-center"><strong><?php echo $puntos?></strong></td>
+          <td class="text-center"><strong><?php echo $cas_causadas?></strong></td>
+          <td class="text-center"><strong><?php echo $cas_recibidas?></strong></td>
+          <td class="text-center"><strong><?php echo $bajas?></strong></td>
+          <td></td>
+          <td class="text-center"><strong><?php echo $dinero?></strong></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    -->
+  </div>
+</div>

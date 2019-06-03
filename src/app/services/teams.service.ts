@@ -17,7 +17,7 @@ export class TeamsService {
   }
 
   getTeamsByTournament(tournament_id: number): Observable<Team[]> {
-    return this.apiService.get(`tournaments/${tournament_id}/team`);
+    return this.apiService.get(`tournaments/${tournament_id}/teams`);
   }
 
   getTeamsByCoach(coach_id: number): Observable<Team[]> {

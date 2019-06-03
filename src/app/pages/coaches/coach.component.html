@@ -15,7 +15,7 @@
   <tbody>
     <tr>
       <td class="text-center">{{team.race_name}}</td>
-      <td class="text-center">{{number_format(team.treasury)}} mo</td>
+      <td class="text-center">{{helper.number_format(team.treasury)}} mo</td>
       <td class="text-center">{{team.rerolls}}</td>
       <td class="text-center">{{team.fan_factor}}</td>
       <td class="text-center">{{team.assistants}}</td>
@@ -25,7 +25,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="7" class="text-right"><b>Coste de los extras: {{addons(team)/1000}}k</b></td>
+      <td colspan="7" class="text-right"><b>Coste de los extras: {{helper.addons(team)/1000}}k</b></td>
     </tr>
   </tfoot>
   </table>
@@ -83,6 +83,6 @@
     </tr>
   </tfoot>
   </table>
-  <div class="text-right"><b>Valor del equipo (VE): {{number_format(addons(team) + team.players_value)}} monedas de oro</b></div>
+  <div class="text-right"><b>Valor del equipo (VE): {{helper.number_format(helper.addons(team) + team.players_value)}} monedas de oro</b></div>
   <hr>
 </div>
