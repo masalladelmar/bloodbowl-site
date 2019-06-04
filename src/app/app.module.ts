@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { HomeLayoutModule } from './shared/layouts/home-layout.module';
 import { TournamentTeamComponent } from './pages/tournaments/tournament-team.component';
+import { TournamentStatsComponent } from './pages/tournaments/tournament-stats.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TournamentTeamComponent } from './pages/tournaments/tournament-team.com
     FooterComponent,
     HomeLayoutComponent,
     SpinnerComponent,
-    TournamentTeamComponent
+    TournamentTeamComponent,
+    TournamentStatsComponent
   ],
   imports: [
     BrowserModule,

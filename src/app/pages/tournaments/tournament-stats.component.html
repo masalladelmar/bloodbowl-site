@@ -1,0 +1,85 @@
+<ul class="tab tab-block">
+  <li class="tab-item active">
+    <a (click)="viewTab($event.target, 'player')" role="tab" data-toggle="tab" title="Ver estadísticas por jugador">Por jugador</a>
+  </li>
+  <li class="tab-item">
+    <a (click)="viewTab($event.target, 'team')" role="tab" data-toggle="tab" title="Ver estadísticas por equipo">Por equipo</a>
+  </li>
+  <li class="tab-item">
+    <a (click)="viewTab($event.target, 'match')" role="tab" data-toggle="tab" title="Ver estadísticas por encuentro">Por encuentro</a>
+  </li>
+</ul>
+<div class="tab-content" *ngIf="stats">
+  <div role="tabpanel" class="tab-pane active" id="player">
+    <div *ngFor="let type of stats.players" class="mb-4">
+      <h3>{{type.header}}</h3>
+      <p *ngIf="!type.data">No tenemos datos suficientes para calcular las estad&iacute;sticas</p>
+      <table class="table table-striped" *ngIf="type.data">
+        <thead>
+          <tr>
+            <th style="width:30%" title="Nombre del equipo" >Equipo</th>
+            <th style="width:30%" title="Nombre del jugador">Nombre</th>
+            <th style="width:25%" title="Posici&oacute;n del jugador">Posici&oacute;n</th>
+            <th style="width:15%" title="{{type.title}}">{{type.title}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of type.data">
+            <td title="Nombre del equipo">{{item.team}}</td>
+            <td title="Nombre del jugador">
+              {{item.name}}&nbsp;
+              <span *ngIf="item.status == 'dead'" class="text-error">(muerto)</span>
+              <span *ngIf="item.status == 'fired'" class="text-warning">(despedido)</span>
+            </td>
+            <td title="Posición del jugador">{{item.position}}</td>
+            <td class="text-center" title="{{type.title}}">{{item.total}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="team">
+    <div *ngFor="let type of stats.teams" class="mb-4">
+      <h3>{{type.header}}</h3>
+      <p *ngIf="!type.data">No tenemos datos suficientes para calcular las estad&iacute;sticas</p>
+      <table class="table table-striped" *ngIf="type.data">
+        <thead>
+          <tr>
+            <th class="text-right" title="Nombre del equipo" style="width:60%">Equipo</th>
+            <th class="text-center" title="{{type.title}}" style="width:40%">{{type.title}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of type.data">
+            <td class="text-right" title="Nombre del equipo">{{item.name}}</td>
+            <td class="text-center" title="{{type.title}}">{{item.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="match">
+    <div *ngFor="let type of stats.matches" class="mb-4">
+      <h3>{{type.header}}</h3>
+      <p *ngIf="!type.data">No tenemos datos suficientes para calcular las estad&iacute;sticas</p>
+      <table class="table table-striped" *ngIf="type.data">
+        <thead>
+          <tr>
+            <th style="width:10%" title="Jornada en la que se disputó el encuentro">Jornada</th>
+            <th style="width:40%" title="Equipo local" class="text-right">Local</th>
+            <th style="width:40%" title="Equipo visitante">Visitante</th>
+            <th style="width:10%" title="{{type.title}}">{{type.title}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of type.data">
+            <td class="text-center" title="Jornada en la que se disputó el encuentro">{{item.journey}}</td>
+            <td class="text-right" title="Nombre del equipo">{{item.name_1}}</td>
+            <td title="Nombre del equipo">{{item.name_2}}</td>
+            <td class="text-center" title="{{type.title}}">{{helper.number_format(item.value)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

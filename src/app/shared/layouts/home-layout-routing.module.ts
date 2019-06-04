@@ -13,6 +13,7 @@ import { TournamentTeamsComponent } from 'src/app/pages/tournaments/tournament-t
 import { HomeLayoutComponent } from './home-layout.component';
 import { TournamentResolverService } from 'src/app/services/tournament-resolver.service';
 import { TournamentTeamComponent } from 'src/app/pages/tournaments/tournament-team.component';
+import { TournamentStatsComponent } from 'src/app/pages/tournaments/tournament-stats.component';
 
 const homeRoutes: Routes = [
   {
@@ -57,7 +58,7 @@ const homeRoutes: Routes = [
           },
           {
             path: 'stats',
-            component: TournamentComponent,
+            component: TournamentStatsComponent,
             resolve: {
               tournament: TournamentResolverService
             }

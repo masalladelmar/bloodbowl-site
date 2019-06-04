@@ -58,3 +58,27 @@ h3, h4{
         text-decoration: none;
     }
 }
+
+.tab-content{
+    padding-top: .4rem;
+}
+.tab-pane{
+    display: none;
+    transition: opacity 0.15s linear;
+
+    &.active{
+        display: block;
+    }
+}
+
+.tab-pane:not(.active){
+    opacity: 0;
+}
+
+.tab-item a{
+    cursor: pointer;
+}
+
+.mb-4{
+    margin-bottom: 1.6rem;
+}
