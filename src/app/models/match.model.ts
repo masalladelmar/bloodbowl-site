@@ -1,8 +1,12 @@
+import { Post } from './post.model';
+
 export interface Match {
     id: number;
     tournament_id: number;
     team_id_1: number;
+    team_name_1: string;
     team_id_2: number;
+    team_name_2: string;
     journey: number;
     updated: boolean;
     tournament_group: string;
@@ -21,6 +25,7 @@ export interface Match {
     ff_modifier_2: number;
     not_showed_1: number;
     not_showed_2: number;
+    posts: Post[];
     created_at: string;
     updated_at: string;
     deleted_at: string;

@@ -28,7 +28,7 @@ export class TournamentStatsComponent implements OnInit, OnDestroy {
       data => {
         this.tournament = data.tournament;
         this.commonsService.setTournament(data.tournament);
-        this.tournamentsService.getTournamentStats(this.tournament.id).subscribe(
+        this.tournamentsService.getStats(this.tournament.id).subscribe(
           data2 => {
             this.stats = data2;
             this.commonsService.setLoading(false);

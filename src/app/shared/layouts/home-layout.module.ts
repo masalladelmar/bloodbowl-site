@@ -11,6 +11,15 @@ import { TeamsComponent } from 'src/app/pages/teams/teams.component';
 import { SkillsComponent } from 'src/app/pages/skills/skills.component';
 import { SkillComponent } from 'src/app/pages/skills/skill.component';
 import { NotfoundComponent } from '../notfound/notfound.component';
+import { TournamentTeamComponent } from 'src/app/pages/tournaments/tournament-team.component';
+import { TournamentStatsComponent } from 'src/app/pages/tournaments/tournament-stats.component';
+import { TournamentRankingComponent } from 'src/app/pages/tournaments/tournament-ranking.component';
+import { TournamentExperienceComponent } from 'src/app/pages/tournaments/tournament-experience.component';
+import { TournamentJourneysComponent } from 'src/app/pages/tournaments/tournament-journeys.component';
+import { TournamentJourneyComponent } from 'src/app/pages/tournaments/tournament-journey.component';
+import { TournamentMatchesComponent } from 'src/app/pages/tournaments/tournament-matches.component';
+import { TournamentMatchComponent } from 'src/app/pages/tournaments/tournament-match.component';
+import { LightboxModule } from 'ngx-lightbox';
 
 @NgModule({
   declarations: [
@@ -23,11 +32,20 @@ import { NotfoundComponent } from '../notfound/notfound.component';
     TeamsComponent,
     SkillsComponent,
     SkillComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    TournamentTeamComponent,
+    TournamentStatsComponent,
+    TournamentRankingComponent,
+    TournamentExperienceComponent,
+    TournamentJourneysComponent,
+    TournamentJourneyComponent,
+    TournamentMatchesComponent,
+    TournamentMatchComponent
   ],
   imports: [
     CommonModule,
-    HomeLayoutRoutingModule
+    HomeLayoutRoutingModule,
+    LightboxModule
   ],
   providers: []
 })

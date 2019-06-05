@@ -14,6 +14,12 @@ import { HomeLayoutComponent } from './home-layout.component';
 import { TournamentResolverService } from 'src/app/services/tournament-resolver.service';
 import { TournamentTeamComponent } from 'src/app/pages/tournaments/tournament-team.component';
 import { TournamentStatsComponent } from 'src/app/pages/tournaments/tournament-stats.component';
+import { TournamentRankingComponent } from 'src/app/pages/tournaments/tournament-ranking.component';
+import { TournamentExperienceComponent } from 'src/app/pages/tournaments/tournament-experience.component';
+import { TournamentJourneysComponent } from 'src/app/pages/tournaments/tournament-journeys.component';
+import { TournamentJourneyComponent } from 'src/app/pages/tournaments/tournament-journey.component';
+import { TournamentMatchesComponent } from 'src/app/pages/tournaments/tournament-matches.component';
+import { TournamentMatchComponent } from 'src/app/pages/tournaments/tournament-match.component';
 
 const homeRoutes: Routes = [
   {
@@ -65,28 +71,42 @@ const homeRoutes: Routes = [
           },
           {
             path: 'experience',
-            component: TournamentComponent,
+            component: TournamentExperienceComponent,
             resolve: {
               tournament: TournamentResolverService
             }
           },
           {
             path: 'ranking',
-            component: TournamentComponent,
+            component: TournamentRankingComponent,
             resolve: {
               tournament: TournamentResolverService
             }
           },
           {
             path: 'journeys',
-            component: TournamentComponent,
+            component: TournamentJourneysComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'journeys/:journey',
+            component: TournamentJourneyComponent,
             resolve: {
               tournament: TournamentResolverService
             }
           },
           {
             path: 'matches',
-            component: TournamentComponent,
+            component: TournamentMatchesComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          },
+          {
+            path: 'matches/:match',
+            component: TournamentMatchComponent,
             resolve: {
               tournament: TournamentResolverService
             }

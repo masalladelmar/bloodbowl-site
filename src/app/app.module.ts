@@ -11,8 +11,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { HomeLayoutModule } from './shared/layouts/home-layout.module';
-import { TournamentTeamComponent } from './pages/tournaments/tournament-team.component';
-import { TournamentStatsComponent } from './pages/tournaments/tournament-stats.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +18,7 @@ import { TournamentStatsComponent } from './pages/tournaments/tournament-stats.c
     HeaderComponent,
     FooterComponent,
     HomeLayoutComponent,
-    SpinnerComponent,
-    TournamentTeamComponent,
-    TournamentStatsComponent
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

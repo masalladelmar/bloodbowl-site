@@ -1,0 +1,53 @@
+<table class="table table-striped mb-4">
+  <thead>
+    <tr>
+      <th title="Posici&oacute;n en la clasificaci&oacute;n">Pos</th>
+      <th title="Equipo">Equipo</th>
+      <th title="Partidos jugados">J</th>
+      <th title="Partidos ganados">G</th>
+      <th title="Partidos empatados">E</th>
+      <th title="Partidos perdidos">P</th>
+      <th title="Valor del equipo en monedas de oro">VE</th>
+      <th title="Puntos">Puntos</th>
+      <th title="Bajas a favor">BF</th>
+      <th title="Bajas en contra">BC</th>
+      <th title="Touchdowns a favor">TF</th>
+      <th title="Touchdowns en contra">TC</th>
+      <th *ngIf="tournament.id == 2" title="Puntos de desempate">D</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let group of groups">
+    <tr class="bg-secondary">
+      <td colspan="14">
+        <h4 class="text-center mb-0">Grupo {{group.name}}</h4>
+      </td>
+    </tr>
+    <tr *ngFor="let team of group.teams; index as i">
+      <ng-template [ngTemplateOutlet]="tableRanking" [ngTemplateOutletContext]="{team:team, tournament:tournament, i:i}"></ng-template>
+    </tr>
+  </tbody>
+  <tbody *ngIf="!groups">
+    <tr *ngFor="let team of ranking; index as i">
+      <ng-template [ngTemplateOutlet]="tableRanking" [ngTemplateOutletContext]="{team:team, tournament:tournament, i:i}"></ng-template>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Reparto de puntos</h3>
+<div [innerHtml]="tournament.score"></div>
+
+<ng-template #tableRanking let-team="team" let-tournament="tournament" let-i="i">
+  <td class="text-center">{{i + 1}}</td>
+  <td><b><a routerLink="/tournaments/{{tournament.permalink}}/teams/{{team.permalink}}" title="Ver datos del equipo">{{team.name}}</a></b></td>
+  <td class="text-center">{{team.played!=0 ? team.played : "-"}}</td>
+  <td class="text-center">{{team.won!=0 ? team.won : "-"}}</td>
+  <td class="text-center">{{team.drawn!=0 ? team.drawn : "-"}}</td>
+  <td class="text-center">{{team.lost!=0 ? team.lost : "-"}}</td>
+  <td class="text-center">{{team.value!=0 ? helper.number_format(team.value) : "-"}}</td>
+  <td class="text-center">{{team.points}}</td>
+  <td class="text-center">{{team.cas_for!=0 ? team.cas_for : "-"}}</td>
+  <td class="text-center">{{team.cas_against!=0 ? team.cas_against : "-"}}</td>
+  <td class="text-center">{{team.td_for!=0 ? team.td_for : "-"}}</td>
+  <td class="text-center">{{team.td_against!=0 ? team.td_against : "-"}}</td>
+  <td *ngIf="tournament.id == 2" class="text-center">{{team.average!=0 ? (team.average>0 ? "+" : "") + team.average : "-"}}</td>
+</ng-template>

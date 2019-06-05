@@ -20,7 +20,15 @@ export class TournamentsService {
     return this.apiService.get(`tournaments/${permalink}`);
   }
 
-  getTournamentStats(tournament_id: number): Observable<Tournament> {
+  getStats(tournament_id: number): Observable<any[]> {
     return this.apiService.get(`tournaments/${tournament_id}/stats`);
+  }
+
+  getRanking(tournament_id: number): Observable<any[]> {
+    return this.apiService.get(`tournaments/${tournament_id}/ranking`);
+  }
+
+  getExperience(tournament_id: number): Observable<any> {
+    return this.apiService.get(`tournaments/${tournament_id}/experience`);
   }
 }

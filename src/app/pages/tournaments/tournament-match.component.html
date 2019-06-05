@@ -1,0 +1,89 @@
+<table class="table table-striped" *ngIf="match">
+  <thead>
+    <tr>
+      <th></th>
+      <th title="Equipo local" class="text-center">{{match.team_name_1}}</th>
+      <th title="Equipo vistante" class="text-center">{{match.team_name_2}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th title="Indica si el equipo se present&oacute; al encuentro">&iquest;Se present&oacute;?</th>
+      <td class="text-center">{{match.not_showed_1==0 ? 'Si' : 'No'}}</td>
+      <td class="text-center">{{match.not_showed_2==0 ? 'Si' : 'No'}}</td>
+    </tr>
+    <tr>
+      <th title="Resultado en TD anotados">TD</th>
+      <td class="text-center">{{match.td_1}}</td>
+      <td class="text-center">{{match.td_2}}</td>
+    </tr>
+    <tr>
+      <th title="Bajas causadas por cada uno de los equipos">CAS</th>
+      <td class="text-center">{{match.cas_1}}</td>
+      <td class="text-center">{{match.cas_2}}</td>
+    </tr>
+    <tr>
+      <th title="Bajas causadas por ca&iacute;das o linchamiento del p&uacute;blico">&quot;Accidentes&quot;</th>
+      <td colspan="2" class="text-center">{{match.cas}} bajas</td>
+    </tr>
+    <tr>
+      <th title="N&uacute;mero de hinchas que acudieron para ver el encuentro">Aforo</th>
+      <td colspan="2" class="text-center">{{helper.number_format(match.fans)}} espectadores</td>
+    </tr>
+    <tr>
+      <th title="Recaudaci&oacute;n de cada uno de los equipos en el encuentro">Recaudaci&oacute;n</th>
+      <td class="text-center">{{helper.number_format(match.winnings_1)}} monedas de oro</td>
+      <td class="text-center">{{helper.number_format(match.winnings_2)}} monedas de oro</td>
+    </tr>
+    <tr>
+      <th title="Puntos acumulados para la clasificaci&oacute;n por cada uno de los equipos">Puntos</th>
+      <td class="text-center">{{match.points_1}}</td>
+      <td class="text-center">{{match.points_2}}</td>
+    </tr>
+    <tr>
+      <th title="Modificador del Factor de Hinchas conseguido en el encuentro aplicable al FF del equipo ">Modif FF</th>
+      <td class="text-center">{{match.ff_modifier_1==1 ? '+1' : match.ff_modifier_1}}</td>
+      <td class="text-center">{{match.ff_modifier_2==1 ? '+1' : match.ff_modifier_2}}</td>
+    </tr>
+    <tr>
+      <th title="Notas tomadas por el &aacute;rbitro del encuentro">Notas</th>
+      <td colspan="2" class="text-center">{{match.notes}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="mb-4">
+  <ng-container *ngIf="chronicle else nochronicle">
+    <h3><a routerLink="/posts/{{chronicle.permalink}}" title="{{chronicle.title}}">Cr&oacute;nica del encuentro</a></h3>
+    <small>
+      {{chronicle->comment_count + ' ' + (chronicle.comment_count==1 ? "comentario" : "comentarios"}}
+      <!--author["user_nicename"]-->
+      {{chronicle->created_at | date: 'dd/MM/yyyy'}}
+    </small>
+    {{chronicle.content}}
+    <small></small>
+  </ng-container>
+  <ng-container #nochronicle>
+    <h3>Cr&oacute;nica</h3>
+    <p>A&uacute;n no se ha escrito la cr&oacute;nica de este encuentro</p>
+  </ng-container>
+</div>
+
+<h3>Fotos</h3>
+<div class="columns" *ngIf="photos else nophotos">
+  <div class="column col-xs-6 col-sm-4 col-3" *ngFor="let photo of photos">
+    <?php
+    $thumbnail = substr($foto->archive, 0, stripos($foto->archive, '.')).'_thumb'.substr($foto->archive, stripos($foto->archive, '.'));
+    ?>
+    <a href="<?php echo site_url('uploads/fotos/'.$foto->archive)}}" data-lightbox="imagen" data-title="{{photo.title}}">
+        <img src="<?php echo site_url('uploads/fotos/'.$thumbnail)}}" title="{{photo.title}}" class="img-responsive thumbnail" />
+    </a>
+    <a routerLink="/photos/{{photo.permalink}}">{{photo.title}}</a>
+    <br />
+    <small>{{photo.archive_date | date: 'dd/MM/yyyy'}}</small><br />
+    <small>{{photo.comment_count.' '.(photo.comment_count==1 ? "comentario" : "comentarios"}}</small>
+  </div>
+</div>
+<ng-container #nophotos>
+  <p>Aún no se han subido fotos del encuentro</p>
+</ng-container>

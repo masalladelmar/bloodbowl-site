@@ -49,7 +49,7 @@ export class TournamentTeamComponent implements OnInit, OnDestroy {
         this.teamsService.getTeam(this.route.snapshot.params['team']).subscribe(
           data2 => {
             this.team = data2;
-            this.commonsService.setTitle(this.team.name + ' en ' + this.tournament.name + ' Ria de Nurgle');
+            this.commonsService.setTitle(this.team.name);
             this.team.players_count = 0;
             this.team.players_value = 0;
             this.team.players.forEach(pl => {
@@ -58,7 +58,7 @@ export class TournamentTeamComponent implements OnInit, OnDestroy {
                 this.team.players_value += pl.value;
               }
             });
-            this.matchesService.getMatches(data.tournament.id, data2.id).subscribe(
+            this.matchesService.getMatchesTeamTournament(data.tournament.id, data2.id).subscribe(
               data3 => {
                 this.matches = data3;
                 this.matches.forEach(el => {

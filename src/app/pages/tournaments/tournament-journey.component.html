@@ -1,0 +1,44 @@
+<table class="table table-striped mb-4">
+  <thead>
+  <tr>
+    <th title="Grupo en el que participa en la liguilla"></th>
+    <th title="Local" class="text-right">Local</th>
+    <th title="Visitante">Visitante</th>
+    <th title="Resultado">Resultado</th>
+    <th title="Bajas causadas por el equipo local">Bajas L</th>
+    <th title="Bajas causadas por el equipo visitante">Bajas V</th>
+    <th title="Bajas causadas por el p&uacute;blico o las ca&iacute;das">&quot;Accidentes&quot;</th>
+    <th title="Aforo">Aforo</th>
+    <th title="Número de fotos del encuentro">Fotos</th>
+    <th title="Crónica del encuentro">Crónica</th>
+    <th title="Ver los detalles del encuentro, las fotos y la cr&oacute;nica">Detalles</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of matches">
+      <td class="text-center">{{item.tournament_group!='' ? item.tournament_group : '' | uppercase}}</td>
+      <td class="text-right">
+        <b [ngClass]="item.not_showed_1 ? 'strike-through' : ''"><a title="Ver datos del equipo" routerLink="/tournaments/{{tournament.permalink}}/teams/{{item.team_permalink_1}}">{{item.team_name_1}}</a></b>
+      </td>
+      <td>
+        <b [ngClass]="item.not_showed_2 ? 'strike-through' : ''"><a title="Ver datos del equipo" routerLink="/tournaments/{{tournament.permalink}}/teams/{{item.team_permalink_2}}">{{item.team_name_2}}</a></b>
+      </td>
+      <td class="text-center">{{item.updated ? item.td_1 + '-' + item.td_2 : '-'}}</td>
+      <td class="text-center">{{item.cas_1}}</td>
+      <td class="text-center">{{item.cas_2}}</td>
+      <td class="text-center">{{item.cas}}</td>
+      <td class="text-center">{{helper.number_format(item.fans)}}</td>
+      <td class="text-center">{{item.photos > 0 ? item.photos : '-'}}</td>
+      <td class="text-center">
+        <a *ngIf="item.chronicle" routerLink="/posts/{{item.chronicle}}" title="Ver crónica del encuentro"><i class="fa fa-newspaper"></i></a>
+        <span *ngIf="!item.chronicle">-</span>
+      </td>
+      <td class="text-center">
+        <a routerLink="/tournaments/{{tournament.permalink}}/matches/{{item.id}}" title="Ver detalles del encuentro {{item.team_name_1}} vs {{item.team_name_2}}">
+          <i class="fa fa-search"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<a routerLink="/tournaments/{{tournament.permalink}}/journeys" title="Volver a la lista de jornadas" class="btn btn-primary">Volver a la lista</a>

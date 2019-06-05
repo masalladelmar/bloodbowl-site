@@ -1,0 +1,37 @@
+<table class="table table-striped mb-4" *ngIf="experience">
+  <thead>
+    <tr>
+      <th title="Entrenador">Entrenador</th>
+      <th title="Equipo con el que ha conseguido la experiencia">Equipo</th>
+      <th colspan="2" title="Pases Completos">Pases Completos</th>
+      <th colspan="2" title="Touch Downs">Touch Downs</th>
+      <th colspan="2" title="Intercepciones">Intercepciones</th>
+      <th colspan="2" title="Bajas">Bajas</th>
+      <th colspan="2" title="Mejor jugador del encuentro">Mejor jugador del encuentro</th>
+      <th colspan="2" title="Puntos de experiencia">Puntos de experiencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of experience.actives; index as i">
+      <td>{{item.coach}}</td>
+      <td>{{item.team}}</td>
+      <td class="text-center"><strong>{{item.com != 0 ? item.com : "-"}}</strong></td>
+      <td class="text-center">{{experience.inactives[i] ? experience.inactives[i].com : "-"}}</td>
+      <td class="text-center"><strong>{{item.td != 0 ? item.td : "-"}}</strong></td>
+      <td class="text-center">{{experience.inactives[i] ? experience.inactives[i].td : "-"}}</td>
+      <td class="text-center"><strong>{{item.itc != 0 ? item.itc : "-"}}</strong></td>
+      <td class="text-center">{{experience.inactives[i] ? experience.inactives[i].itc : "-"}}</td>
+      <td class="text-center"><strong>{{item.cas != 0 ? item.cas : "-"}}</strong></td>
+      <td class="text-center">{{experience.inactives[i] ? experience.inactives[i].cas : "-"}}</td>
+      <td class="text-center"><strong>{{item.mvp != 0 ? item.mvp : "-"}}</strong></td>
+      <td class="text-center">{{experience.inactives[i] ? experience.inactives[i].mvp : "-"}}</td>
+      <td class="text-center"><strong>{{item.spp != 0 ? item.spp : "-"}}</strong></td>
+      <td class="text-center">{{experience.inactives[i] ? experience.inactives[i].spp : "-"}}</td>
+    </tr>
+  </tbody>
+</table>
+<p>Aclaraci&oacute;n a la tabla de experiencia:</p>
+<ul>
+  <li>Los resultados marcados en negrita indican los puntos de experiencia actuales del equipo, lo que quiere decir, de los jugadores que a&uacute;n est&aacute;n vivos</li>
+  <li>Los resultados con fuente normal indican el valor acumulado por los jugadores del equipo que han perecido durante los encuentros del torneo o que han sido despedidos</li>
+</ul>

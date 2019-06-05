@@ -1,0 +1,12 @@
+<div class="columns">
+  <div class="column col-3 cols-sm-4 col-xs-6" *ngFor="let item of journeys">
+    <a routerLink="/tournaments/{{tournament.permalink}}/journeys/{{item.journey}}" title="Ver los partidos de la jornada" class="card baldosa">
+      <div class="card-header text-center">
+        {{item.journey}}&ordf; jornada
+      </div>
+      <div class="card-body text-center">
+        <small>del {{item.begin | date: 'dd/MM/yyyy'}} al {{item.end | date: 'dd/MM/yyyy'}}</small>
+      </div>
+    </a>
+  </div>
+</div>

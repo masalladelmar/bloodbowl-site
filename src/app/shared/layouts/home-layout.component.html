@@ -46,7 +46,12 @@
 			</div>
 
 			<div id="menu-torneo" *ngIf="tournamentSelected">
-				<h3 class="seccion"><button title="Volver a la lista de torneos" class="btn btn-default" (click)="clearTournament()"><i class="fa fa-angle-left"></i><span class="text-hide">Lista</span></button> {{tournamentSelected.name}}</h3>
+				<h3 class="seccion">
+					<button title="Volver a la lista de torneos" class="btn btn-default" (click)="clearTournament()">
+						<i class="fa fa-angle-left"></i><span class="text-hide">Lista</span>
+					</button>
+					<a class="btn btn-link ml-2 text-large" routerLink="/tournaments/{{tournamentSelected.permalink}}" title="{{tournamentSelected.name}} Ria de Nurgle">{{tournamentSelected.name}}</a>
+				</h3>
 				<div class="menu">
 					<li class="menu-item">
 						<a routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/teams" title="La lista de equipos que participan en el torneo">Equipos</a>
@@ -61,7 +66,7 @@
 						<a routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/ranking" title="Los puntos de cada equipo">Clasificaci&oacute;n</a>
 					</li>
 					<li class="menu-item">
-						<a routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/journeys" title="Selecciona la jornada que quieres ver para echar un vistazo a los partidos que se jugaron" >Jornadas</a>
+						<a routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/journeys" title="Selecciona la jornada que quieres ver para echar un vistazo a los partidos que se jugaron">Jornadas</a>
 					</li>
 					<li class="menu-item">
 						<a routerLinkActive="active" routerLink="/tournaments/{{tournamentSelected.permalink}}/matches" title="Todos los partidos de la copa">Emparejamientos</a>
