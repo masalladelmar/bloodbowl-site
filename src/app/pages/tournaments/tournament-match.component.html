@@ -1,4 +1,4 @@
-<table class="table table-striped" *ngIf="match">
+<table class="table table-striped mb-4" *ngIf="match">
   <thead>
     <tr>
       <th></th>
@@ -53,37 +53,43 @@
 </table>
 
 <div class="mb-4">
-  <ng-container *ngIf="chronicle else nochronicle">
+  <ng-container *ngIf="chronicle; else nochronicle">
     <h3><a routerLink="/posts/{{chronicle.permalink}}" title="{{chronicle.title}}">Cr&oacute;nica del encuentro</a></h3>
     <small>
-      {{chronicle->comment_count + ' ' + (chronicle.comment_count==1 ? "comentario" : "comentarios"}}
+      {{chronicle.comment_count + ' ' + (chronicle.comment_count==1 ? "comentario" : "comentarios")}}
       <!--author["user_nicename"]-->
-      {{chronicle->created_at | date: 'dd/MM/yyyy'}}
+      {{chronicle.created_at | date: 'dd/MM/yyyy'}}
     </small>
-    {{chronicle.content}}
-    <small></small>
+    <div [innerHtml]="chronicle.content"></div>
   </ng-container>
-  <ng-container #nochronicle>
+  <ng-template #nochronicle>
     <h3>Cr&oacute;nica</h3>
     <p>A&uacute;n no se ha escrito la cr&oacute;nica de este encuentro</p>
-  </ng-container>
+  </ng-template>
 </div>
 
 <h3>Fotos</h3>
-<div class="columns" *ngIf="photos else nophotos">
-  <div class="column col-xs-6 col-sm-4 col-3" *ngFor="let photo of photos">
-    <?php
-    $thumbnail = substr($foto->archive, 0, stripos($foto->archive, '.')).'_thumb'.substr($foto->archive, stripos($foto->archive, '.'));
-    ?>
+<div class="columns" *ngIf="photos; else nophotos">
+  <div class="column col-xs-6 col-sm-4 col-3" *ngFor="let photo of photos; index as i">
+    <div class="card">
+      <div class="card-image">
+        <img [src]="album[i].thumb" (click)="open(i)"/>
+      </div>
+      <div class="card-header">
+        <a routerLink="/photos/{{photo.permalink}}">{{photo.title}}</a>
+      </div>
+      <div class="card-footer">
+        <small>{{photo.archive_date | date: 'dd/MM/yyyy'}}</small><br />
+        <small>{{photo.comment_count + ' ' + (photo.comment_count==1 ? "comentario" : "comentarios")}}</small>
+      </div>
+    </div>
+    <!--
     <a href="<?php echo site_url('uploads/fotos/'.$foto->archive)}}" data-lightbox="imagen" data-title="{{photo.title}}">
         <img src="<?php echo site_url('uploads/fotos/'.$thumbnail)}}" title="{{photo.title}}" class="img-responsive thumbnail" />
     </a>
-    <a routerLink="/photos/{{photo.permalink}}">{{photo.title}}</a>
-    <br />
-    <small>{{photo.archive_date | date: 'dd/MM/yyyy'}}</small><br />
-    <small>{{photo.comment_count.' '.(photo.comment_count==1 ? "comentario" : "comentarios"}}</small>
+    -->
   </div>
 </div>
-<ng-container #nophotos>
+<ng-template #nophotos>
   <p>Aún no se han subido fotos del encuentro</p>
-</ng-container>
+</ng-template>
