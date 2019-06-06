@@ -73,7 +73,7 @@
   <div class="column col-xs-6 col-sm-4 col-3" *ngFor="let photo of photos; index as i">
     <div class="card">
       <div class="card-image">
-        <img [src]="album[i].thumb" (click)="open(i)"/>
+        <img [src]="album[i].thumb" (click)="open(i)" class="img-responsive lightbox-image" title="Ver imagen ampliada" />
       </div>
       <div class="card-header">
         <a routerLink="/photos/{{photo.permalink}}">{{photo.title}}</a>
@@ -83,11 +83,6 @@
         <small>{{photo.comment_count + ' ' + (photo.comment_count==1 ? "comentario" : "comentarios")}}</small>
       </div>
     </div>
-    <!--
-    <a href="<?php echo site_url('uploads/fotos/'.$foto->archive)}}" data-lightbox="imagen" data-title="{{photo.title}}">
-        <img src="<?php echo site_url('uploads/fotos/'.$thumbnail)}}" title="{{photo.title}}" class="img-responsive thumbnail" />
-    </a>
-    -->
   </div>
 </div>
 <ng-template #nophotos>

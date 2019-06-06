@@ -32,4 +32,5 @@ export interface Match {
     created_by: number;
     updated_by: number;
     deleted_by: number;
+    phase: number;
 }

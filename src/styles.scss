@@ -82,3 +82,15 @@ h3, h4{
 .mb-4{
     margin-bottom: 1.6rem;
 }
+
+.lightbox-image{
+    cursor: pointer;
+}
+
+.playoffs>tbody>tr>td{
+	vertical-align: middle;
+}
+.playoffs tbody tr td.info{
+	background-color: #669900;
+	color: #ffffff;
+}

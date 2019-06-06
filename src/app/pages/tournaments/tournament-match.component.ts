@@ -27,7 +27,6 @@ export class TournamentMatchComponent implements OnInit, OnDestroy {
   photos: Post[];
   chronicle: Post;
   album: Photo[];
-  photosRoute = '/uploads/photos/';
 
   constructor(
     private commonsService: CommonsService,
@@ -49,10 +48,8 @@ export class TournamentMatchComponent implements OnInit, OnDestroy {
               this.photos = this.match.posts.filter(el => el.type === 'photo');
               this.album = [];
               this.photos.forEach(el => {
-                const thumb = this.photosRoute +
-                    el.archive.substr(0, el.archive.lastIndexOf('.')) + '_thumb' +
-                    el.archive.substr(el.archive.lastIndexOf('.'));
-                this.album.push({src: this.photosRoute + el.archive, caption: el.title, thumb: thumb});
+                const thumb = this.commonsService.photosRoute + helper.thumb(el.archive);
+                this.album.push({src: this.commonsService.photosRoute + el.archive, caption: el.title, thumb: thumb});
               });
               this.chronicle = this.match.posts.find(el => el.type === 'chronicle');
             }

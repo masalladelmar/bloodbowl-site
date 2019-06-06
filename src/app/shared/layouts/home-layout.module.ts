@@ -20,6 +20,7 @@ import { TournamentJourneyComponent } from 'src/app/pages/tournaments/tournament
 import { TournamentMatchesComponent } from 'src/app/pages/tournaments/tournament-matches.component';
 import { TournamentMatchComponent } from 'src/app/pages/tournaments/tournament-match.component';
 import { LightboxModule } from 'ngx-lightbox';
+import { TournamentPlayoffsComponent } from 'src/app/pages/tournaments/tournament-playoffs.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LightboxModule } from 'ngx-lightbox';
     TournamentJourneysComponent,
     TournamentJourneyComponent,
     TournamentMatchesComponent,
-    TournamentMatchComponent
+    TournamentMatchComponent,
+    TournamentPlayoffsComponent
   ],
   imports: [
     CommonModule,

@@ -7,9 +7,10 @@ import { Tournament } from '../models/tournament.model';
   providedIn: 'root'
 })
 export class CommonsService {
-  tournament: BehaviorSubject<Tournament>;
-  title: BehaviorSubject<string>;
-  loading: BehaviorSubject<boolean>;
+  private tournament: BehaviorSubject<Tournament>;
+  private title: BehaviorSubject<string>;
+  private loading: BehaviorSubject<boolean>;
+  private _photosRoute: string;
 
   constructor(
     private toastr: ToastrService
@@ -17,6 +18,7 @@ export class CommonsService {
     this.tournament = new BehaviorSubject<Tournament>(null);
     this.title = new BehaviorSubject<string>('');
     this.loading = new BehaviorSubject<boolean>(false);
+    this._photosRoute = 'uploads/photos/';
   }
 
   setTournament(t: Tournament) {
@@ -55,5 +57,9 @@ export class CommonsService {
     this.toastr.success(message, null, {
       toastClass: 'toast toast-success'
     });
+  }
+
+  get photosRoute(): string {
+    return this._photosRoute;
   }
 }

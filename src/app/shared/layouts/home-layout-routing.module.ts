@@ -20,6 +20,7 @@ import { TournamentJourneysComponent } from 'src/app/pages/tournaments/tournamen
 import { TournamentJourneyComponent } from 'src/app/pages/tournaments/tournament-journey.component';
 import { TournamentMatchesComponent } from 'src/app/pages/tournaments/tournament-matches.component';
 import { TournamentMatchComponent } from 'src/app/pages/tournaments/tournament-match.component';
+import { TournamentPlayoffsComponent } from 'src/app/pages/tournaments/tournament-playoffs.component';
 
 const homeRoutes: Routes = [
   {
@@ -113,7 +114,7 @@ const homeRoutes: Routes = [
           },
           {
             path: 'playoffs',
-            component: TournamentComponent,
+            component: TournamentPlayoffsComponent,
             resolve: {
               tournament: TournamentResolverService
             }

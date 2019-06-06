@@ -9,7 +9,7 @@ export class HeaderComponent implements OnInit {
   header_title: string;
 
   constructor() {
-    this.header_title = 'BloodBowl';
+    this.header_title = 'Comunidad Ria de Nurgle';
   }
 
   ngOnInit() {

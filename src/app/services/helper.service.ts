@@ -19,4 +19,8 @@ export class HelperService {
     total += t.rerolls * t.reroll_cost;
     return total;
   }
+
+  public thumb(archive: string): string {
+    return archive.substr(0, archive.lastIndexOf('.')) + '_thumb' + archive.substr(archive.lastIndexOf('.'));
+  }
 }
