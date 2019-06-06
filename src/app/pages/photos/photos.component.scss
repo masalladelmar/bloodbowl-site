@@ -1,0 +1,13 @@
+.photos{
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+    .photo{
+        display: inline-block;
+        width: 100%;
+
+        .card{
+            margin-bottom: 1rem;
+        }
+    }
+}

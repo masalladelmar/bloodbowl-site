@@ -6,14 +6,8 @@ import { Tournament } from 'src/app/models/tournament.model';
 import { Subscription } from 'rxjs';
 import { MatchesService } from 'src/app/services/matches.service';
 import { Match } from 'src/app/models/match.model';
-import { Post } from 'src/app/models/post.model';
+import { Post, Photo } from 'src/app/models/post.model';
 import { Lightbox } from 'ngx-lightbox';
-
-interface Photo {
-  src: string;
-  caption: string;
-  thumb: string;
-}
 
 @Component({
   selector: 'app-tournament-match',

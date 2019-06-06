@@ -1,13 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'sass/variables.scss';
 
 @font-face {
     font-family: Gutcruncher;
     src: url("assets/fonts/Gutcruncher.otf") format("opentype");
 }
 
-body{
-    background: url(assets/img/background.jpg) top center no-repeat fixed;
+.background{
+    position: fixed;
+    background: url(assets/img/background.jpg) top center no-repeat;
     background-size: cover;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+    height: 100%;
+    width: 100%;
+}
+
+app-root{
+    position: relative;
+    z-index: 2; 
 }
 
 h1, h2{
@@ -85,12 +96,13 @@ h3, h4{
 
 .lightbox-image{
     cursor: pointer;
+    width: 100%;
 }
 
 .playoffs>tbody>tr>td{
 	vertical-align: middle;
 }
 .playoffs tbody tr td.info{
-	background-color: #669900;
+	background-color: $standard-green;
 	color: #ffffff;
 }

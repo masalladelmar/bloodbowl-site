@@ -21,6 +21,8 @@ import { TournamentMatchesComponent } from 'src/app/pages/tournaments/tournament
 import { TournamentMatchComponent } from 'src/app/pages/tournaments/tournament-match.component';
 import { LightboxModule } from 'ngx-lightbox';
 import { TournamentPlayoffsComponent } from 'src/app/pages/tournaments/tournament-playoffs.component';
+import { PhotoComponent } from 'src/app/pages/photos/photo.component';
+import { PhotosComponent } from 'src/app/pages/photos/photos.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { TournamentPlayoffsComponent } from 'src/app/pages/tournaments/tournamen
     TournamentJourneyComponent,
     TournamentMatchesComponent,
     TournamentMatchComponent,
-    TournamentPlayoffsComponent
+    TournamentPlayoffsComponent,
+    PhotosComponent,
+    PhotoComponent
   ],
   imports: [
     CommonModule,

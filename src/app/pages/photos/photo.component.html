@@ -1,0 +1,73 @@
+<ng-container *ngIf="photo">
+  <div class="clearfix">
+    <small>
+      <button class="btn btn-link float-right" title="Ver comentarios" (click)="scroll(comments)">{{photo.comment_count + ' ' + (photo.comment_count==1 ? "comentario" : "comentarios")}}</button>
+    </small>
+  </div>
+
+  <figure class="ml-0 mr-0">
+      <ul class="pagination">
+        <li class="page-item page-prev">
+            <a *ngIf="photo.previous" class="btn btn-primary anterior" routerLink="/photos/{{photo.previous.permalink}}" title="Ver la foto anterior de la galer&iacute;a"><i class="fa fa-angle-left"></i><span class="sr-only">Anterior</span></a>
+        </li>
+        <li class="page-item page-next">
+            <a *ngIf="photo.next" class="btn btn-primary siguiente" routerLink="/photos/{{photo.next.permalink}}" title="Ver la foto siguiente de la galer&iacute;a"><span class="sr-only">Siguiente</span><i class="fa fa-angle-right"></i></a>
+        </li>
+      </ul>
+      <img [src]="src" [alt]="photo.title" class="img-responsive">
+      <br>
+      <figcaption>
+        <!--{{datos_encuentro->equipo_1->nombre.' vs '.$datos_encuentro->equipo_2->nombre.' (Jornada '.$datos_encuentro->jornada.' - '.$datos_encuentro->torneo->nombre.')'}}-->
+        <p *ngIf="false">Foto obtenida en el encuentro </p>
+        <small>Fecha foto: {{photo.archive_date | date: 'dd/MM/yyyy'}}</small>
+      </figcaption>
+  </figure>
+
+  <div [innerHtml]="photo.content"></div>
+
+  <!--
+  <?php if (isset($datos_encuentro)): ?>
+  <a href="<?php echo base_url('torneos/'.$datos_encuentro->torneo->permalink.'/encuentro/'.$datos_encuentro->id); ?>">Ver detalles del encuentro</a>
+  <?php endif; ?>
+  -->
+
+  <a *ngIf="photo.comment_status === 'open'" href="#new_comment" class="add_comment" title="Comenta esta foto">A&ntilde;adir comentario</a>
+
+  <h3 #comments>Comentarios</h3>
+
+  <p *ngIf="!photo.comments">No hay ning&uacute;n comentario sobre la foto </p>
+  <!--
+  <h4 *ngIf="photo.comments">{{photo.comment_count + ' ' + (photo.comment_count == 1 ? "comentario" : "comentarios")}}</h4>
+  -->
+  <ul class="comments" *ngIf="photo.comments">
+    <li *ngFor="let comment of photo.comments; index as i">
+        <span class="comment_number">{{i + 1}}</span>
+        <div class="comment_body">
+            <span *ngIf="comment.author_url" class="comment_info"><a href="{{comment.author_url}}" title="La p&aacute;gina web del autor de este comentario">{{comment.author}}</a> dijo...</span>
+            <span *ngIf="!comment.author_url" class="comment_info">{{comment.author}} dijo...</span>
+            <div [innerHtml]="comment.content"></div>
+            <div class="comment_foot">{{comment.created_at | date: 'dd/MM/yyyy'}}</div>
+        </div>
+    </li>
+  </ul>
+
+  <div *ngIf="photo.comment_status === 'open'" id="new_comment" class="new_comment">
+      <div id="mensaje_comentario"></div>
+      <form id="comentar" method="post">
+        <fieldset>
+            <legend>Escribe un comentario</legend>
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" title="Nombre para dejar en el comentario" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="content">Comentario</label>
+                <textarea name="content" id="content" cols="72" wrap="soft" rows="10" class="form-control"></textarea>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" class="btn btn-primary" name="submit" value="Publicar comentario" />
+            </div>
+        </fieldset>
+      </form>
+  </div>
+</ng-container>

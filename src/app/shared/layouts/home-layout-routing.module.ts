@@ -21,6 +21,8 @@ import { TournamentJourneyComponent } from 'src/app/pages/tournaments/tournament
 import { TournamentMatchesComponent } from 'src/app/pages/tournaments/tournament-matches.component';
 import { TournamentMatchComponent } from 'src/app/pages/tournaments/tournament-match.component';
 import { TournamentPlayoffsComponent } from 'src/app/pages/tournaments/tournament-playoffs.component';
+import { PhotosComponent } from 'src/app/pages/photos/photos.component';
+import { PhotoComponent } from 'src/app/pages/photos/photo.component';
 
 const homeRoutes: Routes = [
   {
@@ -36,6 +38,8 @@ const homeRoutes: Routes = [
       { path: 'teams/:team/print', component: TeamsComponent },
       { path: 'skills', component: SkillsComponent },
       { path: 'skills/:type', component: SkillComponent },
+      { path: 'photos', component: PhotosComponent },
+      { path: 'photos/:photo', component: PhotoComponent },
       {
         path: 'tournaments/:tournament',
         resolve: {

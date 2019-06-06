@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CoachesService } from 'src/app/services/coaches.service';
 import { Coach } from 'src/app/models/coach.model';
 import { CommonsService } from 'src/app/services/commons.service';
-import { forkJoin } from 'rxjs';
-import { TeamsService } from 'src/app/services/teams.service';
 
 @Component({
   selector: 'app-coaches',
@@ -15,8 +13,7 @@ export class CoachesComponent implements OnInit {
 
   constructor(
     private coachesService: CoachesService,
-    private commonsService: CommonsService,
-    private teamsService: TeamsService
+    private commonsService: CommonsService
   ) {
 
   }
@@ -24,23 +21,9 @@ export class CoachesComponent implements OnInit {
   ngOnInit() {
     this.commonsService.setLoading(true);
     this.commonsService.setTitle('Listado de entrenadores');
-    forkJoin(
-      this.coachesService.getCoaches(),
-      this.teamsService.getTeams()
-    )
-    .subscribe(
+    this.coachesService.getCoaches().subscribe(
       data => {
-        this.coaches = data[0];
-        data[1].forEach(te => {
-          const coach = this.coaches.find(co => co.id === te.coach_id);
-          if (coach) {
-            if (!coach.teams) {
-              coach.teams = [];
-            }
-            coach.teams.push(te);
-          }
-        });
-
+        this.coaches = data;
         this.commonsService.setLoading(false);
       },
       error => {
