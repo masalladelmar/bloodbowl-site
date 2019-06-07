@@ -33,4 +33,6 @@ export interface Match {
     updated_by: number;
     deleted_by: number;
     phase: number;
+    tournament: string;
+    tournament_permalink: string;
 }

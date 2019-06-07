@@ -1,5 +1,5 @@
 <div class="photos" *ngIf="photos">
-  <div class="photo" *ngFor="let photo of photos; index as i">
+  <div class="photo" *ngFor="let photo of photos.results; index as i">
     <div class="card">
       <div class="card-image">
         <img [src]="album[i].thumb" (click)="open(i)" class="img-responsive lightbox-image" title="Ver imagen ampliada" />
@@ -16,15 +16,10 @@
     </div>
   </div>
 </div>
-<!--
+
 <nav aria-label="paginacion de las fotos" *ngIf="totalPages > 1">
-  <ul class="pager">
-    <?php if ($ini>0) : ?>
-      <li class="next"><a href="<?php echo base_url(). ($ini-10); ?>">Ver fotos más recientes <span aria-hidden="true">&rarr;</span></a></li>
-    <?php endif;
-    if ($ini+10<$total_fotos) : ?>
-      <li class="previous"><a href="<?php echo base_url(). ($ini+10); ?>"><span aria-hidden="true">&larr;</span> Ver fotos más antiguos</a></li>
-    <?php endif; ?>
+  <ul class="pagination">
+    <li *ngIf="page > 1" class="page-item page-prev"><button (click)="loadPage(page - 1)">Ver fotos más recientes <span aria-hidden="true">&rarr;</span></button></li>
+    <li *ngIf="page < totalPages" class="page-item page-next"><button (click)="loadPage(page + 1)"><span aria-hidden="true">&larr;</span> Ver fotos más antiguas</button></li>
   </ul>
 </nav>
--->

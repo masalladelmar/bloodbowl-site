@@ -23,6 +23,7 @@ import { LightboxModule } from 'ngx-lightbox';
 import { TournamentPlayoffsComponent } from 'src/app/pages/tournaments/tournament-playoffs.component';
 import { PhotoComponent } from 'src/app/pages/photos/photo.component';
 import { PhotosComponent } from 'src/app/pages/photos/photos.component';
+import { HomeComponent } from 'src/app/pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PhotosComponent } from 'src/app/pages/photos/photos.component';
     TournamentMatchComponent,
     TournamentPlayoffsComponent,
     PhotosComponent,
-    PhotoComponent
+    PhotoComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

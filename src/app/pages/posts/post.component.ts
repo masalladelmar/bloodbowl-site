@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from 'src/app/services/helper.service';
-import { CommonsService } from 'src/app/services/commons.service';
-import { ActivatedRoute } from '@angular/router';
-import { PostsService } from 'src/app/services/posts.service';
 import { Post } from 'src/app/models/post.model';
+import { ActivatedRoute } from '@angular/router';
+import { CommonsService } from 'src/app/services/commons.service';
+import { PostsService } from 'src/app/services/posts.service';
+import { HelperService } from 'src/app/services/helper.service';
 import { Match } from 'src/app/models/match.model';
 
 @Component({
-  selector: 'app-photo',
-  templateUrl: './photo.component.html',
-  styleUrls: ['./photo.component.scss']
+  selector: 'app-post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.scss']
 })
-export class PhotoComponent implements OnInit {
-  photo: Post;
-  src: string;
+export class PostComponent implements OnInit {
+  post: Post;
   match: Match;
+  src: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,13 +26,15 @@ export class PhotoComponent implements OnInit {
     this.route.paramMap.subscribe(
       data => {
         this.match = null;
-        this.postsService.getPhoto(data.get('photo')).subscribe(
+        this.postsService.getPost(data.get('post')).subscribe(
           response => {
-            this.photo = response;
+            this.post = response;
+            if (this.post.archive) {
+              this.src = this.commonsService.photosRoute + this.post.archive;
+            }
             this.commonsService.setTitle(response.title);
-            this.src = this.commonsService.photosRoute + this.photo.archive;
-            if (this.photo.match_id) {
-              this.postsService.getMatchData(this.photo.match_id).subscribe(
+            if (this.post.match_id) {
+              this.postsService.getMatchData(this.post.match_id).subscribe(
                 response2 => {
                   this.match = response2;
                   this.commonsService.setLoading(false);
@@ -50,7 +52,7 @@ export class PhotoComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al recuperar los datos de la foto'
+              ? 'Se ha producido un error al recuperar los datos del post'
               : error.message);
             this.commonsService.setLoading(false);
           }

@@ -1,0 +1,52 @@
+<div *ngFor="let type of famous" class="mb-4">
+  <h3 [innerHtml]="type.header"></h3>
+
+  <p *ngIf="type.data.length > 1">En este caso el galard&oacute;n est&aacute; compartido por {{type.data.length}} jugadores, que son los siguientes:</p>
+
+  <table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th title="Nombre del monstruo">Nombre</th>
+        <th title="Posici&oacute;n">Posicion</th>
+        <th title="Atributos del jugador">Atributos</th>
+        <!--th title="Movimiento">MO</th>
+        <th title="Fuerza">FU</th>
+        <th title="Agilidad">AG</th>
+        <th title="Armadura">AR</th-->
+        <th title="Habilidades">Habilidades</th>
+        <th title="Pases completos">COM</th>
+        <th title="Bajas hechas">CAS</th>
+        <th title="Intercepciones">INT</th>
+        <th title="Touch Downs anotados">TD</th>
+        <th title="Titulos de mejor jugador del encuentro">MJE</th>
+        <th title="Puntos de experiencia totales">PE</th>
+        <th title="El valor en monedas de oro de este jugador">Coste</th>
+        <th title="Nombre del equipo en el que juega actualmente">Equipo</th>
+        <th title="Entrenador que tiene el honor de alinearlo">Entrenador</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of type.data">
+        <td class="name-col" title="{{item.name}}">{{item.name}}</td>
+        <td class="text-center">{{item.position}}</td>
+        <td class="text-center"><span class="tooltip" [attr.data-tooltip]="'MO: ' + item.ma + ' - FU: ' + item.st + ' - AG: ' + item.ag +' - AR: ' + item.av">Atributos</span></td>
+        <!--
+        <td class="text-center">'.item.MO.'</td>
+        <td class="text-center">'.item.FU.'</td>
+        <td class="text-center">'.item.AG.'</td>
+        <td class="text-center">'.item.AR.'</td>
+        -->
+        <td><span class="tooltip" [attr.data-tooltip]="item.skills">Habilidades</span></td>
+        <td class="text-center" [ngClass]="type.key=='com' ? 'text-error text-bold' : ''">{{item.com!=0 ? item.com : '-'}}</td>
+        <td class="text-center" [ngClass]="type.key=='cas' ? 'text-error text-bold' : ''">{{item.cas!=0 ? item.cas : '-'}}</td>
+        <td class="text-center" [ngClass]="type.key=='itc' ? 'text-error text-bold' : ''">{{item.itc!=0 ? item.itc : '-'}}</td>
+        <td class="text-center" [ngClass]="type.key=='td' ? 'text-error text-bold' : ''">{{item.td!=0 ? item.td : '-'}}</td>
+        <td class="text-center" [ngClass]="type.key=='mvp' ? 'text-error text-bold' : ''">{{item.mvp!=0 ? item.mvp : '-'}}</td>
+        <td class="text-center" [ngClass]="type.key=='spp' ? 'text-error text-bold' : ''">{{item.spp!=0 ? item.spp : '-'}}</td>
+        <td class="text-right">{{item.value/1000}}k</td>
+        <td class="text-center">{{item.team}}</td>
+        <td class="text-center">{{item.coach}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

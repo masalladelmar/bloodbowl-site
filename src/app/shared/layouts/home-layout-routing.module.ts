@@ -23,12 +23,17 @@ import { TournamentMatchComponent } from 'src/app/pages/tournaments/tournament-m
 import { TournamentPlayoffsComponent } from 'src/app/pages/tournaments/tournament-playoffs.component';
 import { PhotosComponent } from 'src/app/pages/photos/photos.component';
 import { PhotoComponent } from 'src/app/pages/photos/photo.component';
+import { HomeComponent } from 'src/app/pages/home/home.component';
+import { PostComponent } from 'src/app/pages/posts/post.component';
+import { HallFameComponent } from 'src/app/pages/hall-fame/hall-fame.component';
+import { HallDeadComponent } from 'src/app/pages/hall-dead/hall-dead.component';
 
 const homeRoutes: Routes = [
   {
     path: '',
     component: HomeLayoutComponent,
     children: [
+      { path: '', component: HomeComponent },
       { path: 'races', component: RacesComponent },
       { path: 'races/:race', component: RaceComponent },
       { path: 'coaches', component: CoachesComponent },
@@ -40,6 +45,9 @@ const homeRoutes: Routes = [
       { path: 'skills/:type', component: SkillComponent },
       { path: 'photos', component: PhotosComponent },
       { path: 'photos/:photo', component: PhotoComponent },
+      { path: 'posts/:post', component: PostComponent },
+      { path: 'hall-of-fame', component: HallFameComponent },
+      { path: 'hall-of-dead', component: HallDeadComponent },
       {
         path: 'tournaments/:tournament',
         resolve: {

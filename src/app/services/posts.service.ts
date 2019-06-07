@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Post } from '../models/post.model';
+import { Post, PostsList } from '../models/post.model';
 import { Observable } from 'rxjs';
+import { Match } from '../models/match.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,23 @@ export class PostsService {
     private apiService: ApiService
   ) { }
 
-  public getPhotos(): Observable<Post[]> {
-    return this.apiService.get('photos');
+  public getPhotos(page: number): Observable<PostsList> {
+    return this.apiService.get(`photos/${page}`);
+  }
+
+  public getPosts(page: number): Observable<PostsList> {
+    return this.apiService.get(`posts/${page}`);
   }
 
   public getPhoto(photo: string): Observable<Post> {
-    return this.apiService.get(`photos/${photo}`);
+    return this.apiService.get(`photos/${photo}/detail`);
+  }
+
+  public getPost(post: string): Observable<Post> {
+    return this.apiService.get(`posts/${post}/detail`);
+  }
+
+  public getMatchData(match_id: number): Observable<Match> {
+    return this.apiService.get(`posts/match/${match_id}`);
   }
 }

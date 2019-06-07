@@ -1,0 +1,39 @@
+<ng-container *ngIf="posts; else empty">
+  <div class="tile" *ngFor="let post of posts.results">
+    <div class="tile-content">
+      <h2 class="tile-title">
+        <a routerLink="/posts/{{post.permalink}}" title="{{post.title}}">{{post.title}}</a>
+      </h2>
+      <div class="tile-subtitle">
+        <i class="text-gray">{{post.author}} | {{post.created_at | date: 'dd/MM/yyyy'}}</i>
+        <span *ngIf="post.comment_count > 0" class="pull-right">{{post.comment_count + ' ' + (post.comment_count==1 ? "comentario" : "comentarios")}}</span>
+      </div>
+      <div class="post-body">{{cutContent(post.content)}}</div>
+      <a routerLink="/posts/{{post.permalink}}" title="{{post.title}}">Leer más</a>
+      <!--
+      <?php /*if($post.post_updated"]!=0){
+          echo '<div class="act">';
+          echo '&Uacute;ltima actualizaci&oacute;n: '.format_salida( convertir_fecha($post.post_updated"], 1) );
+          echo '</div>';
+      }*/ ?>
+      -->
+    </div>
+  </div>
+
+  <nav aria-label="paginacion de los posts" class="blog-pagination" *ngIf="totalPages > 1">
+    <ul class="pagination">
+      <li *ngIf="page > 1" class="page-item page-prev"><button class="btn btn-primary" (click)="loadPage(page - 1)">Ver posts más recientes</button></li>
+      <li *ngIf="page < totalPages" class="page-item page-next"><button class="btn btn-primary" (click)="loadPage(page + 1)">Ver posts más antiguos</button></li>
+    </ul>
+  </nav>
+</ng-container>
+
+<ng-template #empty>
+  <div class="empty">
+    <div class="empty-icon">
+      <i class="fa fa-rss fa-3x"></i>
+    </div>
+    <p class="empty-title h5">No hay posts</p>
+    <p class="empty-subtitle">Puedes loguearte y escribir algo para que esto no esté tan vacío.</p>
+  </div>
+</ng-template>

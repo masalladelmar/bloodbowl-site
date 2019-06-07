@@ -47,6 +47,7 @@ h3, h4{
     h2{
         color: white;
         margin: 0;
+        text-shadow: 0 0 7px #000;
     }
 }
 
@@ -103,6 +104,81 @@ h3, h4{
 	vertical-align: middle;
 }
 .playoffs tbody tr td.info{
-	background-color: $standard-green;
+	background-color: $green;
 	color: #ffffff;
+}
+
+.comments{
+    margin: 0;
+}
+.comments li {
+	list-style:none;
+    margin-bottom: 2rem;
+    margin-top: 0;
+}
+.comment_number {
+	font-size: 2rem;
+	display: block;
+	float: left;
+	color: $green;
+    font-weight: bold;
+    margin-left: .8rem;
+}
+.comment_info {
+	font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: .4rem;
+	border-bottom: $green dashed 1px;
+}
+.comment_body {
+    margin-left: 3rem;
+}
+.comment_foot {
+    text-align: right;
+    font-size: .7rem;
+}
+.new_comment {
+	width:60%;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+/** Reescritura de colores **/
+.btn{
+    color: $green;
+    border-color: $green;
+    &.btn-link{
+        color: $green;
+        border-color: transparent;
+        &.active,
+        &:active,
+        &:focus,
+        &:hover{
+            color: $green-hover;
+        }
+    }
+    &.btn-primary{
+        background-color: $green;
+        border-color: $green-hover;
+    
+        &:hover{
+            background-color: $green-hover;
+            border-color: $green-hover-border;
+        }
+    }
+}
+.menu .menu-item>a:focus,
+.menu .menu-item>a:hover{
+    color: $green;
+}
+.menu .menu-item>a.active,
+.menu .menu-item>a:active{
+    color: $green;
+}
+a:focus{
+    box-shadow: 0 0 0 0.1rem rgba(27, 121, 31, 0.2);
+}
+a,a.active,a:active,a:visited{
+    color: $green;
 }

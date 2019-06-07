@@ -31,7 +31,7 @@
 					<a a routerLinkActive="active" routerLink="/hall-of-fame" title="Donde todos los jugadores quieren estar, pero solo los mejores tienen ese honor">The Hall Of Fame</a>
 				</li>
 				<li class="menu-item">
-					<a a routerLinkActive="active" routerLink="/hall-of-death" title="Aquellos que nos han dejado tambi&eacute;n tienen aqu&iacute; su sitio">The Hall Of Death</a>
+					<a a routerLinkActive="active" routerLink="/hall-of-dead" title="Aquellos que nos han dejado tambi&eacute;n tienen aqu&iacute; su sitio">The Hall Of Dead</a>
 				</li>
 				<!--a a routerLink="/foro" title="Accede a nuestro foro para comentar lo que quieras sobre la liga de Bloodbowl">Foro</a-->
 			</nav>
@@ -47,7 +47,7 @@
 
 			<div id="menu-torneo" *ngIf="tournamentSelected">
 				<h3 class="seccion">
-					<button title="Volver a la lista de torneos" class="btn btn-default" (click)="clearTournament()">
+					<button title="Volver a la lista de torneos" class="btn btn-link" (click)="clearTournament()">
 						<i class="fa fa-angle-left"></i><span class="text-hide">Lista</span>
 					</button>
 					<a class="btn btn-link ml-2 text-large" routerLink="/tournaments/{{tournamentSelected.permalink}}" title="{{tournamentSelected.name}} Ria de Nurgle">{{tournamentSelected.name}}</a>

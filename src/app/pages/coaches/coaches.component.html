@@ -4,10 +4,10 @@
 		</figure>
 	</div>
 	<div class="tile-content">
-		<p class="tile-title">{{ coach.name }}</p>
+		<h3 class="mb-2">{{ coach.name }}</h3>
 		<div class="tile-subtitle">
-			<p>Sus equipos:</p>
-			<ul *ngIf="coach.teams">
+			<p class="mb-2">Sus equipos:</p>
+			<ul *ngIf="coach.teams" class="m-0">
 				<li *ngFor="let team of coach.teams">{{team.name}}</li>
 			</ul>
 		</div>
