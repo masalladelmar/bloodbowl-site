@@ -11,9 +11,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { HomeLayoutModule } from './shared/layouts/home-layout.module';
-import { PostComponent } from './pages/posts/post.component';
-import { HallFameComponent } from './pages/hall-fame/hall-fame.component';
-import { HallDeadComponent } from './pages/hall-dead/hall-dead.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +18,7 @@ import { HallDeadComponent } from './pages/hall-dead/hall-dead.component';
     HeaderComponent,
     FooterComponent,
     HomeLayoutComponent,
-    SpinnerComponent,
-    PostComponent,
-    HallFameComponent,
-    HallDeadComponent
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

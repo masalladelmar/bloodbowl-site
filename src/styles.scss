@@ -144,6 +144,13 @@ h3, h4{
 	position: relative;
 }
 
+hr{
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(27, 121, 31, 0.75), rgba(0, 0, 0, 0));
+    margin: 1rem 0;
+}
+
 /** Reescritura de colores **/
 .btn{
     color: $green;
@@ -161,6 +168,10 @@ h3, h4{
     &.btn-primary{
         background-color: $green;
         border-color: $green-hover;
+        &.active, &:active, &:focus{
+            background: $green;
+            border-color: $green-hover;
+        }
     
         &:hover{
             background-color: $green-hover;
@@ -179,6 +190,26 @@ h3, h4{
 a:focus{
     box-shadow: 0 0 0 0.1rem rgba(27, 121, 31, 0.2);
 }
-a,a.active,a:active,a:visited{
+a,
+a.active,
+a:active,
+a:visited{
     color: $green;
+}
+a:hover{
+    color: $green-hover;
+}
+.tab .tab-item a:focus, .tab .tab-item a:hover{
+    color: $green;
+}
+.tab .tab-item a.active, .tab .tab-item.active a{
+    border-bottom-color: $green;
+    color: $green;
+}
+.form-input:focus{
+    border-color: $green;
+    box-shadow: 0 0 0 0.1rem rgba(85,128,0,.2);
+}
+.pagination .page-item a:focus, .pagination .page-item a:hover{
+    color: white;
 }

@@ -7,11 +7,23 @@
       <tbody>
         <tr>
           <td class="text-center">{{quarter1.team_id_1 ? quarter1.team_name_1 : '1º'}}</td>
-          <td rowspan="2" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="2" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{quarter1.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="2" class="text-center">{{semi1.team_id_1 ? semi1.team_name_1 : 'Semifinalista'}}</td>
-          <td rowspan="5" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="5" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{semi1.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="5" class="text-center">{{final.team_id_1 ? final.team_name_1 : 'Finalista'}}</td>
-          <td rowspan="11" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="11" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{final.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="11" class="text-center">
             <ng-container *ngIf="final; else nofinal">
               <b>Ganador</b>
@@ -29,7 +41,11 @@
         </tr>
         <tr>
           <td class="text-center">{{quarter2.team_id_1 ? quarter2.team_name_1 : '4º'}}</td>
-          <td rowspan="2" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="2" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{quarter2.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="2" class="text-center">{{semi1.team_id_2 ? semi1.team_name_2 : 'Semifinalista'}}</td>
         </tr>
         <tr>
@@ -40,9 +56,17 @@
         </tr>
         <tr>
           <td class="text-center">{{quarter3.team_id_1 ? quarter3.team_name_1 : '2º'}}</td>
-          <td rowspan="2" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="2" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{quarter3.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="2" class="text-center">{{semi2.team_id_1 ? semi2.team_name_1 : 'Semifinalista'}}</td>
-          <td rowspan="5" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="5" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{semi2.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="5" class="text-center">{{final.team_id_2 ? final.team_name_2 : 'Finalista'}}</td>
         </tr>
         <tr>
@@ -53,7 +77,11 @@
         </tr>
         <tr>
           <td class="text-center">{{quarter4.team_id_1 ? quarter4.team_name_1 : '3º'}}</td>
-          <td rowspan="2" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="2" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{quarter4.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="2" class="text-center">{{semi2.team_id_2 ? semi2.team_name_2 : 'Semifinalista'}}</td>
         </tr>
         <tr>
@@ -67,7 +95,11 @@
           <td class="text-center">
             {{third.team_id_1 ? third.team_name_1 : 'Finalista 3º y 4º puesto'}}
           </td>
-          <td rowspan="3" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="3" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{third.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="3" class="text-center">
             <ng-container *ngIf="third; else nothird">
               <b>3º puesto</b>
@@ -91,9 +123,17 @@
       <tbody>
         <tr>
           <td class="text-center">{{semi1.team_id_1 ? semi1.team_name_1 : '1º'}}</td>
-          <td rowspan="2" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="2" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{semi1.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="2" class="text-center">{{final ? final.team_name_1 : 'Finalista'}}</td>
-          <td rowspan="5" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="5" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{final.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="5" class="text-center">
             <ng-container *ngIf="final; else nofinal">
               <b>Ganador</b>
@@ -111,7 +151,11 @@
         </tr>
         <tr>
           <td class="text-center">{{semi2.team_id_1 ? semi2.team_name_1 : '2º'}}</td>
-          <td rowspan="2" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="2" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{semi2.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="2" class="text-center">{{final ? final.team_name_2 : 'Finalista'}}</td>
         </tr>
         <tr>
@@ -123,7 +167,11 @@
         <tr>
           <td colspan="2" rowspan="3"></td>
           <td class="text-center">{{third ? third.team_name_1 : 'Finalista 3º y 4º puesto'}}</td>
-          <td rowspan="3" class="text-center info"><i class="fa fa-chevron-right"></i></td>
+          <td rowspan="3" class="text-center info">
+            <a routerLink="/tournaments/{{tournament.permalink}}/playoffs/{{third.id}}" title="Ver detalles del encuentro">
+              <i class="fa fa-chevron-right text-light"></i>
+            </a>
+          </td>
           <td rowspan="3" class="text-center">
             <ng-container *ngIf="third; else nothird">
               <b>3º puesto</b>

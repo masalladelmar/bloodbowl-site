@@ -15,4 +15,8 @@ export class PlayoffsService {
   getMatches(tournament_id: number): Observable<Match[]> {
     return this.apiService.get(`tournaments/${tournament_id}/playoffs`);
   }
+
+  getMatch(tournament_id: number, match_id: number): Observable<Match> {
+    return this.apiService.get(`tournaments/${tournament_id}/playoffs/${match_id}`);
+  }
 }

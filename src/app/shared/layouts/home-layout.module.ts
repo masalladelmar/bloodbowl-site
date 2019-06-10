@@ -24,6 +24,11 @@ import { TournamentPlayoffsComponent } from 'src/app/pages/tournaments/tournamen
 import { PhotoComponent } from 'src/app/pages/photos/photo.component';
 import { PhotosComponent } from 'src/app/pages/photos/photos.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
+import { PostComponent } from 'src/app/pages/posts/post.component';
+import { HallFameComponent } from 'src/app/pages/hall-fame/hall-fame.component';
+import { HallDeadComponent } from 'src/app/pages/hall-dead/hall-dead.component';
+import { TournamentPlayoffMatchComponent } from 'src/app/pages/tournaments/tournament-playoff-match.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -48,12 +53,17 @@ import { HomeComponent } from 'src/app/pages/home/home.component';
     TournamentPlayoffsComponent,
     PhotosComponent,
     PhotoComponent,
-    HomeComponent
+    HomeComponent,
+    PostComponent,
+    HallFameComponent,
+    HallDeadComponent,
+    TournamentPlayoffMatchComponent
   ],
   imports: [
     CommonModule,
     HomeLayoutRoutingModule,
-    LightboxModule
+    LightboxModule,
+    FormsModule
   ],
   providers: []
 })

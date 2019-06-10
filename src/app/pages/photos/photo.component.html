@@ -46,16 +46,16 @@
     <form id="comentar" method="post">
       <fieldset>
         <legend>Escribe un comentario</legend>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="author_valid ? '' : 'has-error'">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" id="name" name="name" placeholder="Nombre para dejar en el comentario" class="form-input" />
+            <input type="text" id="name" name="name" [(ngModel)]="author" placeholder="Nombre para dejar en el comentario" class="form-input" />
         </div>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="content_valid ? '' : 'has-error'">
             <label for="content" class="form-label">Comentario</label>
-            <textarea name="content" id="content" cols="72" wrap="soft" rows="10" class="form-input" placeholder="Comentario"></textarea>
+            <textarea name="content" id="content" [(ngModel)]="content" cols="72" wrap="soft" rows="10" class="form-input" placeholder="Comentario"></textarea>
         </div>
         <div class="form-group text-center">
-            <input type="submit" class="btn btn-primary" name="submit" value="Publicar comentario" />
+          <button type="button" (click)="comment()" class="btn btn-primary">Publicar comentario</button>
         </div>
       </fieldset>
     </form>

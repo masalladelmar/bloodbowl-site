@@ -32,4 +32,8 @@ export class PostsService {
   public getMatchData(match_id: number): Observable<Match> {
     return this.apiService.get(`posts/match/${match_id}`);
   }
+
+  public commentPost(post_id: number, author: string, content: string): Observable<void> {
+    return this.apiService.post(`comment/${post_id}`, {author: author, content: content});
+  }
 }

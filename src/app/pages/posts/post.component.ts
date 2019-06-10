@@ -15,6 +15,10 @@ export class PostComponent implements OnInit {
   post: Post;
   match: Match;
   src: string;
+  author: string;
+  content: string;
+  author_valid: boolean;
+  content_valid: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +26,8 @@ export class PostComponent implements OnInit {
     private postsService: PostsService,
     public helper: HelperService
   ) {
+    this.author_valid = true;
+    this.content_valid = true;
     this.commonsService.setLoading(true);
     this.route.paramMap.subscribe(
       data => {
@@ -67,5 +73,38 @@ export class PostComponent implements OnInit {
   scroll(el: HTMLElement) {
     console.log(el);
     el.scrollIntoView({behavior: 'smooth'});
+  }
+
+  comment() {
+    if (this.author && this.content) {
+      this.postsService.commentPost(this.post.id, this.author, this.content).subscribe(
+        response => {
+          this.commonsService.handleSuccess('Comentario guardado, está pendiente de aprobación');
+          this.commonsService.setLoading(false);
+          this.author = '';
+          this.content = '';
+          this.author_valid = true;
+          this.content_valid = true;
+        },
+        error => {
+          this.commonsService.handleError(error.status === 500
+            ? 'Se ha producido un error al guardar el comentario'
+            : error.message);
+          this.commonsService.setLoading(false);
+        }
+      );
+    } else {
+      if (!this.author) {
+        this.author_valid = false;
+      } else {
+        this.author_valid = true;
+      }
+      if (!this.content) {
+        this.content_valid = false;
+      } else {
+        this.content_valid = true;
+      }
+      this.commonsService.handleError('Debes rellenar nombre y comentario');
+    }
   }
 }

@@ -27,6 +27,7 @@ import { HomeComponent } from 'src/app/pages/home/home.component';
 import { PostComponent } from 'src/app/pages/posts/post.component';
 import { HallFameComponent } from 'src/app/pages/hall-fame/hall-fame.component';
 import { HallDeadComponent } from 'src/app/pages/hall-dead/hall-dead.component';
+import { TournamentPlayoffMatchComponent } from 'src/app/pages/tournaments/tournament-playoff-match.component';
 
 const homeRoutes: Routes = [
   {
@@ -131,6 +132,13 @@ const homeRoutes: Routes = [
               tournament: TournamentResolverService
             }
           },
+          {
+            path: 'playoffs/:match',
+            component: TournamentPlayoffMatchComponent,
+            resolve: {
+              tournament: TournamentResolverService
+            }
+          }
         ]
       }
     ]
