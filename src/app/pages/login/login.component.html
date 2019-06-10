@@ -1,0 +1,17 @@
+<div class="columns">
+  <div class="column col-4 col-mx-auto col-md-12">
+    <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label class="form-label only-sr">Usuario</label>
+        <input type="text" formControlName="user" placeholder="Usuario" class="form-input">
+      </div>
+      <div class="form-group">
+        <label class="form-label only-sr">Contraseña</label>
+        <input type="password" formControlName="password" placeholder="Contraseña" class="form-input">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="loginform.invalid">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

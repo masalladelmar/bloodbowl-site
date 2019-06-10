@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <main class="off-canvas off-canvas-sidebar-show">
-	<a class="off-canvas-toggle btn btn-primary btn-action" href="#sidebar-id">
+	<a class="off-canvas-toggle btn btn-primary btn-action" (click)="show_menu()">
 		<i class="fas fa-bars"></i>
 	</a>
 
@@ -91,7 +91,7 @@
 		</div>
 	</div>
 
-	<a class="off-canvas-overlay" href="#close"></a>
+	<a class="off-canvas-overlay" (click)="hide_menu()"></a>
 
 	<div class="off-canvas-content">
 		<app-spinner>

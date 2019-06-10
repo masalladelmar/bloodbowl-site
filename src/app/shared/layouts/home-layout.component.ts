@@ -54,4 +54,12 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
   clearTournament() {
     this.tournamentSelected = null;
   }
+
+  show_menu() {
+    document.getElementById('sidebar-id').classList.add('active');
+  }
+
+  hide_menu() {
+    document.getElementById('sidebar-id').classList.remove('active');
+  }
 }

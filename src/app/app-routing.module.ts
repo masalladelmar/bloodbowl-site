@@ -7,10 +7,6 @@ const routes: Routes = [
     path: '',
     component: HomeLayoutComponent
   },
-  /*{
-    path: 'login',
-    component:
-  }*/
   { path: '**', redirectTo: '', component: HomeLayoutComponent }
 ];
 

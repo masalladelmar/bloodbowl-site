@@ -28,7 +28,9 @@ import { PostComponent } from 'src/app/pages/posts/post.component';
 import { HallFameComponent } from 'src/app/pages/hall-fame/hall-fame.component';
 import { HallDeadComponent } from 'src/app/pages/hall-dead/hall-dead.component';
 import { TournamentPlayoffMatchComponent } from 'src/app/pages/tournaments/tournament-playoff-match.component';
-import { FormsModule } from '@angular/forms';
+import { AdminLayoutComponent } from './admin-layout.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from 'src/app/pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -57,13 +59,15 @@ import { FormsModule } from '@angular/forms';
     PostComponent,
     HallFameComponent,
     HallDeadComponent,
-    TournamentPlayoffMatchComponent
+    TournamentPlayoffMatchComponent,
+    AdminLayoutComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
     HomeLayoutRoutingModule,
     LightboxModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   providers: []
 })

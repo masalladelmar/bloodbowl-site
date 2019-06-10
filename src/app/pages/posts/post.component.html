@@ -25,19 +25,19 @@
   </ul>
 
   <div *ngIf="post.comment_status === 'open'" class="new_comment">
-    <form id="comentar" method="post">
+    <form [formGroup]="commentform" (ngSubmit)="onSubmit()">
       <fieldset>
         <legend>Escribe un comentario</legend>
-        <div class="form-group" [ngClass]="author_valid ? '' : 'has-error'">
-            <label for="name" class="form-label">Nombre</label>
-            <input type="text" id="name" name="name" [(ngModel)]="author" placeholder="Nombre para dejar en el comentario" class="form-input" />
+        <div class="form-group" [ngClass]="author.invalid && (author.dirty || author.touched) ? 'has-error' : ''">
+            <label class="form-label">Nombre</label>
+            <input type="text" formControlName="author" placeholder="Nombre para dejar en el comentario" class="form-input">
         </div>
-        <div class="form-group" [ngClass]="content_valid ? '' : 'has-error'">
-            <label for="content" class="form-label">Comentario</label>
-            <textarea name="content" id="content" [(ngModel)]="content" cols="72" wrap="soft" rows="10" class="form-input" placeholder="Comentario"></textarea>
+        <div class="form-group" [ngClass]="content.invalid && (content.dirty || content.touched) ? 'has-error' : ''">
+            <label class="form-label">Comentario</label>
+            <textarea formControlName="content" cols="72" wrap="soft" rows="10" class="form-input" placeholder="Comentario"></textarea>
         </div>
         <div class="form-group text-center">
-            <button type="button" (click)="comment()" class="btn btn-primary">Publicar comentario</button>
+          <button type="submit" class="btn btn-primary">Publicar comentario</button>
         </div>
       </fieldset>
     </form>

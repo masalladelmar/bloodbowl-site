@@ -28,6 +28,7 @@ import { PostComponent } from 'src/app/pages/posts/post.component';
 import { HallFameComponent } from 'src/app/pages/hall-fame/hall-fame.component';
 import { HallDeadComponent } from 'src/app/pages/hall-dead/hall-dead.component';
 import { TournamentPlayoffMatchComponent } from 'src/app/pages/tournaments/tournament-playoff-match.component';
+import { LoginComponent } from 'src/app/pages/login/login.component';
 
 const homeRoutes: Routes = [
   {
@@ -49,6 +50,10 @@ const homeRoutes: Routes = [
       { path: 'posts/:post', component: PostComponent },
       { path: 'hall-of-fame', component: HallFameComponent },
       { path: 'hall-of-dead', component: HallDeadComponent },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
       {
         path: 'tournaments/:tournament',
         resolve: {

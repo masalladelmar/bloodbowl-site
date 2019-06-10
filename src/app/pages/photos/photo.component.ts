@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PostsService } from 'src/app/services/posts.service';
 import { Post } from 'src/app/models/post.model';
 import { Match } from 'src/app/models/match.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-photo',
@@ -15,19 +16,19 @@ export class PhotoComponent implements OnInit {
   photo: Post;
   src: string;
   match: Match;
-  author: string;
-  content: string;
-  author_valid: boolean;
-  content_valid: boolean;
+  commentform: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private commonsService: CommonsService,
     private postsService: PostsService,
-    public helper: HelperService
+    public helper: HelperService,
+    private fb: FormBuilder
   ) {
-    this.author_valid = true;
-    this.content_valid = true;
+    this.commentform = this.fb.group({
+      author: ['', Validators.required],
+      content: ['', Validators.required]
+    });
     this.commonsService.setLoading(true);
     this.route.paramMap.subscribe(
       data => {
@@ -73,16 +74,21 @@ export class PhotoComponent implements OnInit {
     el.scrollIntoView({behavior: 'smooth'});
   }
 
-  comment() {
-    if (this.author && this.content) {
-      this.postsService.commentPost(this.photo.id, this.author, this.content).subscribe(
+  get author() {
+    return this.commentform.get('author');
+  }
+  get content() {
+    return this.commentform.get('content');
+  }
+
+  onSubmit() {
+    if (this.commentform.valid) {
+      this.postsService.commentPost(this.photo.id, this.commentform.get('author').value, this.commentform.get('content').value).subscribe(
         response => {
           this.commonsService.handleSuccess('Comentario guardado, está pendiente de aprobación');
           this.commonsService.setLoading(false);
-          this.author = '';
-          this.content = '';
-          this.author_valid = true;
-          this.content_valid = true;
+          this.commentform.get('author').setValue('');
+          this.commentform.get('content').setValue('');
         },
         error => {
           this.commonsService.handleError(error.status === 500
@@ -92,16 +98,6 @@ export class PhotoComponent implements OnInit {
         }
       );
     } else {
-      if (!this.author) {
-        this.author_valid = false;
-      } else {
-        this.author_valid = true;
-      }
-      if (!this.content) {
-        this.content_valid = false;
-      } else {
-        this.content_valid = true;
-      }
       this.commonsService.handleError('Debes rellenar nombre y comentario');
     }
   }
