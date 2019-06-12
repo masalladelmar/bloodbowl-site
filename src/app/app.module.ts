@@ -12,6 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { HomeLayoutModule } from './shared/layouts/home-layout.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminHeaderComponent } from './shared/header/admin-header.component';
+import { AdminFooterComponent } from './shared/footer/admin-footer.component';
+import { AdminLayoutComponent } from './shared/layouts/admin-layout.component';
+import { AdminLayoutModule } from './shared/layouts/admin-layout.module';
+import { NotfoundComponent } from './shared/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -19,11 +24,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     FooterComponent,
     HomeLayoutComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AdminHeaderComponent,
+    AdminFooterComponent,
+    AdminLayoutComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
     HomeLayoutModule,
+    AdminLayoutModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

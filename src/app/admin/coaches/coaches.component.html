@@ -1,0 +1,28 @@
+<h1>Entrenadores <small>- Lista</small>
+	<a routerLink="/admin/coaches/new" class="btn btn-primary float-right">Nuevo</a>
+</h1>
+
+<div class="columns">
+  <div class="column col-10 col-mx-auto">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Fecha creaci&oacute;n</th>
+          <th>Ultima actualizaci&oacute;n</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coach of coaches">
+          <td>{{coach.id}}</td>
+          <td><a routerLink="/admin/coaches/{{coach.id}}" title="Modificar el entrenador">{{coach.name}}</a></td>
+          <td class="text-center">{{coach.created_at | date: 'd/m/Y H:i'}}</td>
+          <td class="text-center">{{coach.updated_at | date: 'd/m/Y H:i'}}</td>
+          <td class="text-center"><a *ngIf="!in_use(coach.id)" routerLink="/admin/coaches/{{coach.id}}/delete" title="Eliminar" class="btn btn-sm btn-error" onclick="return confirm('¿Seguro que quieres borrar este entrenador?')"><i class="fa fa-skull-crossbones"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

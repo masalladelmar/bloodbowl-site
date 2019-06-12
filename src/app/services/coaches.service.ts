@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Coach } from '../models/coach.model';
+import { Coach, ActiveCoach } from '../models/coach.model';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -18,5 +18,9 @@ export class CoachesService {
 
   getCoach(coach: string): Observable<Coach> {
     return this.apiService.get(`coaches/${coach}`);
+  }
+
+  getActiveCoaches(): Observable<ActiveCoach[]> {
+    return this.apiService.get(`active-coaches`);
   }
 }

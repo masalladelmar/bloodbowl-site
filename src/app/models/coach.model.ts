@@ -12,3 +12,7 @@ export interface Coach {
     deleted_by: number;
     teams: Team[];
 }
+
+export interface ActiveCoach {
+    coach_id: number;
+}

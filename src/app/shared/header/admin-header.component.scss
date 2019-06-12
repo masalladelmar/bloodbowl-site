@@ -1,0 +1,38 @@
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: rgba($color: #eee, $alpha: 0.6);
+    padding: .4rem;
+}
+
+.with-sub{
+    overflow-y: visible;
+}
+
+.menu-item.dropdown{
+    display: block;
+}
+
+.dropdown.active .menu{
+    display: none;
+}
+
+.dropdown .dropdown-toggle:focus + .menu, .dropdown > .menu:hover, .dropdown.active > .menu{
+    display: block;
+}
+
+.submenu{
+    top: -.2rem;
+    left: 100%;
+}
+
+.submenu-toggle{
+    position: relative;
+
+    &:hover + .submenu{
+        display: block;
+    }
+}

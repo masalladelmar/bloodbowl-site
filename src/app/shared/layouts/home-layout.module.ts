@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeLayoutRoutingModule } from './home-layout-routing.module';
 import { TournamentComponent } from 'src/app/pages/tournaments/tournament.component';
 import { TournamentTeamsComponent } from 'src/app/pages/tournaments/tournament-teams.component';
 import { RacesComponent } from 'src/app/pages/races/races.component';
@@ -10,7 +9,6 @@ import { CoachComponent } from 'src/app/pages/coaches/coach.component';
 import { TeamsComponent } from 'src/app/pages/teams/teams.component';
 import { SkillsComponent } from 'src/app/pages/skills/skills.component';
 import { SkillComponent } from 'src/app/pages/skills/skill.component';
-import { NotfoundComponent } from '../notfound/notfound.component';
 import { TournamentTeamComponent } from 'src/app/pages/tournaments/tournament-team.component';
 import { TournamentStatsComponent } from 'src/app/pages/tournaments/tournament-stats.component';
 import { TournamentRankingComponent } from 'src/app/pages/tournaments/tournament-ranking.component';
@@ -28,9 +26,9 @@ import { PostComponent } from 'src/app/pages/posts/post.component';
 import { HallFameComponent } from 'src/app/pages/hall-fame/hall-fame.component';
 import { HallDeadComponent } from 'src/app/pages/hall-dead/hall-dead.component';
 import { TournamentPlayoffMatchComponent } from 'src/app/pages/tournaments/tournament-playoff-match.component';
-import { AdminLayoutComponent } from './admin-layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from 'src/app/pages/login/login.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +41,6 @@ import { LoginComponent } from 'src/app/pages/login/login.component';
     TeamsComponent,
     SkillsComponent,
     SkillComponent,
-    NotfoundComponent,
     TournamentTeamComponent,
     TournamentStatsComponent,
     TournamentRankingComponent,
@@ -60,14 +57,13 @@ import { LoginComponent } from 'src/app/pages/login/login.component';
     HallFameComponent,
     HallDeadComponent,
     TournamentPlayoffMatchComponent,
-    AdminLayoutComponent,
     LoginComponent
   ],
   imports: [
     CommonModule,
-    HomeLayoutRoutingModule,
     LightboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: []
 })
