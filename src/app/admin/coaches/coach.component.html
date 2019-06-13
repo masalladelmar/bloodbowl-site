@@ -10,13 +10,13 @@
     <div class="column col-4 col-ml-auto col-md-12" *ngIf="coach && coach.created_at">
       <div class="form-group">
           <p>Creado en</p>
-          <span>{{coach.created_at | date: 'd/m/Y H:i'}}</span>
+          <span>{{coach.created_at | date: 'dd/MM/yyyy HH:mm'}}</span>
       </div>
     </div>
     <div class="column col-4 col-mr-auto col-md-12" *ngIf="coach && coach.updated_at">
       <div class="form-group">
           <p>Última actualización en</p>
-          <span>{{coach.updated_at | date: 'd/m/Y H:i'}}</span>
+          <span>{{coach.updated_at | date: 'dd/MM/yyyy HH:mm'}}</span>
       </div>
     </div>
   </div>

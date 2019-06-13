@@ -58,7 +58,7 @@
     <small>
       {{chronicle.comment_count + ' ' + (chronicle.comment_count==1 ? "comentario" : "comentarios")}}
       <!--author["user_nicename"]-->
-      {{chronicle.created_at | date: 'dd/MM/yyyy'}}
+      {{chronicle.created_at | date: 'dd/MM/yyyy HH:mm'}}
     </small>
     <div [innerHtml]="chronicle.content"></div>
   </ng-container>

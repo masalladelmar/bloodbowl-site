@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit {
 
         this.usersService.verifyUser(profile.getEmail()).subscribe(
           response => {
-            console.log(response);
             if (!localStorage.getItem('googleToken')) {
               localStorage.setItem('googleToken', googleUser.getAuthResponse().id_token);
               localStorage.setItem('googleName', profile.getName());

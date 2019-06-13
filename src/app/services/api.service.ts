@@ -18,7 +18,11 @@ export class ApiService {
 
   put(method: string,
     body: Object = {},
-    header: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.user_token })): Observable<any> {
+    header: HttpHeaders = new HttpHeaders()): Observable<any> {
+      if (this.user_token) {
+        header = header.append('Authorization', this.user_token);
+      }
+      header = header.append('Content-Type', 'application/json');
     return this.http.put(environment.api_uri + method, JSON.stringify(body), { headers: header }).pipe(
       catchError(this.handleError)
     );
@@ -26,7 +30,11 @@ export class ApiService {
 
   post(method: string,
     body: Object = {},
-    header: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.user_token })): Observable<any> {
+    header: HttpHeaders = new HttpHeaders()): Observable<any> {
+      if (this.user_token) {
+        header = header.append('Authorization', this.user_token);
+      }
+      header = header.append('Content-Type', 'application/json');
     return this.http.post(environment.api_uri + method, JSON.stringify(body), { headers: header }).pipe(
       catchError(this.handleError)
     );
@@ -34,14 +42,22 @@ export class ApiService {
 
   get(method: string,
     params: HttpParams = new HttpParams(),
-    header: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.user_token })): Observable<any> {
+    header: HttpHeaders = new HttpHeaders()): Observable<any> {
+      if (this.user_token) {
+        header = header.append('Authorization', this.user_token);
+      }
+      header = header.append('Content-Type', 'application/json');
     return this.http.get(environment.api_uri + method, { headers: header, params: params }).pipe(
       catchError(this.handleError)
     );
   }
 
   delete(method: string,
-    header: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.user_token })): Observable<any> {
+    header: HttpHeaders = new HttpHeaders()): Observable<any> {
+      if (this.user_token) {
+        header = header.append('Authorization', this.user_token);
+      }
+      header = header.append('Content-Type', 'application/json');
     return this.http.delete(environment.api_uri + method, { headers: header }).pipe(
       catchError(this.handleError)
     );

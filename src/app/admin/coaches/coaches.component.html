@@ -18,8 +18,8 @@
         <tr *ngFor="let coach of coaches">
           <td>{{coach.id}}</td>
           <td><a routerLink="/admin/coaches/{{coach.id}}" title="Modificar el entrenador">{{coach.name}}</a></td>
-          <td class="text-center">{{coach.created_at | date: 'd/m/Y H:i'}}</td>
-          <td class="text-center">{{coach.updated_at | date: 'd/m/Y H:i'}}</td>
+          <td class="text-center">{{coach.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td class="text-center">{{coach.updated_at | date: 'dd/MM/yyyy HH:mm'}}</td>
           <td class="text-center"><a *ngIf="!in_use(coach.id)" routerLink="/admin/coaches/{{coach.id}}/delete" title="Eliminar" class="btn btn-sm btn-error" onclick="return confirm('¿Seguro que quieres borrar este entrenador?')"><i class="fa fa-skull-crossbones"></i></a></td>
         </tr>
       </tbody>

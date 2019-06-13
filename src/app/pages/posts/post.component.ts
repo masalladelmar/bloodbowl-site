@@ -72,7 +72,6 @@ export class PostComponent implements OnInit {
   }
 
   scroll(el: HTMLElement) {
-    console.log(el);
     el.scrollIntoView({behavior: 'smooth'});
   }
 

@@ -5,7 +5,7 @@
 
   <div class="clearfix">
     <button class="btn btn-link float-right" title="Ver comentarios" (click)="scroll(comments)">{{post.comment_count + ' ' + (post.comment_count==1 ? "comentario" : "comentarios")}}</button>
-    <i>{{post.author}} | {{post.created_at | date: 'dd/MM/yyyy'}}</i>
+    <i>{{post.author}} | {{post.created_at | date: 'dd/MM/yyyy HH:mm'}}</i>
   </div>
   <div [innerHtml]="post.content"></div>
 
@@ -20,7 +20,7 @@
         <p *ngIf="!comment.author_url" class="comment_info">{{comment.author}} dijo...</p>
         <div [innerHtml]="comment.content"></div>
       </div>
-      <div class="comment_foot"><i class="text-dark">Perpetrado el {{comment.created_at | date: 'dd/MM/yyyy'}}</i></div>
+      <div class="comment_foot"><i class="text-dark">Perpetrado el {{comment.created_at | date: 'dd/MM/yyyy HH:mm'}}</i></div>
     </li>
   </ul>
 

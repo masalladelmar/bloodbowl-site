@@ -51,7 +51,6 @@ export class TournamentRankingComponent implements OnInit, OnDestroy {
             this.commonsService.setLoading(false);
           },
           error => {
-            console.log(error);
             this.commonsService.handleError(error.status === 500
               ? 'Se ha producido un error al recuperar la clasificación del torneo'
               : error.message);
