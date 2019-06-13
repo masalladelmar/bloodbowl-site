@@ -6,23 +6,26 @@
         <label class="form-label">Nombre</label>
         <input type="text" formControlName="name" placeholder="Nombre del entrenador" class="form-input">
       </div>
-    </div>
-    <div class="column col-4 col-ml-auto col-md-12" *ngIf="coach && coach.created_at">
       <div class="form-group">
-          <p>Creado en</p>
-          <span>{{coach.created_at | date: 'dd/MM/yyyy HH:mm'}}</span>
+        <div class="columns">
+          <div class="column col-4 col-md-12" *ngIf="coach && coach.updated_at">
+            <p class="mb-1">Permalink</p>
+            <span>{{coach.permalink}}</span>
+          </div>
+          <div class="column col-4 col-md-12" *ngIf="coach && coach.created_at">
+            <p class="mb-1">Creado en</p>
+            <span>{{coach.created_at | date: 'dd/MM/yyyy HH:mm'}}</span>
+          </div>
+          <div class="column col-4 col-md-12" *ngIf="coach && coach.updated_at">
+            <p class="mb-1">Última actualización en</p>
+            <span>{{coach.updated_at | date: 'dd/MM/yyyy HH:mm'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary mr-2">Guardar</button>
+        <a routerLink="/admin/coaches" class="btn">Cancelar</a>
       </div>
     </div>
-    <div class="column col-4 col-mr-auto col-md-12" *ngIf="coach && coach.updated_at">
-      <div class="form-group">
-          <p>Última actualización en</p>
-          <span>{{coach.updated_at | date: 'dd/MM/yyyy HH:mm'}}</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center">
-    <button type="submit" class="btn btn-primary mr-2">Guardar</button>
-    <a routerLink="/admin/coaches" class="btn">Cancelar</a>
   </div>
 </form>

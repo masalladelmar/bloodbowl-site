@@ -1,7 +1,7 @@
 <div class="columns">
   <div class="column col-10 col-mx-auto">
     <h1>Entrenadores <small>- Lista</small>
-      <a routerLink="/admin/coaches/new" class="btn btn-primary float-right">Nuevo</a>
+      <a routerLink="/admin/coaches/new" class="btn btn-width btn-primary float-right">Nuevo</a>
     </h1>
     
     <table class="table table-striped">
@@ -20,9 +20,28 @@
           <td><a routerLink="/admin/coaches/{{coach.id}}" title="Modificar el entrenador">{{coach.name}}</a></td>
           <td class="text-center">{{coach.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
           <td class="text-center">{{coach.updated_at | date: 'dd/MM/yyyy HH:mm'}}</td>
-          <td class="text-center"><a *ngIf="!in_use(coach.id)" routerLink="/admin/coaches/{{coach.id}}/delete" title="Eliminar" class="btn btn-sm btn-error" onclick="return confirm('¿Seguro que quieres borrar este entrenador?')"><i class="fa fa-skull-crossbones"></i></a></td>
+          <td class="text-center"><button *ngIf="!inUse(coach.id)" title="Eliminar" class="btn btn-sm btn-error" (click)="showModal(coach)"><i class="fa fa-skull-crossbones"></i></button></td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="modal" id="confirmation-modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-container">
+    <div class="modal-header">
+      <button class="btn btn-clear float-right" (click)="closeModal()" aria-label="Close"></button>
+      <div class="modal-title h5">Confirmación</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+        ¿Seguro que quieres borrar este entrenador?
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-width btn-primary mr-2" (click)="deleteCoach()">Si</button>
+      <button type="button" class="btn btn-width" (click)="closeModal()">No</button>
+    </div>
   </div>
 </div>

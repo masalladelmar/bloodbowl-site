@@ -135,9 +135,19 @@ hr{
 }
 
 .admin{
-    h1{
-        color: $green;
+    h1, h2{
+        font-family: Candara, Verdana, Arial, Helvetica, sans-serif;
     }
+    h1 small,
+    h2 small,
+    h2 small,
+    h2 small{
+        color: $green-hover-border;
+    }
+}
+
+.btn-width{
+    min-width: 7rem;
 }
 
 /** Reescritura de colores **/

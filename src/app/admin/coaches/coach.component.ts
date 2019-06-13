@@ -69,6 +69,7 @@ export class CoachComponent implements OnInit {
           response => {
             this.commonsService.handleSuccess('Entrenador actualizado');
             this.commonsService.setLoading(false);
+            this.router.navigate(['/admin/coaches']);
           },
           error => {
             this.commonsService.handleError(error.status === 500

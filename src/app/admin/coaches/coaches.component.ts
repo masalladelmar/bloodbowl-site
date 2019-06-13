@@ -12,6 +12,7 @@ import { forkJoin } from 'rxjs';
 export class CoachesComponent implements OnInit {
   coaches: Coach[];
   activeCoaches: ActiveCoach[];
+  selected: Coach;
 
   constructor(
     private coachesService: CoachesService,
@@ -39,7 +40,33 @@ export class CoachesComponent implements OnInit {
   ngOnInit() {
   }
 
-  public in_use(coach_id: number): boolean {
+  public inUse(coach_id: number): boolean {
     return this.activeCoaches.find(el => el.coach_id === coach_id) ? true : false;
+  }
+
+  public showModal(coach: Coach) {
+    this.selected = coach;
+    document.getElementById('confirmation-modal').classList.add('active');
+  }
+
+  public closeModal() {
+    this.selected = null;
+    document.getElementById('confirmation-modal').classList.remove('active');
+  }
+
+  public deleteCoach() {
+    this.commonsService.setLoading(true);
+    this.coachesService.delete(this.selected.id).subscribe(
+      response => {
+        this.coaches = this.coaches.filter(el => el.id !== this.selected.id);
+        this.commonsService.setLoading(false);
+      },
+      error => {
+        this.commonsService.handleError(error.status === 500
+          ? 'Se ha producido un error al eliminar el entrenador'
+          : error.message);
+        this.commonsService.setLoading(false);
+      }
+    );
   }
 }
