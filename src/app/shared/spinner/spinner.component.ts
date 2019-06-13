@@ -28,16 +28,17 @@ export class SpinnerComponent implements OnInit, OnDestroy {
 
   constructor(
     private commonsService: CommonsService
-  ) { }
+  ) {
+    this.loading$ = this.commonsService.getLoading().subscribe(
+      data => this.loading = data ? 'on' : 'off'
+    );
+  }
 
   public get state(): string {
     return this.loading;
   }
 
   ngOnInit() {
-    this.loading$ = this.commonsService.getLoading().subscribe(
-      data => this.loading = data ? 'on' : 'off'
-    );
   }
 
   ngOnDestroy() {

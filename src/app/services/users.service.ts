@@ -13,6 +13,6 @@ export class UsersService {
   ) { }
 
   verifyUser(email: string): Observable<User> {
-    return this.apiService.get(`users/${email}`);
+    return this.apiService.post(`verify-user`, {email: email});
   }
 }

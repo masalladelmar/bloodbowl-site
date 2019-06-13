@@ -23,9 +23,7 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
     private tournamentService: TournamentsService,
     private linksService: LinksService,
     private commonsService: CommonsService
-  ) {}
-
-  ngOnInit() {
+  ) {
     // Suscripciones del servicio común
     this.tourselected$ = this.commonsService.getTournament().subscribe(
       data => this.tournamentSelected = data
@@ -33,7 +31,9 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
     this.title$ = this.commonsService.getTitle().subscribe(
       data => this.title = data
     );
+  }
 
+  ngOnInit() {
     // Datos para la navegación
     this.tournamentService.getTournaments().subscribe(
       response => this.tournaments = response,
