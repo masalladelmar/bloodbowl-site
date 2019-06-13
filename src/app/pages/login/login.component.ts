@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { CommonsService } from 'src/app/services/commons.service';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 declare const gapi: any;
 
@@ -12,13 +12,13 @@ declare const gapi: any;
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginform: FormGroup;
   private auth2: any;
 
   constructor(
     private commonsService: CommonsService,
-    private fb: FormBuilder,
-    private router: Router
+    private zone: NgZone,
+    private router: Router,
+    private usersService: UsersService
   ) {
     if (localStorage.getItem('googleToken')) {
       // Ya está logueado
@@ -40,11 +40,6 @@ export class LoginComponent implements OnInit {
 
     document.head.appendChild(metaclientid);
     document.head.appendChild(gapiScript);
-
-    this.loginform = this.fb.group({
-      user: ['', Validators.required],
-      password: ['', Validators.required]
-    });
   }
 
   ngOnInit() {
@@ -53,7 +48,6 @@ export class LoginComponent implements OnInit {
   private googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init();
-      console.log(this.auth2);
       this.attachSignin(document.getElementById('google-sign-in'));
     });
   }
@@ -61,32 +55,35 @@ export class LoginComponent implements OnInit {
   private attachSignin(element) {
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
+        this.zone.run(() => (this.commonsService.setLoading(true)));
         const profile = googleUser.getBasicProfile();
 
-        if (!localStorage.getItem('googleToken')) {
-          localStorage.setItem('googleToken', googleUser.getAuthResponse().id_token);
-          localStorage.setItem('googleName', profile.getName());
-          localStorage.setItem('googleAvatar', profile.getImageUrl());
-        } else {
-          this.router.navigate(['/admin']);
-        }
+        this.usersService.verifyUser(profile.getEmail()).subscribe(
+          response => {
+            console.log(response);
+            if (!localStorage.getItem('googleToken')) {
+              localStorage.setItem('googleToken', googleUser.getAuthResponse().id_token);
+              localStorage.setItem('googleName', profile.getName());
+              localStorage.setItem('googleAvatar', profile.getImageUrl());
+            }
+
+            let url: string;
+            if (this.commonsService.getReturnUrl()) {
+              url = this.commonsService.getReturnUrl();
+            } else {
+              url = '/admin';
+            }
+            this.zone.run(() => this.router.navigate([url]));
+            this.zone.run(() => this.commonsService.setLoading(false));
+          },
+          error => {
+            this.commonsService.handleError('La cuenta que has usado no tiene permiso');
+            this.zone.run(() => this.commonsService.setLoading(false));
+          }
+        );
       }, (error) => {
         console.error(error);
+        this.zone.run(() => this.commonsService.setLoading(false));
       });
-  }
-
-  get user() {
-    return this.loginform.get('user');
-  }
-  get password() {
-    return this.loginform.get('password');
-  }
-
-  onSubmit() {
-    if (this.loginform.valid) {
-
-    } else {
-
-    }
   }
 }

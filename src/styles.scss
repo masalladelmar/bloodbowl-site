@@ -134,6 +134,12 @@ hr{
     margin: 1rem 0;
 }
 
+.admin{
+    h1{
+        color: $green;
+    }
+}
+
 /** Reescritura de colores **/
 .btn{
     color: $green;
@@ -146,7 +152,16 @@ hr{
         &:focus,
         &:hover{
             color: $green-hover;
+            background-color: transparent;
         }
+    }
+    &.active, &:active, &:focus{
+        background: $green;
+        border-color: $green-hover;
+        color: white;
+    }
+    &:hover{
+        border-color: $green;
     }
     &.btn-primary{
         background-color: $green;

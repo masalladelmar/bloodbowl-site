@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tournament } from 'src/app/models/tournament.model';
 import { TournamentsService } from 'src/app/services/tournaments.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-header',
@@ -14,7 +15,8 @@ export class AdminHeaderComponent implements OnInit {
   image = localStorage.getItem('googleAvatar');
 
   constructor(
-    private tournamentService: TournamentsService
+    private tournamentService: TournamentsService,
+    private router: Router
   ) {
     this.tournamentService.getTournaments().subscribe(
       response => this.tournaments = response,
@@ -27,5 +29,10 @@ export class AdminHeaderComponent implements OnInit {
 
   toggle_menu(target: HTMLElement) {
     target.parentElement.classList.toggle('active');
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 }

@@ -1,0 +1,28 @@
+<form [formGroup]="coachform" (ngSubmit)="onSubmit()">
+  <div class="columns">
+    <div class="column col-10 col-mx-auto">
+      <h1>{{title}} entrenador</h1>
+      <div class="form-group" [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''">
+        <label class="form-label">Nombre</label>
+        <input type="text" formControlName="name" placeholder="Nombre del entrenador" class="form-input">
+      </div>
+    </div>
+    <div class="column col-4 col-ml-auto col-md-12" *ngIf="coach && coach.created_at">
+      <div class="form-group">
+          <p>Creado en</p>
+          <span>{{coach.created_at | date: 'd/m/Y H:i'}}</span>
+      </div>
+    </div>
+    <div class="column col-4 col-mr-auto col-md-12" *ngIf="coach && coach.updated_at">
+      <div class="form-group">
+          <p>Última actualización en</p>
+          <span>{{coach.updated_at | date: 'd/m/Y H:i'}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary mr-2">Guardar</button>
+    <a routerLink="/admin/coaches" class="btn">Cancelar</a>
+  </div>
+</form>

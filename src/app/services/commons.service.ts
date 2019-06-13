@@ -11,6 +11,7 @@ export class CommonsService {
   private title: BehaviorSubject<string>;
   private loading: BehaviorSubject<boolean>;
   private _photosRoute: string;
+  private _returnUrl: string;
 
   constructor(
     private toastr: ToastrService
@@ -27,6 +28,14 @@ export class CommonsService {
 
   getTournament(): Observable<Tournament> {
     return this.tournament.asObservable();
+  }
+
+  setReturnUrl(url: string) {
+    this._returnUrl = url;
+  }
+
+  getReturnUrl(): string {
+    return this._returnUrl;
   }
 
   setTitle(t: string) {
@@ -56,6 +65,12 @@ export class CommonsService {
   handleSuccess(message: string) {
     this.toastr.success(message, null, {
       toastClass: 'toast toast-success'
+    });
+  }
+
+  handleWarning(message: string) {
+    this.toastr.success(message, null, {
+      toastClass: 'toast toast-warning'
     });
   }
 
