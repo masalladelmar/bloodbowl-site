@@ -13,3 +13,7 @@ export interface Race {
     updated_by: number;
     deleted_by: number;
 }
+
+export interface ActiveRace {
+    race_id: number;
+}

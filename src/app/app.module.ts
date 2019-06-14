@@ -17,6 +17,7 @@ import { AdminFooterComponent } from './shared/footer/admin-footer.component';
 import { AdminLayoutComponent } from './shared/layouts/admin-layout.component';
 import { AdminLayoutModule } from './shared/layouts/admin-layout.module';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
+import { ConfirmationModalComponent } from './shared/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NotfoundComponent } from './shared/notfound/notfound.component';
     AdminHeaderComponent,
     AdminFooterComponent,
     AdminLayoutComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,9 @@ import { NotfoundComponent } from './shared/notfound/notfound.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule
+  ],
+  entryComponents: [
+    ConfirmationModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

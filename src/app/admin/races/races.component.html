@@ -1,0 +1,28 @@
+<div class="columns">
+  <div class="column col-10 col-mx-auto">
+    <h1>Razas <small>- Lista</small>
+      <a routerLink="/admin/races/new" class="btn btn-primary mt-2 float-right">Nueva</a>
+    </h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Fecha creaci&oacute;n</th>
+          <th>Ultima actualizaci&oacute;n</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let race of races">
+          <td>{{race.id}}</td>
+          <td><a routerLink="/admin/races/{{race.id}}" title="Modificar raza">{{race.name}}</a></td>
+          <td class="text-center">{{race.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td class="text-center">{{race.updated_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td class="text-center"><button *ngIf="!inUse(race.id)" title="Eliminar" class="btn btn-sm btn-error" (click)="confirmationModal(race)"><i class="fa fa-skull-crossbones"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

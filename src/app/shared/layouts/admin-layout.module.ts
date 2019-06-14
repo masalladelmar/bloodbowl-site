@@ -6,12 +6,16 @@ import { DashboardComponent } from 'src/app/admin/dashboard/dashboard.component'
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { CoachesComponent } from 'src/app/admin/coaches/coaches.component';
 import { CoachComponent } from 'src/app/admin/coaches/coach.component';
+import { RaceComponent } from 'src/app/admin/races/race.component';
+import { RacesComponent } from 'src/app/admin/races/races.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     CoachesComponent,
-    CoachComponent
+    CoachComponent,
+    RacesComponent,
+    RaceComponent
   ],
   imports: [
     CommonModule,
