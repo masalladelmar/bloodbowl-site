@@ -12,7 +12,7 @@ export class UsersService {
     private apiService: ApiService
   ) { }
 
-  verifyUser(email: string): Observable<User> {
-    return this.apiService.post(`verify-user`, {email: email});
+  verifyUser(id_token: string): Observable<string> {
+    return this.apiService.post(`verify-user`, {id_token: id_token});
   }
 }

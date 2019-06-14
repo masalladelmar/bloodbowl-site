@@ -58,8 +58,9 @@ export class LoginComponent implements OnInit {
         this.zone.run(() => (this.commonsService.setLoading(true)));
         const profile = googleUser.getBasicProfile();
 
-        this.usersService.verifyUser(profile.getEmail()).subscribe(
+        this.usersService.verifyUser(googleUser.getAuthResponse().id_token).subscribe(
           response => {
+            localStorage.setItem('apiToken', response);
             if (!localStorage.getItem('googleToken')) {
               localStorage.setItem('googleToken', googleUser.getAuthResponse().id_token);
               localStorage.setItem('googleName', profile.getName());
