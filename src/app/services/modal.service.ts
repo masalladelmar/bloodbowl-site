@@ -6,8 +6,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ModalService {
-  modalId = 'modal-div';
-  _output: BehaviorSubject<any>;
+  private modalId = 'modal-div';
+  private _output: BehaviorSubject<any>;
 
   constructor(
     private domService: DomService
@@ -30,7 +30,11 @@ export class ModalService {
     document.getElementById(this.modalId).parentElement.classList.remove('active');
   }
 
-  output(): Observable<any> {
+  getOutput(): Observable<any> {
     return this._output.asObservable();
+  }
+
+  setOutput(value: any) {
+    this._output.next(value);
   }
 }

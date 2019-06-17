@@ -9,4 +9,5 @@ export interface Position {
     normal: string;
     doubles: string;
     price: number;
+    id: number;
 }

@@ -15,4 +15,8 @@ export class PositionsService {
   getPositions(race_id: number): Observable<Position[]> {
     return this.apiService.get(`positions/${race_id}`);
   }
+
+  delete(position: Position): Observable<void> {
+    return this.apiService.delete(`positions/${position.id}`);
+  }
 }

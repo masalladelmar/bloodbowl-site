@@ -8,7 +8,6 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class ConfirmationModalComponent implements OnInit {
   @Input() bodyText: string;
-  @Output() output = new EventEmitter<boolean>();
 
   constructor(
     private modalService: ModalService
@@ -18,10 +17,12 @@ export class ConfirmationModalComponent implements OnInit {
   }
 
   public close() {
+    this.modalService.setOutput(false);
     this.modalService.destroy();
   }
 
   public confirm() {
-    this.output.emit(true);
+    this.modalService.setOutput(true);
+    this.modalService.destroy();
   }
 }

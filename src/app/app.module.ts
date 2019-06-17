@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -17,7 +16,6 @@ import { AdminFooterComponent } from './shared/footer/admin-footer.component';
 import { AdminLayoutComponent } from './shared/layouts/admin-layout.component';
 import { AdminLayoutModule } from './shared/layouts/admin-layout.module';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
-import { ConfirmationModalComponent } from './shared/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +27,7 @@ import { ConfirmationModalComponent } from './shared/confirmation-modal/confirma
     AdminHeaderComponent,
     AdminFooterComponent,
     AdminLayoutComponent,
-    NotfoundComponent,
-    ConfirmationModalComponent
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -41,9 +38,6 @@ import { ConfirmationModalComponent } from './shared/confirmation-modal/confirma
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule
-  ],
-  entryComponents: [
-    ConfirmationModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

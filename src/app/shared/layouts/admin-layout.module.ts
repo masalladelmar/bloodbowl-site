@@ -8,6 +8,8 @@ import { CoachesComponent } from 'src/app/admin/coaches/coaches.component';
 import { CoachComponent } from 'src/app/admin/coaches/coach.component';
 import { RaceComponent } from 'src/app/admin/races/race.component';
 import { RacesComponent } from 'src/app/admin/races/races.component';
+import { PositionComponent } from 'src/app/admin/positions/position.component';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -15,13 +17,19 @@ import { RacesComponent } from 'src/app/admin/races/races.component';
     CoachesComponent,
     CoachComponent,
     RacesComponent,
-    RaceComponent
+    RaceComponent,
+    ConfirmationModalComponent,
+    PositionComponent
   ],
   imports: [
     CommonModule,
     LightboxModule,
     ReactiveFormsModule,
     AppRoutingModule
+  ],
+  entryComponents: [
+    ConfirmationModalComponent,
+    PositionComponent
   ],
   providers: []
 })
