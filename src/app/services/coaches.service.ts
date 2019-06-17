@@ -20,10 +20,6 @@ export class CoachesService {
     return this.apiService.get(`coaches/${coach}`);
   }
 
-  getActiveCoaches(): Observable<ActiveCoach[]> {
-    return this.apiService.get(`active-coaches`);
-  }
-
   create(name: string): Observable<void> {
     return this.apiService.post(`coaches`, {name: name});
   }

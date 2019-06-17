@@ -20,7 +20,7 @@
           <td><a routerLink="/admin/coaches/{{coach.id}}" title="Modificar el entrenador">{{coach.name}}</a></td>
           <td class="text-center">{{coach.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
           <td class="text-center">{{coach.updated_at | date: 'dd/MM/yyyy HH:mm'}}</td>
-          <td class="text-center"><button *ngIf="!inUse(coach.id)" title="Eliminar" class="btn btn-sm btn-error" (click)="showModal(coach)"><i class="fa fa-skull-crossbones"></i></button></td>
+          <td class="text-center"><button title="Eliminar" class="btn btn-sm btn-error" (click)="showModal(coach)"><i class="fa fa-skull-crossbones"></i></button></td>
         </tr>
       </tbody>
     </table>

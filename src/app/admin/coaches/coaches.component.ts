@@ -11,7 +11,6 @@ import { forkJoin } from 'rxjs';
 })
 export class CoachesComponent implements OnInit {
   coaches: Coach[];
-  activeCoaches: ActiveCoach[];
   selected: Coach;
 
   constructor(
@@ -19,13 +18,10 @@ export class CoachesComponent implements OnInit {
     private commonsService: CommonsService
   ) {
     this.commonsService.setLoading(true);
-    forkJoin(
-      this.coachesService.getCoaches(),
-      this.coachesService.getActiveCoaches()
-    ).subscribe(
+    this.coachesService.getCoaches()
+    .subscribe(
       data => {
-        this.coaches = data[0];
-        this.activeCoaches = data[1];
+        this.coaches = data;
         this.commonsService.setLoading(false);
       },
       error => {
@@ -38,10 +34,6 @@ export class CoachesComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  public inUse(coach_id: number): boolean {
-    return this.activeCoaches.find(el => el.coach_id === coach_id) ? true : false;
   }
 
   public showModal(coach: Coach) {

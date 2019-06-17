@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { Race } from '../models/race.model';
+import { Race, ActiveRace } from '../models/race.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,11 @@ export class RacesService {
     return this.apiService.get('races');
   }
 
-  getRace(race: string): Observable<Race> {
+  public getRace(race: string): Observable<Race> {
     return this.apiService.get(`races/${race}`);
+  }
+
+  public delete(race: Race) {
+    return this.apiService.delete(`races/${race.id}`);
   }
 }

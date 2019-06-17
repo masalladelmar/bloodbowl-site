@@ -13,7 +13,6 @@ import { CommonsService } from 'src/app/services/commons.service';
 })
 export class RacesComponent implements OnInit {
   races: Race[];
-  activeRaces: ActiveRace[];
 
   constructor(
     private modalService: ModalService,
@@ -21,13 +20,10 @@ export class RacesComponent implements OnInit {
     private commonsService: CommonsService
   ) {
     this.commonsService.setLoading(true);
-    forkJoin(
-      this.racesService.getRaces(),
-      // this.racesService.getActiveCoaches()
-    ).subscribe(
+    this.racesService.getRaces()
+    .subscribe(
       data => {
-        this.races = data[0];
-        // this.activeRaces = data[1];
+        this.races = data;
         this.commonsService.setLoading(false);
       },
       error => {
@@ -42,16 +38,32 @@ export class RacesComponent implements OnInit {
   ngOnInit() {
   }
 
-  confirmationModal() {
+  confirmationModal(race: Race) {
     const inputs = {
-      bodyText: '¿Seguro que quieres eliminar esta raza?'
+      bodyText: `¿Seguro que quieres eliminar la raza ${race.name}?`
     };
     const outputs = {};
     this.modalService.init(ConfirmationModalComponent, inputs, outputs);
-  }
-
-  public inUse(race_id: number): boolean {
-    return false;
-    return this.activeRaces.find(el => el.race_id === race_id) ? true : false;
+    const modalOutput$ = this.modalService.getOutput().subscribe(
+      response => {
+        if (response === true) {
+          modalOutput$.unsubscribe();
+          this.racesService.delete(race).subscribe(
+            data => {
+              this.commonsService.handleSuccess('Raza eliminada');
+            },
+            error => {
+              this.commonsService.handleError(error.status === 500
+                ? 'Se ha producido un error al recuperar los entrenadores'
+                : error.message);
+              this.commonsService.setLoading(false);
+            }
+          );
+        }
+        if (response === false) {
+          modalOutput$.unsubscribe();
+        }
+      }
+    );
   }
 }
