@@ -1,4 +1,4 @@
-import { Injectable, Injector, ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef } from '@angular/core';
+import { Injectable, Injector, ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, ComponentRef } from '@angular/core';
 
 interface ChildConfig {
   inputs: object;
@@ -24,7 +24,8 @@ export class DomService {
       .create(this.injector);
 
     // Attach the config to the child (inputs and outputs)
-    this.attachConfig(childConfig, childComponentRef);
+    childComponentRef.instance['inputs'] = JSON.stringify(childConfig.inputs);
+    childComponentRef.instance['outputs'] = childConfig.outputs;
 
     this.childComponentRef = childComponentRef;
     // Attach component to the appRef so that it's inside the ng component tree
@@ -43,13 +44,5 @@ export class DomService {
   public removeComponent() {
     this.appRef.detachView(this.childComponentRef.hostView);
     this.childComponentRef.destroy();
-  }
-
-  private attachConfig(config, componentRef) {
-    const inputs = config.inputs;
-    const outputs = config.outputs;
-
-    componentRef.instance['inputs'] = inputs;
-    componentRef.instance['outputs'] = outputs;
   }
 }

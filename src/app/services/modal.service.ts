@@ -22,12 +22,14 @@ export class ModalService {
     };
     const el = this.domService.appendComponentTo(this.modalId, component, componentConfig);
     document.getElementById(this.modalId).parentElement.classList.add('active');
+    document.body.classList.add('modal-open');
     return el;
   }
 
   destroy() {
     this.domService.removeComponent();
     document.getElementById(this.modalId).parentElement.classList.remove('active');
+    document.body.classList.remove('modal-open');
   }
 
   getOutput(): Observable<any> {

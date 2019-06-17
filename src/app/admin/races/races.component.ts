@@ -38,7 +38,7 @@ export class RacesComponent implements OnInit {
   ngOnInit() {
   }
 
-  confirmationModal(race: Race) {
+  deleteRace(race: Race) {
     const inputs = {
       bodyText: `¿Seguro que quieres eliminar la raza ${race.name}?`
     };
@@ -48,7 +48,7 @@ export class RacesComponent implements OnInit {
       response => {
         if (response === true) {
           modalOutput$.unsubscribe();
-          this.racesService.delete(race).subscribe(
+          this.racesService.delete(race.id).subscribe(
             data => {
               this.commonsService.handleSuccess('Raza eliminada');
             },

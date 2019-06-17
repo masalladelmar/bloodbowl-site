@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CoachesService } from 'src/app/services/coaches.service';
 import { CommonsService } from 'src/app/services/commons.service';
-import { Coach, ActiveCoach } from 'src/app/models/coach.model';
-import { forkJoin } from 'rxjs';
+import { Coach } from 'src/app/models/coach.model';
+import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-coaches',
@@ -15,7 +16,8 @@ export class CoachesComponent implements OnInit {
 
   constructor(
     private coachesService: CoachesService,
-    private commonsService: CommonsService
+    private commonsService: CommonsService,
+    private modalService: ModalService
   ) {
     this.commonsService.setLoading(true);
     this.coachesService.getCoaches()
@@ -36,28 +38,31 @@ export class CoachesComponent implements OnInit {
   ngOnInit() {
   }
 
-  public showModal(coach: Coach) {
-    this.selected = coach;
-    document.getElementById('confirmation-modal').classList.add('active');
-  }
-
-  public closeModal() {
-    this.selected = null;
-    document.getElementById('confirmation-modal').classList.remove('active');
-  }
-
-  public deleteCoach() {
-    this.commonsService.setLoading(true);
-    this.coachesService.delete(this.selected.id).subscribe(
+  deleteCoach(coach: Coach) {
+    const inputs = {
+      bodyText: `¿Seguro que quieres eliminar al entrenador ${coach.name}?`
+    };
+    const outputs = {};
+    this.modalService.init(ConfirmationModalComponent, inputs, outputs);
+    const modalOutput$ = this.modalService.getOutput().subscribe(
       response => {
-        this.coaches = this.coaches.filter(el => el.id !== this.selected.id);
-        this.commonsService.setLoading(false);
-      },
-      error => {
-        this.commonsService.handleError(error.status === 500
-          ? 'Se ha producido un error al eliminar el entrenador'
-          : error.message);
-        this.commonsService.setLoading(false);
+        if (response === true) {
+          modalOutput$.unsubscribe();
+          this.coachesService.delete(coach.id).subscribe(
+            data => {
+              this.commonsService.handleSuccess('Entrenador eliminado');
+            },
+            error => {
+              this.commonsService.handleError(error.status === 500
+                ? 'Se ha producido un error al eliminar al entrenador'
+                : error.message);
+              this.commonsService.setLoading(false);
+            }
+          );
+        }
+        if (response === false) {
+          modalOutput$.unsubscribe();
+        }
       }
     );
   }

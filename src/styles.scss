@@ -150,6 +150,10 @@ hr{
     min-width: 7rem;
 }
 
+.modal-open{
+    overflow: hidden;
+}
+
 /** Reescritura de colores **/
 .btn{
     color: $green;

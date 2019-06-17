@@ -1,3 +1,98 @@
-<p>
-  race works!
-</p>
+<form [formGroup]="raceform" (ngSubmit)="onSubmit()">
+  <div class="columns">
+    <div class="column col-10 col-mx-auto">
+      <h1>{{title}} raza</h1>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group" [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''">
+            <label class="form-label">Nombre</label>
+            <input type="text" formControlName="name" placeholder="Nombre de la raza" class="form-input">
+          </div>
+          <div class="form-group">
+            <p class="mb-1">Permalink</p>
+            <span *ngIf="race">{{race.permalink}}</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Descripción</label>
+            <input type="text" formControlName="description" placeholder="Datos adicionales de la raza" class="form-input">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group" [ngClass]="reroll_cost.invalid && (reroll_cost.dirty || reroll_cost.touched) ? 'has-error' : ''">
+            <label class="form-label">Coste segunda oportunidad</label>
+            <input type="text" formControlName="reroll_cost" placeholder="Coste en monedas" class="form-input">
+          </div>
+          <div class="form-group" [ngClass]="coat_arms.invalid && (coat_arms.dirty || coat_arms.touched) ? 'has-error' : ''">
+            <label class="form-label">Escudo</label>
+            <input type="text" formControlName="coat_arms" placeholder="Escudo de armas" class="form-input">
+          </div>
+          <div class="form-group">
+            <p>Actual</p>
+            <figure *ngIf="race && race.coat_arms">
+              <img src="assets/img/races/{{race.coat_arms}}.jpg" alt="Escudo de armas de la raza">
+            </figure>
+          </div>
+          <div class="form-group" *ngIf="race && race.created_at">
+              <p>Creado en</p>
+              <span>{{race.created_at | date: 'dd/MM/yyyy HH:mm'}}</span>
+          </div>
+          <div class="form-group" *ngIf="race && race.updated_at">
+              <p>Última actualización en</p>
+              <span>{{race.updated_at | date: 'dd/MM/yyyy HH:mm'}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary mr-2">Guardar</button>
+        <a routerLink="/admin/races" class="btn">Cancelar</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="columns">
+  <div class="column col-10 col-mx-auto">
+    <h2>Posiciones<button type="button" class="btn btn-primary float-right" (click)="addPosition()">Añadir posición</button></h2>
+    <table class="table table-condensed" id="tabla-posiciones">
+      <thead>
+        <tr>
+          <th style="width: 5%;" title="L&iacute;mite">L&iacute;mite</th>
+          <th title="Denominaci&oacute;n">Denominaci&oacute;n</th>
+          <th style="width: 10%;" title="Coste">Coste</th>
+          <th style="width: 5%;" title="Movimiento">MO</th>
+          <th style="width: 5%;" title="Fuerza">FU</th>
+          <th style="width: 5%;" title="Agilidad">AG</th>
+          <th style="width: 5%;" title="Armadura">AR</th>
+          <th title="Habilidades">Habilidades</th>
+          <th style="width: 10%;" title="Habilidades disponibles con tirada normal">Normal</th>
+          <th style="width: 10%;" title="Habilidades y atributos disponibles con tirada de dobles">Dobles</th>
+          <th style="width: 92px;" title="Orden en el que se mostrarán los jugadores">Orden</th>
+          <th style="width: 92px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let position of positions; index as i">
+          <td>{{position.limit}}</td>
+          <td>{{position.name}}</td>
+          <td>{{position.price}}</td>
+          <td>{{position.ma}}</td>
+          <td>{{position.st}}</td>
+          <td>{{position.ag}}</td>
+          <td>{{position.av}}</td>
+          <td>{{position.skills}}</td>
+          <td>{{getTypesSelected(position.normal)}}</td>
+          <td>{{getTypesSelected(position.doubles)}}</td>
+          <td>
+            <button *ngIf="i !== 1" (click)="positionUp(position.id)" title="Subir" class="btn btn-sm btn-link"><i class="fa fa-arrow-up"></i></button>
+            <button *ngIf="i !== positions.length - 1" (click)="positionDown(position.id)" title="Bajar" class="btn btn-sm btn-link"><i class="fa fa-arrow-down"></i></button>
+          </td>
+          <td>
+            <button type="button" (click)="editPosition(position)" title="Editar" class="btn btn-sm btn-primary mr-2"><i class="fa fa-pen"></i></button>
+            <button title="Eliminar" class="btn btn-sm btn-error" (click)="deletePosition(position)"><i class="fa fa-skull-crossbones"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -20,7 +20,7 @@ export class RacesService {
     return this.apiService.get(`races/${race}`);
   }
 
-  public delete(race: Race) {
-    return this.apiService.delete(`races/${race.id}`);
+  public delete(race_id: number) {
+    return this.apiService.delete(`races/${race_id}`);
   }
 }
