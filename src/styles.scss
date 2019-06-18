@@ -225,3 +225,14 @@ a:hover{
 .pagination .page-item a:focus, .pagination .page-item a:hover{
     color: white;
 }
+.form-checkbox input:checked+.form-icon,
+.form-radio input:checked+.form-icon,
+.form-switch input:checked+.form-icon{
+    background: $green;
+    border-color: $green-hover;
+}
+.form-checkbox input:focus+.form-icon,
+.form-radio input:focus+.form-icon,
+.form-switch input:focus+.form-icon{
+    border-color: $green-hover;
+}

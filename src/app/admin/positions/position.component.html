@@ -8,47 +8,47 @@
       <div class="column col-8">
         <div class="columns">
           <div class="column col-4">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="limit.invalid && (limit.dirty || limit.touched) ? 'has-error' : ''">
               <label>Limite</label>
-              <input type="text" class="form-input" formControlName="limit">
+              <input type="number" min="1" max="16" class="form-input" formControlName="limit">
             </div>
           </div>
           <div class="column col-5">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''">
               <label>Denominación</label>
               <input type="text" class="form-input" formControlName="name">
             </div>
           </div>
           <div class="column col-3">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="price.invalid && (price.dirty || price.touched) ? 'has-error' : ''">
               <label>Coste</label>
-              <input type="text" class="form-input" formControlName="price">
+              <input type="number" step="1000" class="form-input" formControlName="price">
             </div>
           </div>
         </div>
         <div class="columns">
           <div class="column col-3">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="ma.invalid && (ma.dirty || ma.touched) ? 'has-error' : ''">
               <label>Movimiento</label>
-              <input type="text" class="form-input" formControlName="ma">
+              <input type="number" min="1" max="10" class="form-input" formControlName="ma">
             </div>
           </div>
           <div class="column col-3">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="st.invalid && (st.dirty || st.touched) ? 'has-error' : ''">
               <label>Fuerza</label>
-              <input type="text" class="form-input" formControlName="st">
+              <input type="number" min="1" max="10" class="form-input" formControlName="st">
             </div>
           </div>
           <div class="column col-3">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="ag.invalid && (ag.dirty || ag.touched) ? 'has-error' : ''">
               <label>Agilidad</label>
-              <input type="text" class="form-input" formControlName="ag">
+              <input type="number" min="1" max="10" class="form-input" formControlName="ag">
             </div>
           </div>
           <div class="column col-3">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="av.invalid && (av.dirty || av.touched) ? 'has-error' : ''">
               <label>Armadura</label>
-              <input type="text" class="form-input" formControlName="av">
+              <input type="number" min="1" max="10" class="form-input" formControlName="av">
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
       <div class="column col-4">
         <div class="columns">
           <div class="column col-6">
-            <div class="form-group tirada-normal">
+            <div class="form-group" [ngClass]="normal.invalid && (normal.dirty || normal.touched) ? 'has-error' : ''">
               <label>Tirada normal</label><br>
               <label class="form-checkbox" formArrayName="normal" *ngFor="let order of positionform.controls.normal.controls; let i = index">
                 <input type="checkbox" [formControlName]="i">
@@ -70,7 +70,7 @@
             </div>
           </div>
           <div class="column col-6">
-            <div class="form-group tirada-dobles">
+            <div class="form-group" [ngClass]="doubles.invalid && (doubles.dirty || doubles.touched) ? 'has-error' : ''">
               <label>Tirada dobles</label><br>
               <label class="form-checkbox" formArrayName="doubles" *ngFor="let order of positionform.controls.doubles.controls; let i = index">
                 <input type="checkbox" [formControlName]="i">
@@ -84,7 +84,7 @@
     </div>
   </div>
   <div class="modal-footer pt-0">
-    <button type="button" class="btn btn-width mr-2 btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-width mr-2 btn-primary">Guardar</button>
     <button type="button" class="btn btn-width" (click)="close()">Cancelar</button>
   </div>
 </form>
