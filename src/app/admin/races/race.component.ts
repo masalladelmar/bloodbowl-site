@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Race } from 'src/app/models/race.model';
+import { Race, PostRace } from 'src/app/models/race.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonsService } from 'src/app/services/commons.service';
 import { RacesService } from 'src/app/services/races.service';
@@ -176,11 +176,103 @@ export class RaceComponent implements OnInit {
     );
   }
 
-  positionUp() {
-    // Mover hacia arriba la posición en la lista
+  positionUp(position: Position) {
+    if (position.order === 1) {
+      this.commonsService.handleError('No se puede mover a una posición superior');
+    } else {
+      // Mover hacia arriba la posición en la lista
+      const order_array = [];
+      this.positions.forEach(el => {
+        if (el.id === position.id) {
+          order_array.push({id: el.id, order: el.order - 1});
+        } else {
+          if (el.order === position.order - 1) {
+            order_array.push({id: el.id, order: el.order + 1});
+          } else {
+            order_array.push({id: el.id, order: el.order});
+          }
+        }
+      });
+      this.saveOrder(order_array);
+    }
   }
 
-  positionDown() {
-    // Mover hacia abajo la posición en la lista
+  positionDown(position: Position) {
+    if (position.order === this.positions.length) {
+      this.commonsService.handleError('No se puede mover a una posición inferior');
+    } else {
+      // Mover hacia abajo la posición en la lista
+      const order_array = [];
+      this.positions.forEach(el => {
+        if (el.id === position.id) {
+          order_array.push({id: el.id, order: el.order + 1});
+        } else {
+          if (el.order === position.order + 1) {
+            order_array.push({id: el.id, order: el.order - 1});
+          } else {
+            order_array.push({id: el.id, order: el.order});
+          }
+        }
+      });
+      this.saveOrder(order_array);
+    }
+  }
+
+  private saveOrder(array: any[]) {
+    this.commonsService.setLoading(true);
+    this.positionsService.order(array).subscribe(
+      response => {
+        this.commonsService.handleSuccess('Orden guardado');
+        this.commonsService.setLoading(false);
+      },
+      error => {
+        this.commonsService.handleError(error.status === 500
+          ? 'Se ha producido un error al guardar el orden'
+          : error.message);
+        this.commonsService.setLoading(false);
+      }
+    );
+  }
+
+  onSubmit() {
+    if (this.raceform.valid) {
+      const postRace: PostRace = {
+        name: this.raceform.get('name').value,
+        reroll_cost: this.raceform.get('reroll_cost').value,
+        description: this.raceform.get('description').value,
+        coat_arms: this.raceform.get('coat_arms').value,
+        apothecary: this.raceform.get('apothecary').value
+      };
+
+      if (this.race_id === 'new') {
+        this.racesService.create(postRace).subscribe(
+          response => {
+            this.commonsService.handleSuccess('Raza creada');
+            this.commonsService.setLoading(false);
+            this.router.navigate(['/admin/races']);
+          },
+          error => {
+            this.commonsService.handleError(error.status === 500
+              ? 'Se ha producido un error al crear la raza'
+              : error.message);
+            this.commonsService.setLoading(false);
+          }
+        );
+      } else {
+        this.racesService.update(Number(this.race_id), postRace).subscribe(
+          response => {
+            this.commonsService.handleSuccess('Raza actualizada');
+            this.commonsService.setLoading(false);
+            this.router.navigate(['/admin/races']);
+          },
+          error => {
+            this.commonsService.handleError(error.status === 500
+              ? 'Se ha producido un error al actualizar la raza'
+              : error.message);
+            this.commonsService.setLoading(false);
+          }
+        );
+      }
+    }
   }
 }

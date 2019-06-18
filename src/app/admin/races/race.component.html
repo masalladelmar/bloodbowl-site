@@ -1,43 +1,43 @@
-<form [formGroup]="raceform" (ngSubmit)="onSubmit()">
+<form [formGroup]="raceform" (ngSubmit)="onSubmit()" class="mb-4">
   <div class="columns">
     <div class="column col-10 col-mx-auto">
       <h1>{{title}} raza</h1>
-      <div class="row">
-        <div class="col-md-8">
+      <div class="columns mb-2">
+        <div class="column col-md-8">
           <div class="form-group" [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''">
             <label class="form-label">Nombre</label>
             <input type="text" formControlName="name" placeholder="Nombre de la raza" class="form-input">
           </div>
           <div class="form-group">
-            <p class="mb-1">Permalink</p>
-            <span *ngIf="race">{{race.permalink}}</span>
-          </div>
-          <div class="form-group">
             <label class="form-label">Descripción</label>
-            <input type="text" formControlName="description" placeholder="Datos adicionales de la raza" class="form-input">
+            <textarea formControlName="description" rows="5" placeholder="Datos adicionales de la raza" class="form-input"></textarea>
           </div>
-        </div>
-        <div class="col-md-4">
           <div class="form-group" [ngClass]="reroll_cost.invalid && (reroll_cost.dirty || reroll_cost.touched) ? 'has-error' : ''">
             <label class="form-label">Coste segunda oportunidad</label>
-            <input type="text" formControlName="reroll_cost" placeholder="Coste en monedas" class="form-input">
+            <input type="number" step="1000" formControlName="reroll_cost" placeholder="Coste en monedas" class="form-input">
           </div>
+        </div>
+        <div class="column col-md-4">
           <div class="form-group" [ngClass]="coat_arms.invalid && (coat_arms.dirty || coat_arms.touched) ? 'has-error' : ''">
             <label class="form-label">Escudo</label>
             <input type="text" formControlName="coat_arms" placeholder="Escudo de armas" class="form-input">
           </div>
           <div class="form-group">
-            <p>Actual</p>
+            <p class="mb-1">Actual</p>
             <figure *ngIf="race && race.coat_arms">
               <img src="assets/img/races/{{race.coat_arms}}.jpg" alt="Escudo de armas de la raza">
             </figure>
           </div>
+          <div class="form-group" *ngIf="race">
+            <p class="mb-1">Permalink</p>
+            <span *ngIf="race">{{race.permalink}}</span>
+          </div>
           <div class="form-group" *ngIf="race && race.created_at">
-              <p>Creado en</p>
+              <p class="mb-1">Creado en</p>
               <span>{{race.created_at | date: 'dd/MM/yyyy HH:mm'}}</span>
           </div>
           <div class="form-group" *ngIf="race && race.updated_at">
-              <p>Última actualización en</p>
+              <p class="mb-1">Última actualización en</p>
               <span>{{race.updated_at | date: 'dd/MM/yyyy HH:mm'}}</span>
           </div>
         </div>
@@ -51,7 +51,7 @@
   </div>
 </form>
 
-<div class="columns">
+<div class="columns" *ngIf="race">
   <div class="column col-10 col-mx-auto">
     <h2>Posiciones<button type="button" class="btn btn-primary float-right" (click)="addPosition()">Añadir posición</button></h2>
     <table class="table table-condensed" id="tabla-posiciones">
@@ -84,8 +84,9 @@
           <td>{{getTypesSelected(position.normal)}}</td>
           <td>{{getTypesSelected(position.doubles)}}</td>
           <td>
-            <button *ngIf="i !== 1" (click)="positionUp(position.id)" title="Subir" class="btn btn-sm btn-link"><i class="fa fa-arrow-up"></i></button>
-            <button *ngIf="i !== positions.length - 1" (click)="positionDown(position.id)" title="Bajar" class="btn btn-sm btn-link"><i class="fa fa-arrow-down"></i></button>
+            <span>{{position.order}}</span>
+            <button *ngIf="i !== 0" (click)="positionUp(position)" title="Subir" class="btn btn-sm btn-link"><i class="fa fa-arrow-up"></i></button>
+            <button *ngIf="i !== positions.length - 1" (click)="positionDown(position)" title="Bajar" class="btn btn-sm btn-link"><i class="fa fa-arrow-down"></i></button>
           </td>
           <td>
             <button type="button" (click)="editPosition(position)" title="Editar" class="btn btn-sm btn-primary mr-2"><i class="fa fa-pen"></i></button>

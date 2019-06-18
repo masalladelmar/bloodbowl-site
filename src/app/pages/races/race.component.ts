@@ -9,6 +9,7 @@ import { StarplayersService } from 'src/app/services/starplayers.service';
 import { forkJoin } from 'rxjs';
 import { SkillsService } from 'src/app/services/skills.service';
 import { CommonsService } from 'src/app/services/commons.service';
+import { SkillType } from 'src/app/models/skill.model';
 
 @Component({
   selector: 'app-race',
@@ -19,6 +20,7 @@ export class RaceComponent implements OnInit {
   race: Race;
   positions: Position[];
   star_players: StarPlayer[];
+  types: SkillType[];
 
   constructor(
     private route: ActivatedRoute,
@@ -41,27 +43,8 @@ export class RaceComponent implements OnInit {
               this.starplayersService.getRaceStarPlayers(response.id)
             ).subscribe(
               response2 => {
-                const types = response2[0];
+                this.types = response2[0];
                 this.positions = response2[1];
-                this.positions.forEach(po => {
-                  let divided = po.normal.split(',');
-                  po.normal = '';
-                  divided.forEach(sk => {
-                    const finded = types.find(el => el.link === sk);
-                    if (finded) {
-                      po.normal += (po.normal === '' ? '' : ', ') + finded.name;
-                    }
-                  });
-
-                  divided = po.doubles.split(',');
-                  po.doubles = '';
-                  divided.forEach(sk => {
-                    const finded = types.find(el => el.link === sk);
-                    if (finded) {
-                      po.doubles += (po.doubles === '' ? '' : ', ') + finded.name;
-                    }
-                  });
-                });
                 this.star_players = response2[2];
                 this.commonsService.setLoading(false);
               },
@@ -87,4 +70,16 @@ export class RaceComponent implements OnInit {
   ngOnInit() {
   }
 
+  getTypesSelected(types: string): string {
+    let out = '';
+    const divided = types.split(',');
+    divided.forEach(sk => {
+      const finded = this.types.find(el => el.link === sk);
+      if (finded) {
+        out += (out === '' ? '' : ', ') + finded.short;
+      }
+    });
+
+    return out;
+  }
 }

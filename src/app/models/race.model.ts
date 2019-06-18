@@ -17,3 +17,11 @@ export interface Race {
 export interface ActiveRace {
     race_id: number;
 }
+
+export interface PostRace {
+    name: string;
+    reroll_cost: number;
+    description: string;
+    coat_arms: string;
+    apothecary: boolean;
+}
