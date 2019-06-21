@@ -24,4 +24,5 @@ export interface PostPosition {
     normal: string;
     doubles: string;
     price: number;
+    race_id: number;
 }

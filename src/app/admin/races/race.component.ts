@@ -120,7 +120,8 @@ export class RaceComponent implements OnInit {
   private modalPosition(position: Position) {
     const inputs = {
       position: position,
-      skilltypes: this.types
+      skilltypes: this.types,
+      race_id: this.race_id
     };
     this.modalService.init(PositionComponent, inputs, {});
     const modalOutput$ = this.modalService.getOutput().subscribe(
@@ -139,7 +140,7 @@ export class RaceComponent implements OnInit {
             }
           );
         }
-        if (response === false) {
+        if (response === false && modalOutput$) {
           // TODO Fix unsubscribe of undefined
           modalOutput$.unsubscribe();
         }

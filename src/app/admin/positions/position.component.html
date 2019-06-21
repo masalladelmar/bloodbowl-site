@@ -63,7 +63,7 @@
             <div class="form-group" [ngClass]="normal.invalid && (normal.dirty || normal.touched) ? 'has-error' : ''">
               <label>Tirada normal</label><br>
               <label class="form-checkbox" formArrayName="normal" *ngFor="let order of positionform.controls.normal.controls; let i = index">
-                <input type="checkbox" [formControlName]="i">
+                <input type="checkbox" [formControlName]="i" (click)="toggleType('doubles', i)">
                 <i class="form-icon"></i>
                 {{skilltypes[i].short}}
               </label>
@@ -73,7 +73,7 @@
             <div class="form-group" [ngClass]="doubles.invalid && (doubles.dirty || doubles.touched) ? 'has-error' : ''">
               <label>Tirada dobles</label><br>
               <label class="form-checkbox" formArrayName="doubles" *ngFor="let order of positionform.controls.doubles.controls; let i = index">
-                <input type="checkbox" [formControlName]="i">
+                <input type="checkbox" [formControlName]="i" (click)="toggleType('normal', i)">
                 <i class="form-icon"></i>
                 {{skilltypes[i].short}}
               </label>
