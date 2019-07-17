@@ -10,6 +10,8 @@ import { RaceComponent } from 'src/app/admin/races/race.component';
 import { RacesComponent } from 'src/app/admin/races/races.component';
 import { PositionComponent } from 'src/app/admin/positions/position.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+import { TeamComponent } from 'src/app/admin/teams/team.component';
+import { TeamsComponent } from 'src/app/admin/teams/teams.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-m
     RacesComponent,
     RaceComponent,
     ConfirmationModalComponent,
-    PositionComponent
+    PositionComponent,
+    TeamsComponent,
+    TeamComponent
   ],
   imports: [
     CommonModule,

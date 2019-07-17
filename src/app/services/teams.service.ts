@@ -31,4 +31,8 @@ export class TeamsService {
   getTeam(team: string): Observable<Team> {
     return this.apiService.get(`teams/${team}`);
   }
+
+  delete(team_id: number): Observable<void> {
+    return this.apiService.delete(`teams/${team_id}`);
+  }
 }

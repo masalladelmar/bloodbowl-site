@@ -19,4 +19,8 @@ export class PlayersService {
   getFamous(): Observable<any> {
     return this.apiService.get(`players/famous`);
   }
+
+  getTeamPlayers(team_id: number): Observable<Player[]> {
+    return this.apiService.get(`players/${team_id}`);
+  }
 }

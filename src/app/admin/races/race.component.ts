@@ -159,7 +159,7 @@ export class RaceComponent implements OnInit {
         if (response === true) {
           this.positionsService.delete(position).subscribe(
             data => {
-              this.commonsService.handleSuccess('Poisición eliminada');
+              this.commonsService.handleSuccess('Posición eliminada');
               modalOutput$.unsubscribe();
             },
             error => {

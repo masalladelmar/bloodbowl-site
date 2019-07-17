@@ -1,0 +1,28 @@
+<div class="columns">
+  <div class="column col-10 col-mx-auto">
+    <h1>Equipos <small>- Lista</small>
+      <a routerLink="/admin/teams/new" class="btn btn-primary mt-2 float-right">Nuevo</a>
+    </h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Fecha creaci&oacute;n</th>
+          <th>Ultima actualizaci&oacute;n</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let team of teams">
+          <td>{{team.id}}</td>
+          <td><a routerLink="/admin/teams/{{team.id}}" title="Modificar equipo">{{team.name}}</a></td>
+          <td class="text-center">{{team.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td class="text-center">{{team.updated_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td class="text-center"><button title="Eliminar" class="btn btn-sm btn-error" (click)="deleteTeam(team)"><i class="fa fa-skull-crossbones"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
