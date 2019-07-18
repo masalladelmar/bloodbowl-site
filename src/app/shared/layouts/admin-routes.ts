@@ -14,5 +14,5 @@ export const admin_routes = [
     { path: 'races' , component: RacesComponent, canActivate: [AuthGuard] },
     { path: 'races/:race' , component: RaceComponent, canActivate: [AuthGuard] },
     { path: 'teams' , component: TeamsComponent, canActivate: [AuthGuard] },
-    { path: 'teams/:race' , component: TeamComponent, canActivate: [AuthGuard] }
+    { path: 'teams/:team' , component: TeamComponent, canActivate: [AuthGuard] }
 ];

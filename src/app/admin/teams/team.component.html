@@ -1,81 +1,80 @@
-<h1>{{title}} equipo</h1>
-
-<form [formGroup]="raceform" (ngSubmit)="onSubmit()" class="mb-4">
-  <div class="columns">
-    <div class="column col-10 col-mx-auto">
-      <div class="columns mb-2">
+<form [formGroup]="teamform" (ngSubmit)="onSubmit()" class="mb-4">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <h1>{{title}} equipo</h1>
+      <div class="row mb-2">
         <!--5-->
-        <div class="column col-5 col-md-12">
+        <div class="col-md-5">
           <div class="form-group" [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''">
             <label class="form-label">Nombre</label>
-            <input type="text" formControlName="name" placeholder="Nombre del equipo" class="form-input">
+            <input type="text" formControlName="name" placeholder="Nombre del equipo" class="form-control">
           </div>
         </div>
         <!--3-->
-        <div class="column col-md-3">
-          <div class="form-group">
-            <label title="Entrenador/a del equipo">Entrenador/a</label>
-            <select formControlName="coach_id" title="Selecionar el entrenador/a del equipo" class="form-input">
+        <div class="col-md-3">
+          <div class="form-group" [ngClass]="coach_id.invalid && (coach_id.dirty || coach_id.touched) ? 'has-error' : ''">
+            <label title="Entrenador/a del equipo" class="form-label">Entrenador/a</label>
+            <select formControlName="coach_id" title="Selecionar el entrenador/a del equipo" class="form-control">
               <option value="">[Selecciona un entrenador/a]</option>
               <option *ngFor="let coach of coaches" value="{{coach.id}}">{{coach.name}}</option>
             </select>
           </div>
         </div>
         <!--2-->
-        <div class="column col-md-2">
-          <div class="form-group">
-            <label title="Raza del equipo">Raza</label>
-            <select formControlName="race_id" title="Selecionar la raza del equipo" class="form-input">
+        <div class="col-md-2">
+          <div class="form-group" [ngClass]="race_id.invalid && (race_id.dirty || race_id.touched) ? 'has-error' : ''">
+            <label title="Raza del equipo" class="form-label">Raza</label>
+            <select formControlName="race_id" title="Selecionar la raza del equipo" class="form-control">
               <option value="">[Selecciona una raza]</option>
               <option *ngFor="let race of races" value="{{race.id}}">{{race.name}}</option>
             </select>
           </div>
         </div>
         <!--2-->
-        <div class="column col-md-2">
+        <div class="col-md-2">
           <div class="form-group">
-            <label title="Coste de la segunda oportunidad de equipo">Coste segunda</label>
+            <label title="Coste de la segunda oportunidad de equipo" class="form-label">Coste segunda</label>
             <p>{{reroll_cost}}</p>
           </div>
         </div>
 
 
         <!--2-->
-        <div class="column col-md-2">
-          <div class="form-group">
-            <label title="Cantidad de Segundas Oportunidades">Segundas</label>
-            <input type="number" formControlName="rerolls" value="0" step="1" class="form-input" />
+        <div class="col-md-2">
+          <div class="form-group" [ngClass]="rerolls.invalid && (rerolls.dirty || rerolls.touched) ? 'has-error' : ''">
+            <label title="Cantidad de Segundas Oportunidades" class="form-label">Segundas</label>
+            <input type="number" formControlName="rerolls" value="0" step="1" class="form-control" />
           </div>
         </div>
 
         <!--2-->
-        <div class="column col-md-2">
-          <div class="form-group">
-            <label title="Factor de hichas">Hinchas</label>
-            <input type="number" formControlName="fan_factor" value="0" step="1" class="form-input" />
+        <div class="col-md-2">
+          <div class="form-group" [ngClass]="fan_factor.invalid && (fan_factor.dirty || fan_factor.touched) ? 'has-error' : ''">
+            <label title="Factor de hichas" class="form-label">Hinchas</label>
+            <input type="number" formControlName="fan_factor" value="0" step="1" class="form-control" />
           </div>
         </div>
 
         <!--2-->
-        <div class="column col-md-2">
-          <div class="form-group">
-            <label title="Cantidad de ayudantes del entrenador">Ayundantes</label>
-            <input type="number" formControlName="assistants" value="0" step="1" class="form-input" />
+        <div class="col-md-2">
+          <div class="form-group" [ngClass]="assistants.invalid && (assistants.dirty || assistants.touched) ? 'has-error' : ''">
+            <label title="Cantidad de ayudantes del entrenador" class="form-label">Ayundantes</label>
+            <input type="number" formControlName="assistants" value="0" step="1" class="form-control" />
           </div>
         </div>
 
         <!--2-->
-        <div class="column col-md-2">
-          <div class="form-group">
-            <label title="Número de animadoras">Animadoras</label>
-            <input type="number" formControlName="cheerleaders" value="0" step="1" class="form-input" />
+        <div class="col-md-2">
+          <div class="form-group" [ngClass]="cheerleaders.invalid && (cheerleaders.dirty || cheerleaders.touched) ? 'has-error' : ''">
+            <label title="Número de animadoras" class="form-label">Animadoras</label>
+            <input type="number" formControlName="cheerleaders" value="0" step="1" class="form-control" />
           </div>
         </div>
 
         <!--2-->
-        <div class="column col-md-2">
+        <div class="col-md-2">
           <div class="form-group">
-            <label title="Indica si el equipo tiene un apotecario contratado">Apotecario</label>
+            <label title="Indica si el equipo tiene un apotecario contratado" class="form-label">Apotecario</label>
             <div class="checkbox">
               <label><input type="checkbox" formControlName="apothecary" value="1" onclick="sumarAP()" />&nbsp;</label>
             </div>
@@ -83,10 +82,10 @@
         </div>
 
         <!--2-->
-        <div class="column col-md-2">
-          <div class="form-group">
-            <label title="Monedas de oro en las arcas del equipo">Tesorer&iacute;a</label>
-            <input type="number" formControlName="treasury" value="1000000" class="form-input" />
+        <div class="col-md-2">
+          <div class="form-group" [ngClass]="treasury.invalid && (treasury.dirty || treasury.touched) ? 'has-error' : ''">
+            <label title="Monedas de oro en las arcas del equipo" class="form-label">Tesorer&iacute;a</label>
+            <input type="number" formControlName="treasury" value="1000000" class="form-control" />
           </div>
         </div>
       </div>
@@ -101,104 +100,81 @@
 
 
 
-
-
-
-
-<form [formGroup]="raceform" (ngSubmit)="onSubmit()" class="mb-4">
-  <div class="columns">
-    <div class="column col-10 col-mx-auto">
-      <h1>{{title}}</h1>
-      <div class="columns mb-2">
-        <div class="column col-md-8">
-          <div class="form-group" [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''">
-            <label class="form-label">Nombre</label>
-            <input type="text" formControlName="name" placeholder="Nombre de la raza" class="form-input">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Descripción</label>
-            <textarea formControlName="description" rows="5" placeholder="Datos adicionales de la raza" class="form-input"></textarea>
-          </div>
-          <div class="form-group" [ngClass]="reroll_cost.invalid && (reroll_cost.dirty || reroll_cost.touched) ? 'has-error' : ''">
-            <label class="form-label">Coste segunda oportunidad</label>
-            <input type="number" step="1000" formControlName="reroll_cost" placeholder="Coste en monedas" class="form-input">
-          </div>
-        </div>
-        <div class="column col-md-4">
-          <div class="form-group" [ngClass]="coat_arms.invalid && (coat_arms.dirty || coat_arms.touched) ? 'has-error' : ''">
-            <label class="form-label">Escudo</label>
-            <input type="text" formControlName="coat_arms" placeholder="Escudo de armas" class="form-input">
-          </div>
-          <div class="form-group">
-            <p class="mb-1">Actual</p>
-            <figure *ngIf="race && race.coat_arms">
-              <img src="assets/img/races/{{race.coat_arms}}.jpg" alt="Escudo de armas de la raza">
-            </figure>
-          </div>
-          <div class="form-group" *ngIf="race">
-            <p class="mb-1">Permalink</p>
-            <span *ngIf="race">{{race.permalink}}</span>
-          </div>
-          <div class="form-group" *ngIf="race && race.created_at">
-              <p class="mb-1">Creado en</p>
-              <span>{{race.created_at | date: 'dd/MM/yyyy HH:mm'}}</span>
-          </div>
-          <div class="form-group" *ngIf="race && race.updated_at">
-              <p class="mb-1">Última actualización en</p>
-              <span>{{race.updated_at | date: 'dd/MM/yyyy HH:mm'}}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary mr-2">Guardar</button>
-        <a routerLink="/admin/races" class="btn">Cancelar</a>
-      </div>
-    </div>
-  </div>
-</form>
-
-<div class="columns" *ngIf="race">
-  <div class="column col-10 col-mx-auto">
-    <h2>Posiciones<button type="button" class="btn btn-primary float-right" (click)="addPosition()">Añadir posición</button></h2>
-    <table class="table table-condensed" id="tabla-posiciones">
+<div class="row justify-content-center" *ngIf="team">
+  <div class="col-10">
+    <h2>Jugadores<button type="button" class="btn btn-primary float-right" (click)="addPlayer()">Añadir jugador</button></h2>
+    <table class="table table-condensed" id="tabla-jugadores">
       <thead>
         <tr>
-          <th style="width: 5%;" title="L&iacute;mite">L&iacute;mite</th>
-          <th title="Denominaci&oacute;n">Denominaci&oacute;n</th>
-          <th style="width: 10%;" title="Coste">Coste</th>
-          <th style="width: 5%;" title="Movimiento">MO</th>
-          <th style="width: 5%;" title="Fuerza">FU</th>
-          <th style="width: 5%;" title="Agilidad">AG</th>
-          <th style="width: 5%;" title="Armadura">AR</th>
+          <th title="Dorsal">#</th>
+          <th title="Estado">Estado</th>
+          <th title="Nombre">Nombre</th>
+          <th title="Posici&oacute;n">Posici&oacute;n</th>
+          <th title="Movimiento">MO</th>
+          <th title="Fuerza">FU</th>
+          <th title="Agilidad">AG</th>
+          <th title="Armadura">AR</th>
           <th title="Habilidades">Habilidades</th>
-          <th style="width: 10%;" title="Habilidades disponibles con tirada normal">Normal</th>
-          <th style="width: 10%;" title="Habilidades y atributos disponibles con tirada de dobles">Dobles</th>
-          <th style="width: 92px;" title="Orden en el que se mostrarán los jugadores">Orden</th>
-          <th style="width: 92px;">Acciones</th>
+          <th title="Acciones">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let position of positions; index as i">
-          <td>{{position.limit}}</td>
-          <td>{{position.name}}</td>
-          <td>{{position.price}}</td>
-          <td>{{position.ma}}</td>
-          <td>{{position.st}}</td>
-          <td>{{position.ag}}</td>
-          <td>{{position.av}}</td>
-          <td>{{position.skills}}</td>
-          <td>{{getTypesSelected(position.normal)}}</td>
-          <td>{{getTypesSelected(position.doubles)}}</td>
+        <tr *ngFor="let player of team.players; index as i">
           <td>
-            <span>{{position.order}}</span>
+            {{player.number}}
+          </td>
+          <td>
+            <select *ngIf="player.isEditing" class="form-control input-sm" name="status">
+              <option value="ACTIVO">Activo</option>
+              <option value="DESPEDIDO">Despedido</option>
+              <option value="MUERTO">Muerto</option>
+            </select>
+            <span *ngIf="!player.isEditing">{{player.status}}</span>
+          </td>
+          <td>
+            <input class="form-control" *ngIf="player.isEditing" name="name" value="{{player.name}}">
+            <span *ngIf="!player.isEditing">{{player.name}}</span>
+          </td>
+          <td>{{getPosition(player.position_id)}}</td>
+          <td>
+            <input class="form-control" *ngIf="player.isEditing" name="ma" value="{{player.ma}}" maxlength="2" size="1">
+            <span *ngIf="!player.isEditing">{{player.ma}}</span>
+          </td>
+          <td>
+            <input class="form-control" *ngIf="player.isEditing" name="st" value="{{player.st}}" maxlength="2" size="1">
+            <span *ngIf="!player.isEditing">{{player.st}}</span>
+          </td>
+          <td>
+            <input class="form-control" *ngIf="player.isEditing" name="ag" value="{{player.ag}}" maxlength="2" size="1">
+            <span *ngIf="!player.isEditing">{{player.ag}}</span>
+          </td>
+          <td>
+            <input class="form-control" *ngIf="player.isEditing" name="av" value="{{player.av}}" maxlength="2" size="1">
+            <span *ngIf="!player.isEditing">{{player.av}}</span>
+          </td>
+          <td>
+            <textarea class="form-control" *ngIf="player.isEditing" rows="2" cols="22">{{player.skills}}</textarea>
+            <span *ngIf="!player.isEditing">{{player.skills}}</span>
+          </td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-danger" title="Marcar como muerto"><i class="fa fa-skull-crossbones"></i></button>
+              <button class="btn btn-warning" title="Despedir"><i class="fa fa-external-link-alt"></i></button>
+              <button class="btn btn-primary" title="Editar"><i class="fa fa-pencil-alt"></i></button>
+            </div>
+          </td>
+
+          <!--
+          <td>
+            <span>{{player.order}}</span>
             <button *ngIf="i !== 0" (click)="positionUp(position)" title="Subir" class="btn btn-sm btn-link"><i class="fa fa-arrow-up"></i></button>
-            <button *ngIf="i !== positions.length - 1" (click)="positionDown(position)" title="Bajar" class="btn btn-sm btn-link"><i class="fa fa-arrow-down"></i></button>
+            <button *ngIf="i !== players.length - 1" (click)="positionDown(position)" title="Bajar" class="btn btn-sm btn-link"><i class="fa fa-arrow-down"></i></button>
           </td>
           <td>
             <button type="button" (click)="editPosition(position)" title="Editar" class="btn btn-sm btn-primary mr-2"><i class="fa fa-pen"></i></button>
             <button title="Eliminar" class="btn btn-sm btn-error" (click)="deletePosition(position)"><i class="fa fa-skull-crossbones"></i></button>
           </td>
+          -->
         </tr>
       </tbody>
     </table>

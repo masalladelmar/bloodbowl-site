@@ -31,11 +31,13 @@
             "styles": [
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/ngx-lightbox/lightbox.css",
-              "src/assets/css/spectre.min.css",
-              "src/assets/css/spectre-exp.min.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {

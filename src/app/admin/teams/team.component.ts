@@ -8,6 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Team } from 'src/app/models/team.model';
 import { Player } from 'src/app/models/player.model';
 import { forkJoin } from 'rxjs';
+import { RacesService } from 'src/app/services/races.service';
+import { CoachesService } from 'src/app/services/coaches.service';
+import { Race } from 'src/app/models/race.model';
+import { Coach } from 'src/app/models/coach.model';
+import { PositionsService } from 'src/app/services/positions.service';
+import { Position } from 'src/app/models/position.model';
 
 @Component({
   selector: 'app-team',
@@ -21,6 +27,9 @@ export class TeamComponent implements OnInit {
   title: string;
   players: Player[];
   // types: SkillType[];
+  races: Race[];
+  coaches: Coach[];
+  positions: Position[];
 
   constructor(
     private teamsService: TeamsService,
@@ -30,23 +39,48 @@ export class TeamComponent implements OnInit {
     private commonsService: CommonsService,
     private modalService: ModalService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private racesService: RacesService,
+    private coachesService: CoachesService,
+    private positionsService: PositionsService
   ) {
     this.teamform = this.fb.group({
       name: ['', Validators.required],
-      reroll_cost: ['', Validators.required],
+      fan_factor: ['', Validators.required],
+      assistants: ['', Validators.required],
+      cheerleaders: ['', Validators.required],
+      apothecary: [''],
+      rerolls: ['', Validators.required],
+      treasury: ['', Validators.required],
+      value: ['', Validators.required],
       coach_id: ['', Validators.required],
-      coat_arms: ['', Validators.required],
-      apothecary: ['']
+      race_id: ['', Validators.required]
     });
     this.commonsService.setLoading(true);
     this.team_id = this.route.snapshot.paramMap.get('team');
+
+    forkJoin(
+      this.racesService.getRaces(),
+      this.coachesService.getCoaches()
+    )
+    .subscribe(
+      response => {
+        this.races = response[0];
+        this.coaches = response[1];
+      },
+      error => {
+        this.commonsService.handleError(error.status === 500
+          ? 'Se ha producido un error al recuperar las razas y los entrenadores'
+          : error.message);
+        this.commonsService.setLoading(false);
+      }
+    );
+
     if (this.team_id !== 'new') {
       this.title = 'Editar';
       forkJoin(
         // this.skillsService.getTypes(),
-        this.teamsService.getTeamById(Number(this.team_id)),
-        this.playersService.getTeamPlayers(Number(this.team_id))
+        this.teamsService.getTeamById(Number(this.team_id))
       )
       .subscribe(
         response => {
@@ -60,8 +94,20 @@ export class TeamComponent implements OnInit {
           this.teamform.get('rerolls').setValue(this.team.rerolls);
           this.teamform.get('treasury').setValue(this.team.treasury);
           this.teamform.get('value').setValue(this.team.value);
+          this.teamform.get('coach_id').setValue(this.team.coach_id);
+          this.teamform.get('race_id').setValue(this.team.race_id);
 
-          this.players = response[1];
+          this.positionsService.getPositions(this.team.race_id).subscribe(
+            data => {
+              this.positions = data;
+            },
+            error => {
+              this.commonsService.handleError(error.status === 500
+                ? 'Se ha producido un error al recuperar las posiciones disponibles de la raza'
+                : error.message);
+              this.commonsService.setLoading(false);
+            }
+          );
         },
         error => {
           this.commonsService.handleError(error.status === 500
@@ -73,10 +119,50 @@ export class TeamComponent implements OnInit {
     } else {
       this.title = 'Nuevo';
       this.players = [];
+      this.teamform.get('fan_factor').setValue(0);
+      this.teamform.get('assistants').setValue(0);
+      this.teamform.get('cheerleaders').setValue(0);
+      this.teamform.get('rerolls').setValue(0);
+      this.teamform.get('treasury').setValue(1000000);
+      this.teamform.get('treasury').disable();
     }
   }
 
   ngOnInit() {
   }
 
+  get name() {
+    return this.teamform.get('name');
+  }
+  get fan_factor() {
+    return this.teamform.get('fan_factor');
+  }
+  get assistants() {
+    return this.teamform.get('assistants');
+  }
+  get cheerleaders() {
+    return this.teamform.get('cheerleaders');
+  }
+  get apothecary() {
+    return this.teamform.get('apothecary');
+  }
+  get rerolls() {
+    return this.teamform.get('rerolls');
+  }
+  get treasury() {
+    return this.teamform.get('treasury');
+  }
+  get value() {
+    return this.teamform.get('value');
+  }
+  get coach_id() {
+    return this.teamform.get('coach_id');
+  }
+  get race_id() {
+    return this.teamform.get('race_id');
+  }
+
+  getPosition(position_id: number): string {
+    return this.positions.find(el => el.id === position_id).name;
+  }
 }

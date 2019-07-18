@@ -1,52 +1,48 @@
-<nav class="navbar">
-  <div class="navbar-section">
-    <a class="navbar-brand" routerLink="/admin">{{header_title}}</a>
-  </div>
-  <div class="navbar-section">
-    <div class="dropdown" routerLinkActive="active">
-      <a class="btn btn-link dropdown-toggle" (click)="toggle_menu($event.currentTarget)" role="button" aria-expanded="false">Torneos <i class="fa fa-caret-down"></i></a>
-      <ul class="menu with-sub">
-        <li *ngFor="let tournament of tournaments" class="menu-item dropdown">
-          <a routerLink="/admin/tournaments/{{tournament.id}}/edit" class="submenu-toggle clearfix"><i class="float-right fa fa-caret-right"></i>{{tournament.name}}</a>
-          <ul class="menu submenu">
-            <li class="menu-item">{{tournament.name}}</li>
-            <li role="separator" class="divider"></li>
-            <li class="menu-item" routerLinkActive="active"><a routerLink="/admin/tournaments/{{tournament.id}}/teams">Equipos</a></li>
-            <li class="menu-item" routerLinkActive="active"><a routerLink="/admin/tournaments/{{tournament.id}}/matches">Encuentros</a></li>
-            <li *ngIf="tournament.playoffs" class="menu-item" routerLinkActive="active"><a routerLink="/admin/tournaments/{{tournament.id}}/playoffs">Playoffs</a></li>
-          </ul>
-        </li>
-        <li role="separator" class="divider"></li>
-        <li class="menu-item" routerLinkActive="active"><a routerLink="/admin/tournaments/new" title="Crear torneo">Nuevo</a></li>
-      </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/admin">{{header_title}}</a>
+  <div class="navbar-nav mr-auto">
+    <div class="nav-item dropdown" routerLinkActive="active">
+      <a class="nav-link dropdown-toggle" href="#" role="button"  data-toggle="dropdown">Torneos</a>
+      <div class="dropdown-menu">
+        <div class="dropdown-submenu" *ngFor="let tournament of tournaments">
+          <a routerLink="/admin/tournaments/{{tournament.id}}/edit" class="dropdown-item d-flex justify-content-between align-items-center">{{tournament.name}} <i class="ml-2 fa fa-caret-right"></i></a>
+          <div class="dropdown-menu">
+            <h4 class="dropdown-header">{{tournament.name}}</h4>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/tournaments/{{tournament.id}}/teams">Equipos</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/tournaments/{{tournament.id}}/matches">Encuentros</a>
+            <a class="dropdown-item" routerLinkActive="active" *ngIf="tournament.playoffs" routerLink="/admin/tournaments/{{tournament.id}}/playoffs">Playoffs</a>
+          </div>
+        </div>
+        <div role="separator" class="dropdown-divider"></div>
+        <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/tournaments/new" title="Crear torneo">Nuevo</a>
+      </div>
     </div>
-    <a class="btn btn-link" routerLink="/admin/races" routerLinkActive="active">Razas</a>
-    <a class="btn btn-link" routerLink="/admin/coaches" routerLinkActive="active">Entrenadores</a>
-    <a class="btn btn-link" routerLink="/admin/teams" routerLinkActive="active">Equipos</a>
-    <a class="btn btn-link" routerLink="/admin/links" routerLinkActive="active">Enlaces</a>
-    <div class="dropdown" routerLinkActive="active">
-      <a class="btn btn-link dropdown-toggle" (click)="toggle_menu($event.currentTarget)" role="button" aria-expanded="false">Posts <i class="fa fa-caret-down"></i></a>
-      <ul class="menu">
-        <li class="menu-item" routerLinkActive="active"><a routerLink="/admin/posts">Blog</a></li>
-        <li class="menu-item" routerLinkActive="active"><a routerLink="/admin/posts/chronicles">Crónicas</a></li>
-        <li class="menu-item" routerLinkActive="active"><a routerLink="/admin/posts/photos">Fotos</a></li>
-      </ul>
+    <a class="nav-item nav-link" routerLink="/admin/races" routerLinkActive="active">Razas</a>
+    <a class="nav-item nav-link" routerLink="/admin/coaches" routerLinkActive="active">Entrenadores</a>
+    <a class="nav-item nav-link" routerLink="/admin/teams" routerLinkActive="active">Equipos</a>
+    <a class="nav-item nav-link" routerLink="/admin/links" routerLinkActive="active">Enlaces</a>
+    <div class="nav-item dropdown" routerLinkActive="active">
+      <a class="nav-link dropdown-toggle" href="#" role="button"  data-toggle="dropdown">Posts</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/posts">Blog</a>
+        <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/posts/chronicles">Crónicas</a>
+        <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/posts/photos">Fotos</a>
+      </div>
     </div>
-    <a class="btn btn-link" routerLink="/admin/comments" routerLinkActive="active">Comentarios</a>
+    <a class="nav-item nav-link" routerLink="/admin/comments" routerLinkActive="active">Comentarios</a>
   </div>
-  <div class="navbar-section">
-    <div class="dropdown dropdown-right">
-      <a class="btn btn-link dropdown-toggle" (click)="toggle_menu($event.currentTarget)" role="button" aria-expanded="false">
-        <figure class="avatar avatar-sm" [attr.data-initial]="user.substring(0, 1)">
-          <img *ngIf="image" src="{{image}}" alt="avatar de usuario">
-        </figure>
-        {{user}} <i class="fa fa-caret-down"></i>
-      </a>
-      <ul class="menu" role="menu">
-        <li class="menu-item" routerLinkActive="active"><a routerLink="/admin/user/profile"><span class="fa fa-user"></span> Mi perfil</a></li>
-        <li class="divider"></li>
-        <li class="menu-item"><a (click)="logout()"><span class="fa fa-sign-out"></span> Salir</a></li>
-      </ul>
+  <div class="dropdown dropdown-right">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+      <figure class="float-left mr-2 mb-0" [attr.data-initial]="user.substring(0, 1)">
+        <img *ngIf="image" src="{{image}}" alt="avatar de usuario" class="rounded-circle" height="25">
+      </figure>
+      {{user}}
+    </a>
+    <div class="dropdown-menu" role="menu">
+      <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/user/profile"><span class="fa fa-user"></span> Mi perfil</a>
+      <div class="dropdown-divider"></div>
+      <button class="dropdown-item" (click)="logout()"><span class="fa fa-sign-out"></span> Salir</button>
     </div>
   </div>
 </nav>

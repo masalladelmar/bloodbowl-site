@@ -1,5 +1,5 @@
-<div class="columns">
-  <div class="column col-10 col-mx-auto">
+<div class="row justify-content-md-center">
+  <div class="col-10">
     <h1>Razas <small>- Lista</small>
       <a routerLink="/admin/races/new" class="btn btn-primary mt-2 float-right">Nueva</a>
     </h1>
@@ -20,7 +20,7 @@
           <td><a routerLink="/admin/races/{{race.id}}" title="Modificar raza">{{race.name}}</a></td>
           <td class="text-center">{{race.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
           <td class="text-center">{{race.updated_at | date: 'dd/MM/yyyy HH:mm'}}</td>
-          <td class="text-center"><button title="Eliminar" class="btn btn-sm btn-error" (click)="deleteRace(race)"><i class="fa fa-skull-crossbones"></i></button></td>
+          <td class="text-center"><button title="Eliminar" class="btn btn-sm btn-danger" (click)="deleteRace(race)"><i class="fa fa-skull-crossbones"></i></button></td>
         </tr>
       </tbody>
     </table>

@@ -1,13 +1,7 @@
 nav{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
     background-color: rgba($color: #eee, $alpha: 0.6);
-    padding: .4rem;
 }
-
+/*
 .with-sub{
     overflow-y: visible;
 }
@@ -23,16 +17,14 @@ nav{
 .dropdown .dropdown-toggle:focus + .menu, .dropdown > .menu:hover, .dropdown.active > .menu{
     display: block;
 }
+*/
 
-.submenu{
-    top: -.2rem;
-    left: 100%;
-}
-
-.submenu-toggle{
+.dropdown-submenu{
     position: relative;
 
-    &:hover + .submenu{
+    &:hover .dropdown-menu{
         display: block;
+        top: -.7rem;
+        left: 100%;
     }
 }
