@@ -45,14 +45,14 @@
 
       <div class="text-center">
         <button type="submit" class="btn btn-primary mr-2">Guardar</button>
-        <a routerLink="/admin/races" class="btn">Cancelar</a>
+        <a routerLink="/admin/races" class="btn btn-outline-primary">Cancelar</a>
       </div>
     </div>
   </div>
 </form>
 
-<div class="columns" *ngIf="race">
-  <div class="column col-10 col-mx-auto">
+<div class="row justify-content-center" *ngIf="race">
+  <div class="col-10">
     <h2>Posiciones<button type="button" class="btn btn-primary float-right" (click)="addPosition()">Añadir posición</button></h2>
     <table class="table table-condensed" id="tabla-posiciones">
       <thead>
@@ -89,8 +89,10 @@
             <button *ngIf="i !== positions.length - 1" (click)="positionDown(position)" title="Bajar" class="btn btn-sm btn-link"><i class="fa fa-arrow-down"></i></button>
           </td>
           <td>
-            <button type="button" (click)="editPosition(position)" title="Editar" class="btn btn-sm btn-primary mr-2"><i class="fa fa-pen"></i></button>
-            <button title="Eliminar" class="btn btn-sm btn-error" (click)="deletePosition(position)"><i class="fa fa-skull-crossbones"></i></button>
+            <div class="btn-group">
+              <button type="button" (click)="editPosition(position)" title="Editar" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></button>
+              <button title="Eliminar" class="btn btn-sm btn-danger" (click)="deletePosition(position)"><i class="fa fa-skull-crossbones"></i></button>
+            </div>
           </td>
         </tr>
       </tbody>

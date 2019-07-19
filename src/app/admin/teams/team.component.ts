@@ -163,6 +163,6 @@ export class TeamComponent implements OnInit {
   }
 
   getPosition(position_id: number): string {
-    return this.positions.find(el => el.id === position_id).name;
+    return this.positions ? this.positions.find(el => el.id === position_id).name : '';
   }
 }

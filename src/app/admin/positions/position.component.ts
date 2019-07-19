@@ -47,7 +47,7 @@ export class PositionComponent implements OnInit {
     );
     this.selected = {normal: [], doubles: []};
 
-    document.getElementById('modal-div').style.maxWidth = '960px';
+    document.getElementById('modal-div').parentElement.classList.add('modal-lg');
   }
 
   private buildTypes(type: string) {
@@ -84,7 +84,7 @@ export class PositionComponent implements OnInit {
 
   public close() {
     this.modalService.setOutput(false);
-    document.getElementById('modal-div').style.maxWidth = '';
+    document.getElementById('modal-div').parentElement.classList.remove('modal-lg');
     this.modalService.destroy();
   }
 
