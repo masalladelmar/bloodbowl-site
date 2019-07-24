@@ -12,7 +12,6 @@ import { PositionComponent } from 'src/app/admin/positions/position.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 import { TeamComponent } from 'src/app/admin/teams/team.component';
 import { TeamsComponent } from 'src/app/admin/teams/teams.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     CommonModule,
     LightboxModule,
     ReactiveFormsModule,
-    AppRoutingModule,
-    BsDropdownModule.forRoot()
+    AppRoutingModule
   ],
   entryComponents: [
     ConfirmationModalComponent,
