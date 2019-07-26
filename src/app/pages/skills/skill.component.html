@@ -1,14 +1,8 @@
-<div class="accordion card" *ngFor="let skill of skills">
-  <input type="checkbox" id="accordion-{{skill.id}}" name="accordion-checkbox" hidden>
-  <label class="accordion-header card-header" [for]="'accordion-' + skill.id">
-    {{ skill.name_es }} ({{skill.name_en}})
-    <i class="fa fa-chevron-down icon"></i>
-  </label>
-  <div class="accordion-body">
-    <div class="card-body">
-      {{ skill.description }}
-    </div>
-  </div>
-</div>
+<accordion class="mb-4">
+  <accordion-group *ngFor="let skill of skills" heading="">
+    <span accordion-heading>{{skill.name_es}} ({{skill.name_en}})</span>
+    {{ skill.description }}
+  </accordion-group>
+</accordion>
 
 <a routerLink="/skills" title="Volver a la lista de tipos" class="btn btn-primary">Volver a los tipos</a>

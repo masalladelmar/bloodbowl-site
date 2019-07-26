@@ -1,9 +1,7 @@
-<div class="columns">
-  <div class="column col-4 col-md-12" *ngFor="let skill of types">
-    <div class="card">
-      <div class="card-image">
-        <img src="assets/img/skills/{{skill.link}}.jpg" alt="Logo {{ skill.name }}" class="img-responsive p-centered" height="150">
-      </div>
+<div class="row">
+  <div class="col-md-4" *ngFor="let skill of types">
+    <div class="card mb-2">
+      <img src="assets/img/skills/{{skill.link}}.jpg" alt="Logo {{ skill.name }}" class="card-img-top">
       <div class="card-body">
         <h5 class="card-title">{{ skill.name }}</h5>
         <a routerLink="/skills/{{ skill.link }}" class="btn btn-success">Ver</a>

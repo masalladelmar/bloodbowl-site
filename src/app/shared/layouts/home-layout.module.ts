@@ -29,6 +29,7 @@ import { TournamentPlayoffMatchComponent } from 'src/app/pages/tournaments/tourn
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from 'src/app/pages/login/login.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     CommonModule,
     LightboxModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AccordionModule.forRoot()
   ],
   providers: []
 })
