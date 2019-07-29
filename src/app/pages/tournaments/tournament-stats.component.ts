@@ -44,12 +44,13 @@ export class TournamentStatsComponent implements OnInit, OnDestroy {
     );
   }
 
-  public viewTab(link: any, tab: string) {
-    const a = link as HTMLElement;
+  public viewTab(event: Event, tab: string) {
+    event.preventDefault();
+    const a = event.target as HTMLElement;
     document.querySelector('.tab-pane.active').classList.remove('active');
-    document.querySelector('.tab-item.active').classList.remove('active');
+    document.querySelector('.nav-tabs .nav-link.active').classList.remove('active');
     document.getElementById(tab).classList.add('active');
-    a.parentElement.classList.add('active');
+    a.classList.add('active');
   }
 
   ngOnInit() {

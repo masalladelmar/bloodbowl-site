@@ -15,10 +15,6 @@ export class CoachesComponent implements OnInit {
     private coachesService: CoachesService,
     private commonsService: CommonsService
   ) {
-
-  }
-
-  ngOnInit() {
     this.commonsService.setLoading(true);
     this.commonsService.setTitle('Listado de entrenadores');
     this.coachesService.getCoaches().subscribe(
@@ -33,6 +29,9 @@ export class CoachesComponent implements OnInit {
         this.commonsService.setLoading(false);
       }
     );
+  }
+
+  ngOnInit() {
   }
 
 }

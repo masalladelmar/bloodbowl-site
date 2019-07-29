@@ -1,29 +1,32 @@
-<table class="table table-striped mb-4" *ngFor="let item of journeys">
-  <caption><a routerLink="/tournaments/{{tournament.permalink}}/journeys/{{item.journey}}" title="Ver jornada en detalle">Jornada {{item.journey}} (del {{item.begin}} al {{item.end}})</a></caption>
-  <thead>
-    <tr>
-      <th title="Grupo en el que participa en la liguilla" *ngIf="tournament.groups"></th>
-      <th title="Local" class="text-right" style="width:40%;">Local</th>
-      <th title="Visitante" style="width:40%;">Visitante</th>
-      <th title="Resultado">Resultado</th>
-      <th title="Ver los detalles del encuentro, las fotos y la cr&oacute;nica">Detalles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let match of matches_filtered(item.journey)">
-      <td class="text-center" *ngIf="tournament.groups">{{match.tournament_group | uppercase}}</td>
-      <td class="text-right">
-        <a [ngClass]="match.not_showed_1 ? 'strike-through' : ''" routerLink="/tournaments/{{tournament.permalink}}/teams/{{match.team_permalink_1}}" title="Ver datos del equipo">{{match.team_name_1}}</a>
-      </td>
-      <td>
-        <a [ngClass]="match.not_showed_2 ? 'strike-through' : ''" routerLink="/tournaments/{{tournament.permalink}}/teams/{{match.team_permalink_2}}" title="Ver datos del equipo">{{match.team_name_2}}</a>
-      </td>
-      <td class="text-center">{{match.updated ? match.td_1 + '-' + match.td_2 : '-'}}</td>
-      <td class="text-center">
-        <a routerLink="/tournaments/{{tournament.permalink}}/matches/{{match.id}}" title="Ver detalles del encuentro {{match.team_name_1}} vs {{match.team_name_2}}">
-          <i class="fa fa-search"></i>
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="mb-4" *ngFor="let item of journeys">
+  <h3>Jornada {{item.journey}} <small>(del {{item.begin | date: 'dd/MM/yyyy'}} al {{item.end | date: 'dd/MM/yyyy'}})</small></h3>
+  <table class="table table-striped">
+    <caption><a routerLink="/tournaments/{{tournament.permalink}}/journeys/{{item.journey}}" title="Ver jornada en detalle">Ver jornada en detalle</a></caption>
+    <thead>
+      <tr>
+        <th title="Grupo en el que participa en la liguilla" *ngIf="tournament.groups"></th>
+        <th title="Local" class="text-right" style="width:40%;">Local</th>
+        <th title="Visitante" style="width:40%;">Visitante</th>
+        <th title="Resultado">Resultado</th>
+        <th title="Ver los detalles del encuentro, las fotos y la cr&oacute;nica">Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of matches_filtered(item.journey)">
+        <td class="text-center" *ngIf="tournament.groups">{{match.tournament_group | uppercase}}</td>
+        <td class="text-right">
+          <a [ngClass]="match.not_showed_1 ? 'strike-through' : ''" routerLink="/tournaments/{{tournament.permalink}}/teams/{{match.team_permalink_1}}" title="Ver datos del equipo">{{match.team_name_1}}</a>
+        </td>
+        <td>
+          <a [ngClass]="match.not_showed_2 ? 'strike-through' : ''" routerLink="/tournaments/{{tournament.permalink}}/teams/{{match.team_permalink_2}}" title="Ver datos del equipo">{{match.team_name_2}}</a>
+        </td>
+        <td class="text-center">{{match.updated ? match.td_1 + '-' + match.td_2 : '-'}}</td>
+        <td class="text-center">
+          <a routerLink="/tournaments/{{tournament.permalink}}/matches/{{match.id}}" title="Ver detalles del encuentro {{match.team_name_1}} vs {{match.team_name_2}}">
+            <i class="fa fa-search"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

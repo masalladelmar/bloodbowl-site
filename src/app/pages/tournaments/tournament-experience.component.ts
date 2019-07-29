@@ -23,7 +23,7 @@ export class TournamentExperienceComponent implements OnInit, OnDestroy {
     public helper: HelperService
   ) {
     this.commonsService.setLoading(true);
-    this.commonsService.setTitle('Clasificación del torneo');
+    this.commonsService.setTitle('Experiencia en el torneo');
     this.toursubscript$ = this.route.data.subscribe(
       data => {
         this.tournament = data.tournament;

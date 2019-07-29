@@ -1,18 +1,12 @@
-<div class="tile" *ngFor="let coach of coaches">
-	<div class="tile-icon">
-		<figure class="avatar avatar-xl" [attr.data-initial]="coach.name.substring(0, 1)">
-		</figure>
-	</div>
-	<div class="tile-content">
-		<h3 class="mb-2">{{ coach.name }}</h3>
-		<div class="tile-subtitle">
-			<p class="mb-2">Sus equipos:</p>
-			<ul *ngIf="coach.teams" class="m-0">
-				<li *ngFor="let team of coach.teams">{{team.name}}</li>
-			</ul>
-		</div>
-	</div>
-	<div class="tile-action">
-		<a routerLink="/coaches/{{ coach.permalink }}" class="btn btn-success">Ver detalles</a>
-	</div>
+<div class="card-columns">
+  <div class="card" *ngFor="let coach of coaches">
+    <div class="card-header">{{ coach.name }}</div>
+    <div class="card-body">
+      <h5 *ngIf="coach.teams" class="card-title">Sus equipos:</h5>
+      <ul *ngIf="coach.teams" class="mb-2">
+        <li *ngFor="let team of coach.teams">{{team.name}}</li>
+      </ul>
+      <a routerLink="/coaches/{{ coach.permalink }}" class="btn btn-success">Ver detalles</a>
+    </div>
+  </div>
 </div>

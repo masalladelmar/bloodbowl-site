@@ -1,12 +1,12 @@
-<ul class="tab tab-block">
-  <li class="tab-item active">
-    <a (click)="viewTab($event.target, 'player')" role="tab" data-toggle="tab" title="Ver estadísticas por jugador">Por jugador</a>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="#player" (click)="viewTab($event, 'player')" role="tab" data-toggle="tab" title="Ver estadísticas por jugador">Por jugador</a>
   </li>
-  <li class="tab-item">
-    <a (click)="viewTab($event.target, 'team')" role="tab" data-toggle="tab" title="Ver estadísticas por equipo">Por equipo</a>
+  <li class="nav-item">
+    <a class="nav-link" href="#team" (click)="viewTab($event, 'team')" role="tab" data-toggle="tab" title="Ver estadísticas por equipo">Por equipo</a>
   </li>
-  <li class="tab-item">
-    <a (click)="viewTab($event.target, 'match')" role="tab" data-toggle="tab" title="Ver estadísticas por encuentro">Por encuentro</a>
+  <li class="nav-item">
+    <a class="nav-link" href="#match" (click)="viewTab($event, 'match')" role="tab" data-toggle="tab" title="Ver estadísticas por encuentro">Por encuentro</a>
   </li>
 </ul>
 <div class="tab-content" *ngIf="stats">

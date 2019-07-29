@@ -17,9 +17,9 @@
     </tr>
   </thead>
   <tbody *ngFor="let group of groups">
-    <tr class="bg-secondary">
+    <tr class="bg-green">
       <td colspan="14">
-        <h4 class="text-center mb-0">Grupo {{group.name}}</h4>
+        <h4 class="text-center text-light mb-0">Grupo {{group.name}}</h4>
       </td>
     </tr>
     <tr *ngFor="let team of group.teams; index as i">

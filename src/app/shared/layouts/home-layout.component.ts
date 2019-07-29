@@ -5,7 +5,7 @@ import { NavigationLink } from 'src/app/models/link.model';
 import { LinksService } from 'src/app/services/links.service';
 import { CommonsService } from 'src/app/services/commons.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-home-layout',
@@ -26,7 +26,7 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
     private tournamentService: TournamentsService,
     private linksService: LinksService,
     private commonsService: CommonsService,
-    private route: ActivatedRoute
+    private router: Router
   ) {
     this.isTournaments = false;
     // Suscripciones del servicio común
@@ -36,14 +36,15 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
     this.title$ = this.commonsService.getTitle().subscribe(
       data => this.title = data
     );
-    this.route$ = this.route.url.subscribe(
-      data => {
-        console.log(data);
-        if (data.find(el => el.toString() === 'tournaments')) {
+    this.route$ = this.router.events.subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        if (e.url.startsWith('/tournaments')) {
           this.isTournaments = true;
+        } else {
+          this.isTournaments = false;
         }
       }
-    );
+    });
   }
 
   ngOnInit() {
