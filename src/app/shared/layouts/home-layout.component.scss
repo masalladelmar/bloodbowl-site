@@ -20,14 +20,15 @@
     background: url(../../../assets/img/c-header.jpg) left top repeat;
     background-size: contain;
 
+    @media screen and (max-width: 767px) {
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
     h2{
         color: white;
         margin: 0;
         text-shadow: 0 0 7px #000;
-    }
-
-    @media screen and (max-width: 960px) {
-        height: auto;
     }
 }
 
@@ -49,6 +50,10 @@
     position: -webkit-sticky;
     position: sticky;
     z-index: 2;
+
+    @media screen and (max-width: 767px) {
+        top: 40px;
+    }
 }
 .tournament-nav{
     background-color: white;
