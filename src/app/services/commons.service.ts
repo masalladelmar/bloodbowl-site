@@ -58,21 +58,15 @@ export class CommonsService {
   }
 
   handleError(message: string) {
-    this.toastr.error(message, null, {
-      toastClass: 'toast toast-error'
-    });
+    this.toastr.error(message, 'Error', {});
   }
 
   handleSuccess(message: string) {
-    this.toastr.success(message, null, {
-      toastClass: 'toast toast-success'
-    });
+    this.toastr.success(message, null, {});
   }
 
   handleWarning(message: string) {
-    this.toastr.success(message, null, {
-      toastClass: 'toast toast-warning'
-    });
+    this.toastr.success(message, 'Aviso', {});
   }
 
   get photosRoute(): string {
