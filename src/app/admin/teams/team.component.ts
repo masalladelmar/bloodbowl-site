@@ -14,6 +14,7 @@ import { Race } from 'src/app/models/race.model';
 import { Coach } from 'src/app/models/coach.model';
 import { PositionsService } from 'src/app/services/positions.service';
 import { Position } from 'src/app/models/position.model';
+import { PlayerComponent } from '../players/player.component';
 
 @Component({
   selector: 'app-team',
@@ -164,5 +165,43 @@ export class TeamComponent implements OnInit {
 
   getPosition(position_id: number): string {
     return this.positions ? this.positions.find(el => el.id === position_id).name : '';
+  }
+
+  addPlayer() {
+    this.modalPlayer(null);
+  }
+
+  editPlayer(position: Position) {
+    this.modalPlayer(position);
+  }
+
+  private modalPlayer(player: Position) {
+    const inputs = {
+      player: player,
+      team_id: this.team_id
+    };
+    this.modalService.init(PlayerComponent, inputs, {});
+    const modalOutput$ = this.modalService.getOutput().subscribe(
+      response => {
+        if (response === true) {
+          modalOutput$.unsubscribe();
+          this.playersService.getTeamPlayers(Number(this.team_id)).subscribe(
+            data => {
+              this.players = data;
+            },
+            error => {
+              this.commonsService.handleError(error.status === 500
+                ? 'Se ha producido un error al recuperar los jugadores'
+                : error.message);
+              this.commonsService.setLoading(false);
+            }
+          );
+        }
+        if (response === false && modalOutput$) {
+          // TODO Fix unsubscribe of undefined
+          modalOutput$.unsubscribe();
+        }
+      }
+    );
   }
 }

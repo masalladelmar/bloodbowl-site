@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <button class="btn btn-clear float-right" (click)="close()" aria-label="Close"></button>
+  <div class="modal-title h5">Confirmación</div>
+</div>
+<div class="modal-body">
+  <div class="content">
+    {{bodyText}}
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-width btn-primary mr-2" (click)="confirm()">Si</button>
+  <button type="button" class="btn btn-width" (click)="close()">No</button>
+</div>

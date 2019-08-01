@@ -12,6 +12,7 @@ import { PositionComponent } from 'src/app/admin/positions/position.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 import { TeamComponent } from 'src/app/admin/teams/team.component';
 import { TeamsComponent } from 'src/app/admin/teams/teams.component';
+import { PlayerComponent } from 'src/app/admin/players/player.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TeamsComponent } from 'src/app/admin/teams/teams.component';
     ConfirmationModalComponent,
     PositionComponent,
     TeamsComponent,
-    TeamComponent
+    TeamComponent,
+    PlayerComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { TeamsComponent } from 'src/app/admin/teams/teams.component';
   ],
   entryComponents: [
     ConfirmationModalComponent,
-    PositionComponent
+    PositionComponent,
+    PlayerComponent
   ],
   providers: []
 })

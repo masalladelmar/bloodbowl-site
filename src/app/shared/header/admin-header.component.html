@@ -1,21 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink="/admin">{{header_title}}</a>
   <div class="navbar-nav mr-auto">
-    <div class="btn-group" dropdown>
-      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-              aria-controls="dropdown-basic" data-toggle="dropdown">
-        Button dropdown <span class="caret"></span>
-      </button>
-      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-          role="menu" aria-labelledby="button-basic">
-        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-        <li class="divider dropdown-divider"></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-        </li>
-      </ul>
-    </div>
     <div class="nav-item btn-group dropdown" routerLinkActive="active" dropdown>
       <button class="btn btn-link nav-link dropdown-toggle" dropdownToggle data-toggle="dropdown">Torneos</button>
       <div class="dropdown-menu" *dropdownMenu>
@@ -47,14 +32,14 @@
     </div>
     <a class="nav-item nav-link" routerLink="/admin/comments" routerLinkActive="active">Comentarios</a>
   </div>
-  <div class="dropdown dropdown-right">
-    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+  <div class="dropdown dropdown-right" dropdown>
+    <button class="btn btn-link nav-link dropdown-toggle" dropdownToggle data-toggle="dropdown">
       <figure class="float-left mr-2 mb-0" [attr.data-initial]="user.substring(0, 1)">
         <img *ngIf="image" src="{{image}}" alt="avatar de usuario" class="rounded-circle" height="25">
       </figure>
       {{user}}
-    </a>
-    <div class="dropdown-menu" role="menu">
+    </button>
+    <div class="dropdown-menu" role="menu" *dropdownMenu>
       <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/user/profile"><span class="fa fa-user"></span> Mi perfil</a>
       <div class="dropdown-divider"></div>
       <button class="dropdown-item" (click)="logout()"><span class="fa fa-sign-out"></span> Salir</button>
