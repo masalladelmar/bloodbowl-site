@@ -17,6 +17,7 @@ import { AdminLayoutComponent } from './shared/layouts/admin-layout.component';
 import { AdminLayoutModule } from './shared/layouts/admin-layout.module';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

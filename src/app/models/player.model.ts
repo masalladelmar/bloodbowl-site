@@ -12,4 +12,6 @@ export interface Player {
     injuries: string;
     value: number;
     skills: Skill[];
+    position_name: string;
+    position_id: number;
 }

@@ -3,7 +3,6 @@ import { TeamsService } from 'src/app/services/teams.service';
 import { PlayersService } from 'src/app/services/players.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonsService } from 'src/app/services/commons.service';
-import { ModalService } from 'src/app/services/modal.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Team } from 'src/app/models/team.model';
 import { Player } from 'src/app/models/player.model';
@@ -15,6 +14,7 @@ import { Coach } from 'src/app/models/coach.model';
 import { PositionsService } from 'src/app/services/positions.service';
 import { Position } from 'src/app/models/position.model';
 import { PlayerComponent } from '../players/player.component';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-team',
@@ -31,6 +31,8 @@ export class TeamComponent implements OnInit {
   races: Race[];
   coaches: Coach[];
   positions: Position[];
+  modalRef: BsModalRef;
+  canBuyPlayers: boolean;
 
   constructor(
     private teamsService: TeamsService,
@@ -38,12 +40,13 @@ export class TeamComponent implements OnInit {
     // private skillsService: SkillsService,
     private route: ActivatedRoute,
     private commonsService: CommonsService,
-    private modalService: ModalService,
+    // private modalService: ModalService,
     private router: Router,
     private fb: FormBuilder,
     private racesService: RacesService,
     private coachesService: CoachesService,
-    private positionsService: PositionsService
+    private positionsService: PositionsService,
+    private modalService: BsModalService
   ) {
     this.teamform = this.fb.group({
       name: ['', Validators.required],
@@ -59,6 +62,7 @@ export class TeamComponent implements OnInit {
     });
     this.commonsService.setLoading(true);
     this.team_id = this.route.snapshot.paramMap.get('team');
+    this.canBuyPlayers = false;
 
     forkJoin(
       this.racesService.getRaces(),
@@ -101,6 +105,9 @@ export class TeamComponent implements OnInit {
           this.positionsService.getPositions(this.team.race_id).subscribe(
             data => {
               this.positions = data;
+              if (this.positions.find(el => el.price < this.team.treasury) && this.team.players.length < 16) {
+                this.canBuyPlayers = true;
+              }
             },
             error => {
               this.commonsService.handleError(error.status === 500
@@ -171,11 +178,35 @@ export class TeamComponent implements OnInit {
     this.modalPlayer(null);
   }
 
-  editPlayer(position: Position) {
-    this.modalPlayer(position);
+  editPlayer(player: Player) {
+    this.modalPlayer(player);
   }
 
-  private modalPlayer(player: Position) {
+  private modalPlayer(player: Player) {
+    const initialState = {
+      player: player,
+      team: this.team,
+      positions: this.positions
+    };
+    this.modalRef = this.modalService.show(PlayerComponent, {initialState});
+
+    const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
+      this.playersService.getTeamPlayers(Number(this.team_id)).subscribe(
+        data => {
+          this.players = data;
+        },
+        error => {
+          this.commonsService.handleError(error.status === 500
+            ? 'Se ha producido un error al recuperar los jugadores'
+            : error.message);
+          this.commonsService.setLoading(false);
+        }
+      );
+      modalSubs$.unsubscribe();
+    });
+  }
+
+  /*private modalPlayer(player: Position) {
     const inputs = {
       player: player,
       team_id: this.team_id
@@ -203,5 +234,5 @@ export class TeamComponent implements OnInit {
         }
       }
     );
-  }
+  }*/
 }

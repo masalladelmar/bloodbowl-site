@@ -1,5 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalService } from 'src/app/services/modal.service';
+import { Component, OnInit } from '@angular/core';
+import { Player } from 'src/app/models/player.model';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Position } from 'src/app/models/position.model';
+import { PositionsService } from 'src/app/services/positions.service';
+import { CommonsService } from 'src/app/services/commons.service';
+import { Team } from 'src/app/models/team.model';
 
 @Component({
   selector: 'app-player',
@@ -7,25 +12,61 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  @Input() inputs: string;
-  bodyText: string;
+  player: Player;
+  team: Team;
+  positions: Position[];
+
+  free_numbers: number[];
+  occupied_numbers: number[];
+  free_positions: any[];
+  occupied_positions: any[];
 
   constructor(
-    private modalService: ModalService
-  ) { }
+    public bsModalRef: BsModalRef,
+    private positionsService: PositionsService,
+    private commonsService: CommonsService
+  ) {
+    this.free_numbers = [];
+    this.occupied_numbers =  [];
+    this.free_positions = [];
+    this.occupied_positions = [];
+  }
 
   ngOnInit() {
-    const input = JSON.parse(this['inputs']);
-    this.bodyText = input.bodyText;
+    if (this.player === null) {
+      this.team.players.forEach(pl => {
+        if (pl.number < 17) {
+          this.occupied_numbers.push(pl.number);
+        }
+
+        const item = this.occupied_positions.find(el => el.id === pl.position_id);
+        if (!item) {
+          this.occupied_positions.push({id: pl.position_id, value: 1});
+        } else {
+          item.value++;
+        }
+      });
+
+      console.log(this.occupied_positions);
+
+      for (let i = 1; i < 17; ++i) {
+        if (!this.occupied_numbers.includes(i)) {
+          this.free_numbers.push(i);
+        }
+      }
+
+      this.positions.forEach(po => {
+        const finded = this.occupied_positions.find(el => el.id === po.id);
+        console.log('finded', finded);
+        if ((!finded || finded.value < po.limit) && po.price < this.team.treasury) {
+          this.free_positions.push({id: po.id, name: po.name});
+        }
+      });
+      console.log(this.free_positions);
+    }
   }
 
-  public close() {
-    this.modalService.setOutput(false);
-    this.modalService.destroy();
-  }
-
-  public confirm() {
-    this.modalService.setOutput(true);
-    this.modalService.destroy();
+  save() {
+    this.bsModalRef.hide();
   }
 }

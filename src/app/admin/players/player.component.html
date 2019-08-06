@@ -1,13 +1,41 @@
 <div class="modal-header">
-  <button class="btn btn-clear float-right" (click)="close()" aria-label="Close"></button>
-  <div class="modal-title h5">Confirmación</div>
+  <button class="btn btn-clear float-right" (click)="bsModalRef.hide()" aria-label="Close"></button>
+  <div class="modal-title h5">Añadir jugador</div>
 </div>
 <div class="modal-body">
   <div class="content">
-    {{bodyText}}
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="form-group">
+          <label for="posicion_id">Posición</label>
+          <select name="posicion_id" id="posicion_id" title="Selecionar la posición del jugador" class="form-control" required>
+            <option value="">[Posición]</option>
+            <option *ngFor="let position of free_positions" value="{{position.id}}">{{position.name}}</option>
+          </select>
+          <span class="help-block"></span>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="form-group">
+          <label for="dorsal">Dorsal</label>
+          <select name="dorsal" id="dorsal" title="Selecionar el dorsal del jugador" class="form-control" required>
+            <option value="">[Dorsal]</option>
+            <option *ngFor="let number of free_numbers" value="{{number}}">{{number}}</option>
+          </select>
+          <span class="help-block"></span>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" value="">
+          <span class="help-block"></span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-width btn-primary mr-2" (click)="confirm()">Si</button>
-  <button type="button" class="btn btn-width" (click)="close()">No</button>
+  <button type="button" class="btn btn-width btn-primary mr-2" (click)="save()">Guardar</button>
+  <button type="button" class="btn btn-width" (click)="bsModalRef.hide()">Cancelar</button>
 </div>

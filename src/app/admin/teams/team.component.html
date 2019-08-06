@@ -102,7 +102,7 @@
 
 <div class="row justify-content-center" *ngIf="team">
   <div class="col-10">
-    <h2>Jugadores<button type="button" class="btn btn-primary float-right" (click)="addPlayer()">Añadir jugador</button></h2>
+    <h2>Jugadores<button *ngIf="canBuyPlayers" type="button" class="btn btn-primary float-right" (click)="addPlayer()">Añadir jugador</button></h2>
     <table class="table table-condensed" id="tabla-jugadores">
       <thead>
         <tr>
