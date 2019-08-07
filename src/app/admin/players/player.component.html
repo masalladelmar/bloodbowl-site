@@ -1,41 +1,86 @@
 <div class="modal-header">
   <button class="btn btn-clear float-right" (click)="bsModalRef.hide()" aria-label="Close"></button>
-  <div class="modal-title h5">Añadir jugador</div>
+  <div class="modal-title h5">{{title}} jugador</div>
 </div>
-<div class="modal-body">
-  <div class="content">
-    <div class="row">
-      <div class="col-xs-4">
-        <div class="form-group">
-          <label for="posicion_id">Posición</label>
-          <select name="posicion_id" id="posicion_id" title="Selecionar la posición del jugador" class="form-control" required>
-            <option value="">[Posición]</option>
-            <option *ngFor="let position of free_positions" value="{{position.id}}">{{position.name}}</option>
-          </select>
-          <span class="help-block"></span>
+<form [formGroup]="playerform" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+    <div class="content">
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="position_id">Posición</label>
+            <select *ngIf="!player"  formControlName="position_id" title="Selecionar la posición del jugador" class="form-control">
+              <option value="">[Posición]</option>
+              <option *ngFor="let position of free_positions" value="{{position.id}}">{{position.name}}</option>
+            </select>
+            <p *ngIf="player">{{player.position_name}}</p>
+            <span class="help-block"></span>
+          </div>
         </div>
-      </div>
-      <div class="col-xs-4">
-        <div class="form-group">
-          <label for="dorsal">Dorsal</label>
-          <select name="dorsal" id="dorsal" title="Selecionar el dorsal del jugador" class="form-control" required>
-            <option value="">[Dorsal]</option>
-            <option *ngFor="let number of free_numbers" value="{{number}}">{{number}}</option>
-          </select>
-          <span class="help-block"></span>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="number">Dorsal</label>
+            <select *ngIf="!player" formControlName="number" title="Selecionar el dorsal del jugador" class="form-control" required>
+              <option value="">[Dorsal]</option>
+              <option *ngFor="let number of free_numbers" value="{{number}}">{{number}}</option>
+            </select>
+            <p *ngIf="player">{{player.number}}</p>
+            <span class="help-block"></span>
+          </div>
         </div>
-      </div>
-      <div class="col-xs-4">
-        <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" class="form-control" name="nombre" value="">
-          <span class="help-block"></span>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" formControlName="name">
+            <span class="help-block"></span>
+          </div>
+        </div>
+
+        <div class="col-4" *ngIf="player">
+          <div class="form-group">
+            <label for="status">Estado</label>
+            <select class="form-control" formControlName="status">
+              <option value="active">Activo</option>
+              <option value="fired">Despedido</option>
+              <option value="dead">Muerto</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2" *ngIf="player">
+          <div class="form-group">
+            <label for="ma">MO</label>
+            <input class="form-control" formControlName="ma" maxlength="2" size="1">
+          </div>
+        </div>
+        <div class="col-2" *ngIf="player">
+          <div class="form-group">
+            <label for="st">FU</label>
+            <input class="form-control" formControlName="st" maxlength="2" size="1">
+          </div>
+        </div>
+        <div class="col-2" *ngIf="player">
+          <div class="form-group">
+            <label for="ag">AG</label>
+            <input class="form-control" formControlName="ag" maxlength="2" size="1">
+          </div>
+        </div>
+        <div class="col-2" *ngIf="player">
+          <div class="form-group">
+            <label for="av">AR</label>
+            <input class="form-control" formControlName="av" maxlength="2" size="1">
+          </div>
+        </div>
+        <div class="col-12" *ngIf="player">
+          <div class="form-group">
+            <label for="skills">Habilidades</label>
+            <textarea class="form-control" rows="2" cols="22" formControlName="skills"></textarea>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-width btn-primary mr-2" (click)="save()">Guardar</button>
-  <button type="button" class="btn btn-width" (click)="bsModalRef.hide()">Cancelar</button>
-</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-width btn-primary mr-2" (click)="save()">Guardar</button>
+    <button type="button" class="btn btn-width" (click)="bsModalRef.hide()">Cancelar</button>
+  </div>
+</form>

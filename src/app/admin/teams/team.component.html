@@ -124,43 +124,32 @@
             {{player.number}}
           </td>
           <td>
-            <select *ngIf="player.isEditing" class="form-control input-sm" name="status">
-              <option value="ACTIVO">Activo</option>
-              <option value="DESPEDIDO">Despedido</option>
-              <option value="MUERTO">Muerto</option>
-            </select>
-            <span *ngIf="!player.isEditing">{{player.status}}</span>
+            {{player.status}}
           </td>
           <td>
-            <input class="form-control" *ngIf="player.isEditing" name="name" value="{{player.name}}">
-            <span *ngIf="!player.isEditing">{{player.name}}</span>
+            {{player.name}}
           </td>
           <td>{{getPosition(player.position_id)}}</td>
           <td>
-            <input class="form-control" *ngIf="player.isEditing" name="ma" value="{{player.ma}}" maxlength="2" size="1">
-            <span *ngIf="!player.isEditing">{{player.ma}}</span>
+            {{player.ma}}
           </td>
           <td>
-            <input class="form-control" *ngIf="player.isEditing" name="st" value="{{player.st}}" maxlength="2" size="1">
-            <span *ngIf="!player.isEditing">{{player.st}}</span>
+            {{player.st}}
           </td>
           <td>
-            <input class="form-control" *ngIf="player.isEditing" name="ag" value="{{player.ag}}" maxlength="2" size="1">
-            <span *ngIf="!player.isEditing">{{player.ag}}</span>
+            {{player.ag}}
           </td>
           <td>
-            <input class="form-control" *ngIf="player.isEditing" name="av" value="{{player.av}}" maxlength="2" size="1">
-            <span *ngIf="!player.isEditing">{{player.av}}</span>
+            {{player.av}}
           </td>
           <td>
-            <textarea class="form-control" *ngIf="player.isEditing" rows="2" cols="22">{{player.skills}}</textarea>
-            <span *ngIf="!player.isEditing">{{player.skills}}</span>
+            {{player.skills}}
           </td>
           <td>
             <div class="btn-group">
               <button class="btn btn-danger" title="Marcar como muerto"><i class="fa fa-skull-crossbones"></i></button>
               <button class="btn btn-warning" title="Despedir"><i class="fa fa-external-link-alt"></i></button>
-              <button class="btn btn-primary" title="Editar"><i class="fa fa-pencil-alt"></i></button>
+              <button class="btn btn-primary" (click)="editPlayer(player)" title="Editar"><i class="fa fa-pencil-alt"></i></button>
             </div>
           </td>
 
