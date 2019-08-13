@@ -174,6 +174,10 @@ export class TeamComponent implements OnInit {
     return this.positions ? this.positions.find(el => el.id === position_id).name : '';
   }
 
+  getSkills(player: Player) {
+    return (player.skills.map(el => el.name).concat(player.characteristics.map(el => el.type))).join(', ');
+  }
+
   addPlayer() {
     this.modalPlayer(null);
   }

@@ -11,7 +11,8 @@ export interface Player {
     av: number;
     injuries: string;
     value: number;
-    skills: Skill[];
+    skills: PlayerSkill[];
+    characteristics: Characteristic[];
     position_name: string;
     position_id: number;
 }
@@ -27,6 +28,18 @@ export interface PostPlayer {
     injuries: string;
     value: number;
     skills: Skill[];
+    characteristics: Characteristic[];
     position_id: number;
     team_id: number;
+}
+
+export interface Characteristic {
+    type: string;
+    modifier: number;
+}
+
+export interface PlayerSkill {
+    skill_id: number;
+    modifier: number;
+    name: string;
 }

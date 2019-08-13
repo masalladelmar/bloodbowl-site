@@ -44,6 +44,7 @@ export class PlayerComponent implements OnInit {
       ag: ['', Validators.required],
       av: ['', Validators.required],
       skills: [''],
+      characteristics: [''],
       status: ['', Validators.required]
       }
     );
@@ -93,6 +94,7 @@ export class PlayerComponent implements OnInit {
       this.playerform.controls.ag.setValue(this.player.ag);
       this.playerform.controls.av.setValue(this.player.av);
       this.playerform.controls.skills.setValue(this.player.skills);
+      this.playerform.controls.characteristics.setValue(this.player.characteristics);
       this.playerform.controls.status.setValue(this.player.status);
     }
   }
@@ -108,6 +110,7 @@ export class PlayerComponent implements OnInit {
         ag: this.playerform.controls.ag.value,
         av: this.playerform.controls.av.value,
         skills: this.playerform.controls.skills.value,
+        characteristics: this.playerform.controls.characteristics.value,
         status: this.playerform.controls.price.value,
         team_id: this.team.id,
         injuries: this.player.injuries,

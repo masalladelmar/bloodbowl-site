@@ -71,10 +71,16 @@
           </div>
         </div>
         <div class="col-12" *ngIf="player">
+          <!--
           <div class="form-group">
             <label for="skills">Habilidades</label>
             <textarea class="form-control" rows="2" cols="22" formControlName="skills"></textarea>
           </div>
+          -->
+          <label for="skills">Habilidades y modificadores</label>
+          <br>
+          <span class="badge mr-1" *ngFor="let skill of player.skills" [ngClass]="skill.modifier === 0 ? 'badge-secondary' : 'badge-primary'">{{skill.name}}</span>
+          <span class="badge badge-info" *ngFor="let characteristic of player.characteristics">{{characteristic.modifier + ' ' + characteristic.characteristic}}</span>
         </div>
       </div>
     </div>
