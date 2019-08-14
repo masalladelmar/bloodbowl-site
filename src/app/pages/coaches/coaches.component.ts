@@ -17,7 +17,7 @@ export class CoachesComponent implements OnInit {
   ) {
     this.commonsService.setLoading(true);
     this.commonsService.setTitle('Listado de entrenadores');
-    this.coachesService.getCoaches().subscribe(
+    this.coachesService.getCoachesWithTeams().subscribe(
       data => {
         this.coaches = data;
         this.commonsService.setLoading(false);

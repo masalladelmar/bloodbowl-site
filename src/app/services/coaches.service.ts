@@ -16,6 +16,10 @@ export class CoachesService {
     return this.apiService.get('coaches');
   }
 
+  getCoachesWithTeams(): Observable<Coach[]> {
+    return this.apiService.get('coaches-with-teams');
+  }
+
   getCoach(coach: string): Observable<Coach> {
     return this.apiService.get(`coaches/${coach}`);
   }
