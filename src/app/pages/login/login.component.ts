@@ -9,7 +9,7 @@ declare const gapi: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   private auth2: any;
@@ -20,10 +20,10 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private usersService: UsersService
   ) {
-    if (localStorage.getItem('googleToken')) {
+    /*if (localStorage.getItem('googleToken')) {
       // Ya está logueado
       this.router.navigate(['/admin']);
-    }
+    }*/
 
     this.commonsService.setTitle('Login');
     const gapiScript = document.createElement('script');
@@ -42,8 +42,7 @@ export class LoginComponent implements OnInit {
     document.head.appendChild(gapiScript);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   private googleInit() {
     gapi.load('auth2', () => {
@@ -53,9 +52,11 @@ export class LoginComponent implements OnInit {
   }
 
   private attachSignin(element) {
-    this.auth2.attachClickHandler(element, {},
-      (googleUser) => {
-        this.zone.run(() => (this.commonsService.setLoading(true)));
+    this.auth2.attachClickHandler(
+      element,
+      {},
+      googleUser => {
+        this.zone.run(() => this.commonsService.setLoading(true));
         const profile = googleUser.getBasicProfile();
 
         this.usersService.verifyUser(googleUser.getAuthResponse().id_token).subscribe(
@@ -81,9 +82,11 @@ export class LoginComponent implements OnInit {
             this.zone.run(() => this.commonsService.setLoading(false));
           }
         );
-      }, (error) => {
+      },
+      error => {
         console.error(error);
         this.zone.run(() => this.commonsService.setLoading(false));
-      });
+      }
+    );
   }
 }

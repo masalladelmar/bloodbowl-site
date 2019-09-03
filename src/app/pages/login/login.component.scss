@@ -1,13 +1,14 @@
-#google-sign-in{
-    margin: 3rem auto;
-    height: auto;
+#google-sign-in {
+  margin: 3rem auto;
+  height: auto;
+  background: white;
 
-    img{
-        vertical-align: middle;
-    }
+  img {
+    vertical-align: middle;
+  }
 
-    &:hover{
-        background: white;
-        box-shadow: 0 0 8px black;
-    }
+  &:hover {
+    /*background: white;*/
+    box-shadow: 0 0 8px black;
+  }
 }

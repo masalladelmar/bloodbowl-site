@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { TournamentsRoutingModule } from './tournaments-routing.module';
 import { TournamentComponent } from './tournament.component';
@@ -14,6 +13,7 @@ import { TournamentMatchesComponent } from './tournament-matches.component';
 import { TournamentMatchComponent } from './tournament-match.component';
 import { TournamentPlayoffsComponent } from './tournament-playoffs.component';
 import { TournamentPlayoffMatchComponent } from './tournament-playoff-match.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [

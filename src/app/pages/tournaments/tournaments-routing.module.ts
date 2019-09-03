@@ -16,90 +16,89 @@ import { TournamentPlayoffMatchComponent } from './tournament-playoff-match.comp
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':tournament',
     component: TournamentComponent,
+    pathMatch: 'full',
     resolve: {
       tournament: TournamentResolverService,
     },
-    children: [
-      {
-        path: 'teams',
-        component: TournamentTeamsComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'teams/:team',
-        component: TournamentTeamComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'stats',
-        component: TournamentStatsComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'experience',
-        component: TournamentExperienceComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'ranking',
-        component: TournamentRankingComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'journeys',
-        component: TournamentJourneysComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'journeys/:journey',
-        component: TournamentJourneyComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'matches',
-        component: TournamentMatchesComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'matches/:match',
-        component: TournamentMatchComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'playoffs',
-        component: TournamentPlayoffsComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-      {
-        path: 'playoffs/:match',
-        component: TournamentPlayoffMatchComponent,
-        resolve: {
-          tournament: TournamentResolverService,
-        },
-      },
-    ],
+  },
+  {
+    path: ':tournament/teams',
+    component: TournamentTeamsComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/teams/:team',
+    component: TournamentTeamComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/stats',
+    component: TournamentStatsComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/experience',
+    component: TournamentExperienceComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/ranking',
+    component: TournamentRankingComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/journeys',
+    component: TournamentJourneysComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/journeys/:journey',
+    component: TournamentJourneyComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/matches',
+    component: TournamentMatchesComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/matches/:match',
+    component: TournamentMatchComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/playoffs',
+    component: TournamentPlayoffsComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
+  },
+  {
+    path: ':tournament/playoffs/:match',
+    component: TournamentPlayoffMatchComponent,
+    resolve: {
+      tournament: TournamentResolverService,
+    },
   },
 ];
 

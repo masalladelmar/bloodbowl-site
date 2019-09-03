@@ -4,15 +4,15 @@ import { Observable } from 'rxjs';
 import { TournamentsService } from './tournaments.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TournamentResolverService implements Resolve<any> {
+  constructor(private tournamentsService: TournamentsService) {}
 
-  constructor(
-    private tournamentsService: TournamentsService
-  ) {}
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<any> | Observable<never> {
     return this.tournamentsService.getTournament(route.params['tournament']);
   }
 }

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -12,8 +11,14 @@ import { PositionComponent } from './positions/position.component';
 import { TeamsComponent } from './teams/teams.component';
 import { TeamComponent } from './teams/team.component';
 import { PlayerComponent } from './players/player.component';
-import { LightboxModule } from 'ngx-lightbox';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AdminFooterComponent } from '../shared/footer/admin-footer.component';
+import { AdminHeaderComponent } from '../shared/header/admin-header.component';
+import { AdminLayoutComponent } from '../shared/layouts/admin-layout.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,8 +32,19 @@ import { ReactiveFormsModule } from '@angular/forms';
     TeamsComponent,
     TeamComponent,
     PlayerComponent,
+    AdminFooterComponent,
+    AdminHeaderComponent,
+    AdminLayoutComponent,
   ],
-  imports: [CommonModule, LightboxModule, ReactiveFormsModule, AdminRoutingModule],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
+    ToastrModule.forRoot(),
+  ],
   entryComponents: [ConfirmationModalComponent, PositionComponent, PlayerComponent],
 })
 export class AdminModule {}
