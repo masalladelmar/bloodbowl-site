@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Player, PostPlayer } from 'src/app/models/player.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Position } from 'src/app/models/position.model';
@@ -6,16 +6,19 @@ import { CommonsService } from 'src/app/services/commons.service';
 import { Team } from 'src/app/models/team.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlayersService } from 'src/app/services/players.service';
+import { Characteristics } from '../../models/attributes.model';
+import { Skill } from 'src/app/models/skill.model';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss']
+  styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent implements OnInit {
   player: Player;
   team: Team;
   positions: Position[];
+  skills: Skill[];
 
   free_numbers: number[];
   occupied_numbers: number[];
@@ -24,6 +27,13 @@ export class PlayerComponent implements OnInit {
   title: string;
   playerform: FormGroup;
 
+  _addSkill = false;
+  _addCharact = false;
+
+  resolve = false;
+
+  skillstypes: any[];
+
   constructor(
     public bsModalRef: BsModalRef,
     private playersService: PlayersService,
@@ -31,7 +41,7 @@ export class PlayerComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.free_numbers = [];
-    this.occupied_numbers =  [];
+    this.occupied_numbers = [];
     this.free_positions = [];
     this.occupied_positions = [];
 
@@ -45,9 +55,10 @@ export class PlayerComponent implements OnInit {
       av: ['', Validators.required],
       skills: [''],
       characteristics: [''],
-      status: ['', Validators.required]
-      }
-    );
+      status: ['', Validators.required],
+      skill: [''],
+      characteristic: [''],
+    });
   }
 
   ngOnInit() {
@@ -61,7 +72,7 @@ export class PlayerComponent implements OnInit {
 
         const item = this.occupied_positions.find(el => el.id === pl.position_id);
         if (!item) {
-          this.occupied_positions.push({id: pl.position_id, value: 1});
+          this.occupied_positions.push({ id: pl.position_id, value: 1 });
         } else {
           item.value++;
         }
@@ -79,7 +90,7 @@ export class PlayerComponent implements OnInit {
         const finded = this.occupied_positions.find(el => el.id === po.id);
         console.log('finded', finded);
         if ((!finded || finded.value < po.limit) && po.price < this.team.treasury) {
-          this.free_positions.push({id: po.id, name: po.name});
+          this.free_positions.push({ id: po.id, name: po.name });
         }
       });
       console.log(this.free_positions);
@@ -97,6 +108,17 @@ export class PlayerComponent implements OnInit {
       this.playerform.controls.characteristics.setValue(this.player.characteristics);
       this.playerform.controls.status.setValue(this.player.status);
     }
+
+    this.skillstypes = [];
+    this.skills.forEach(el => {
+      if (!this.skillstypes.find(gr => gr.name === el.type)) {
+        this.skillstypes.push({ name: el.type, skills: [] });
+      }
+
+      const item = this.skillstypes.find(gr => gr.name === el.type);
+      item.skills.push(el);
+    });
+    console.log(this.skillstypes);
   }
 
   public onSubmit() {
@@ -115,7 +137,7 @@ export class PlayerComponent implements OnInit {
         team_id: this.team.id,
         injuries: this.player.injuries,
         value: this.player.value,
-        position_id: this.playerform.controls.position_id.value
+        position_id: this.playerform.controls.position_id.value,
       };
       if (this.player) {
         this.playersService.update(this.player.id, pla).subscribe(
@@ -123,11 +145,14 @@ export class PlayerComponent implements OnInit {
             this.commonsService.handleSuccess('Jugador actualizado');
             this.commonsService.setLoading(false);
             this.bsModalRef.hide();
+            this.resolve = true;
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al actualizar el jugador'
-              : error.message);
+            this.commonsService.handleError(
+              error.status === 500
+                ? 'Se ha producido un error al actualizar el jugador'
+                : error.message
+            );
             this.commonsService.setLoading(false);
           }
         );
@@ -137,11 +162,14 @@ export class PlayerComponent implements OnInit {
             this.commonsService.handleSuccess('Jugador añadido');
             this.commonsService.setLoading(false);
             this.bsModalRef.hide();
+            this.resolve = true;
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al añadir el jugador'
-              : error.message);
+            this.commonsService.handleError(
+              error.status === 500
+                ? 'Se ha producido un error al añadir el jugador'
+                : error.message
+            );
             this.commonsService.setLoading(false);
           }
         );
@@ -172,5 +200,29 @@ export class PlayerComponent implements OnInit {
   }
   get status() {
     return this.playerform.get('status');
+  }
+
+  getCharacteristicName(value: string) {
+    return Characteristics.find(ch => ch.id === value).name;
+  }
+
+  viewAddSkill() {
+    this._addSkill = !this._addSkill;
+  }
+
+  get addSkill() {
+    return this._addSkill;
+  }
+
+  viewAddCharact() {
+    this._addCharact = !this._addCharact;
+  }
+
+  get addCharact() {
+    return this._addCharact;
+  }
+
+  get characteristicsList() {
+    return Characteristics;
   }
 }

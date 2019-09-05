@@ -1,91 +1,199 @@
 <form [formGroup]="teamform" (ngSubmit)="onSubmit()" class="mb-4">
   <div class="row justify-content-center">
     <div class="col-10">
-      <h1>{{title}} equipo</h1>
+      <h1>{{ title }} equipo</h1>
       <div class="row mb-2">
         <!--5-->
         <div class="col-md-5">
-          <div class="form-group" [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''">
+          <div
+            class="form-group"
+            [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''"
+          >
             <label class="form-label">Nombre</label>
-            <input type="text" formControlName="name" placeholder="Nombre del equipo" class="form-control">
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Nombre del equipo"
+              class="form-control"
+            />
           </div>
         </div>
         <!--3-->
         <div class="col-md-3">
-          <div class="form-group" [ngClass]="coach_id.invalid && (coach_id.dirty || coach_id.touched) ? 'has-error' : ''">
+          <div
+            class="form-group"
+            [ngClass]="
+              coach_id.invalid && (coach_id.dirty || coach_id.touched) ? 'has-error' : ''
+            "
+          >
             <label title="Entrenador/a del equipo" class="form-label">Entrenador/a</label>
-            <select formControlName="coach_id" title="Selecionar el entrenador/a del equipo" class="form-control">
+            <select
+              formControlName="coach_id"
+              title="Selecionar el entrenador/a del equipo"
+              class="form-control"
+            >
               <option value="">[Selecciona un entrenador/a]</option>
-              <option *ngFor="let coach of coaches" value="{{coach.id}}">{{coach.name}}</option>
+              <option *ngFor="let coach of coaches" value="{{ coach.id }}">{{
+                coach.name
+              }}</option>
             </select>
           </div>
         </div>
         <!--2-->
         <div class="col-md-2">
-          <div class="form-group" [ngClass]="race_id.invalid && (race_id.dirty || race_id.touched) ? 'has-error' : ''">
+          <div
+            class="form-group"
+            [ngClass]="
+              race_id.invalid && (race_id.dirty || race_id.touched) ? 'has-error' : ''
+            "
+          >
             <label title="Raza del equipo" class="form-label">Raza</label>
-            <select formControlName="race_id" title="Selecionar la raza del equipo" class="form-control">
+            <select
+              formControlName="race_id"
+              title="Selecionar la raza del equipo"
+              class="form-control"
+            >
               <option value="">[Selecciona una raza]</option>
-              <option *ngFor="let race of races" value="{{race.id}}">{{race.name}}</option>
+              <option *ngFor="let race of races" value="{{ race.id }}">{{
+                race.name
+              }}</option>
             </select>
           </div>
         </div>
         <!--2-->
         <div class="col-md-2">
           <div class="form-group">
-            <label title="Coste de la segunda oportunidad de equipo" class="form-label">Coste segunda</label>
-            <p>{{reroll_cost}}</p>
-          </div>
-        </div>
-
-
-        <!--2-->
-        <div class="col-md-2">
-          <div class="form-group" [ngClass]="rerolls.invalid && (rerolls.dirty || rerolls.touched) ? 'has-error' : ''">
-            <label title="Cantidad de Segundas Oportunidades" class="form-label">Segundas</label>
-            <input type="number" formControlName="rerolls" value="0" step="1" class="form-control" />
+            <label title="Coste de la segunda oportunidad de equipo" class="form-label"
+              >Coste segunda</label
+            >
+            <p>{{ reroll_cost }}</p>
           </div>
         </div>
 
         <!--2-->
         <div class="col-md-2">
-          <div class="form-group" [ngClass]="fan_factor.invalid && (fan_factor.dirty || fan_factor.touched) ? 'has-error' : ''">
+          <div
+            class="form-group"
+            [ngClass]="
+              rerolls.invalid && (rerolls.dirty || rerolls.touched) ? 'has-error' : ''
+            "
+          >
+            <label title="Cantidad de Segundas Oportunidades" class="form-label"
+              >Segundas</label
+            >
+            <input
+              type="number"
+              formControlName="rerolls"
+              value="0"
+              step="1"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <!--2-->
+        <div class="col-md-2">
+          <div
+            class="form-group"
+            [ngClass]="
+              fan_factor.invalid && (fan_factor.dirty || fan_factor.touched)
+                ? 'has-error'
+                : ''
+            "
+          >
             <label title="Factor de hichas" class="form-label">Hinchas</label>
-            <input type="number" formControlName="fan_factor" value="0" step="1" class="form-control" />
+            <input
+              type="number"
+              formControlName="fan_factor"
+              value="0"
+              step="1"
+              class="form-control"
+            />
           </div>
         </div>
 
         <!--2-->
         <div class="col-md-2">
-          <div class="form-group" [ngClass]="assistants.invalid && (assistants.dirty || assistants.touched) ? 'has-error' : ''">
-            <label title="Cantidad de ayudantes del entrenador" class="form-label">Ayundantes</label>
-            <input type="number" formControlName="assistants" value="0" step="1" class="form-control" />
+          <div
+            class="form-group"
+            [ngClass]="
+              assistants.invalid && (assistants.dirty || assistants.touched)
+                ? 'has-error'
+                : ''
+            "
+          >
+            <label title="Cantidad de ayudantes del entrenador" class="form-label"
+              >Ayundantes</label
+            >
+            <input
+              type="number"
+              formControlName="assistants"
+              value="0"
+              step="1"
+              class="form-control"
+            />
           </div>
         </div>
 
         <!--2-->
         <div class="col-md-2">
-          <div class="form-group" [ngClass]="cheerleaders.invalid && (cheerleaders.dirty || cheerleaders.touched) ? 'has-error' : ''">
+          <div
+            class="form-group"
+            [ngClass]="
+              cheerleaders.invalid && (cheerleaders.dirty || cheerleaders.touched)
+                ? 'has-error'
+                : ''
+            "
+          >
             <label title="Número de animadoras" class="form-label">Animadoras</label>
-            <input type="number" formControlName="cheerleaders" value="0" step="1" class="form-control" />
+            <input
+              type="number"
+              formControlName="cheerleaders"
+              value="0"
+              step="1"
+              class="form-control"
+            />
           </div>
         </div>
 
         <!--2-->
         <div class="col-md-2">
           <div class="form-group">
-            <label title="Indica si el equipo tiene un apotecario contratado" class="form-label">Apotecario</label>
+            <label
+              title="Indica si el equipo tiene un apotecario contratado"
+              class="form-label"
+              >Apotecario</label
+            >
             <div class="checkbox">
-              <label><input type="checkbox" formControlName="apothecary" value="1" onclick="sumarAP()" />&nbsp;</label>
+              <label
+                ><input
+                  type="checkbox"
+                  formControlName="apothecary"
+                  value="1"
+                  onclick="sumarAP()"
+                />&nbsp;</label
+              >
             </div>
           </div>
         </div>
 
         <!--2-->
         <div class="col-md-2">
-          <div class="form-group" [ngClass]="treasury.invalid && (treasury.dirty || treasury.touched) ? 'has-error' : ''">
-            <label title="Monedas de oro en las arcas del equipo" class="form-label">Tesorer&iacute;a</label>
-            <input type="number" formControlName="treasury" value="1000000" class="form-control" />
+          <div
+            class="form-group"
+            [ngClass]="
+              treasury.invalid && (treasury.dirty || treasury.touched) ? 'has-error' : ''
+            "
+          >
+            <label title="Monedas de oro en las arcas del equipo" class="form-label"
+              >Tesorer&iacute;a</label
+            >
+            <input
+              type="number"
+              formControlName="treasury"
+              value="1000000"
+              class="form-control"
+            />
           </div>
         </div>
       </div>
@@ -97,12 +205,18 @@
   </div>
 </form>
 
-
-
-
 <div class="row justify-content-center" *ngIf="team">
   <div class="col-10">
-    <h2>Jugadores<button *ngIf="canBuyPlayers" type="button" class="btn btn-primary float-right" (click)="addPlayer()">Añadir jugador</button></h2>
+    <h2>
+      Jugadores<button
+        *ngIf="canBuyPlayers"
+        type="button"
+        class="btn btn-primary float-right"
+        (click)="addPlayer()"
+      >
+        Añadir jugador
+      </button>
+    </h2>
     <table class="table table-condensed" id="tabla-jugadores">
       <thead>
         <tr>
@@ -121,35 +235,41 @@
       <tbody>
         <tr *ngFor="let player of team.players; index as i">
           <td>
-            {{player.number}}
+            {{ player.number }}
           </td>
           <td>
-            {{player.status}}
+            {{ player.status }}
           </td>
           <td>
-            {{player.name}}
+            {{ player.name }}
           </td>
-          <td>{{getPosition(player.position_id)}}</td>
+          <td>{{ getPosition(player.position_id) }}</td>
           <td>
-            {{player.ma}}
-          </td>
-          <td>
-            {{player.st}}
+            {{ player.ma }}
           </td>
           <td>
-            {{player.ag}}
+            {{ player.st }}
           </td>
           <td>
-            {{player.av}}
+            {{ player.ag }}
           </td>
           <td>
-            {{getSkills(player)}}
+            {{ player.av }}
+          </td>
+          <td>
+            {{ helperService.playerSkills(player) }}
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-danger" title="Marcar como muerto"><i class="fa fa-skull-crossbones"></i></button>
-              <button class="btn btn-warning" title="Despedir"><i class="fa fa-external-link-alt"></i></button>
-              <button class="btn btn-primary" (click)="editPlayer(player)" title="Editar"><i class="fa fa-pencil-alt"></i></button>
+              <button class="btn btn-danger" title="Marcar como muerto">
+                <i class="fa fa-skull-crossbones"></i>
+              </button>
+              <button class="btn btn-warning" title="Despedir">
+                <i class="fa fa-external-link-alt"></i>
+              </button>
+              <button class="btn btn-primary" (click)="editPlayer(player)" title="Editar">
+                <i class="fa fa-pencil-alt"></i>
+              </button>
             </div>
           </td>
 

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Team } from '../models/team.model';
+import { Player } from '../models/player.model';
+import { Characteristics } from '../models/attributes.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HelperService {
-
-  constructor() { }
+  constructor() {}
 
   public number_format(number: number): string {
     return number.toLocaleString('es-ES');
@@ -21,6 +22,26 @@ export class HelperService {
   }
 
   public thumb(archive: string): string {
-    return archive.substr(0, archive.lastIndexOf('.')) + '_thumb' + archive.substr(archive.lastIndexOf('.'));
+    return (
+      archive.substr(0, archive.lastIndexOf('.')) +
+      '_thumb' +
+      archive.substr(archive.lastIndexOf('.'))
+    );
+  }
+
+  public playerSkills(player: Player): string {
+    return player.skills
+      .map(el => el.name)
+      .concat(
+        player.characteristics.map(el => {
+          return (
+            (el.modifier > 0 ? '+' : '') +
+            el.modifier +
+            ' ' +
+            Characteristics.find(ch => ch.id === el.type).name
+          );
+        })
+      )
+      .join(', ');
   }
 }

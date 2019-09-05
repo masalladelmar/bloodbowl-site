@@ -1,31 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalService } from 'src/app/services/modal.service';
+import { Component, OnInit } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-confirmation-modal',
   templateUrl: './confirmation-modal.component.html',
-  styleUrls: ['./confirmation-modal.component.scss']
+  styleUrls: ['./confirmation-modal.component.scss'],
 })
 export class ConfirmationModalComponent implements OnInit {
-  @Input() inputs: string;
   bodyText: string;
+  resolve = false;
 
-  constructor(
-    private modalService: ModalService
-  ) { }
+  constructor(public bsModalRef: BsModalRef) {}
 
-  ngOnInit() {
-    const input = JSON.parse(this['inputs']);
-    this.bodyText = input.bodyText;
-  }
+  ngOnInit() {}
 
   public close() {
-    this.modalService.setOutput(false);
-    this.modalService.destroy();
+    this.bsModalRef.hide();
   }
 
   public confirm() {
-    this.modalService.setOutput(true);
-    this.modalService.destroy();
+    this.resolve = true;
+    this.bsModalRef.hide();
   }
 }

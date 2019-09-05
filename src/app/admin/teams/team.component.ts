@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamsService } from 'src/app/services/teams.service';
 import { PlayersService } from 'src/app/services/players.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonsService } from 'src/app/services/commons.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Team } from 'src/app/models/team.model';
@@ -15,11 +15,15 @@ import { PositionsService } from 'src/app/services/positions.service';
 import { Position } from 'src/app/models/position.model';
 import { PlayerComponent } from '../players/player.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Characteristics } from 'src/app/models/attributes.model';
+import { HelperService } from 'src/app/services/helper.service';
+import { SkillsService } from 'src/app/services/skills.service';
+import { Skill } from 'src/app/models/skill.model';
 
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
-  styleUrls: ['./team.component.scss']
+  styleUrls: ['./team.component.scss'],
 })
 export class TeamComponent implements OnInit {
   team: Team;
@@ -27,26 +31,25 @@ export class TeamComponent implements OnInit {
   team_id: string;
   title: string;
   players: Player[];
-  // types: SkillType[];
   races: Race[];
   coaches: Coach[];
   positions: Position[];
   modalRef: BsModalRef;
   canBuyPlayers: boolean;
+  skills: Skill[];
 
   constructor(
     private teamsService: TeamsService,
     private playersService: PlayersService,
-    // private skillsService: SkillsService,
     private route: ActivatedRoute,
     private commonsService: CommonsService,
-    // private modalService: ModalService,
-    private router: Router,
     private fb: FormBuilder,
     private racesService: RacesService,
     private coachesService: CoachesService,
     private positionsService: PositionsService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    public helperService: HelperService,
+    private skillsService: SkillsService
   ) {
     this.teamform = this.fb.group({
       name: ['', Validators.required],
@@ -58,7 +61,7 @@ export class TeamComponent implements OnInit {
       treasury: ['', Validators.required],
       value: ['', Validators.required],
       coach_id: ['', Validators.required],
-      race_id: ['', Validators.required]
+      race_id: ['', Validators.required],
     });
     this.commonsService.setLoading(true);
     this.team_id = this.route.snapshot.paramMap.get('team');
@@ -66,30 +69,28 @@ export class TeamComponent implements OnInit {
 
     forkJoin(
       this.racesService.getRaces(),
-      this.coachesService.getCoaches()
-    )
-    .subscribe(
+      this.coachesService.getCoaches(),
+      this.skillsService.getSkills()
+    ).subscribe(
       response => {
         this.races = response[0];
         this.coaches = response[1];
+        this.skills = response[2];
       },
       error => {
-        this.commonsService.handleError(error.status === 500
-          ? 'Se ha producido un error al recuperar las razas y los entrenadores'
-          : error.message);
+        this.commonsService.handleError(
+          error.status === 500
+            ? 'Se ha producido un error al recuperar las razas y los entrenadores'
+            : error.message
+        );
         this.commonsService.setLoading(false);
       }
     );
 
     if (this.team_id !== 'new') {
       this.title = 'Editar';
-      forkJoin(
-        // this.skillsService.getTypes(),
-        this.teamsService.getTeamById(Number(this.team_id))
-      )
-      .subscribe(
+      forkJoin(this.teamsService.getTeamById(Number(this.team_id))).subscribe(
         response => {
-          // this.types = response[0];
           this.team = response[0];
           this.teamform.get('name').setValue(this.team.name);
           this.teamform.get('fan_factor').setValue(this.team.fan_factor);
@@ -105,22 +106,29 @@ export class TeamComponent implements OnInit {
           this.positionsService.getPositions(this.team.race_id).subscribe(
             data => {
               this.positions = data;
-              if (this.positions.find(el => el.price < this.team.treasury) && this.team.players.length < 16) {
+              if (
+                this.positions.find(el => el.price < this.team.treasury) &&
+                this.team.players.length < 16
+              ) {
                 this.canBuyPlayers = true;
               }
             },
             error => {
-              this.commonsService.handleError(error.status === 500
-                ? 'Se ha producido un error al recuperar las posiciones disponibles de la raza'
-                : error.message);
+              this.commonsService.handleError(
+                error.status === 500
+                  ? 'Se ha producido un error al recuperar las posiciones disponibles de la raza'
+                  : error.message
+              );
               this.commonsService.setLoading(false);
             }
           );
         },
         error => {
-          this.commonsService.handleError(error.status === 500
-            ? 'Se ha producido un error al recuperar los datos de la raza'
-            : error.message);
+          this.commonsService.handleError(
+            error.status === 500
+              ? 'Se ha producido un error al recuperar los datos de la raza'
+              : error.message
+          );
           this.commonsService.setLoading(false);
         }
       );
@@ -136,8 +144,7 @@ export class TeamComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   get name() {
     return this.teamform.get('name');
@@ -175,7 +182,23 @@ export class TeamComponent implements OnInit {
   }
 
   getSkills(player: Player) {
-    return (player.skills.map(el => el.name).concat(player.characteristics.map(el => el.type))).join(', ');
+    return player.skills
+      .map(el => el.name)
+      .concat(
+        player.characteristics.map(el => {
+          return (
+            (el.modifier > 0 ? '+' : '') +
+            el.modifier +
+            ' ' +
+            Characteristics.find(ch => ch.id === el.type).name
+          );
+        })
+      )
+      .join(', ');
+  }
+
+  getCharacteristicName(value: string) {
+    return Characteristics.find(ch => ch.id === value).name;
   }
 
   addPlayer() {
@@ -187,56 +210,31 @@ export class TeamComponent implements OnInit {
   }
 
   private modalPlayer(player: Player) {
+    console.log(this.skills);
     const initialState = {
       player: player,
       team: this.team,
-      positions: this.positions
+      positions: this.positions,
+      skills: this.skills,
     };
-    this.modalRef = this.modalService.show(PlayerComponent, {initialState});
-
+    this.modalRef = this.modalService.show(PlayerComponent, { initialState });
     const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
-      this.playersService.getTeamPlayers(Number(this.team_id)).subscribe(
-        data => {
-          this.players = data;
-        },
-        error => {
-          this.commonsService.handleError(error.status === 500
-            ? 'Se ha producido un error al recuperar los jugadores'
-            : error.message);
-          this.commonsService.setLoading(false);
-        }
-      );
+      if (this.modalRef.content.resolve === true) {
+        this.playersService.getTeamPlayers(Number(this.team_id)).subscribe(
+          data => {
+            this.players = data;
+          },
+          error => {
+            this.commonsService.handleError(
+              error.status === 500
+                ? 'Se ha producido un error al recuperar los jugadores'
+                : error.message
+            );
+            this.commonsService.setLoading(false);
+          }
+        );
+      }
       modalSubs$.unsubscribe();
     });
   }
-
-  /*private modalPlayer(player: Position) {
-    const inputs = {
-      player: player,
-      team_id: this.team_id
-    };
-    this.modalService.init(PlayerComponent, inputs, {});
-    const modalOutput$ = this.modalService.getOutput().subscribe(
-      response => {
-        if (response === true) {
-          modalOutput$.unsubscribe();
-          this.playersService.getTeamPlayers(Number(this.team_id)).subscribe(
-            data => {
-              this.players = data;
-            },
-            error => {
-              this.commonsService.handleError(error.status === 500
-                ? 'Se ha producido un error al recuperar los jugadores'
-                : error.message);
-              this.commonsService.setLoading(false);
-            }
-          );
-        }
-        if (response === false && modalOutput$) {
-          // TODO Fix unsubscribe of undefined
-          modalOutput$.unsubscribe();
-        }
-      }
-    );
-  }*/
 }

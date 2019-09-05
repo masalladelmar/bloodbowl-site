@@ -1,10 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalService } from 'src/app/services/modal.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Position } from 'src/app/models/position.model';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { SkillType } from 'src/app/models/skill.model';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 import { CommonsService } from 'src/app/services/commons.service';
 import { PositionsService } from 'src/app/services/positions.service';
+import { SkillTypes } from 'src/app/models/skill.model';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 export interface Selected {
   normal: string[];
@@ -14,56 +20,52 @@ export interface Selected {
 @Component({
   selector: 'app-position',
   templateUrl: './position.component.html',
-  styleUrls: ['./position.component.scss']
+  styleUrls: ['./position.component.scss'],
 })
 export class PositionComponent implements OnInit {
-  @Input() inputs: string;
   position: Position;
   positionform: FormGroup;
   title: string;
-  skilltypes: SkillType[];
   race_id: number;
   selected: Selected;
 
+  resolve = false;
+
   constructor(
-    private modalService: ModalService,
     private commonsService: CommonsService,
     private positionsService: PositionsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public bsModalRef: BsModalRef
   ) {
-    this.positionform = this.fb.group({
-      name: ['', Validators.required],
-      limit: ['', Validators.required],
-      price: ['', Validators.required],
-      ma: ['', Validators.required],
-      st: ['', Validators.required],
-      ag: ['', Validators.required],
-      av: ['', Validators.required],
-      skills: [''],
-      normal: new FormArray([]),
-      doubles: new FormArray([])
+    this.positionform = this.fb.group(
+      {
+        name: ['', Validators.required],
+        limit: ['', Validators.required],
+        price: ['', Validators.required],
+        ma: ['', Validators.required],
+        st: ['', Validators.required],
+        ag: ['', Validators.required],
+        av: ['', Validators.required],
+        skills: [''],
+        normal: new FormArray([]),
+        doubles: new FormArray([]),
       },
       { validator: this.validateTypes }
     );
-    this.selected = {normal: [], doubles: []};
-
-    document.getElementById('modal-div').parentElement.classList.add('modal-lg');
+    this.selected = { normal: [], doubles: [] };
   }
 
   private buildTypes(type: string) {
     const skillsSelected = this.position ? this.position[type].split(',') : [];
-    this.skilltypes.forEach(skill => {
-      const control = new FormControl(skillsSelected.find(el => el === skill.link) ? true : false);
+    SkillTypes.forEach(skill => {
+      const control = new FormControl(
+        skillsSelected.find(el => el === skill.link) ? true : false
+      );
       (this.positionform.controls[type] as FormArray).push(control);
     });
   }
 
   ngOnInit() {
-    const input = JSON.parse(this['inputs']);
-    this.position = input.position;
-    this.skilltypes = input.skilltypes;
-    this.race_id = input.race_id;
-
     this.buildTypes('normal');
     this.buildTypes('doubles');
 
@@ -83,9 +85,7 @@ export class PositionComponent implements OnInit {
   }
 
   public close() {
-    this.modalService.setOutput(false);
-    document.getElementById('modal-div').parentElement.classList.remove('modal-lg');
-    this.modalService.destroy();
+    this.bsModalRef.hide();
   }
 
   public onSubmit() {
@@ -102,21 +102,22 @@ export class PositionComponent implements OnInit {
         normal: this.selected.normal.join(','),
         doubles: this.selected.doubles.join(','),
         price: this.positionform.controls.price.value,
-        race_id: this.race_id
+        race_id: this.race_id,
       };
       if (this.position) {
         this.positionsService.update(this.position.id, pos).subscribe(
           response => {
             this.commonsService.handleSuccess('Posición actualizada');
             this.commonsService.setLoading(false);
-            this.modalService.setOutput(true);
-            document.getElementById('modal-div').style.maxWidth = '';
-            this.modalService.destroy();
+            this.bsModalRef.hide();
+            this.resolve = true;
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al actualizar la posición'
-              : error.message);
+            this.commonsService.handleError(
+              error.status === 500
+                ? 'Se ha producido un error al actualizar la posición'
+                : error.message
+            );
             this.commonsService.setLoading(false);
           }
         );
@@ -125,14 +126,15 @@ export class PositionComponent implements OnInit {
           response => {
             this.commonsService.handleSuccess('Posición creada');
             this.commonsService.setLoading(false);
-            this.modalService.setOutput(true);
-            document.getElementById('modal-div').style.maxWidth = '';
-            this.modalService.destroy();
+            this.bsModalRef.hide();
+            this.resolve = true;
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al crear la posición'
-              : error.message);
+            this.commonsService.handleError(
+              error.status === 500
+                ? 'Se ha producido un error al crear la posición'
+                : error.message
+            );
             this.commonsService.setLoading(false);
           }
         );
@@ -174,21 +176,27 @@ export class PositionComponent implements OnInit {
   validateTypes(group: FormGroup): any {
     if (group) {
       // Validar que la suma de ambos arrays es 6 entre los 2 y que no se repiten
-      const totalNormal = group.get('normal').value ? group.get('normal').value
-        // get a list of checkbox values (boolean)
-        // .map(control => control.value)
-        // total up the number of checked checkboxes
-        .reduce((prev, next) => next ? prev + next : prev, 0) : 0;
-      const totalDoubles = group.get('doubles').value ? group.get('doubles').value
-        // get a list of checkbox values (boolean)
-        // .map(control => control.value)
-        // total up the number of checked checkboxes
-        .reduce((prev, next) => next ? prev + next : prev, 0) : 0;
+      const totalNormal = group.get('normal').value
+        ? group
+            .get('normal')
+            .value // get a list of checkbox values (boolean)
+            // .map(control => control.value)
+            // total up the number of checked checkboxes
+            .reduce((prev, next) => (next ? prev + next : prev), 0)
+        : 0;
+      const totalDoubles = group.get('doubles').value
+        ? group
+            .get('doubles')
+            .value // get a list of checkbox values (boolean)
+            // .map(control => control.value)
+            // total up the number of checked checkboxes
+            .reduce((prev, next) => (next ? prev + next : prev), 0)
+        : 0;
 
       if (totalNormal + totalDoubles > 6 || totalNormal + totalDoubles < 4) {
         // Se deben seleccionar entre 4 y 6
-        group.get('normal').setErrors({required: true});
-        group.get('doubles').setErrors({required: true});
+        group.get('normal').setErrors({ required: true });
+        group.get('doubles').setErrors({ required: true });
       } else {
         // Si se selecciona un número correcto no hay error
         group.get('normal').setErrors(null);
@@ -202,12 +210,16 @@ export class PositionComponent implements OnInit {
     control.disabled ? control.enable() : control.disable();
     control.disabled ? control.setValue(null) : control.setValue(false);
 
-    const finded = this.selected[parent].indexOf(this.skilltypes[index].link);
+    const finded = this.selected[parent].indexOf(SkillTypes[index].link);
     if (finded !== -1) {
       this.selected[parent].splice(finded, 1);
     } else {
-      this.selected[parent].push(this.skilltypes[index].link);
+      this.selected[parent].push(SkillTypes[index].link);
     }
     console.log(parent, this.selected[parent]);
+  }
+
+  skillType(index: number): string {
+    return SkillTypes[index].short;
   }
 }

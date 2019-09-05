@@ -1,6 +1,10 @@
 <div class="modal-header">
-  <button class="btn btn-clear float-right" (click)="bsModalRef.hide()" aria-label="Close"></button>
-  <div class="modal-title h5">{{title}} jugador</div>
+  <button
+    class="btn btn-clear float-right"
+    (click)="bsModalRef.hide()"
+    aria-label="Close"
+  ></button>
+  <div class="modal-title h5">{{ title }} jugador</div>
 </div>
 <form [formGroup]="playerform" (ngSubmit)="onSubmit()">
   <div class="modal-body">
@@ -9,29 +13,44 @@
         <div class="col-4">
           <div class="form-group">
             <label for="position_id">Posición</label>
-            <select *ngIf="!player"  formControlName="position_id" title="Selecionar la posición del jugador" class="form-control">
+            <select
+              *ngIf="!player"
+              formControlName="position_id"
+              title="Selecionar la posición del jugador"
+              class="form-control"
+            >
               <option value="">[Posición]</option>
-              <option *ngFor="let position of free_positions" value="{{position.id}}">{{position.name}}</option>
+              <option *ngFor="let position of free_positions" value="{{ position.id }}">{{
+                position.name
+              }}</option>
             </select>
-            <p *ngIf="player">{{player.position_name}}</p>
+            <p *ngIf="player">{{ player.position_name }}</p>
             <span class="help-block"></span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label for="number">Dorsal</label>
-            <select *ngIf="!player" formControlName="number" title="Selecionar el dorsal del jugador" class="form-control" required>
+            <select
+              *ngIf="!player"
+              formControlName="number"
+              title="Selecionar el dorsal del jugador"
+              class="form-control"
+              required
+            >
               <option value="">[Dorsal]</option>
-              <option *ngFor="let number of free_numbers" value="{{number}}">{{number}}</option>
+              <option *ngFor="let number of free_numbers" value="{{ number }}">{{
+                number
+              }}</option>
             </select>
-            <p *ngIf="player">{{player.number}}</p>
+            <p *ngIf="player">{{ player.number }}</p>
             <span class="help-block"></span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" class="form-control" formControlName="name">
+            <input type="text" class="form-control" formControlName="name" />
             <span class="help-block"></span>
           </div>
         </div>
@@ -49,44 +68,94 @@
         <div class="col-2" *ngIf="player">
           <div class="form-group">
             <label for="ma">MO</label>
-            <input class="form-control" formControlName="ma" maxlength="2" size="1">
+            <input class="form-control" formControlName="ma" maxlength="2" size="1" />
           </div>
         </div>
         <div class="col-2" *ngIf="player">
           <div class="form-group">
             <label for="st">FU</label>
-            <input class="form-control" formControlName="st" maxlength="2" size="1">
+            <input class="form-control" formControlName="st" maxlength="2" size="1" />
           </div>
         </div>
         <div class="col-2" *ngIf="player">
           <div class="form-group">
             <label for="ag">AG</label>
-            <input class="form-control" formControlName="ag" maxlength="2" size="1">
+            <input class="form-control" formControlName="ag" maxlength="2" size="1" />
           </div>
         </div>
         <div class="col-2" *ngIf="player">
           <div class="form-group">
             <label for="av">AR</label>
-            <input class="form-control" formControlName="av" maxlength="2" size="1">
+            <input class="form-control" formControlName="av" maxlength="2" size="1" />
           </div>
         </div>
         <div class="col-12" *ngIf="player">
-          <!--
           <div class="form-group">
-            <label for="skills">Habilidades</label>
-            <textarea class="form-control" rows="2" cols="22" formControlName="skills"></textarea>
+            <label for="skills"
+              >Habilidades
+              <button
+                class="btn btn-link pt-0 pb-0"
+                type="button"
+                (click)="viewAddSkill()"
+              >
+                <i class="fa" [ngClass]="addSkill ? 'fa-minus' : 'fa-plus'"></i></button
+            ></label>
+            <div *ngIf="addSkill">
+              <label for="skill">Nueva habilidad</label>
+              <select class="form-control" formControlName="skill">
+                <ng-container *ngFor="let skilltype of skillstypes">
+                  <optgroup>{{ skilltype }}</optgroup>
+                  <option *ngFor="let skill of skilltype.skills" [value]="skill.id">{{
+                    skill.name_es
+                  }}</option>
+                </ng-container>
+              </select>
+            </div>
+            <br />
+            <span
+              class="badge mr-1"
+              *ngFor="let skill of player.skills"
+              [ngClass]="skill.modifier === 0 ? 'badge-secondary' : 'badge-primary'"
+              >{{ skill.name }}</span
+            >
           </div>
-          -->
-          <label for="skills">Habilidades y modificadores</label>
-          <br>
-          <span class="badge mr-1" *ngFor="let skill of player.skills" [ngClass]="skill.modifier === 0 ? 'badge-secondary' : 'badge-primary'">{{skill.name}}</span>
-          <span class="badge badge-info" *ngFor="let characteristic of player.characteristics">{{characteristic.modifier + ' ' + characteristic.characteristic}}</span>
+          <div class="form-group">
+            <label for="characteristics"
+              >Modificadores
+              <button
+                class="btn btn-link pt-0 pb-0"
+                type="button"
+                (click)="viewAddCharact()"
+              >
+                <i class="fa" [ngClass]="addCharact ? 'fa-minus' : 'fa-plus'"></i></button
+            ></label>
+            <div *ngIf="addCharact">
+              <label for="characteristic">Nuevo modificador</label>
+              <select class="form-control" formControlName="characteristic">
+                <option *ngFor="let item of characteristicsList" [value]="item.id">{{
+                  item.name
+                }}</option>
+              </select>
+            </div>
+            <br />
+            <span
+              class="badge "
+              [ngClass]="characteristic.modifier > 0 ? 'badge-info' : 'badge-danger'"
+              *ngFor="let characteristic of player.characteristics"
+              >{{ characteristic.modifier > 0 ? '+' : '' }}{{ characteristic.modifier }}
+              {{ getCharacteristicName(characteristic.type) }}</span
+            >
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-width btn-primary mr-2" (click)="save()">Guardar</button>
-    <button type="button" class="btn btn-width" (click)="bsModalRef.hide()">Cancelar</button>
+    <button type="button" class="btn btn-width btn-primary mr-2" (click)="save()">
+      Guardar
+    </button>
+    <button type="button" class="btn btn-width" (click)="bsModalRef.hide()">
+      Cancelar
+    </button>
   </div>
 </form>
