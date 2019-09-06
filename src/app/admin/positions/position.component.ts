@@ -216,7 +216,6 @@ export class PositionComponent implements OnInit {
     } else {
       this.selected[parent].push(SkillTypes[index].link);
     }
-    console.log(parent, this.selected[parent]);
   }
 
   skillType(index: number): string {

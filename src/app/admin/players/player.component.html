@@ -100,16 +100,19 @@
               >
                 <i class="fa" [ngClass]="addSkill ? 'fa-minus' : 'fa-plus'"></i></button
             ></label>
-            <div *ngIf="addSkill">
-              <label for="skill">Nueva habilidad</label>
-              <select class="form-control" formControlName="skill">
-                <ng-container *ngFor="let skilltype of skillstypes">
-                  <optgroup>{{ skilltype }}</optgroup>
+            <div *ngIf="addSkill" class="form-inline">
+              <label for="skill" class="mr-1">Nueva</label>
+              <select class="form-control mr-1" formControlName="skill">
+                <optgroup
+                  *ngFor="let skilltype of skillstypes"
+                  label="{{ helperService.getSkillType(skilltype.name) }}"
+                >
                   <option *ngFor="let skill of skilltype.skills" [value]="skill.id">{{
                     skill.name_es
                   }}</option>
-                </ng-container>
+                </optgroup>
               </select>
+              <button type="button" class="btn btn-primary">Añadir</button>
             </div>
             <br />
             <span
@@ -129,21 +132,24 @@
               >
                 <i class="fa" [ngClass]="addCharact ? 'fa-minus' : 'fa-plus'"></i></button
             ></label>
-            <div *ngIf="addCharact">
-              <label for="characteristic">Nuevo modificador</label>
-              <select class="form-control" formControlName="characteristic">
-                <option *ngFor="let item of characteristicsList" [value]="item.id">{{
-                  item.name
-                }}</option>
+            <div *ngIf="addCharact" class="form-inline">
+              <label for="attribute" class="mr-1">Nuevo</label>
+              <select class="form-control mr-1" formControlName="attribute">
+                <option
+                  *ngFor="let item of helperService.getAttributes()"
+                  [value]="item.id"
+                  >{{ item.name }}</option
+                >
               </select>
+              <button type="button" class="btn btn-primary">Añadir</button>
             </div>
             <br />
             <span
               class="badge "
-              [ngClass]="characteristic.modifier > 0 ? 'badge-info' : 'badge-danger'"
-              *ngFor="let characteristic of player.characteristics"
-              >{{ characteristic.modifier > 0 ? '+' : '' }}{{ characteristic.modifier }}
-              {{ getCharacteristicName(characteristic.type) }}</span
+              [ngClass]="attribute.modifier > 0 ? 'badge-info' : 'badge-danger'"
+              *ngFor="let attribute of player.characteristics"
+              >{{ attribute.modifier > 0 ? '+' : '' }}{{ attribute.modifier }}
+              {{ helperService.getAttributeName(attribute.type) }}</span
             >
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Player, PostPlayer } from 'src/app/models/player.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Position } from 'src/app/models/position.model';
@@ -6,8 +6,8 @@ import { CommonsService } from 'src/app/services/commons.service';
 import { Team } from 'src/app/models/team.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlayersService } from 'src/app/services/players.service';
-import { Characteristics } from '../../models/attributes.model';
 import { Skill } from 'src/app/models/skill.model';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-player',
@@ -38,7 +38,8 @@ export class PlayerComponent implements OnInit {
     public bsModalRef: BsModalRef,
     private playersService: PlayersService,
     private commonsService: CommonsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public helperService: HelperService
   ) {
     this.free_numbers = [];
     this.occupied_numbers = [];
@@ -57,7 +58,7 @@ export class PlayerComponent implements OnInit {
       characteristics: [''],
       status: ['', Validators.required],
       skill: [''],
-      characteristic: [''],
+      attribute: [''],
     });
   }
 
@@ -65,20 +66,20 @@ export class PlayerComponent implements OnInit {
     if (this.player === null) {
       this.title = 'Nuevo';
 
-      this.team.players.forEach(pl => {
-        if (pl.number < 17) {
-          this.occupied_numbers.push(pl.number);
-        }
+      this.team.players
+        .filter(el => el.status === 'active')
+        .forEach(pl => {
+          if (pl.number < 17) {
+            this.occupied_numbers.push(pl.number);
+          }
 
-        const item = this.occupied_positions.find(el => el.id === pl.position_id);
-        if (!item) {
-          this.occupied_positions.push({ id: pl.position_id, value: 1 });
-        } else {
-          item.value++;
-        }
-      });
-
-      console.log(this.occupied_positions);
+          const item = this.occupied_positions.find(el => el.id === pl.position_id);
+          if (!item) {
+            this.occupied_positions.push({ id: pl.position_id, value: 1 });
+          } else {
+            item.value++;
+          }
+        });
 
       for (let i = 1; i < 17; ++i) {
         if (!this.occupied_numbers.includes(i)) {
@@ -88,12 +89,10 @@ export class PlayerComponent implements OnInit {
 
       this.positions.forEach(po => {
         const finded = this.occupied_positions.find(el => el.id === po.id);
-        console.log('finded', finded);
         if ((!finded || finded.value < po.limit) && po.price < this.team.treasury) {
           this.free_positions.push({ id: po.id, name: po.name });
         }
       });
-      console.log(this.free_positions);
     } else {
       this.title = 'Editar';
       console.log(this.player);
@@ -118,7 +117,6 @@ export class PlayerComponent implements OnInit {
       const item = this.skillstypes.find(gr => gr.name === el.type);
       item.skills.push(el);
     });
-    console.log(this.skillstypes);
   }
 
   public onSubmit() {
@@ -202,10 +200,6 @@ export class PlayerComponent implements OnInit {
     return this.playerform.get('status');
   }
 
-  getCharacteristicName(value: string) {
-    return Characteristics.find(ch => ch.id === value).name;
-  }
-
   viewAddSkill() {
     this._addSkill = !this._addSkill;
   }
@@ -220,9 +214,5 @@ export class PlayerComponent implements OnInit {
 
   get addCharact() {
     return this._addCharact;
-  }
-
-  get characteristicsList() {
-    return Characteristics;
   }
 }

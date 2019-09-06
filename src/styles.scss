@@ -6,219 +6,208 @@
 @import '~ngx-toastr/toastr-bs4-alert';
 
 @font-face {
-    font-family: Gutcruncher;
-    src: url("assets/fonts/Gutcruncher.otf") format("opentype");
+  font-family: Gutcruncher;
+  src: url('assets/fonts/Gutcruncher.otf') format('opentype');
 }
 
-.background{
-    position: fixed;
-    background: url(assets/img/background.jpg) top center no-repeat;
-    background-size: cover;
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
-    height: 100%;
-    width: 100%;
+.background {
+  position: fixed;
+  background: url(assets/img/background.jpg) top center no-repeat;
+  background-size: cover;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  height: 100%;
+  width: 100%;
 }
 
-app-root{
-    position: relative;
-    z-index: 2; 
+app-root {
+  position: relative;
+  z-index: 2;
 }
 
-h1, h2{
-	font-family: Gutcruncher, Helvetica, sans-serif;
+h1,
+h2 {
+  font-family: Gutcruncher, Helvetica, sans-serif;
 }
 
-h3, h4{
-	font-family: Candara, Verdana, Arial, Helvetica, sans-serif;
-	font-weight: normal;
+h3,
+h4 {
+  font-family: Candara, Verdana, Arial, Helvetica, sans-serif;
+  font-weight: normal;
 }
 
-.toast{
-    margin-bottom: 20px;
+.toast {
+  margin-bottom: 20px;
 }
 
-.strike-through{
-    text-decoration: line-through;
+.strike-through {
+  text-decoration: line-through;
 }
 
-.name-col{
-    white-space: normal;
-    word-wrap: break-word;
-    max-width: 150px; 
+.name-col {
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 150px;
 }
 
-.baldosa{
-    margin-bottom: .4rem;
+.baldosa {
+  margin-bottom: 0.4rem;
 
-    &:hover,
-    &:focus,
-    &:active{
-        text-decoration: none;
-    }
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
 }
 
-.tab-content{
-    padding-top: .4rem;
+.tab-content {
+  padding-top: 0.4rem;
 }
-.tab-pane{
-    display: none;
-    transition: opacity 0.15s linear;
+.tab-pane {
+  display: none;
+  transition: opacity 0.15s linear;
 
-    &.active{
-        display: block;
-    }
-}
-
-.tab-pane:not(.active){
-    opacity: 0;
+  &.active {
+    display: block;
+  }
 }
 
-.tab-item a{
-    cursor: pointer;
+.tab-pane:not(.active) {
+  opacity: 0;
 }
 
-.mb-4{
-    margin-bottom: 1.6rem;
+.tab-item a {
+  cursor: pointer;
 }
 
-.lightbox-image{
-    cursor: pointer;
-    width: 100%;
+.mb-4 {
+  margin-bottom: 1.6rem;
 }
 
-.playoffs>tbody>tr>td{
-	vertical-align: middle;
-}
-.playoffs tbody tr td.info{
-	background-color: $green;
-	color: #ffffff;
+.lightbox-image {
+  cursor: pointer;
+  width: 100%;
 }
 
-.comments{
-    margin: 0;
+.playoffs > tbody > tr > td {
+  vertical-align: middle;
+}
+.playoffs tbody tr td.info {
+  background-color: $green;
+  color: #ffffff;
+}
+
+.comments {
+  margin: 0;
 }
 .comments li {
-	list-style:none;
-    margin-bottom: 2rem;
-    margin-top: 0;
+  list-style: none;
+  margin-bottom: 2rem;
+  margin-top: 0;
 }
 .comment_number {
-	font-size: 2rem;
-	display: block;
-	float: left;
-	color: $green;
-    font-weight: bold;
-    margin-left: .8rem;
+  font-size: 2rem;
+  display: block;
+  float: left;
+  color: $green;
+  font-weight: bold;
+  margin-left: 0.8rem;
 }
 .comment_info {
-	font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: .4rem;
-	border-bottom: $green dashed 1px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  border-bottom: $green dashed 1px;
 }
 .comment_body {
-    margin-left: 3rem;
+  margin-left: 3rem;
 }
 .comment_foot {
-    text-align: right;
-    font-size: .7rem;
+  text-align: right;
+  font-size: 0.7rem;
 }
 .new_comment {
-	width:60%;
-	margin-left: auto;
-	margin-right: auto;
-	position: relative;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
 
-hr{
-    border: none;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(27, 121, 31, 0.75), rgba(0, 0, 0, 0));
-    margin: 1rem 0;
+hr {
+  border: none;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(27, 121, 31, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+  margin: 1rem 0;
 }
 
-.admin{
-    h1, h2{
-        font-family: Candara, Verdana, Arial, Helvetica, sans-serif;
-    }
-    h1 small,
-    h2 small,
-    h2 small,
-    h2 small{
-        color: $green-hover-border;
-    }
+.admin {
+  h1,
+  h2 {
+    font-family: Candara, Verdana, Arial, Helvetica, sans-serif;
+  }
+  h1 small,
+  h2 small,
+  h2 small,
+  h2 small {
+    color: $green-hover-border;
+  }
 }
 
-.btn-width{
-    min-width: 7rem;
+.btn-width {
+  min-width: 7rem;
 }
 
-.modal-open{
-    overflow: hidden;
+.modal-open {
+  overflow: hidden;
 }
 
-.bg-green{
-    background-color: $green !important;
+.bg-green {
+  background-color: $green !important;
 }
 
 /** Reescritura de colores **/
-/*.btn{
-    color: $green;
-    border-color: $green;
-    &.btn-link{
-        color: $green;
-        border-color: transparent;
-        &.active,
-        &:active,
-        &:focus,
-        &:hover{
-            color: $green-hover;
-            background-color: transparent;
-        }
-    }
-    &.active, &:active, &:focus{
-        background: $green;
-        border-color: $green-hover;
-        color: white;
-    }
-    &:hover{
-        border-color: $green;
-    }
-    &.btn-primary{
-        background-color: $green;
-        border-color: $green-hover;
-        &.active, &:active, &:focus{
-            background: $green;
-            border-color: $green-hover;
-        }
-    
-        &:hover{
-            background-color: $green-hover;
-            border-color: $green-hover-border;
-        }
-    }
-}
-.menu .menu-item>a:focus,
-.menu .menu-item>a:hover{
-    color: $green;
-}
-.menu .menu-item>a.active,
-.menu .menu-item>a:active{
-    color: $green;
-}
-a:focus{
-    box-shadow: 0 0 0 0.1rem rgba(27, 121, 31, 0.2);
-}
 a,
-a.active,
-a:active,
-a:visited{
-    color: $green;
-}
-a:hover{
+.btn-link {
+  color: $green;
+
+  &:hover {
     color: $green-hover;
+  }
 }
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: $green;
+  color: #ffffff;
+}
+.btn-primary,
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: $green;
+  border-color: $green-hover;
+  &.active,
+  &:active,
+  &:focus {
+    background: $green;
+    border-color: $green-hover;
+  }
+
+  &:hover {
+    background-color: $green-hover;
+    border-color: $green-hover-border;
+  }
+}
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(27, 121, 31, 0.5);
+}
+/*
 .tab .tab-item a:focus, .tab .tab-item a:hover{
     color: $green;
 }

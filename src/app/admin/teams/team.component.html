@@ -233,12 +233,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let player of team.players; index as i">
+        <tr
+          *ngFor="let player of team.players; index as i"
+          [ngClass]="{
+            'table-danger': player.status === 'dead',
+            'table-warning': player.status === 'fired'
+          }"
+        >
           <td>
             {{ player.number }}
           </td>
           <td>
-            {{ player.status }}
+            {{ helperService.getStatusName(player.status) }}
           </td>
           <td>
             {{ player.name }}
@@ -261,10 +267,20 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-danger" title="Marcar como muerto">
+              <button
+                *ngIf="player.status === 'active'"
+                class="btn btn-danger"
+                title="Marcar como muerto"
+                (click)="killPlayer(player)"
+              >
                 <i class="fa fa-skull-crossbones"></i>
               </button>
-              <button class="btn btn-warning" title="Despedir">
+              <button
+                *ngIf="player.status === 'active'"
+                class="btn btn-warning"
+                title="Despedir"
+                (click)="firePlayer(player)"
+              >
                 <i class="fa fa-external-link-alt"></i>
               </button>
               <button class="btn btn-primary" (click)="editPlayer(player)" title="Editar">

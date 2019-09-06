@@ -3,7 +3,7 @@ interface Attribute {
   name: string;
 }
 
-export const Characteristics: Attribute[] = [
+export const Attributes: Attribute[] = [
   {
     id: 'st',
     name: 'Fuerza',

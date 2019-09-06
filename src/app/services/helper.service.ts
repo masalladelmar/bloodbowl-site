@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Team } from '../models/team.model';
-import { Player } from '../models/player.model';
-import { Characteristics } from '../models/attributes.model';
+import { Player, Status } from '../models/player.model';
+import { Attributes } from '../models/attributes.model';
+import { SkillTypes } from '../models/skill.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,10 +39,28 @@ export class HelperService {
             (el.modifier > 0 ? '+' : '') +
             el.modifier +
             ' ' +
-            Characteristics.find(ch => ch.id === el.type).name
+            Attributes.find(ch => ch.id === el.type).name
           );
         })
       )
       .join(', ');
+  }
+
+  public getSkillType(value: string): string {
+    const finded = SkillTypes.find(el => el.link === value);
+    return finded.name || '';
+  }
+
+  public getAttributes() {
+    return Attributes;
+  }
+
+  public getAttributeName(value: string): string {
+    const finded = Attributes.find(el => el.id === value);
+    return finded.name || '';
+  }
+
+  public getStatusName(value: string): string {
+    return Status[value] || '';
   }
 }

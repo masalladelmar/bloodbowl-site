@@ -4,13 +4,10 @@ import { ApiService } from './api.service';
 import { Player, PostPlayer } from '../models/player.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PlayersService {
-
-  constructor(
-    private apiService: ApiService
-  ) { }
+  constructor(private apiService: ApiService) {}
 
   getDead(): Observable<Player[]> {
     return this.apiService.get(`players/dead`);
@@ -21,7 +18,7 @@ export class PlayersService {
   }
 
   getTeamPlayers(team_id: number): Observable<Player[]> {
-    return this.apiService.get(`players/${team_id}`);
+    return this.apiService.get(`teams/${team_id}/players`);
   }
 
   create(player: PostPlayer): Observable<void> {
@@ -30,5 +27,13 @@ export class PlayersService {
 
   update(player_id: number, player: PostPlayer): Observable<void> {
     return this.apiService.put(`players/${player_id}`, player);
+  }
+
+  killPlayer(player_id: number): Observable<void> {
+    return this.apiService.put(`players/${player_id}/kill`);
+  }
+
+  firePlayer(player_id: number): Observable<void> {
+    return this.apiService.put(`players/${player_id}/fire`);
   }
 }

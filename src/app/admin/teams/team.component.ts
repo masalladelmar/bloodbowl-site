@@ -15,10 +15,10 @@ import { PositionsService } from 'src/app/services/positions.service';
 import { Position } from 'src/app/models/position.model';
 import { PlayerComponent } from '../players/player.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Characteristics } from 'src/app/models/attributes.model';
 import { HelperService } from 'src/app/services/helper.service';
 import { SkillsService } from 'src/app/services/skills.service';
 import { Skill } from 'src/app/models/skill.model';
+import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-team',
@@ -108,7 +108,7 @@ export class TeamComponent implements OnInit {
               this.positions = data;
               if (
                 this.positions.find(el => el.price < this.team.treasury) &&
-                this.team.players.length < 16
+                this.team.players.filter(el => el.status === 'active').length < 16
               ) {
                 this.canBuyPlayers = true;
               }
@@ -190,15 +190,11 @@ export class TeamComponent implements OnInit {
             (el.modifier > 0 ? '+' : '') +
             el.modifier +
             ' ' +
-            Characteristics.find(ch => ch.id === el.type).name
+            this.helperService.getAttributeName(el.type)
           );
         })
       )
       .join(', ');
-  }
-
-  getCharacteristicName(value: string) {
-    return Characteristics.find(ch => ch.id === value).name;
   }
 
   addPlayer() {
@@ -210,7 +206,6 @@ export class TeamComponent implements OnInit {
   }
 
   private modalPlayer(player: Player) {
-    console.log(this.skills);
     const initialState = {
       player: player,
       team: this.team,
@@ -228,6 +223,62 @@ export class TeamComponent implements OnInit {
             this.commonsService.handleError(
               error.status === 500
                 ? 'Se ha producido un error al recuperar los jugadores'
+                : error.message
+            );
+            this.commonsService.setLoading(false);
+          }
+        );
+      }
+      modalSubs$.unsubscribe();
+    });
+  }
+
+  killPlayer(player: Player) {
+    const initialState = {
+      bodyText: `¿Seguro que quieres marcar como muerto al jugador '${player.name}' con dorsal ${player.number}?`,
+    };
+    this.modalRef = this.modalService.show(ConfirmationModalComponent, {
+      initialState,
+      class: 'modal-sm',
+    });
+    const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
+      if (this.modalRef.content.resolve === true) {
+        this.playersService.killPlayer(player.id).subscribe(
+          data => {
+            this.commonsService.handleSuccess('Jugador muerto');
+          },
+          error => {
+            this.commonsService.handleError(
+              error.status === 500
+                ? 'Se ha producido un error al marcar el jugador como muerto'
+                : error.message
+            );
+            this.commonsService.setLoading(false);
+          }
+        );
+      }
+      modalSubs$.unsubscribe();
+    });
+  }
+
+  firePlayer(player: Player) {
+    const initialState = {
+      bodyText: `¿Seguro que quieres despedir al jugador '${player.name}' con dorsal ${player.number}?`,
+    };
+    this.modalRef = this.modalService.show(ConfirmationModalComponent, {
+      initialState,
+      class: 'modal-sm',
+    });
+    const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
+      if (this.modalRef.content.resolve === true) {
+        this.playersService.firePlayer(player.id).subscribe(
+          data => {
+            this.commonsService.handleSuccess('Jugador despedido');
+          },
+          error => {
+            this.commonsService.handleError(
+              error.status === 500
+                ? 'Se ha producido un error al despedir al jugador'
                 : error.message
             );
             this.commonsService.setLoading(false);
