@@ -29,11 +29,11 @@ export class PlayersService {
     return this.apiService.put(`players/${player_id}`, player);
   }
 
-  killPlayer(player_id: number): Observable<void> {
+  kill(player_id: number): Observable<void> {
     return this.apiService.put(`players/${player_id}/kill`);
   }
 
-  firePlayer(player_id: number): Observable<void> {
+  fire(player_id: number): Observable<void> {
     return this.apiService.put(`players/${player_id}/fire`);
   }
 }

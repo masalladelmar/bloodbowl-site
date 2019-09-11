@@ -243,9 +243,9 @@ export class TeamComponent implements OnInit {
     });
     const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
       if (this.modalRef.content.resolve === true) {
-        this.playersService.killPlayer(player.id).subscribe(
+        this.playersService.kill(player.id).subscribe(
           data => {
-            this.commonsService.handleSuccess('Jugador muerto');
+            this.commonsService.handleSuccess('Cambios guardados');
           },
           error => {
             this.commonsService.handleError(
@@ -271,9 +271,9 @@ export class TeamComponent implements OnInit {
     });
     const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
       if (this.modalRef.content.resolve === true) {
-        this.playersService.firePlayer(player.id).subscribe(
+        this.playersService.fire(player.id).subscribe(
           data => {
-            this.commonsService.handleSuccess('Jugador despedido');
+            this.commonsService.handleSuccess('Cambios guardados');
           },
           error => {
             this.commonsService.handleError(
