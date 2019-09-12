@@ -30,7 +30,6 @@ export class TeamComponent implements OnInit {
   teamform: FormGroup;
   team_id: string;
   title: string;
-  players: Player[];
   races: Race[];
   coaches: Coach[];
   positions: Position[];
@@ -134,7 +133,6 @@ export class TeamComponent implements OnInit {
       );
     } else {
       this.title = 'Nuevo';
-      this.players = [];
       this.teamform.get('fan_factor').setValue(0);
       this.teamform.get('assistants').setValue(0);
       this.teamform.get('cheerleaders').setValue(0);
@@ -185,7 +183,7 @@ export class TeamComponent implements OnInit {
     return player.skills
       .map(el => el.name)
       .concat(
-        player.characteristics.map(el => {
+        player.modifiers.map(el => {
           return (
             (el.modifier > 0 ? '+' : '') +
             el.modifier +
@@ -215,9 +213,10 @@ export class TeamComponent implements OnInit {
     this.modalRef = this.modalService.show(PlayerComponent, { initialState });
     const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
       if (this.modalRef.content.resolve === true) {
+        this.commonsService.setLoading(true);
         this.playersService.getTeamPlayers(Number(this.team_id)).subscribe(
           data => {
-            this.players = data;
+            this.team.players = data;
           },
           error => {
             this.commonsService.handleError(
@@ -243,8 +242,23 @@ export class TeamComponent implements OnInit {
     });
     const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
       if (this.modalRef.content.resolve === true) {
+        this.commonsService.setLoading(true);
         this.playersService.kill(player.id).subscribe(
           data => {
+            this.playersService.getTeamPlayers(Number(this.team_id)).subscribe(
+              players => {
+                this.team.players = players;
+                this.commonsService.setLoading(false);
+              },
+              error => {
+                this.commonsService.handleError(
+                  error.status === 500
+                    ? 'Se ha producido un error al recuperar los jugadores'
+                    : error.message
+                );
+                this.commonsService.setLoading(false);
+              }
+            );
             this.commonsService.handleSuccess('Cambios guardados');
           },
           error => {
@@ -271,8 +285,23 @@ export class TeamComponent implements OnInit {
     });
     const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
       if (this.modalRef.content.resolve === true) {
+        this.commonsService.setLoading(true);
         this.playersService.fire(player.id).subscribe(
           data => {
+            this.playersService.getTeamPlayers(Number(this.team_id)).subscribe(
+              players => {
+                this.team.players = players;
+                this.commonsService.setLoading(false);
+              },
+              error => {
+                this.commonsService.handleError(
+                  error.status === 500
+                    ? 'Se ha producido un error al recuperar los jugadores'
+                    : error.message
+                );
+                this.commonsService.setLoading(false);
+              }
+            );
             this.commonsService.handleSuccess('Cambios guardados');
           },
           error => {

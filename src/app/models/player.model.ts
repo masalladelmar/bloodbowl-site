@@ -1,5 +1,3 @@
-import { Skill } from './skill.model';
-
 export interface Player {
   id: number;
   number: number;
@@ -12,7 +10,7 @@ export interface Player {
   injuries: string;
   value: number;
   skills: PlayerSkill[];
-  characteristics: Characteristic[];
+  modifiers: Modifier[];
   position_name: string;
   position_id: number;
 }
@@ -25,17 +23,13 @@ export interface PostPlayer {
   st: number;
   ag: number;
   av: number;
-  injuries: string;
   value: number;
-  skills: Skill[];
-  characteristics: Characteristic[];
-  position_id: number;
-  team_id: number;
 }
 
-export interface Characteristic {
+export interface Modifier {
   type: string;
   modifier: number;
+  id: number;
 }
 
 export interface PlayerSkill {

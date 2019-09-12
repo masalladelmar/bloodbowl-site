@@ -36,4 +36,30 @@ export class PlayersService {
   fire(player_id: number): Observable<void> {
     return this.apiService.put(`players/${player_id}/fire`);
   }
+
+  newSkill(
+    player_id: number,
+    skill_id: number,
+    money_modifier: number
+  ): Observable<void> {
+    return this.apiService.post(`players/${player_id}/skills`, {
+      skill_id: skill_id,
+      money_modifier: money_modifier,
+    });
+  }
+
+  deleteSkill(player_id: number, skill_id: number): Observable<void> {
+    return this.apiService.delete(`players/${player_id}/skills/${skill_id}`);
+  }
+
+  newModifier(player_id: number, type: string, modifier: number): Observable<number> {
+    return this.apiService.post(`players/${player_id}/modifiers`, {
+      type: type,
+      modifier: modifier,
+    });
+  }
+
+  deleteModifier(player_id: number, modifier_id: number): Observable<void> {
+    return this.apiService.delete(`players/${player_id}/modifiers/${modifier_id}`);
+  }
 }

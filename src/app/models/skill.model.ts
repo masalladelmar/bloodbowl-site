@@ -1,9 +1,9 @@
 export interface Skill {
   id: number;
-  name: string;
+  name_es: string;
   name_en: string;
   description: string;
-  type: number;
+  type: string;
   createdAt: string;
   updatedAt: string;
   deletedAt: string;

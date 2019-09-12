@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Team } from '../models/team.model';
 import { Player, Status } from '../models/player.model';
-import { Attributes } from '../models/attributes.model';
+import { Attributes, Attribute } from '../models/attributes.model';
 import { SkillTypes } from '../models/skill.model';
 
 @Injectable({
@@ -34,12 +34,12 @@ export class HelperService {
     return player.skills
       .map(el => el.name)
       .concat(
-        player.characteristics.map(el => {
+        player.modifiers.map(el => {
           return (
             (el.modifier > 0 ? '+' : '') +
             el.modifier +
             ' ' +
-            Attributes.find(ch => ch.id === el.type).name
+            this.getAttributeName(el.type)
           );
         })
       )
@@ -48,16 +48,16 @@ export class HelperService {
 
   public getSkillType(value: string): string {
     const finded = SkillTypes.find(el => el.link === value);
-    return finded.name || '';
+    return finded ? finded.name : '';
   }
 
-  public getAttributes() {
+  public getAttributes(): Attribute[] {
     return Attributes;
   }
 
   public getAttributeName(value: string): string {
     const finded = Attributes.find(el => el.id === value);
-    return finded.name || '';
+    return finded ? finded.name : '';
   }
 
   public getStatusName(value: string): string {

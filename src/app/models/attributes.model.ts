@@ -1,4 +1,4 @@
-interface Attribute {
+export interface Attribute {
   id: string;
   name: string;
 }
