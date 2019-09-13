@@ -34,7 +34,7 @@ export class RaceComponent implements OnInit {
           this.race = response;
           this.commonsService.setTitle('Jugadores de los equipos de ' + this.race.name);
           forkJoin(
-            this.positionsService.getPositions(response.id),
+            this.positionsService.getAll(response.id),
             this.starplayersService.getRaceStarPlayers(response.id)
           ).subscribe(
             response2 => {

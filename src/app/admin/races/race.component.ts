@@ -47,7 +47,7 @@ export class RaceComponent implements OnInit {
       this.title = 'Editar';
       forkJoin(
         this.racesService.getRace(this.race_id),
-        this.positionsService.getPositions(Number(this.race_id))
+        this.positionsService.getAll(Number(this.race_id))
       ).subscribe(
         response => {
           this.race = response[0];
@@ -124,7 +124,7 @@ export class RaceComponent implements OnInit {
     });
     const modalSubs$ = this.modalService.onHide.subscribe((reason: string) => {
       if (this.modalRef.content.resolve === true) {
-        this.positionsService.getPositions(Number(this.race_id)).subscribe(
+        this.positionsService.getAll(Number(this.race_id)).subscribe(
           data => {
             this.positions = data;
           },
@@ -214,7 +214,7 @@ export class RaceComponent implements OnInit {
 
   private saveOrder(array: any[]) {
     this.commonsService.setLoading(true);
-    this.positionsService.order(array).subscribe(
+    this.racesService.order(this.race.id, array).subscribe(
       response => {
         this.commonsService.handleSuccess('Orden guardado');
         this.commonsService.setLoading(false);

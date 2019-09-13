@@ -36,6 +36,8 @@ export class TeamComponent implements OnInit {
   modalRef: BsModalRef;
   canBuyPlayers: boolean;
   skills: Skill[];
+  raceName: string;
+  reroll_cost: string;
 
   constructor(
     private teamsService: TeamsService,
@@ -102,7 +104,11 @@ export class TeamComponent implements OnInit {
           this.teamform.get('coach_id').setValue(this.team.coach_id);
           this.teamform.get('race_id').setValue(this.team.race_id);
 
-          this.positionsService.getPositions(this.team.race_id).subscribe(
+          const race = this.races.find(el => el.id === this.team.race_id);
+          this.raceName = race ? race.name : '';
+          this.reroll_cost = race ? race.reroll_cost.toString() : '';
+
+          this.positionsService.getAll(this.team.race_id).subscribe(
             data => {
               this.positions = data;
               if (
@@ -193,6 +199,11 @@ export class TeamComponent implements OnInit {
         })
       )
       .join(', ');
+  }
+
+  updateRerollCost(value: string) {
+    const race = this.races.find(el => el.id === Number(value));
+    this.reroll_cost = race ? race.reroll_cost.toString() : '';
   }
 
   addPlayer() {

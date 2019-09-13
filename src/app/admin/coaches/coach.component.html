@@ -2,16 +2,14 @@
   <div class="row justify-content-center">
     <div class="col-10">
       <h1>{{ title }} entrenador</h1>
-      <div
-        class="form-group"
-        [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''"
-      >
+      <div class="form-group">
         <label class="form-label">Nombre</label>
         <input
           type="text"
           formControlName="name"
           placeholder="Nombre del entrenador"
           class="form-control"
+          [ngClass]="name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''"
         />
       </div>
       <div class="form-group">

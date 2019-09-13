@@ -331,7 +331,22 @@ export class PlayerComponent implements OnInit {
           this.commonsService.handleSuccess('Modificador eliminado');
           this.commonsService.setLoading(false);
           this.player.modifiers = this.player.modifiers.filter(el => el.id !== id);
-          // TODO: Restar valor del jugador y eliminar el modificador del atributo afectado
+          // Restar valor del jugador y eliminar el modificador del atributo afectado
+          if ((this.removeItem as Modifier).modifier > 0) {
+            switch ((this.removeItem as Modifier).type) {
+              case 'st':
+                this.player.value -= 50000;
+                break;
+              case 'ag':
+                this.player.value -= 40000;
+                break;
+              case 'ma':
+              case 'av':
+                this.player.value -= 30000;
+                break;
+            }
+          }
+          this.cancelRemove();
         },
         error => {
           this.commonsService.handleError(
@@ -351,7 +366,9 @@ export class PlayerComponent implements OnInit {
           this.skillsTaken = this.skillsTaken.filter(el => el !== id);
           this.fillSkills();
           this.player.skills = this.player.skills.filter(el => el.skill_id !== id);
-          // TODO: Restar valor del jugador
+          // Restar valor del jugador
+          this.player.value -= (this.removeItem as PlayerSkill).modifier * 1000;
+          this.cancelRemove();
         },
         error => {
           this.commonsService.handleError(
@@ -363,7 +380,5 @@ export class PlayerComponent implements OnInit {
         }
       );
     }
-
-    this.cancelRemove();
   }
 }

@@ -8,12 +8,7 @@
       <div class="col-8">
         <div class="row">
           <div class="col-4">
-            <div
-              class="form-group"
-              [ngClass]="
-                limit.invalid && (limit.dirty || limit.touched) ? 'has-error' : ''
-              "
-            >
+            <div class="form-group">
               <label>Limite</label>
               <input
                 type="number"
@@ -21,41 +16,43 @@
                 max="16"
                 class="form-control"
                 formControlName="limit"
+                [ngClass]="
+                  limit.invalid && (limit.dirty || limit.touched) ? 'is-invalid' : ''
+                "
               />
             </div>
           </div>
           <div class="col-5">
-            <div
-              class="form-group"
-              [ngClass]="name.invalid && (name.dirty || name.touched) ? 'has-error' : ''"
-            >
+            <div class="form-group">
               <label>Denominación</label>
-              <input type="text" class="form-control" formControlName="name" />
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                [ngClass]="
+                  name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''
+                "
+              />
             </div>
           </div>
           <div class="col-3">
-            <div
-              class="form-group"
-              [ngClass]="
-                price.invalid && (price.dirty || price.touched) ? 'has-error' : ''
-              "
-            >
+            <div class="form-group">
               <label>Coste</label>
               <input
                 type="number"
                 step="1000"
                 class="form-control"
                 formControlName="price"
+                [ngClass]="
+                  price.invalid && (price.dirty || price.touched) ? 'is-invalid' : ''
+                "
               />
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-3">
-            <div
-              class="form-group"
-              [ngClass]="ma.invalid && (ma.dirty || ma.touched) ? 'has-error' : ''"
-            >
+            <div class="form-group">
               <label>Movimiento</label>
               <input
                 type="number"
@@ -63,14 +60,12 @@
                 max="10"
                 class="form-control"
                 formControlName="ma"
+                [ngClass]="ma.invalid && (ma.dirty || ma.touched) ? 'is-invalid' : ''"
               />
             </div>
           </div>
           <div class="col-3">
-            <div
-              class="form-group"
-              [ngClass]="st.invalid && (st.dirty || st.touched) ? 'has-error' : ''"
-            >
+            <div class="form-group">
               <label>Fuerza</label>
               <input
                 type="number"
@@ -78,14 +73,12 @@
                 max="10"
                 class="form-control"
                 formControlName="st"
+                [ngClass]="st.invalid && (st.dirty || st.touched) ? 'is-invalid' : ''"
               />
             </div>
           </div>
           <div class="col-3">
-            <div
-              class="form-group"
-              [ngClass]="ag.invalid && (ag.dirty || ag.touched) ? 'has-error' : ''"
-            >
+            <div class="form-group">
               <label>Agilidad</label>
               <input
                 type="number"
@@ -93,14 +86,12 @@
                 max="10"
                 class="form-control"
                 formControlName="ag"
+                [ngClass]="ag.invalid && (ag.dirty || ag.touched) ? 'is-invalid' : ''"
               />
             </div>
           </div>
           <div class="col-3">
-            <div
-              class="form-group"
-              [ngClass]="av.invalid && (av.dirty || av.touched) ? 'has-error' : ''"
-            >
+            <div class="form-group">
               <label>Armadura</label>
               <input
                 type="number"
@@ -108,6 +99,7 @@
                 max="10"
                 class="form-control"
                 formControlName="av"
+                [ngClass]="av.invalid && (av.dirty || av.touched) ? 'is-invalid' : ''"
               />
             </div>
           </div>
@@ -125,12 +117,7 @@
       <div class="col-4">
         <div class="row">
           <div class="col-6">
-            <div
-              class="form-group"
-              [ngClass]="
-                normal.invalid && (normal.dirty || normal.touched) ? 'has-error' : ''
-              "
-            >
+            <div class="form-group">
               <label>Tirada normal</label><br />
               <label
                 class="form-checkbox"
@@ -141,6 +128,9 @@
                   type="checkbox"
                   [formControlName]="i"
                   (click)="toggleType('doubles', i)"
+                  [ngClass]="
+                    normal.invalid && (normal.dirty || normal.touched) ? 'is-invalid' : ''
+                  "
                 />
                 <i class="form-icon"></i>
                 {{ skillType(i) }}
@@ -148,12 +138,7 @@
             </div>
           </div>
           <div class="col-6">
-            <div
-              class="form-group"
-              [ngClass]="
-                doubles.invalid && (doubles.dirty || doubles.touched) ? 'has-error' : ''
-              "
-            >
+            <div class="form-group">
               <label>Tirada dobles</label><br />
               <label
                 class="form-checkbox"
@@ -167,6 +152,11 @@
                   type="checkbox"
                   [formControlName]="i"
                   (click)="toggleType('normal', i)"
+                  [ngClass]="
+                    doubles.invalid && (doubles.dirty || doubles.touched)
+                      ? 'is-invalid'
+                      : ''
+                  "
                 />
                 <i class="form-icon"></i>
                 {{ skillType(i) }}

@@ -1,11 +1,21 @@
 <ng-container *ngIf="post">
   <figure *ngIf="post.archive">
-      <img [src]="src" alt="{{post.title}}" class="img-responsive" />
+    <img [src]="src" alt="{{ post.title }}" class="img-responsive" />
   </figure>
 
   <div class="clearfix">
-    <button class="btn btn-link float-right" title="Ver comentarios" (click)="scroll(comments)">{{post.comment_count + ' ' + (post.comment_count==1 ? "comentario" : "comentarios")}}</button>
-    <i>{{post.author}} | {{post.created_at | date: 'dd/MM/yyyy HH:mm'}}</i>
+    <button
+      class="btn btn-link float-right"
+      title="Ver comentarios"
+      (click)="scroll(comments)"
+    >
+      {{
+        post.comment_count +
+          ' ' +
+          (post.comment_count == 1 ? 'comentario' : 'comentarios')
+      }}
+    </button>
+    <i>{{ post.author }} | {{ post.created_at | date: 'dd/MM/yyyy HH:mm' }}</i>
   </div>
   <div [innerHtml]="post.content"></div>
 
@@ -14,13 +24,26 @@
   <p *ngIf="!post.comments">No hay ning&uacute;n comentario sobre el post</p>
   <ul class="comments" *ngIf="post.comments">
     <li *ngFor="let comment of post.comments; index as i">
-      <span class="comment_number">{{i + 1}}</span>
+      <span class="comment_number">{{ i + 1 }}</span>
       <div class="comment_body">
-        <p *ngIf="comment.author_url" class="comment_info"><a href="{{comment.author_url}}" title="La p&aacute;gina web del autor de este comentario">{{comment.author}}</a> dijo...</p>
-        <p *ngIf="!comment.author_url" class="comment_info">{{comment.author}} dijo...</p>
+        <p *ngIf="comment.author_url" class="comment_info">
+          <a
+            href="{{ comment.author_url }}"
+            title="La p&aacute;gina web del autor de este comentario"
+            >{{ comment.author }}</a
+          >
+          dijo...
+        </p>
+        <p *ngIf="!comment.author_url" class="comment_info">
+          {{ comment.author }} dijo...
+        </p>
         <div [innerHtml]="comment.content"></div>
       </div>
-      <div class="comment_foot"><i class="text-dark">Perpetrado el {{comment.created_at | date: 'dd/MM/yyyy HH:mm'}}</i></div>
+      <div class="comment_foot">
+        <i class="text-dark"
+          >Perpetrado el {{ comment.created_at | date: 'dd/MM/yyyy HH:mm' }}</i
+        >
+      </div>
     </li>
   </ul>
 
@@ -28,13 +51,31 @@
     <form [formGroup]="commentform" (ngSubmit)="onSubmit()">
       <fieldset>
         <legend>Escribe un comentario</legend>
-        <div class="form-group" [ngClass]="author.invalid && (author.dirty || author.touched) ? 'has-error' : ''">
-            <label class="form-label">Nombre</label>
-            <input type="text" formControlName="author" placeholder="Nombre para dejar en el comentario" class="form-input">
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input
+            type="text"
+            formControlName="author"
+            placeholder="Nombre para dejar en el comentario"
+            class="form-input"
+            [ngClass]="
+              author.invalid && (author.dirty || author.touched) ? 'is-invalid' : ''
+            "
+          />
         </div>
-        <div class="form-group" [ngClass]="content.invalid && (content.dirty || content.touched) ? 'has-error' : ''">
-            <label class="form-label">Comentario</label>
-            <textarea formControlName="content" cols="72" wrap="soft" rows="10" class="form-input" placeholder="Comentario"></textarea>
+        <div class="form-group">
+          <label class="form-label">Comentario</label>
+          <textarea
+            formControlName="content"
+            cols="72"
+            wrap="soft"
+            rows="10"
+            class="form-input"
+            placeholder="Comentario"
+            [ngClass]="
+              content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''
+            "
+          ></textarea>
         </div>
         <div class="form-group text-center">
           <button type="submit" class="btn btn-primary">Publicar comentario</button>
