@@ -56,7 +56,9 @@ export class PositionComponent implements OnInit {
   }
 
   private buildTypes(type: string) {
-    const skillsSelected = this.position ? this.position[type].split(',') : [];
+    const skillsSelected =
+      this.position && this.position[type] !== '' ? this.position[type].split(',') : [];
+    this.selected[type] = skillsSelected;
     SkillTypes.forEach(skill => {
       const control = new FormControl(
         skillsSelected.find(el => el === skill.link) ? true : false
@@ -68,6 +70,18 @@ export class PositionComponent implements OnInit {
   ngOnInit() {
     this.buildTypes('normal');
     this.buildTypes('doubles');
+    const normal = <FormArray>this.positionform.get('normal');
+    const doubles = <FormArray>this.positionform.get('doubles');
+    // Deshabilitar campos contrarios a los que están seleccionados
+    SkillTypes.forEach((skill, index) => {
+      if (normal.controls[index].value === true) {
+        doubles.controls[index].disable();
+      }
+
+      if (doubles.controls[index].value === true) {
+        normal.controls[index].disable();
+      }
+    });
 
     if (this.position) {
       this.title = 'Editar';
@@ -206,10 +220,13 @@ export class PositionComponent implements OnInit {
   }
 
   toggleType(parent: string, index: number) {
-    const control = (<FormArray>this.positionform.get(parent)).controls[index];
+    // Desactivar el control del tipo opuesto
+    const opposite = parent === 'normal' ? 'doubles' : 'normal';
+    const control = (<FormArray>this.positionform.get(opposite)).controls[index];
     control.disabled ? control.enable() : control.disable();
     control.disabled ? control.setValue(null) : control.setValue(false);
 
+    // Añadir o quitar de los seleccionados del tipo seleccionado
     const finded = this.selected[parent].indexOf(SkillTypes[index].link);
     if (finded !== -1) {
       this.selected[parent].splice(finded, 1);

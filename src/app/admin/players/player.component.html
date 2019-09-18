@@ -206,7 +206,7 @@
           </div>
         </div>
       </div>
-      <div>Valor: {{ player.value }} monedas de oro</div>
+      <div *ngIf="player">Valor: {{ player.value }} monedas de oro</div>
     </div>
   </div>
   <div class="modal-footer">

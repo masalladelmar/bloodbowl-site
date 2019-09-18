@@ -127,7 +127,7 @@
                 <input
                   type="checkbox"
                   [formControlName]="i"
-                  (click)="toggleType('doubles', i)"
+                  (click)="toggleType('normal', i)"
                   [ngClass]="
                     normal.invalid && (normal.dirty || normal.touched) ? 'is-invalid' : ''
                   "
@@ -151,7 +151,7 @@
                 <input
                   type="checkbox"
                   [formControlName]="i"
-                  (click)="toggleType('normal', i)"
+                  (click)="toggleType('doubles', i)"
                   [ngClass]="
                     doubles.invalid && (doubles.dirty || doubles.touched)
                       ? 'is-invalid'
