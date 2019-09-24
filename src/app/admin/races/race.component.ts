@@ -9,8 +9,10 @@ import { PositionsService } from 'src/app/services/positions.service';
 import { Position } from '../../models/position.model';
 import { PositionComponent } from '../positions/position.component';
 import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
-import { SkillTypes } from 'src/app/models/skill.model';
+import { SkillTypes, Skill } from 'src/app/models/skill.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { SkillsService } from 'src/app/services/skills.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-race',
@@ -24,6 +26,7 @@ export class RaceComponent implements OnInit {
   title: string;
   positions: Position[];
   modalRef: BsModalRef;
+  skills: Skill[];
 
   constructor(
     private racesService: RacesService,
@@ -32,7 +35,9 @@ export class RaceComponent implements OnInit {
     private commonsService: CommonsService,
     private router: Router,
     private fb: FormBuilder,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private skillsService: SkillsService,
+    public helperService: HelperService
   ) {
     this.raceform = this.fb.group({
       name: ['', Validators.required],
@@ -47,7 +52,8 @@ export class RaceComponent implements OnInit {
       this.title = 'Editar';
       forkJoin(
         this.racesService.getRace(this.race_id),
-        this.positionsService.getAll(Number(this.race_id))
+        this.positionsService.getAll(Number(this.race_id)),
+        this.skillsService.getSkills()
       ).subscribe(
         response => {
           this.race = response[0];
@@ -58,6 +64,7 @@ export class RaceComponent implements OnInit {
           this.raceform.get('apothecary').setValue(this.race.apothecary);
 
           this.positions = response[1];
+          this.skills = response[2];
         },
         error => {
           this.commonsService.handleError(
@@ -117,6 +124,7 @@ export class RaceComponent implements OnInit {
     const initialState = {
       position: position,
       race_id: this.race_id,
+      skills: this.skills,
     };
     this.modalRef = this.modalService.show(PositionComponent, {
       initialState,

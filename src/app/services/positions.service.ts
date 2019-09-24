@@ -24,4 +24,14 @@ export class PositionsService {
   update(position_id: number, position: PostPosition): Observable<void> {
     return this.apiService.put(`positions/${position_id}`, position);
   }
+
+  newSkill(position_id: number, skill_id: number): Observable<void> {
+    return this.apiService.post(`positions/${position_id}/skills`, {
+      skill_id: skill_id,
+    });
+  }
+
+  deleteSkill(position_id: number, skill_id: number): Observable<void> {
+    return this.apiService.delete(`positions/${position_id}/skills/${skill_id}`);
+  }
 }

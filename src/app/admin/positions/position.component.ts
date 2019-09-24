@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Position } from 'src/app/models/position.model';
+import { Component, OnInit } from '@angular/core';
+import { Position, PositionSkill } from 'src/app/models/position.model';
 import {
   FormGroup,
   FormBuilder,
@@ -9,8 +9,9 @@ import {
 } from '@angular/forms';
 import { CommonsService } from 'src/app/services/commons.service';
 import { PositionsService } from 'src/app/services/positions.service';
-import { SkillTypes } from 'src/app/models/skill.model';
+import { SkillTypes, Skill } from 'src/app/models/skill.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { HelperService } from 'src/app/services/helper.service';
 
 export interface Selected {
   normal: string[];
@@ -28,6 +29,10 @@ export class PositionComponent implements OnInit {
   title: string;
   race_id: number;
   selected: Selected;
+  skills: Skill[];
+  availableSkills: any[];
+  skillsTaken: number[];
+  skillList: PositionSkill[];
 
   resolve = false;
 
@@ -35,7 +40,8 @@ export class PositionComponent implements OnInit {
     private commonsService: CommonsService,
     private positionsService: PositionsService,
     private fb: FormBuilder,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    public helperService: HelperService
   ) {
     this.positionform = this.fb.group(
       {
@@ -46,7 +52,7 @@ export class PositionComponent implements OnInit {
         st: ['', Validators.required],
         ag: ['', Validators.required],
         av: ['', Validators.required],
-        skills: [''],
+        skill: [''],
         normal: new FormArray([]),
         doubles: new FormArray([]),
       },
@@ -64,6 +70,19 @@ export class PositionComponent implements OnInit {
         skillsSelected.find(el => el === skill.link) ? true : false
       );
       (this.positionform.controls[type] as FormArray).push(control);
+    });
+  }
+
+  private fillSkills() {
+    this.skills.forEach(el => {
+      if (!this.skillsTaken.includes(el.id)) {
+        if (!this.availableSkills.find(gr => gr.name === el.type)) {
+          this.availableSkills.push({ name: el.type, skills: [] });
+        }
+
+        const item = this.availableSkills.find(gr => gr.name === el.type);
+        item.skills.push(el);
+      }
     });
   }
 
@@ -92,10 +111,15 @@ export class PositionComponent implements OnInit {
       this.positionform.controls.st.setValue(this.position.st);
       this.positionform.controls.ag.setValue(this.position.ag);
       this.positionform.controls.av.setValue(this.position.av);
-      this.positionform.controls.skills.setValue(this.position.skills);
+      this.skillsTaken = this.position.skills.map(el => el.skill_id);
+      this.skillList = this.position.skills;
     } else {
       this.title = 'Nueva';
+      this.skillsTaken = [];
+      this.skillList = [];
     }
+    this.availableSkills = [];
+    this.fillSkills();
   }
 
   public close() {
@@ -237,5 +261,75 @@ export class PositionComponent implements OnInit {
 
   skillType(index: number): string {
     return SkillTypes[index].short;
+  }
+
+  addSkill() {
+    this.commonsService.setLoading(true);
+
+    const skill = this.skills.find(
+      el => el.id === Number(this.positionform.controls.skill.value)
+    );
+    if (this.position) {
+      this.positionsService.newSkill(this.position.id, skill.id).subscribe(
+        response => {
+          this.commonsService.handleSuccess('Habilidad añadida');
+          this.commonsService.setLoading(false);
+          this.addedSkill(skill.id, skill.name_es);
+          this.resolve = true;
+        },
+        error => {
+          this.commonsService.handleError(
+            error.status === 500
+              ? 'Se ha producido un error al añadir la habilidad'
+              : error.message
+          );
+          this.commonsService.setLoading(false);
+        }
+      );
+    } else {
+      this.addedSkill(skill.id, skill.name_es);
+    }
+  }
+
+  private addedSkill(skill_id: number, name: string) {
+    this.skillList.push({
+      skill_id: skill_id,
+      position_id: this.position ? this.position.id : null,
+      name: name,
+    });
+    this.availableSkills.forEach(el => {
+      el.skills = el.skills.filter(sk => sk.id !== skill_id);
+    });
+    this.positionform.controls.skill.setValue(null);
+  }
+
+  removeSkill(removeItem: PositionSkill) {
+    const id = removeItem.skill_id;
+    if (this.position) {
+      this.positionsService.deleteSkill(this.position.id, id).subscribe(
+        response => {
+          this.commonsService.handleSuccess('Habilidad eliminada');
+          this.commonsService.setLoading(false);
+          this.removedSkill(id);
+          this.resolve = true;
+        },
+        error => {
+          this.commonsService.handleError(
+            error.status === 500
+              ? 'Se ha producido un error al eliminar la habilidad'
+              : error.message
+          );
+          this.commonsService.setLoading(false);
+        }
+      );
+    } else {
+      this.removedSkill(id);
+    }
+  }
+
+  private removedSkill(id: number) {
+    this.skillsTaken = this.skillsTaken.filter(el => el !== id);
+    this.fillSkills();
+    this.skillList = this.skillList.filter(el => el.skill_id !== id);
   }
 }

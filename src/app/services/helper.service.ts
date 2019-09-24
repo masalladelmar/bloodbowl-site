@@ -3,6 +3,7 @@ import { Team } from '../models/team.model';
 import { Player, Status } from '../models/player.model';
 import { Attributes, Attribute } from '../models/attributes.model';
 import { SkillTypes } from '../models/skill.model';
+import { Position } from '../models/position.model';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +45,10 @@ export class HelperService {
         })
       )
       .join(', ');
+  }
+
+  public positionSkills(position: Position) {
+    return position.skills.map(el => el.name).join(', ');
   }
 
   public getSkillType(value: string): string {
