@@ -144,7 +144,7 @@ export class PositionComponent implements OnInit {
       };
       if (this.position) {
         this.positionsService.update(this.position.id, pos).subscribe(
-          response => {
+          _ => {
             this.commonsService.handleSuccess('Posición actualizada');
             this.commonsService.setLoading(false);
             this.bsModalRef.hide();
@@ -161,7 +161,7 @@ export class PositionComponent implements OnInit {
         );
       } else {
         this.positionsService.create(pos).subscribe(
-          response => {
+          _ => {
             this.commonsService.handleSuccess('Posición creada');
             this.commonsService.setLoading(false);
             this.bsModalRef.hide();
@@ -271,7 +271,7 @@ export class PositionComponent implements OnInit {
     );
     if (this.position) {
       this.positionsService.newSkill(this.position.id, skill.id).subscribe(
-        response => {
+        _ => {
           this.commonsService.handleSuccess('Habilidad añadida');
           this.commonsService.setLoading(false);
           this.addedSkill(skill.id, skill.name_es);
@@ -307,7 +307,7 @@ export class PositionComponent implements OnInit {
     const id = removeItem.skill_id;
     if (this.position) {
       this.positionsService.deleteSkill(this.position.id, id).subscribe(
-        response => {
+        _ => {
           this.commonsService.handleSuccess('Habilidad eliminada');
           this.commonsService.setLoading(false);
           this.removedSkill(id);
