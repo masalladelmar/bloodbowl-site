@@ -81,7 +81,7 @@ export class RaceComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   getTypesSelected(types: string): string {
     let out = '';
@@ -163,6 +163,7 @@ export class RaceComponent implements OnInit {
         this.positionsService.delete(position).subscribe(
           data => {
             this.commonsService.handleSuccess('Posición eliminada');
+            this.updatePositions();
           },
           error => {
             this.commonsService.handleError(
@@ -220,11 +221,18 @@ export class RaceComponent implements OnInit {
     }
   }
 
+  private updatePositions() {
+    this.positionsService.getAll(Number(this.race_id)).subscribe(
+      data => this.positions = data
+    );
+  }
+
   private saveOrder(array: any[]) {
     this.commonsService.setLoading(true);
-    this.racesService.order(this.race.id, array).subscribe(
+    this.positionsService.order(this.race.id, array).subscribe(
       response => {
         this.commonsService.handleSuccess('Orden guardado');
+        this.updatePositions();
         this.commonsService.setLoading(false);
       },
       error => {

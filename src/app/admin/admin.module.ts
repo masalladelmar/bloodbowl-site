@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ToastrModule } from 'ngx-toastr';
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   entryComponents: [ConfirmationModalComponent, PositionComponent, PlayerComponent],
 })
-export class AdminModule {}
+export class AdminModule { }

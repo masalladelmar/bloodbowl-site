@@ -84,6 +84,7 @@ export class PositionComponent implements OnInit {
         item.skills.push(el);
       }
     });
+    this.positionform.controls.skill.setValue(null);
   }
 
   ngOnInit() {
@@ -136,7 +137,7 @@ export class PositionComponent implements OnInit {
         st: this.positionform.controls.st.value,
         ag: this.positionform.controls.ag.value,
         av: this.positionform.controls.av.value,
-        skills: this.positionform.controls.skills.value,
+        skills: this.skillList,
         normal: this.selected.normal.join(','),
         doubles: this.selected.doubles.join(','),
         price: this.positionform.controls.price.value,
@@ -216,19 +217,19 @@ export class PositionComponent implements OnInit {
       // Validar que la suma de ambos arrays es 6 entre los 2 y que no se repiten
       const totalNormal = group.get('normal').value
         ? group
-            .get('normal')
-            .value // get a list of checkbox values (boolean)
-            // .map(control => control.value)
-            // total up the number of checked checkboxes
-            .reduce((prev, next) => (next ? prev + next : prev), 0)
+          .get('normal')
+          .value // get a list of checkbox values (boolean)
+          // .map(control => control.value)
+          // total up the number of checked checkboxes
+          .reduce((prev, next) => (next ? prev + next : prev), 0)
         : 0;
       const totalDoubles = group.get('doubles').value
         ? group
-            .get('doubles')
-            .value // get a list of checkbox values (boolean)
-            // .map(control => control.value)
-            // total up the number of checked checkboxes
-            .reduce((prev, next) => (next ? prev + next : prev), 0)
+          .get('doubles')
+          .value // get a list of checkbox values (boolean)
+          // .map(control => control.value)
+          // total up the number of checked checkboxes
+          .reduce((prev, next) => (next ? prev + next : prev), 0)
         : 0;
 
       if (totalNormal + totalDoubles > 6 || totalNormal + totalDoubles < 4) {
@@ -297,10 +298,13 @@ export class PositionComponent implements OnInit {
       position_id: this.position ? this.position.id : null,
       name: name,
     });
-    this.availableSkills.forEach(el => {
+    /*this.availableSkills.forEach(el => {
       el.skills = el.skills.filter(sk => sk.id !== skill_id);
-    });
-    this.positionform.controls.skill.setValue(null);
+    });*/
+    this.availableSkills = [];
+    this.skillsTaken.push(skill_id);
+    this.fillSkills();
+    // this.positionform.controls.skill.setValue(null);
   }
 
   removeSkill(removeItem: PositionSkill) {

@@ -7,7 +7,7 @@ import { Race, ActiveRace, PostRace } from '../models/race.model';
   providedIn: 'root',
 })
 export class RacesService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   public getRaces(): Observable<Race[]> {
     return this.apiService.get('races');
@@ -27,9 +27,5 @@ export class RacesService {
 
   public update(race_id: number, race: PostRace): Observable<void> {
     return this.apiService.put(`races/${race_id}`, race);
-  }
-
-  public order(race_id: number, order: any): Observable<void> {
-    return this.apiService.put(`/races/${race_id}/positions/order`, order);
   }
 }

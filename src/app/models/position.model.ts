@@ -21,7 +21,7 @@ export interface PostPosition {
   st: number;
   ag: number;
   av: number;
-  skills: string;
+  skills: PositionSkill[];
   normal: string;
   doubles: string;
   price: number;

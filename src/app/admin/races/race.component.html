@@ -1,94 +1,60 @@
+<ng-template #infoTooltip>
+  <p class="mb-1" *ngIf="race && race.created_at">Creado en: {{ race.created_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+  <p class="mb-0" *ngIf="race && race.updated_at">Actualizado en: {{ race.updated_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+</ng-template>
 <form [formGroup]="raceform" (ngSubmit)="onSubmit()" class="mb-4">
   <div class="row justify-content-center">
     <div class="col-10">
-      <h1>{{ title }} raza</h1>
+      <h1>{{ title }} raza<div class="float-right" [tooltip]="infoTooltip"><small><i *ngIf="race"
+              class="fa fa-info"></i></small>
+        </div>
+      </h1>
       <div class="row mb-2">
         <div class="column col-md-8">
           <div class="form-group">
             <label class="form-label">Nombre</label>
-            <input
-              type="text"
-              formControlName="name"
-              placeholder="Nombre de la raza"
-              class="form-control"
-              [ngClass]="name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''"
-            />
-            <span
-              *ngIf="name.invalid && (name.dirty || name.touched)"
-              class="invalid-feedback"
-              >Debes rellenar el nombre de la raza</span
-            >
+            <input type="text" formControlName="name" placeholder="Nombre de la raza" class="form-control"
+              [ngClass]="name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''" />
+            <span *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">Debes rellenar el nombre
+              de la raza</span>
           </div>
           <div class="form-group">
             <label class="form-label">Descripción</label>
-            <textarea
-              formControlName="description"
-              rows="5"
-              placeholder="Datos adicionales de la raza"
-              class="form-control"
-            ></textarea>
+            <textarea formControlName="description" rows="5" placeholder="Datos adicionales de la raza"
+              class="form-control"></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">Coste segunda oportunidad</label>
-            <input
-              type="number"
-              step="10000"
-              formControlName="reroll_cost"
-              placeholder="Coste en monedas"
-              class="form-control"
-              [ngClass]="
+            <input type="number" step="10000" formControlName="reroll_cost" placeholder="Coste en monedas"
+              class="form-control" [ngClass]="
                 reroll_cost.invalid && (reroll_cost.dirty || reroll_cost.touched)
                   ? 'is-invalid'
                   : ''
-              "
-            />
-            <span
-              *ngIf="name.invalid && (name.dirty || name.touched)"
-              class="invalid-feedback"
-              >Debes rellenar el coste de la segunda oportunidad</span
-            >
+              " />
+            <span *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback">Debes rellenar el coste
+              de la segunda oportunidad</span>
           </div>
         </div>
         <div class="column col-md-4">
           <div class="form-group">
             <label class="form-label">Escudo</label>
-            <input
-              type="text"
-              formControlName="coat_arms"
-              placeholder="Escudo de armas"
-              class="form-control"
-              [ngClass]="
+            <input type="text" formControlName="coat_arms" placeholder="Escudo de armas" class="form-control" [ngClass]="
                 coat_arms.invalid && (coat_arms.dirty || coat_arms.touched)
                   ? 'is-invalid'
                   : ''
-              "
-            />
-            <span
-              *ngIf="coat_arms.invalid && (coat_arms.dirty || coat_arms.touched)"
-              class="invalid-feedback"
-              >Debes rellenar el escudo de armas</span
-            >
+              " />
+            <span *ngIf="coat_arms.invalid && (coat_arms.dirty || coat_arms.touched)" class="invalid-feedback">Debes
+              rellenar el escudo de armas</span>
           </div>
           <div class="form-group">
             <p class="mb-1">Actual</p>
             <figure *ngIf="race && race.coat_arms">
-              <img
-                src="assets/img/races/{{ race.coat_arms }}.jpg"
-                alt="Escudo de armas de la raza"
-              />
+              <img src="assets/img/races/{{ race.coat_arms }}.jpg" alt="Escudo de armas de la raza" />
             </figure>
           </div>
           <div class="form-group" *ngIf="race">
             <p class="mb-1">Permalink</p>
             <span *ngIf="race">{{ race.permalink }}</span>
-          </div>
-          <div class="form-group" *ngIf="race && race.created_at">
-            <p class="mb-1">Creado en</p>
-            <span>{{ race.created_at | date: 'dd/MM/yyyy HH:mm' }}</span>
-          </div>
-          <div class="form-group" *ngIf="race && race.updated_at">
-            <p class="mb-1">Última actualización en</p>
-            <span>{{ race.updated_at | date: 'dd/MM/yyyy HH:mm' }}</span>
           </div>
         </div>
       </div>
@@ -104,11 +70,7 @@
 <div class="row justify-content-center" *ngIf="race">
   <div class="col-10">
     <h2>
-      Posiciones<button
-        type="button"
-        class="btn btn-primary float-right"
-        (click)="addPosition()"
-      >
+      Posiciones<button type="button" class="btn btn-primary float-right" (click)="addPosition()">
         Añadir posición
       </button>
     </h2>
@@ -126,10 +88,7 @@
           <th style="width: 10%;" title="Habilidades disponibles con tirada normal">
             Normal
           </th>
-          <th
-            style="width: 10%;"
-            title="Habilidades y atributos disponibles con tirada de dobles"
-          >
+          <th style="width: 10%;" title="Habilidades y atributos disponibles con tirada de dobles">
             Dobles
           </th>
           <th style="width: 92px;" title="Orden en el que se mostrarán los jugadores">
@@ -152,38 +111,20 @@
           <td>{{ getTypesSelected(position.doubles) }}</td>
           <td>
             <span>{{ position.order }}</span>
-            <button
-              *ngIf="i !== 0"
-              (click)="positionUp(position)"
-              title="Subir"
-              class="btn btn-sm btn-link"
-            >
+            <button *ngIf="i !== 0" (click)="positionUp(position)" title="Subir" class="btn btn-sm btn-link">
               <i class="fa fa-arrow-up"></i>
             </button>
-            <button
-              *ngIf="i !== positions.length - 1"
-              (click)="positionDown(position)"
-              title="Bajar"
-              class="btn btn-sm btn-link"
-            >
+            <button *ngIf="i !== positions.length - 1" (click)="positionDown(position)" title="Bajar"
+              class="btn btn-sm btn-link">
               <i class="fa fa-arrow-down"></i>
             </button>
           </td>
           <td>
             <div class="btn-group">
-              <button
-                type="button"
-                (click)="editPosition(position)"
-                title="Editar"
-                class="btn btn-sm btn-primary"
-              >
+              <button type="button" (click)="editPosition(position)" title="Editar" class="btn btn-sm btn-primary">
                 <i class="fa fa-pen"></i>
               </button>
-              <button
-                title="Eliminar"
-                class="btn btn-sm btn-danger"
-                (click)="deletePosition(position)"
-              >
+              <button title="Eliminar" class="btn btn-sm btn-danger" (click)="deletePosition(position)">
                 <i class="fa fa-skull-crossbones"></i>
               </button>
             </div>

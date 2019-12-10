@@ -7,7 +7,7 @@ import { Position, PostPosition } from '../models/position.model';
   providedIn: 'root',
 })
 export class PositionsService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   getAll(race_id: number): Observable<Position[]> {
     return this.apiService.get(`positions/${race_id}`);
@@ -33,5 +33,9 @@ export class PositionsService {
 
   deleteSkill(position_id: number, skill_id: number): Observable<void> {
     return this.apiService.delete(`positions/${position_id}/skills/${skill_id}`);
+  }
+
+  public order(race_id: number, order: any): Observable<void> {
+    return this.apiService.put(`races/${race_id}/positions/order`, order);
   }
 }
