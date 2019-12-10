@@ -9,6 +9,7 @@ import { TeamsComponent } from './teams/teams.component';
 import { TeamComponent } from './teams/team.component';
 import { AdminLayoutComponent } from '../shared/layouts/admin-layout.component';
 import { AuthGuard } from '../guards/auth-guard.service';
+import { LinksComponent } from './links/links.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'races/:race', component: RaceComponent, canActivate: [AuthGuard] },
       { path: 'teams', component: TeamsComponent, canActivate: [AuthGuard] },
       { path: 'teams/:team', component: TeamComponent, canActivate: [AuthGuard] },
+      { path: 'links', component: LinksComponent, canActivate: [AuthGuard] },
     ],
   },
 ];
@@ -30,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule {}
+export class AdminRoutingModule { }

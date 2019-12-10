@@ -20,6 +20,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { LinksComponent } from './links/links.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AdminFooterComponent,
     AdminHeaderComponent,
     AdminLayoutComponent,
+    LinksComponent,
   ],
   imports: [
     CommonModule,
