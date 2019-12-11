@@ -1,33 +1,42 @@
-<h1>Enlaces <small>- Lista</small>
-  <a routerLink="/admin/links/new" class="btn btn-width btn-primary mt-2 float-right">Nuevo</a>
-</h1>
+<div class="row justify-content-center">
+  <div class="col-10">
+    <h1>Enlaces <small>- Lista</small>
+      <button type="button" (click)="addLink()" class="btn btn-width btn-primary mt-2 float-right">Nuevo</button>
+    </h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Estado</th>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>URL</th>
-      <th>Fecha creaci&oacute;n</th>
-      <th>Ultima actualizaci&oacute;n</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let link of links">
-      <td class="text-center">
-        <a routerLink="/admin/links/publish/{{link.id}}" class="btn btn-light"
-          title="{{link.pusblished ? 'Despublicar el enlace' : 'Publicar el enlace'}}"><i
-            class="fa fa-thumbs-{{link.pusblished ? 'up' : 'down'}} text-{{link.pusblished ? 'success' : 'danger'}}"></i></a>
-        <a routerLink="/admin/links/delete/{{link.id}}" class="btn btn-xs btn-danger" title="Borrar enlace"
-          onclick="return confirm('¿Seguro que quieres borrar este enlace?')"><i class="fa fa-trash"></i></a>
-      </td>
-      <td>{{link.id}}</td>
-      <td><a routerLink="/admin/links/edit/{{link.id}}" title="Modificar el contenido del enlace">{{link.name}}</a></td>
-      <td>{{link.url}}</td>
-      <td class="text-center">{{link.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
-      <td class="text-center">
-        <span *ngIf="link.updated_at">{{link.updated_at | date: 'dd/MM/yyyy HH:mm'}}</span></td>
-    </tr>
-  </tbody>
-</table>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="d-none">ID</th>
+          <th>Nombre</th>
+          <th>URL</th>
+          <th>Creado</th>
+          <th>Actualizado</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let link of links">
+          <td class="d-none">{{link.id}}</td>
+          <td>{{link.name}}</td>
+          <td>{{link.url}}</td>
+          <td class="text-center">{{link.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td class="text-center">
+            <span *ngIf="link.updated_at">{{link.updated_at | date: 'dd/MM/yyyy HH:mm'}}</span></td>
+          <td class="text-center">
+            <div class="btn-group">
+              <button type="button" (click)="editLink(link)" title="Editar" class="btn btn-sm btn-primary">
+                <i class="fa fa-pen"></i>
+              </button>
+              <button type="button" (click)="publishLink(link)" class="btn btn-sm btn-light"
+                title="{{link.published ? 'Despublicar el enlace' : 'Publicar el enlace'}}"><i
+                  class="fa fa-thumbs-{{link.published ? 'up' : 'down'}} text-{{link.published ? 'success' : 'danger'}}"></i></button>
+              <button type="button" (click)="deleteLink(link)" class="btn btn-sm btn-danger" title="Borrar enlace"><i
+                  class="fa fa-skull-crossbones"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

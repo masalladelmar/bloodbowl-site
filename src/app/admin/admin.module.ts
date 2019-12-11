@@ -21,6 +21,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { LinksComponent } from './links/links.component';
+import { LinkComponent } from './links/link.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { LinksComponent } from './links/links.component';
     AdminHeaderComponent,
     AdminLayoutComponent,
     LinksComponent,
+    LinkComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,6 @@ import { LinksComponent } from './links/links.component';
     ToastrModule.forRoot(),
     TooltipModule.forRoot()
   ],
-  entryComponents: [ConfirmationModalComponent, PositionComponent, PlayerComponent],
+  entryComponents: [ConfirmationModalComponent, PositionComponent, PlayerComponent, LinkComponent],
 })
 export class AdminModule { }

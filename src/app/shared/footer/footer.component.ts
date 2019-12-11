@@ -7,12 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   year: number;
+  route: string;
 
   constructor() {
     this.year = new Date().getFullYear();
   }
 
   ngOnInit() {
+    if (!localStorage.getItem('googleToken')) {
+      this.route = '/login';
+    } else {
+      this.route = '/admin';
+    }
   }
 
 }

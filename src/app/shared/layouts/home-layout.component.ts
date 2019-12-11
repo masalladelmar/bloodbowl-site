@@ -51,12 +51,12 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
     // Datos para la navegación
     this.tournamentService.getTournaments().subscribe(
       response => this.tournaments = response,
-      error => {}
+      error => { }
     );
 
-    this.linksService.getLinks().subscribe(
+    this.linksService.get().subscribe(
       response => this.links = response,
-      error => {}
+      error => { }
     );
   }
 

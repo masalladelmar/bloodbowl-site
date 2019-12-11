@@ -11,3 +11,9 @@ export interface NavigationLink {
     updated_by: number;
     deleted_by: number;
 }
+
+export interface NavigationLinkPost {
+    name: string;
+    url: string;
+    description: string;
+}

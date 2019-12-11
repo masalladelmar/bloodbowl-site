@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <button class="btn btn-clear float-right" (click)="close()" aria-label="Close"></button>
+  <div class="modal-title h5">{{ title }} enlace</div>
+</div>
+<form [formGroup]="linkform" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" class="form-control" formControlName="name" [ngClass]="
+                      name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''
+                    " />
+    </div>
+    <div class="form-group">
+      <label>Descripción</label>
+      <input type="text" class="form-control" formControlName="description" [ngClass]="
+                          description.invalid && (description.dirty || description.touched) ? 'is-invalid' : ''
+                        " />
+    </div>
+    <div class="form-group">
+      <label>URL</label>
+      <input type="url" class="form-control" formControlName="url" [ngClass]="
+                          url.invalid && (url.dirty || url.touched) ? 'is-invalid' : ''
+                        " />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-width mr-2 btn-primary">Guardar</button>
+    <button type="button" class="btn btn-outline-secondary btn-width" (click)="close()">
+      Cancelar
+    </button>
+  </div>
+</form>
