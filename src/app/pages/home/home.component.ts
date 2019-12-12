@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   private loadPosts() {
     this.commonsService.setLoading(true);
-    this.postsService.getPosts(this.page).subscribe(
+    this.postsService.get('posts', this.page, 'published').subscribe(
       data => {
         this.posts = data;
         this.totalPages = Math.ceil(this.posts.total_items / 10);

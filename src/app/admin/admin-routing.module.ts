@@ -10,6 +10,7 @@ import { TeamComponent } from './teams/team.component';
 import { AdminLayoutComponent } from '../shared/layouts/admin-layout.component';
 import { AuthGuard } from '../guards/auth-guard.service';
 import { LinksComponent } from './links/links.component';
+import { PostsComponent } from './posts/posts.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,9 @@ const routes: Routes = [
       { path: 'teams', component: TeamsComponent, canActivate: [AuthGuard] },
       { path: 'teams/:team', component: TeamComponent, canActivate: [AuthGuard] },
       { path: 'links', component: LinksComponent, canActivate: [AuthGuard] },
+      { path: 'posts', component: PostsComponent, canActivate: [AuthGuard], data: { type: 'posts' } },
+      { path: 'chronicles', component: PostsComponent, canActivate: [AuthGuard], data: { type: 'chronicles' } },
+      { path: 'photos', component: PostsComponent, canActivate: [AuthGuard], data: { type: 'photos' } },
     ],
   },
 ];

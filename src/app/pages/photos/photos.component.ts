@@ -25,14 +25,14 @@ export class PhotosComponent implements OnInit {
     this.page = 1;
     this.commonsService.setLoading(true);
     this.commonsService.setTitle('Galería de la comunidad');
-    this.postsService.getPhotos(this.page).subscribe(
+    this.postsService.get('photos', this.page, 'published').subscribe(
       data => {
         this.photos = data;
         this.totalPages = Math.ceil(this.photos.total_items / 10);
         this.album = [];
         this.photos.results.forEach(el => {
           const thumb = this.commonsService.photosRoute + helper.thumb(el.archive);
-          this.album.push({src: this.commonsService.photosRoute + el.archive, caption: el.title, thumb: thumb});
+          this.album.push({ src: this.commonsService.photosRoute + el.archive, caption: el.title, thumb: thumb });
         });
         this.commonsService.setLoading(false);
       },

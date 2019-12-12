@@ -23,11 +23,15 @@ export class LinksService {
     return this.apiService.delete(`links/${data.id}`);
   }
 
-  create(data: NavigationLinkPost): Observable<void> {
+  public create(data: NavigationLinkPost): Observable<void> {
     return this.apiService.post(`links`, data);
   }
 
-  update(id: number, data: NavigationLinkPost): Observable<void> {
+  public update(id: number, data: NavigationLinkPost): Observable<void> {
     return this.apiService.put(`links/${id}`, data);
+  }
+
+  public publish(id: number, published: boolean): Observable<void> {
+    return this.apiService.patch(`links/${id}`, { published: published });
   }
 }

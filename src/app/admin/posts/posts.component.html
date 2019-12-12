@@ -1,0 +1,43 @@
+<h1>{{ type | titlecase }} <small>- Lista</small>
+  <div class="btn-group pull-right">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      Nuevo <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a routerLink="/admin/posts/nuevo/post">Post</a></li>
+      <li><a routerLink="/admin/posts/nuevo/foto">Foto</a></li>
+      <li><a routerLink="/admin/posts/nuevo/cronica">Crónica</a></li>
+    </ul>
+  </div>
+</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="d-none">ID</th>
+      <th>T&iacute;tulo</th>
+      <th>Fecha creaci&oacute;n</th>
+      <th>Ultima actualizaci&oacute;n</th>
+      <th>N&ordm; comentarios</th>
+      <th>Operaciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts.results">
+      <td class="d-none">{{post.id}}</td>
+      <td><a routerLink="/admin/posts/editar/{{post.id}}" title="Modificar el contenido del post">{{post.title}}</a>
+      </td>
+      <td class="text-center">{{post.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+      <td class="text-center">{{post.updated_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+      <td class="text-center">{{post.comment_count}}</td>
+      <td class="text-center">
+        <a routerLink="/admin/posts/publish/{{post.id}}" class="btn btn-xs btn-default"
+          title="{{post.published ? 'Despublicar '.type : 'Publicar '.type}}"><i
+            class="fa fa-thumbs-{{post.published ? 'up' : 'down'}} text-{{post.published ? 'sucess' : 'danger'}}"></i></a>
+        <a routerLink="/admin/posts/delete/{{post.id}}" class="btn btn-xs btn-danger" title="Eliminar {{type}}"><i
+            class="fa fa-skull-crossbones"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

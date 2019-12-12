@@ -109,6 +109,10 @@ export class PlayerComponent implements OnInit {
     }
   }
 
+  public close() {
+    this.bsModalRef.hide();
+  }
+
   public onSubmit() {
     if (this.playerform.valid) {
       this.commonsService.setLoading(true);
@@ -311,9 +315,9 @@ export class PlayerComponent implements OnInit {
     this.confirmMessage =
       (item as Modifier).type !== undefined
         ? 'el modificador ' +
-          (item as Modifier).modifier +
-          ' ' +
-          this.helperService.getAttributeName((item as Modifier).type)
+        (item as Modifier).modifier +
+        ' ' +
+        this.helperService.getAttributeName((item as Modifier).type)
         : 'la habilidad ' + (item as PlayerSkill).name;
     this.removeItem = item;
   }

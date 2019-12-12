@@ -22,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { LinksComponent } from './links/links.component';
 import { LinkComponent } from './links/link.component';
+import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { LinkComponent } from './links/link.component';
     AdminLayoutComponent,
     LinksComponent,
     LinkComponent,
+    PostsComponent,
   ],
   imports: [
     CommonModule,

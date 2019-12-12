@@ -119,11 +119,11 @@ export class LinksComponent implements OnInit {
   }
 
   publishLink(data: NavigationLink) {
-    data.published = !data.published;
     this.commonsService.setLoading(true);
-    this.linksService.update(data.id, data).subscribe(
+    this.linksService.publish(data.id, !data.published).subscribe(
       _ => {
         this.commonsService.handleSuccess('Enlace actualizado');
+        data.published = !data.published;
         this.commonsService.setLoading(false);
       },
       error => {

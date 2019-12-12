@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   put(
     method: string,
@@ -30,13 +30,23 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  get(
+  patch(
     method: string,
-    params: HttpParams = new HttpParams(),
+    body: Object = {},
     header: HttpHeaders = new HttpHeaders()
   ): Observable<any> {
     return this.http
-      .get(environment.api_uri + method, { headers: header, params: params })
+      .patch(environment.api_uri + method, JSON.stringify(body), { headers: header })
+      .pipe(catchError(this.handleError));
+  }
+
+  get(
+    method: string,
+    params: HttpParams = new HttpParams(),
+    headers: HttpHeaders = new HttpHeaders()
+  ): Observable<any> {
+    return this.http
+      .get(environment.api_uri + method, { headers, params })
       .pipe(catchError(this.handleError));
   }
 

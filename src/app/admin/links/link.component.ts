@@ -27,7 +27,7 @@ export class LinkComponent implements OnInit {
       {
         name: ['', Validators.required],
         description: ['', Validators.required],
-        url: ['', Validators.required],
+        url: ['', [Validators.required, Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)]],
       }
     );
   }
@@ -102,7 +102,16 @@ export class LinkComponent implements OnInit {
       }
     } else {
       this.commonsService.markFormGroupTouched(this.linkform);
-      this.commonsService.handleError('Hay campos sin rellenar');
+      console.log(this.linkform);
+      if (this.linkform.controls['url'].invalid) {
+        this.commonsService.handleError('La URL no es válida');
+      }
+      if (this.linkform.controls['name'].invalid) {
+        this.commonsService.handleError('Debes rellenar el nombre');
+      }
+      if (this.linkform.controls['description'].invalid) {
+        this.commonsService.handleError('Debes rellenar la descripción');
+      }
     }
   }
 }

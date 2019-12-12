@@ -1,10 +1,6 @@
 <div class="modal-header">
-  <button
-    class="btn btn-clear float-right"
-    (click)="bsModalRef.hide()"
-    aria-label="Close"
-  ></button>
   <div class="modal-title h5">{{ title }} jugador</div>
+  <button class="btn btn-clear" (click)="close()" aria-label="Close"><i class="fa fa-times"></i></button>
 </div>
 <form [formGroup]="playerform" (ngSubmit)="onSubmit()">
   <div class="modal-body">
@@ -13,12 +9,8 @@
         <div class="col-4">
           <div class="form-group">
             <label for="position_id">Posición</label>
-            <select
-              *ngIf="!player"
-              formControlName="position_id"
-              title="Selecionar la posición del jugador"
-              class="form-control"
-            >
+            <select *ngIf="!player" formControlName="position_id" title="Selecionar la posición del jugador"
+              class="form-control">
               <option value="">[Posición]</option>
               <option *ngFor="let position of free_positions" value="{{ position.id }}">{{
                 position.name
@@ -31,13 +23,8 @@
         <div class="col-4">
           <div class="form-group">
             <label for="number">Dorsal</label>
-            <select
-              *ngIf="!player"
-              formControlName="number"
-              title="Selecionar el dorsal del jugador"
-              class="form-control"
-              required
-            >
+            <select *ngIf="!player" formControlName="number" title="Selecionar el dorsal del jugador"
+              class="form-control" required>
               <option value="">[Dorsal]</option>
               <option *ngFor="let number of free_numbers" value="{{ number }}">{{
                 number
@@ -103,25 +90,14 @@
         </div>
         <div class="col-12" *ngIf="player">
           <div class="form-group">
-            <label for="skills"
-              >Habilidades
-              <button
-                class="btn btn-link pt-0 pb-0"
-                type="button"
-                (click)="toggleViewAddSkill()"
-              >
-                <i
-                  class="fa"
-                  [ngClass]="viewAddSkill ? 'fa-minus' : 'fa-plus'"
-                ></i></button
-            ></label>
+            <label for="skills">Habilidades
+              <button class="btn btn-link pt-0 pb-0" type="button" (click)="toggleViewAddSkill()">
+                <i class="fa" [ngClass]="viewAddSkill ? 'fa-minus' : 'fa-plus'"></i></button></label>
             <div *ngIf="viewAddSkill" class="form-inline">
               <label for="skill" class="mr-1">Nueva</label>
               <select class="form-control mr-1" formControlName="skill">
-                <optgroup
-                  *ngFor="let skilltype of availableSkills"
-                  label="{{ helperService.getSkillType(skilltype.name) }}"
-                >
+                <optgroup *ngFor="let skilltype of availableSkills"
+                  label="{{ helperService.getSkillType(skilltype.name) }}">
                   <option *ngFor="let skill of skilltype.skills" [value]="skill.id">{{
                     skill.name_es
                   }}</option>
@@ -136,28 +112,15 @@
               <span *ngIf="skill.modifier === 0" class="badge mr-1 badge-secondary">{{
                 skill.name
               }}</span>
-              <span
-                *ngIf="skill.modifier !== 0"
-                class="badge mr-1 badge-primary removable"
-                (click)="confirmRemove(skill)"
-                title="Eliminar habilidad"
-                >{{ skill.name }} <i class="fas fa-times-circle"></i
-              ></span>
+              <span *ngIf="skill.modifier !== 0" class="badge mr-1 badge-primary removable"
+                (click)="confirmRemove(skill)" title="Eliminar habilidad">{{ skill.name }} <i
+                  class="fas fa-times-circle"></i></span>
             </ng-container>
           </div>
           <div class="form-group">
-            <label for="modifiers"
-              >Modificadores
-              <button
-                class="btn btn-link pt-0 pb-0"
-                type="button"
-                (click)="toggleViewAddModifier()"
-              >
-                <i
-                  class="fa"
-                  [ngClass]="viewAddModifier ? 'fa-minus' : 'fa-plus'"
-                ></i></button
-            ></label>
+            <label for="modifiers">Modificadores
+              <button class="btn btn-link pt-0 pb-0" type="button" (click)="toggleViewAddModifier()">
+                <i class="fa" [ngClass]="viewAddModifier ? 'fa-minus' : 'fa-plus'"></i></button></label>
             <div *ngIf="viewAddModifier" class="form-inline">
               <label for="attribute" class="mr-1">Nuevo</label>
               <select class="form-control mr-1" formControlName="modifier_type">
@@ -165,41 +128,24 @@
                 <option value="-1">-1</option>
               </select>
               <select class="form-control mr-1" formControlName="attribute">
-                <option
-                  *ngFor="let item of helperService.getAttributes()"
-                  [value]="item.id"
-                  >{{ item.name }}</option
-                >
+                <option *ngFor="let item of helperService.getAttributes()" [value]="item.id">{{ item.name }}</option>
               </select>
               <button type="button" class="btn btn-primary" (click)="addModifier()">
                 Añadir
               </button>
             </div>
             <br />
-            <span
-              class="badge mr-1 removable"
-              [ngClass]="attribute.modifier > 0 ? 'badge-info' : 'badge-danger'"
-              *ngFor="let attribute of player.modifiers"
-              (click)="confirmRemove(attribute)"
-              title="Eliminar modificador"
-              >{{ attribute.modifier > 0 ? '+' : '' }}{{ attribute.modifier }}
+            <span class="badge mr-1 removable" [ngClass]="attribute.modifier > 0 ? 'badge-info' : 'badge-danger'"
+              *ngFor="let attribute of player.modifiers" (click)="confirmRemove(attribute)"
+              title="Eliminar modificador">{{ attribute.modifier > 0 ? '+' : '' }}{{ attribute.modifier }}
               {{ helperService.getAttributeName(attribute.type) }}
-              <i class="fas fa-times-circle"></i
-            ></span>
+              <i class="fas fa-times-circle"></i></span>
             <div *ngIf="showConfirm" class="text-center mt-3">
               <p>¿Seguro que quieres eliminar {{ confirmMessage }}?</p>
-              <button
-                type="button"
-                class="btn btn-primary btn-width btn-primary mr-2"
-                (click)="remove()"
-              >
+              <button type="button" class="btn btn-primary btn-width btn-primary mr-2" (click)="remove()">
                 Si
               </button>
-              <button
-                type="button"
-                class="btn btn-outline-secondary btn-width"
-                (click)="cancelRemove()"
-              >
+              <button type="button" class="btn btn-outline-secondary btn-width" (click)="cancelRemove()">
                 No
               </button>
             </div>
@@ -213,11 +159,7 @@
     <button type="submit" class="btn btn-primary btn-width btn-primary mr-2">
       Guardar
     </button>
-    <button
-      type="button"
-      class="btn btn-outline-secondary btn-width"
-      (click)="bsModalRef.hide()"
-    >
+    <button type="button" class="btn btn-outline-secondary btn-width" (click)="bsModalRef.hide()">
       Cancelar
     </button>
   </div>
