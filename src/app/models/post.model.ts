@@ -2,6 +2,7 @@ import { Pagination } from './common.model';
 
 export interface Post {
     id: number;
+    permalink: string;
     type: string;
     archive: string;
     title: string;
@@ -9,6 +10,19 @@ export interface Post {
     next?: Post;
     match_id: number;
     author: string;
+    status: string;
+    content: string;
+    comment_status: string;
+    comment_count: number;
+    page_title: string;
+    page_description: string;
+    page_keywords: string;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+    created_by: number;
+    updated_by: number;
+    deleted_by: number;
 }
 
 export interface Photo {

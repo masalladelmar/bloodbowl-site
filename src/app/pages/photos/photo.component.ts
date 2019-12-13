@@ -33,14 +33,15 @@ export class PhotoComponent implements OnInit {
     this.route.paramMap.subscribe(
       data => {
         this.match = null;
-        this.postsService.getPhoto(data.get('photo')).subscribe(
-          response => {
+        this.postsService.get('photos', data.get('photo')).subscribe(
+          (response: Post) => {
             this.photo = response;
             this.commonsService.setTitle(response.title);
             this.src = this.commonsService.photosRoute + this.photo.archive;
+
             if (this.photo.match_id) {
-              this.postsService.getMatchData(this.photo.match_id).subscribe(
-                response2 => {
+              this.postsService.get('chronicles', this.photo.match_id).subscribe(
+                (response2: Match) => {
                   this.match = response2;
                   this.commonsService.setLoading(false);
                 },
@@ -70,7 +71,7 @@ export class PhotoComponent implements OnInit {
   }
 
   scroll(el: HTMLElement) {
-    el.scrollIntoView({behavior: 'smooth'});
+    el.scrollIntoView({ behavior: 'smooth' });
   }
 
   get author() {

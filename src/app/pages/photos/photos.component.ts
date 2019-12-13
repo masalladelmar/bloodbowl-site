@@ -25,7 +25,7 @@ export class PhotosComponent implements OnInit {
     this.page = 1;
     this.commonsService.setLoading(true);
     this.commonsService.setTitle('Galería de la comunidad');
-    this.postsService.get('photos', this.page, 'published').subscribe(
+    this.postsService.getList('photos', this.page, 'published').subscribe(
       data => {
         this.photos = data;
         this.totalPages = Math.ceil(this.photos.total_items / 10);

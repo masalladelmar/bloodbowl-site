@@ -14,7 +14,7 @@ export class PostsService {
     private apiService: ApiService
   ) { }
 
-  public get(type: string, page = 0, status = 'all', deleted = false): Observable<PostsList> {
+  public getList(type: string, page = 0, status = 'all', deleted = false): Observable<PostsList> {
     let params = new HttpParams();
 
     if (status !== 'all') {
@@ -30,16 +30,16 @@ export class PostsService {
     return this.apiService.get(`${type}`, params);
   }
 
-  public getPhoto(photo: string): Observable<Post> {
-    return this.apiService.get(`photos/${photo}/detail`);
+  public get(type: string, slug: string | number): Observable<Post | Match> {
+    if (typeof (slug) === 'number') {
+      return this.apiService.get(`chronicles/${slug}`);
+    } else {
+      return this.apiService.get(`${type}/${slug}`);
+    }
   }
 
-  public getPost(post: string): Observable<Post> {
-    return this.apiService.get(`posts/${post}/detail`);
-  }
-
-  public getMatchData(match_id: number): Observable<Match> {
-    return this.apiService.get(`matches/${match_id}`);
+  public publish(type: string, id: number, status: string): Observable<void> {
+    return this.apiService.patch(`${type}/${id}`, { status: status });
   }
 
   public commentPost(post_id: number, author: string, content: string): Observable<void> {

@@ -1,14 +1,13 @@
 <h1>{{ type | titlecase }} <small>- Lista</small>
-  <div class="btn-group pull-right">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false">
+  <div class="dropdown float-right" routerLinkActive="active" dropdown>
+    <button class="btn btn-success dropdown-toggle" dropdownToggle data-toggle="dropdown">
       Nuevo <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu">
-      <li><a routerLink="/admin/posts/nuevo/post">Post</a></li>
-      <li><a routerLink="/admin/posts/nuevo/foto">Foto</a></li>
-      <li><a routerLink="/admin/posts/nuevo/cronica">Crónica</a></li>
-    </ul>
+    <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+      <a class="dropdown-item" routerLink="/admin/posts/new">Post</a>
+      <a class="dropdown-item" routerLink="/admin/photos/new">Foto</a>
+      <a class="dropdown-item" routerLink="/admin/chronicles/new">Crónica</a>
+    </div>
   </div>
 </h1>
 
@@ -23,21 +22,28 @@
       <th>Operaciones</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngIf="posts">
     <tr *ngFor="let post of posts.results">
       <td class="d-none">{{post.id}}</td>
-      <td><a routerLink="/admin/posts/editar/{{post.id}}" title="Modificar el contenido del post">{{post.title}}</a>
+      <td><a routerLink="/admin/{{type}}/{{post.id}}" title="Modificar el contenido del post">{{post.title}}</a>
       </td>
       <td class="text-center">{{post.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
       <td class="text-center">{{post.updated_at | date: 'dd/MM/yyyy HH:mm'}}</td>
       <td class="text-center">{{post.comment_count}}</td>
       <td class="text-center">
-        <a routerLink="/admin/posts/publish/{{post.id}}" class="btn btn-xs btn-default"
-          title="{{post.published ? 'Despublicar '.type : 'Publicar '.type}}"><i
-            class="fa fa-thumbs-{{post.published ? 'up' : 'down'}} text-{{post.published ? 'sucess' : 'danger'}}"></i></a>
-        <a routerLink="/admin/posts/delete/{{post.id}}" class="btn btn-xs btn-danger" title="Eliminar {{type}}"><i
-            class="fa fa-skull-crossbones"></i></a>
+        <div class="btn-group">
+          <button type="button" (click)="publish(post)" class="btn btn-sm btn-light"
+            [title]="post.status === 'published' ? 'Despublicar '.type : 'Publicar '.type"><i
+              class="fa fa-thumbs-{{post.status === 'published' ? 'up' : 'down'}} text-{{post.status === 'published' ? 'success' : 'danger'}}"></i></button>
+          <a routerLink="/admin/posts/delete/{{post.id}}" class="btn btn-sm btn-danger" title="Eliminar {{type}}"><i
+              class="fa fa-skull-crossbones"></i></a>
+        </div>
       </td>
+    </tr>
+  </tbody>
+  <tbody *ngIf="!posts">
+    <tr>
+      <td colspan="6" class="text-center">No hay posts en esta categoría</td>
     </tr>
   </tbody>
 </table>

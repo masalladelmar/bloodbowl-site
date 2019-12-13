@@ -24,6 +24,8 @@ import { LinksComponent } from './links/links.component';
 import { LinkComponent } from './links/link.component';
 import { PostsComponent } from './posts/posts.component';
 import { SpinnerModule } from '../shared/spinner/spinner.module';
+import { PostComponent } from './posts/post.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { SpinnerModule } from '../shared/spinner/spinner.module';
     AdminLayoutComponent,
     LinksComponent,
     LinkComponent,
-    PostsComponent
+    PostsComponent,
+    PostComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +56,8 @@ import { SpinnerModule } from '../shared/spinner/spinner.module';
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
     TooltipModule.forRoot(),
-    SpinnerModule
+    SpinnerModule,
+    CKEditorModule
   ],
   entryComponents: [ConfirmationModalComponent, PositionComponent, PlayerComponent, LinkComponent],
 })

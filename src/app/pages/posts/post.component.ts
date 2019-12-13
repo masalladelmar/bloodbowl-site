@@ -33,16 +33,16 @@ export class PostComponent implements OnInit {
     this.route.paramMap.subscribe(
       data => {
         this.match = null;
-        this.postsService.getPost(data.get('post')).subscribe(
-          response => {
+        this.postsService.get('posts', data.get('post')).subscribe(
+          (response: Post) => {
             this.post = response;
             if (this.post.archive) {
               this.src = this.commonsService.photosRoute + this.post.archive;
             }
             this.commonsService.setTitle(response.title);
             if (this.post.match_id) {
-              this.postsService.getMatchData(this.post.match_id).subscribe(
-                response2 => {
+              this.postsService.get('chronicles', this.post.match_id).subscribe(
+                (response2: Match) => {
                   this.match = response2;
                   this.commonsService.setLoading(false);
                 },
@@ -72,7 +72,7 @@ export class PostComponent implements OnInit {
   }
 
   scroll(el: HTMLElement) {
-    el.scrollIntoView({behavior: 'smooth'});
+    el.scrollIntoView({ behavior: 'smooth' });
   }
 
   get author() {

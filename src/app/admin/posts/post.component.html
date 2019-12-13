@@ -1,0 +1,118 @@
+<ng-template #infoTooltip>
+  <p class="mb-1" *ngIf="item && item.created_at">Creado en: {{ item.created_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+  <p class="mb-0" *ngIf="item && item.updated_at">Actualizado en: {{ item.updated_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+</ng-template>
+
+<h1>{{h1title + ' ' + type}}<div class="float-right" [tooltip]="infoTooltip"><small><i *ngIf="item"
+        class="fa fa-info"></i></small>
+  </div>
+</h1>
+
+<form [formGroup]="postform" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <label>Título</label>
+        <input type="text" class="form-control" formControlName="title"
+          [ngClass]="title.invalid && (title.dirty || title.touched) ? 'is-invalid' : ''" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Alias</label>
+        <input type="text" class="form-control" formControlName="permalink"
+          [ngClass]="permalink.invalid && (permalink.dirty || permalink.touched) ? 'is-invalid' : ''" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+
+      <div class="form-group" *ngIf="type === 'posts' || type === 'photos'">
+        <label>{{item && item.archive ? 'Cambiar' : 'Añadir'}} imagen <small>(jpg,png,gif)</small></label>
+        <input type="file" class="form-control" name="image" accept=".gif,.jpg,.png"
+          [ngClass]="image.invalid && (image.dirty || image.touched) ? 'is-invalid' : ''">
+      </div>
+      <div class="form-group" *ngIf="hasPhoto">
+        <label>Imagen actual</label>
+        <img src="/uploads/fotos/{{post.archive}}" alt="Foto del post" class="img-responsive" />
+      </div>
+
+      <div class="form-group">
+        <label>Contenido</label>
+        <ckeditor [ngClass]="content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''"
+          [editor]="Editor" formControlName="content" data=""></ckeditor>
+        <!--
+        <textarea class="form-control editor tinymce-editor"
+          [ngClass]="content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''"
+          formControlName="content"></textarea>
+          -->
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group text-center" *ngIf="matchData">
+        <h3>Encuentro</h3>
+        <p><b>{{matchData.equipo_1.nombre}}</b><br>
+          vs<br>
+          <b>{{matchData.equipo_2.nombre}}</b></p>
+      </div>
+
+      <div class="form-group">
+        <label>Título de página</label>
+        <input type="text" class="form-control" formControlName="page_title"
+          [ngClass]="page_title.invalid && (page_title.dirty || page_title.touched) ? 'is-invalid' : ''"
+          placeholder="SEO..." />
+      </div>
+      <div class="form-group">
+        <label>Palabras clave de página</label>
+        <input type="text" class="form-control" formControlName="page_keywords"
+          [ngClass]="page_keywords.invalid && (page_keywords.dirty || page_keywords.touched) ? 'is-invalid' : ''"
+          placeholder="SEO..." />
+      </div>
+      <div class="form-group">
+        <label>Descripción de página</label>
+        <input type="text" class="form-control" formControlName="page_description"
+          [ngClass]="page_description.invalid && (page_description.dirty || page_description.touched) ? 'is-invalid' : ''"
+          placeholder="SEO..." />
+      </div>
+      <div class="form-group">
+        <label>Estado</label>
+        <select formControlName="status" title="Selecionar el estado del post" class="form-control" [ngClass]="
+                        status.invalid && (status.dirty || status.touched)
+                          ? 'is-invalid'
+                          : ''
+                      ">
+          <option title="Se muestra en el site" value="published" [selected]="!item || item.status === 'published'">
+            Publicado
+          </option>
+          <option title="No se muestra en el site" value="private" [selected]="item && item.status === 'private'">
+            Privado
+          </option>
+          <option title="Post antiguo que ya no se muestra ni se modifica" value="closed"
+            [selected]="item && item.status === 'closed'">Cerrado</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Permitir comentarios</label><br>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-light" [ngClass]="item && item.comment_status === 'open' ? 'active' : ''"
+            for="published_si">
+            <input name="comment_status" type="radio" formControlName="comment_status" value="open" required="required">
+            Si
+          </label>
+          <label class="btn" [ngClass]="item && item.comment_status === 'closed' ? 'active' : ''" for="published_no">
+            <input name="comment_status" type="radio" formControlName="comment_status" value="closed"
+              required="required"> No
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button type="submit" class="btn btn-width mr-2 btn-primary">Guardar</button>
+    <a routerLink="/admin/{{type}}" class="btn btn-outline-secondary btn-width">
+      Cancelar
+    </a>
+  </div>
+</form>

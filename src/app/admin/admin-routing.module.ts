@@ -11,6 +11,7 @@ import { AdminLayoutComponent } from '../shared/layouts/admin-layout.component';
 import { AuthGuard } from '../guards/auth-guard.service';
 import { LinksComponent } from './links/links.component';
 import { PostsComponent } from './posts/posts.component';
+import { PostComponent } from './posts/post.component';
 
 const routes: Routes = [
   {
@@ -26,8 +27,11 @@ const routes: Routes = [
       { path: 'teams/:team', component: TeamComponent, canActivate: [AuthGuard] },
       { path: 'links', component: LinksComponent, canActivate: [AuthGuard] },
       { path: 'posts', component: PostsComponent, canActivate: [AuthGuard], data: { type: 'posts' } },
+      { path: 'posts/:id', component: PostComponent, canActivate: [AuthGuard], data: { type: 'posts' } },
       { path: 'chronicles', component: PostsComponent, canActivate: [AuthGuard], data: { type: 'chronicles' } },
+      { path: 'chronicles/:id', component: PostComponent, canActivate: [AuthGuard], data: { type: 'chronicles' } },
       { path: 'photos', component: PostsComponent, canActivate: [AuthGuard], data: { type: 'photos' } },
+      { path: 'photos/:id', component: PostComponent, canActivate: [AuthGuard], data: { type: 'photos' } },
     ],
   },
 ];
