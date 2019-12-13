@@ -1,7 +1,9 @@
 <main>
   <app-admin-header></app-admin-header>
-  <div class="container-fluid admin">
-    <router-outlet></router-outlet>
-  </div>
+  <app-spinner>
+    <div class="container-fluid admin">
+      <router-outlet></router-outlet>
+    </div>
+  </app-spinner>
   <app-admin-footer></app-admin-footer>
 </main>

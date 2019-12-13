@@ -23,6 +23,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { LinksComponent } from './links/links.component';
 import { LinkComponent } from './links/link.component';
 import { PostsComponent } from './posts/posts.component';
+import { SpinnerModule } from '../shared/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { PostsComponent } from './posts/posts.component';
     AdminLayoutComponent,
     LinksComponent,
     LinkComponent,
-    PostsComponent,
+    PostsComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +52,8 @@ import { PostsComponent } from './posts/posts.component';
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    SpinnerModule
   ],
   entryComponents: [ConfirmationModalComponent, PositionComponent, PlayerComponent, LinkComponent],
 })
