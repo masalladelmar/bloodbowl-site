@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Post, PostsList } from '../models/post.model';
+import { Post, PostsList, PostBack } from '../models/post.model';
 import { Observable } from 'rxjs';
 import { Match } from '../models/match.model';
 import { HttpParams } from '@angular/common/http';
@@ -44,5 +44,13 @@ export class PostsService {
 
   public commentPost(post_id: number, author: string, content: string): Observable<void> {
     return this.apiService.post(`comment/${post_id}`, { author: author, content: content });
+  }
+
+  public create(data: PostBack): Observable<void> {
+    return this.apiService.post(`${data.type}`, data);
+  }
+
+  public update(postId: number, data: PostBack): Observable<void> {
+    return this.apiService.put(`${data.type}/${postId}`, data);
   }
 }

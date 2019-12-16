@@ -9,7 +9,6 @@ export interface Post {
     previous?: Post;
     next?: Post;
     match_id: number;
-    author: string;
     status: string;
     content: string;
     comment_status: string;
@@ -23,6 +22,20 @@ export interface Post {
     created_by: number;
     updated_by: number;
     deleted_by: number;
+}
+
+export interface PostBack {
+    permalink: string;
+    type: string;
+    archive: string;
+    title: string;
+    match_id: number;
+    status: string;
+    content: string;
+    comment_status: string;
+    page_title: string;
+    page_description: string;
+    page_keywords: string;
 }
 
 export interface Photo {

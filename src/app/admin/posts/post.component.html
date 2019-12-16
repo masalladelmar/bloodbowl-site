@@ -4,7 +4,7 @@
 </ng-template>
 
 <h1>{{h1title + ' ' + type}}<div class="float-right" [tooltip]="infoTooltip"><small><i *ngIf="item"
-        class="fa fa-info"></i></small>
+        class="fa fa-stream"></i></small>
   </div>
 </h1>
 
@@ -34,14 +34,14 @@
           [ngClass]="image.invalid && (image.dirty || image.touched) ? 'is-invalid' : ''">
       </div>
       <div class="form-group" *ngIf="hasPhoto">
-        <label>Imagen actual</label>
-        <img src="/uploads/fotos/{{post.archive}}" alt="Foto del post" class="img-responsive" />
+        <label>Imagen actual</label><br>
+        <img src="/uploads/fotos/{{item.archive}}" alt="Foto del post" class="img-responsive" />
       </div>
 
       <div class="form-group">
         <label>Contenido</label>
         <ckeditor [ngClass]="content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''"
-          [editor]="Editor" formControlName="content" data=""></ckeditor>
+          [editor]="Editor" [config]="config" formControlName="content" data=""></ckeditor>
         <!--
         <textarea class="form-control editor tinymce-editor"
           [ngClass]="content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''"
@@ -94,14 +94,16 @@
       </div>
       <div class="form-group">
         <label>Permitir comentarios</label><br>
-        <div class="btn-group" data-toggle="buttons">
+        <div class="btn-group" btnRadioGroup>
           <label class="btn btn-light" [ngClass]="item && item.comment_status === 'open' ? 'active' : ''"
-            for="published_si">
-            <input name="comment_status" type="radio" formControlName="comment_status" value="open" required="required">
+            for="open-comment" btnRadio="open" tabindex="0" role="button">
+            <input name="comment_status" id="open-comment" type="radio" formControlName="comment_status" value="open"
+              required="required">
             Si
           </label>
-          <label class="btn" [ngClass]="item && item.comment_status === 'closed' ? 'active' : ''" for="published_no">
-            <input name="comment_status" type="radio" formControlName="comment_status" value="closed"
+          <label class="btn btn-light" [ngClass]="item && item.comment_status === 'closed' ? 'active' : ''"
+            for="close-comment" btnRadio="closed" tabindex="0" role="button">
+            <input name="comment_status" id="close-comment" type="radio" formControlName="comment_status" value="closed"
               required="required"> No
           </label>
         </div>
