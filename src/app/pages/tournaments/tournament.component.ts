@@ -26,9 +26,7 @@ export class TournamentComponent implements OnInit, OnDestroy {
         this.commonsService.setLoading(false);
       },
       error => {
-        this.commonsService.handleError(error.status === 500
-          ? 'Se ha producido un error al recuperar los datos del torneo'
-          : error.message);
+        this.commonsService.handleError(error, 'Se ha producido un error al recuperar los datos del torneo');
         this.commonsService.setLoading(false);
       }
     );

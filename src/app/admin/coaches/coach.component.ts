@@ -58,9 +58,7 @@ export class CoachComponent implements OnInit {
             this.router.navigate(['/admin/coaches']);
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al crear el entrenador'
-              : error.message);
+            this.commonsService.handleError(error, 'Se ha producido un error al crear el entrenador');
             this.commonsService.setLoading(false);
           }
         );
@@ -72,9 +70,7 @@ export class CoachComponent implements OnInit {
             this.router.navigate(['/admin/coaches']);
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al actualizar el entrenador'
-              : error.message);
+            this.commonsService.handleError(error, 'Se ha producido un error al actualizar el entrenador');
             this.commonsService.setLoading(false);
           }
         );

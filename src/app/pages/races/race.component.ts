@@ -44,9 +44,7 @@ export class RaceComponent implements OnInit {
             },
             error => {
               this.commonsService.handleError(
-                error.status === 500
-                  ? 'Se ha producido un error al recuperar las posiciones y estrellas de la raza'
-                  : error.message
+                error, 'Se ha producido un error al recuperar las posiciones y estrellas de la raza'
               );
               this.commonsService.setLoading(false);
             }
@@ -54,9 +52,7 @@ export class RaceComponent implements OnInit {
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al recuperar los datos de la raza'
-              : error.message
+            error, 'Se ha producido un error al recuperar los datos de la raza'
           );
           this.commonsService.setLoading(false);
         }
@@ -64,7 +60,7 @@ export class RaceComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   getTypesSelected(types: string): string {
     let out = '';

@@ -26,6 +26,7 @@ import { PostsComponent } from './posts/posts.component';
 import { SpinnerModule } from '../shared/spinner/spinner.module';
 import { PostComponent } from './posts/post.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ToastrModule.forRoot(),
     TooltipModule.forRoot(),
     SpinnerModule,
-    CKEditorModule
+    CKEditorModule,
+    ButtonsModule.forRoot()
   ],
   entryComponents: [ConfirmationModalComponent, PositionComponent, PlayerComponent, LinkComponent],
 })

@@ -27,16 +27,14 @@ export class RacesComponent implements OnInit {
       },
       error => {
         this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al recuperar los entrenadores'
-            : error.message
+          error, 'Se ha producido un error al recuperar los entrenadores'
         );
         this.commonsService.setLoading(false);
       }
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   deleteRace(race: Race) {
     const initialState = {
@@ -54,9 +52,7 @@ export class RacesComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al recuperar los entrenadores'
-                : error.message
+              error, 'Se ha producido un error al recuperar los entrenadores'
             );
             this.commonsService.setLoading(false);
           }

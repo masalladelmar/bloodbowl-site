@@ -31,11 +31,7 @@ export class PostsComponent implements OnInit {
         this.commonsService.setLoading(false);
       },
       error => {
-        this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al recuperar los posts'
-            : error.message
-        );
+        this.commonsService.handleError(error, 'Se ha producido un error al recuperar los posts');
         this.commonsService.setLoading(false);
       }
     );
@@ -51,11 +47,8 @@ export class PostsComponent implements OnInit {
         this.commonsService.setLoading(false);
       },
       error => {
-        this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al actualizar el estado de publicación'
-            : error.message
-        );
+        this.commonsService.handleError(error,
+          'Se ha producido un error al actualizar el estado de publicación');
         this.commonsService.setLoading(false);
       }
     );

@@ -31,9 +31,7 @@ export class SkillComponent implements OnInit {
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al recuperar las habilidades'
-              : error.message
+            error, 'Se ha producido un error al recuperar las habilidades'
           );
           this.commonsService.setLoading(false);
         }
@@ -41,5 +39,5 @@ export class SkillComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

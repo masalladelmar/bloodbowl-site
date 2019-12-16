@@ -65,12 +65,11 @@ export class RaceComponent implements OnInit {
 
           this.positions = response[1];
           this.skills = response[2];
+          this.commonsService.setLoading(false);
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al recuperar los datos de la raza'
-              : error.message
+            error, 'Se ha producido un error al recuperar los datos de la raza'
           );
           this.commonsService.setLoading(false);
         }
@@ -138,9 +137,7 @@ export class RaceComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al recuperar las posiciones'
-                : error.message
+              error, 'Se ha producido un error al recuperar las posiciones'
             );
             this.commonsService.setLoading(false);
           }
@@ -167,9 +164,7 @@ export class RaceComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al eliminar la posición'
-                : error.message
+              error, 'Se ha producido un error al eliminar la posición'
             );
             this.commonsService.setLoading(false);
           }
@@ -237,9 +232,7 @@ export class RaceComponent implements OnInit {
       },
       error => {
         this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al guardar el orden'
-            : error.message
+          error, 'Se ha producido un error al guardar el orden'
         );
         this.commonsService.setLoading(false);
       }
@@ -265,9 +258,7 @@ export class RaceComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al crear la raza'
-                : error.message
+              error, 'Se ha producido un error al crear la raza'
             );
             this.commonsService.setLoading(false);
           }
@@ -281,9 +272,7 @@ export class RaceComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al actualizar la raza'
-                : error.message
+              error, 'Se ha producido un error al actualizar la raza'
             );
             this.commonsService.setLoading(false);
           }

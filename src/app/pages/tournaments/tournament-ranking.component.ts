@@ -41,7 +41,7 @@ export class TournamentRankingComponent implements OnInit, OnDestroy {
               this.groups = [];
               this.ranking.forEach(el => {
                 if (!this.groups.find(gr => gr.name === el.tournament_group)) {
-                  this.groups.push({name: el.tournament_group, teams: []});
+                  this.groups.push({ name: el.tournament_group, teams: [] });
                 }
 
                 const item = this.groups.find(gr => gr.name === el.tournament_group);
@@ -51,10 +51,8 @@ export class TournamentRankingComponent implements OnInit, OnDestroy {
             this.commonsService.setLoading(false);
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al recuperar la clasificación del torneo'
-              : error.message);
-              this.commonsService.setLoading(false);
+            this.commonsService.handleError(error, 'Se ha producido un error al recuperar la clasificación del torneo');
+            this.commonsService.setLoading(false);
           }
         );
       }

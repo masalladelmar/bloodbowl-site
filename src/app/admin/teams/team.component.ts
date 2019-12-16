@@ -80,9 +80,7 @@ export class TeamComponent implements OnInit {
       },
       error => {
         this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al recuperar las razas y los entrenadores'
-            : error.message
+          error, 'Se ha producido un error al recuperar las razas y los entrenadores'
         );
         this.commonsService.setLoading(false);
       }
@@ -120,9 +118,7 @@ export class TeamComponent implements OnInit {
             },
             error => {
               this.commonsService.handleError(
-                error.status === 500
-                  ? 'Se ha producido un error al recuperar las posiciones disponibles de la raza'
-                  : error.message
+                error, 'Se ha producido un error al recuperar las posiciones disponibles de la raza'
               );
               this.commonsService.setLoading(false);
             }
@@ -130,9 +126,7 @@ export class TeamComponent implements OnInit {
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al recuperar los datos de la raza'
-              : error.message
+            error, 'Se ha producido un error al recuperar los datos de la raza'
           );
           this.commonsService.setLoading(false);
         }
@@ -148,7 +142,7 @@ export class TeamComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   get name() {
     return this.teamform.get('name');
@@ -180,6 +174,9 @@ export class TeamComponent implements OnInit {
   get race_id() {
     return this.teamform.get('race_id');
   }
+
+
+  // TODO: Implement onSubmit function
 
   getPosition(position_id: number): string {
     return this.positions ? this.positions.find(el => el.id === position_id).name : '';
@@ -231,9 +228,7 @@ export class TeamComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al recuperar los jugadores'
-                : error.message
+              error, 'Se ha producido un error al recuperar los jugadores'
             );
             this.commonsService.setLoading(false);
           }
@@ -263,9 +258,7 @@ export class TeamComponent implements OnInit {
               },
               error => {
                 this.commonsService.handleError(
-                  error.status === 500
-                    ? 'Se ha producido un error al recuperar los jugadores'
-                    : error.message
+                  error, 'Se ha producido un error al recuperar los jugadores'
                 );
                 this.commonsService.setLoading(false);
               }
@@ -274,9 +267,7 @@ export class TeamComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al marcar el jugador como muerto'
-                : error.message
+              error, 'Se ha producido un error al marcar el jugador como muerto'
             );
             this.commonsService.setLoading(false);
           }
@@ -306,9 +297,7 @@ export class TeamComponent implements OnInit {
               },
               error => {
                 this.commonsService.handleError(
-                  error.status === 500
-                    ? 'Se ha producido un error al recuperar los jugadores'
-                    : error.message
+                  error, 'Se ha producido un error al recuperar los jugadores'
                 );
                 this.commonsService.setLoading(false);
               }
@@ -317,9 +306,7 @@ export class TeamComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al despedir al jugador'
-                : error.message
+              error, 'Se ha producido un error al despedir al jugador'
             );
             this.commonsService.setLoading(false);
           }

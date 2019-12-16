@@ -25,10 +25,8 @@ export class RacesComponent implements OnInit {
         this.commonsService.setLoading(false);
       },
       error => {
-        this.commonsService.handleError(error.status === 500
-          ? 'Se ha producido un error al recuperar las razas'
-          : error.message);
-          this.commonsService.setLoading(false);
+        this.commonsService.handleError(error, 'Se ha producido un error al recuperar las razas');
+        this.commonsService.setLoading(false);
       }
     );
   }

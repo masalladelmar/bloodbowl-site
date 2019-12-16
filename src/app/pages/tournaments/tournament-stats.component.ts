@@ -34,10 +34,8 @@ export class TournamentStatsComponent implements OnInit, OnDestroy {
             this.commonsService.setLoading(false);
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al recuperar las estadísticas del torneo'
-              : error.message);
-              this.commonsService.setLoading(false);
+            this.commonsService.handleError(error, 'Se ha producido un error al recuperar las estadísticas del torneo');
+            this.commonsService.setLoading(false);
           }
         );
       }

@@ -153,9 +153,7 @@ export class PositionComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al actualizar la posición'
-                : error.message
+              error, 'Se ha producido un error al actualizar la posición'
             );
             this.commonsService.setLoading(false);
           }
@@ -170,9 +168,7 @@ export class PositionComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al crear la posición'
-                : error.message
+              error, 'Se ha producido un error al crear la posición'
             );
             this.commonsService.setLoading(false);
           }
@@ -280,9 +276,7 @@ export class PositionComponent implements OnInit {
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al añadir la habilidad'
-              : error.message
+            error, 'Se ha producido un error al añadir la habilidad'
           );
           this.commonsService.setLoading(false);
         }
@@ -319,9 +313,7 @@ export class PositionComponent implements OnInit {
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al eliminar la habilidad'
-              : error.message
+            error, 'Se ha producido un error al eliminar la habilidad'
           );
           this.commonsService.setLoading(false);
         }

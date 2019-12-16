@@ -34,9 +34,7 @@ export class TournamentExperienceComponent implements OnInit, OnDestroy {
             this.commonsService.setLoading(false);
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al recuperar la experiencia del torneo'
-              : error.message);
+            this.commonsService.handleError(error, 'Se ha producido un error al recuperar la experiencia del torneo');
             this.commonsService.setLoading(false);
           }
         );

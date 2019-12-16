@@ -57,8 +57,28 @@ export class CommonsService {
     return this.loading.asObservable();
   }
 
-  handleError(message: string) {
-    this.toastr.error(message, 'Error', {});
+  handleError(error: string | Response, optMessage = '') {
+    if (typeof error === 'string') {
+      this.toastr.error(error, 'Error', {});
+    } else {
+      let message = '';
+      console.error(error);
+      switch (error.status) {
+        case 500:
+          message = optMessage || error.statusText;
+          break;
+        case 404:
+          message = 'No se ha encontrado en la API el punto de acceso especificado';
+          break;
+        case 401:
+          message = 'El token ha caducado. Debes iniciar sesión de nuevo';
+          break;
+        default:
+          message = error.statusText;
+      }
+
+      this.toastr.error(message, 'Error', {});
+    }
   }
 
   handleSuccess(message: string) {

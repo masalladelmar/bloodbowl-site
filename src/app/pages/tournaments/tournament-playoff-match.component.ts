@@ -43,16 +43,14 @@ export class TournamentPlayoffMatchComponent implements OnInit, OnDestroy {
               this.album = [];
               this.photos.forEach(el => {
                 const thumb = this.commonsService.photosRoute + helper.thumb(el.archive);
-                this.album.push({src: this.commonsService.photosRoute + el.archive, caption: el.title, thumb: thumb});
+                this.album.push({ src: this.commonsService.photosRoute + el.archive, caption: el.title, thumb: thumb });
               });
               this.chronicle = this.match.posts.find(el => el.type === 'chronicle');
             }
             this.commonsService.setLoading(false);
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al recuperar los datos del encuentro'
-              : error.message);
+            this.commonsService.handleError(error, 'Se ha producido un error al recuperar los datos del encuentro');
             this.commonsService.setLoading(false);
           }
         );

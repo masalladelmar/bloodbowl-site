@@ -75,9 +75,7 @@ export class LinkComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al actualizar el enlace'
-                : error.message
+              error, 'Se ha producido un error al actualizar el enlace'
             );
             this.commonsService.setLoading(false);
           }
@@ -92,9 +90,7 @@ export class LinkComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al crear el enlace'
-                : error.message
+              error, 'Se ha producido un error al crear el enlace'
             );
             this.commonsService.setLoading(false);
           }

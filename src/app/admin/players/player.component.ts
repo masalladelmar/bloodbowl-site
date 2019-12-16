@@ -137,9 +137,7 @@ export class PlayerComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al actualizar el jugador'
-                : error.message
+              error, 'Se ha producido un error al actualizar el jugador'
             );
             this.commonsService.setLoading(false);
           }
@@ -155,9 +153,7 @@ export class PlayerComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al añadir el jugador'
-                : error.message
+              error, 'Se ha producido un error al añadir el jugador'
             );
             this.commonsService.setLoading(false);
           }
@@ -242,9 +238,7 @@ export class PlayerComponent implements OnInit {
       },
       error => {
         this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al añadir la habilidad'
-            : error.message
+          error, 'Se ha producido un error al añadir la habilidad'
         );
         this.commonsService.setLoading(false);
       }
@@ -301,9 +295,7 @@ export class PlayerComponent implements OnInit {
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al añadir el modificador'
-              : error.message
+            error, 'Se ha producido un error al añadir el modificador'
           );
           this.commonsService.setLoading(false);
         }
@@ -354,9 +346,7 @@ export class PlayerComponent implements OnInit {
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al eliminar el modificador'
-              : error.message
+            error, 'Se ha producido un error al eliminar el modificador'
           );
           this.commonsService.setLoading(false);
         }
@@ -376,9 +366,7 @@ export class PlayerComponent implements OnInit {
         },
         error => {
           this.commonsService.handleError(
-            error.status === 500
-              ? 'Se ha producido un error al eliminar la habilidad'
-              : error.message
+            error, 'Se ha producido un error al eliminar la habilidad'
           );
           this.commonsService.setLoading(false);
         }

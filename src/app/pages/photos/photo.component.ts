@@ -46,9 +46,7 @@ export class PhotoComponent implements OnInit {
                   this.commonsService.setLoading(false);
                 },
                 error => {
-                  this.commonsService.handleError(error.status === 500
-                    ? 'Se ha producido un error al recuperar los datos del encuentro'
-                    : error.message);
+                  this.commonsService.handleError(error, 'Se ha producido un error al recuperar los datos del encuentro');
                   this.commonsService.setLoading(false);
                 }
               );
@@ -57,9 +55,7 @@ export class PhotoComponent implements OnInit {
             }
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al recuperar los datos de la foto'
-              : error.message);
+            this.commonsService.handleError(error, 'Se ha producido un error al recuperar los datos de la foto');
             this.commonsService.setLoading(false);
           }
         );
@@ -91,9 +87,7 @@ export class PhotoComponent implements OnInit {
           this.commentform.get('content').setValue('');
         },
         error => {
-          this.commonsService.handleError(error.status === 500
-            ? 'Se ha producido un error al guardar el comentario'
-            : error.message);
+          this.commonsService.handleError(error, 'Se ha producido un error al guardar el comentario');
           this.commonsService.setLoading(false);
         }
       );

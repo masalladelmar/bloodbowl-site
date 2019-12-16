@@ -27,16 +27,14 @@ export class TeamsComponent implements OnInit {
       },
       error => {
         this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al recuperar los equipos'
-            : error.message
+          error, 'Se ha producido un error al recuperar los equipos'
         );
         this.commonsService.setLoading(false);
       }
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   deleteTeam(team: Team) {
     const initialState = {
@@ -54,9 +52,7 @@ export class TeamsComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al intentar eliminar el equipo'
-                : error.message
+              error, 'Se ha producido un error al intentar eliminar el equipo'
             );
             this.commonsService.setLoading(false);
           }

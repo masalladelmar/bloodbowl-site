@@ -30,9 +30,7 @@ export class LinksComponent implements OnInit {
       },
       error => {
         this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al recuperar los enlaces'
-            : error.message
+          error, 'Se ha producido un error al recuperar los enlaces'
         );
         this.commonsService.setLoading(false);
       }
@@ -46,9 +44,7 @@ export class LinksComponent implements OnInit {
       },
       error => {
         this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al recuperar los enlaces'
-            : error.message
+          error, 'Se ha producido un error al recuperar los enlaces'
         );
       }
     );
@@ -69,9 +65,7 @@ export class LinksComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al recuperar los enlaces'
-                : error.message
+              error, 'Se ha producido un error al recuperar los enlaces'
             );
             this.commonsService.setLoading(false);
           }
@@ -106,9 +100,7 @@ export class LinksComponent implements OnInit {
           },
           error => {
             this.commonsService.handleError(
-              error.status === 500
-                ? 'Se ha producido un error al eliminar el enlace'
-                : error.message
+              error, 'Se ha producido un error al eliminar el enlace'
             );
             this.commonsService.setLoading(false);
           }
@@ -128,9 +120,7 @@ export class LinksComponent implements OnInit {
       },
       error => {
         this.commonsService.handleError(
-          error.status === 500
-            ? 'Se ha producido un error al actualizar el enlace'
-            : error.message
+          error, 'Se ha producido un error al actualizar el enlace'
         );
         this.commonsService.setLoading(false);
       }

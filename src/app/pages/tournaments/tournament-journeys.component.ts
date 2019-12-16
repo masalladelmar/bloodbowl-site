@@ -35,9 +35,7 @@ export class TournamentJourneysComponent implements OnInit, OnDestroy {
             this.commonsService.setLoading(false);
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al recuperar las jornadas del torneo'
-              : error.message);
+            this.commonsService.handleError(error, 'Se ha producido un error al recuperar las jornadas del torneo');
             this.commonsService.setLoading(false);
           }
         );

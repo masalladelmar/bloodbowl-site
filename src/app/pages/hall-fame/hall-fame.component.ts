@@ -24,9 +24,7 @@ export class HallFameComponent implements OnInit {
         this.commonsService.setLoading(false);
       },
       error => {
-        this.commonsService.handleError(error.status === 500
-          ? 'Se ha producido un error al recuperar los jugadores famosos'
-          : error.message);
+        this.commonsService.handleError(error, 'Se ha producido un error al recuperar los jugadores famosos');
         this.commonsService.setLoading(false);
       }
     );

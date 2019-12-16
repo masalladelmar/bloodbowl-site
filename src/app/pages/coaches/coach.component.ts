@@ -44,17 +44,13 @@ export class CoachComponent implements OnInit {
             this.commonsService.setLoading(false);
           },
           error => {
-            this.commonsService.handleError(error.status === 500
-              ? 'Se ha producido un error al recuperar los equipos del entrenador'
-              : error.message);
+            this.commonsService.handleError(error, 'Se ha producido un error al recuperar los equipos del entrenador');
             this.commonsService.setLoading(false);
           }
         );
       },
       error => {
-        this.commonsService.handleError(error.status === 500
-          ? 'Se ha producido un error al recuperar los datos del entrenador'
-          : error.message);
+        this.commonsService.handleError(error, 'Se ha producido un error al recuperar los datos del entrenador');
         this.commonsService.setLoading(false);
       }
     );

@@ -37,9 +37,7 @@ export class PhotosComponent implements OnInit {
         this.commonsService.setLoading(false);
       },
       error => {
-        this.commonsService.handleError(error.status === 500
-          ? 'Se ha producido un error al recuperar las fotos de la galería'
-          : error.message);
+        this.commonsService.handleError(error, 'Se ha producido un error al recuperar las fotos de la galería');
         this.commonsService.setLoading(false);
       }
     );
