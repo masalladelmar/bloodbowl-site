@@ -13,7 +13,7 @@ export class PositionsService {
     return this.apiService.get(`positions/${race_id}`);
   }
 
-  delete(position: Position): Observable<void> {
+  delete(position: Position): Observable<boolean> {
     return this.apiService.delete(`positions/${position.id}`);
   }
 
@@ -21,7 +21,7 @@ export class PositionsService {
     return this.apiService.post(`positions`, position);
   }
 
-  update(position_id: number, position: PostPosition): Observable<void> {
+  update(position_id: number, position: PostPosition): Observable<boolean> {
     return this.apiService.put(`positions/${position_id}`, position);
   }
 
@@ -31,11 +31,11 @@ export class PositionsService {
     });
   }
 
-  deleteSkill(position_id: number, skill_id: number): Observable<void> {
+  deleteSkill(position_id: number, skill_id: number): Observable<boolean> {
     return this.apiService.delete(`positions/${position_id}/skills/${skill_id}`);
   }
 
-  public order(race_id: number, order: any): Observable<void> {
+  public order(race_id: number, order: any): Observable<boolean> {
     return this.apiService.put(`races/${race_id}/positions/order`, order);
   }
 }

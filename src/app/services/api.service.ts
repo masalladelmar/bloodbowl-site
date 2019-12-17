@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +14,10 @@ export class ApiService {
     method: string,
     body: Object = {},
     header: HttpHeaders = new HttpHeaders()
-  ): Observable<any> {
+  ): Observable<boolean> {
     return this.http
       .put(environment.api_uri + method, JSON.stringify(body), { headers: header })
+      .pipe(map(() => true))
       .pipe(catchError(this.handleError));
   }
 
@@ -34,9 +35,10 @@ export class ApiService {
     method: string,
     body: Object = {},
     header: HttpHeaders = new HttpHeaders()
-  ): Observable<any> {
+  ): Observable<boolean> {
     return this.http
       .patch(environment.api_uri + method, JSON.stringify(body), { headers: header })
+      .pipe(map(() => true))
       .pipe(catchError(this.handleError));
   }
 
@@ -50,9 +52,10 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
-  delete(method: string, header: HttpHeaders = new HttpHeaders()): Observable<any> {
+  delete(method: string, header: HttpHeaders = new HttpHeaders()): Observable<boolean> {
     return this.http
       .delete(environment.api_uri + method, { headers: header })
+      .pipe(map(() => true))
       .pipe(catchError(this.handleError));
   }
 

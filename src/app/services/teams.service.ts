@@ -32,7 +32,7 @@ export class TeamsService {
     return this.apiService.get(`teams/${team}`);
   }
 
-  delete(team_id: number): Observable<void> {
+  delete(team_id: number): Observable<boolean> {
     return this.apiService.delete(`teams/${team_id}`);
   }
 }

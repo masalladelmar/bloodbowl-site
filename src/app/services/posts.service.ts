@@ -38,7 +38,7 @@ export class PostsService {
     }
   }
 
-  public publish(type: string, id: number, status: string): Observable<void> {
+  public publish(type: string, id: number, status: string): Observable<boolean> {
     return this.apiService.patch(`${type}/${id}`, { status: status });
   }
 
@@ -50,7 +50,7 @@ export class PostsService {
     return this.apiService.post(`${data.type}`, data);
   }
 
-  public update(postId: number, data: PostBack): Observable<void> {
+  public update(postId: number, data: PostBack): Observable<boolean> {
     return this.apiService.put(`${data.type}/${postId}`, data);
   }
 }

@@ -19,7 +19,7 @@ export class LinksService {
     return this.apiService.get('links');
   }
 
-  public delete(data: NavigationLink): Observable<void> {
+  public delete(data: NavigationLink): Observable<boolean> {
     return this.apiService.delete(`links/${data.id}`);
   }
 
@@ -27,11 +27,11 @@ export class LinksService {
     return this.apiService.post(`links`, data);
   }
 
-  public update(id: number, data: NavigationLinkPost): Observable<void> {
+  public update(id: number, data: NavigationLinkPost): Observable<boolean> {
     return this.apiService.put(`links/${id}`, data);
   }
 
-  public publish(id: number, published: boolean): Observable<void> {
+  public publish(id: number, published: boolean): Observable<boolean> {
     return this.apiService.patch(`links/${id}`, { published: published });
   }
 }

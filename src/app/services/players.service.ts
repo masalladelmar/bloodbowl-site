@@ -7,7 +7,7 @@ import { Player, PostPlayer } from '../models/player.model';
   providedIn: 'root',
 })
 export class PlayersService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   getDead(): Observable<Player[]> {
     return this.apiService.get(`players/dead`);
@@ -25,15 +25,15 @@ export class PlayersService {
     return this.apiService.post(`players`, player);
   }
 
-  update(player_id: number, player: PostPlayer): Observable<void> {
+  update(player_id: number, player: PostPlayer): Observable<boolean> {
     return this.apiService.put(`players/${player_id}`, player);
   }
 
-  kill(player_id: number): Observable<void> {
+  kill(player_id: number): Observable<boolean> {
     return this.apiService.put(`players/${player_id}/kill`);
   }
 
-  fire(player_id: number): Observable<void> {
+  fire(player_id: number): Observable<boolean> {
     return this.apiService.put(`players/${player_id}/fire`);
   }
 
@@ -48,7 +48,7 @@ export class PlayersService {
     });
   }
 
-  deleteSkill(player_id: number, skill_id: number): Observable<void> {
+  deleteSkill(player_id: number, skill_id: number): Observable<boolean> {
     return this.apiService.delete(`players/${player_id}/skills/${skill_id}`);
   }
 
@@ -59,7 +59,7 @@ export class PlayersService {
     });
   }
 
-  deleteModifier(player_id: number, modifier_id: number): Observable<void> {
+  deleteModifier(player_id: number, modifier_id: number): Observable<boolean> {
     return this.apiService.delete(`players/${player_id}/modifiers/${modifier_id}`);
   }
 }

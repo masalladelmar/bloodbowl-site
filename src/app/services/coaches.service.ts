@@ -25,14 +25,14 @@ export class CoachesService {
   }
 
   create(name: string): Observable<void> {
-    return this.apiService.post(`coaches`, {name: name});
+    return this.apiService.post(`coaches`, { name: name });
   }
 
-  update(name: string, id: number): Observable<void> {
-    return this.apiService.put(`coaches/${id}`, {name: name});
+  update(name: string, id: number): Observable<boolean> {
+    return this.apiService.put(`coaches/${id}`, { name: name });
   }
 
-  delete(id: number): Observable<void> {
+  delete(id: number): Observable<boolean> {
     return this.apiService.delete(`coaches/${id}`);
   }
 }

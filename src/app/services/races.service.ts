@@ -17,7 +17,7 @@ export class RacesService {
     return this.apiService.get(`races/${race}`);
   }
 
-  public delete(race_id: number): Observable<void> {
+  public delete(race_id: number): Observable<boolean> {
     return this.apiService.delete(`races/${race_id}`);
   }
 
@@ -25,7 +25,7 @@ export class RacesService {
     return this.apiService.post(`races`, race);
   }
 
-  public update(race_id: number, race: PostRace): Observable<void> {
+  public update(race_id: number, race: PostRace): Observable<boolean> {
     return this.apiService.put(`races/${race_id}`, race);
   }
 }
