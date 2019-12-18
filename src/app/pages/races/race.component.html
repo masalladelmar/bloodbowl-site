@@ -1,6 +1,6 @@
 <div class="clearfix" *ngIf="race">
   <figure class="float-right" *ngIf="race.coat_arms">
-    <img src="assets/img/races/{{race.coat_arms}}.png" alt="{{race.name}}" class="img-responsive" /><br />
+    <img [src]="race.coat_arms" alt="{{race.name}}" class="img-responsive" /><br />
   </figure>
   <p>Pueden tener de 0-8 segundas oportunidades: {{race.reroll_cost/1000}}k MO cada una</p>
   <p *ngIf="race.description">Apuntes importantes: {{race.description}}</p>
