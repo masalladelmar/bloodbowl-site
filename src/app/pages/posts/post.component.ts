@@ -15,7 +15,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PostComponent implements OnInit {
   post: Post;
   match: Match;
-  src: string;
   commentform: FormGroup;
 
   constructor(
@@ -36,9 +35,6 @@ export class PostComponent implements OnInit {
         this.postsService.get('posts', data.get('post')).subscribe(
           (response: Post) => {
             this.post = response;
-            if (this.post.archive) {
-              this.src = this.commonsService.photosRoute + this.post.archive;
-            }
             this.commonsService.setTitle(response.title);
             if (this.post.match_id) {
               this.postsService.get('chronicles', this.post.match_id).subscribe(

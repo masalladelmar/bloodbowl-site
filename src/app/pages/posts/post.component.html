@@ -1,14 +1,10 @@
 <ng-container *ngIf="post">
-  <figure *ngIf="post.archive">
-    <img [src]="src" alt="{{ post.title }}" class="img-responsive" />
+  <figure *ngIf="post.image">
+    <img [src]="post.image" alt="{{ post.title }}" class="img-responsive" />
   </figure>
 
   <div class="clearfix">
-    <button
-      class="btn btn-link float-right"
-      title="Ver comentarios"
-      (click)="scroll(comments)"
-    >
+    <button class="btn btn-link float-right" title="Ver comentarios" (click)="scroll(comments)">
       {{
         post.comment_count +
           ' ' +
@@ -27,11 +23,8 @@
       <span class="comment_number">{{ i + 1 }}</span>
       <div class="comment_body">
         <p *ngIf="comment.author_url" class="comment_info">
-          <a
-            href="{{ comment.author_url }}"
-            title="La p&aacute;gina web del autor de este comentario"
-            >{{ comment.author }}</a
-          >
+          <a href="{{ comment.author_url }}"
+            title="La p&aacute;gina web del autor de este comentario">{{ comment.author }}</a>
           dijo...
         </p>
         <p *ngIf="!comment.author_url" class="comment_info">
@@ -40,9 +33,7 @@
         <div [innerHtml]="comment.content"></div>
       </div>
       <div class="comment_foot">
-        <i class="text-dark"
-          >Perpetrado el {{ comment.created_at | date: 'dd/MM/yyyy HH:mm' }}</i
-        >
+        <i class="text-dark">Perpetrado el {{ comment.created_at | date: 'dd/MM/yyyy HH:mm' }}</i>
       </div>
     </li>
   </ul>
@@ -53,29 +44,17 @@
         <legend>Escribe un comentario</legend>
         <div class="form-group">
           <label class="form-label">Nombre</label>
-          <input
-            type="text"
-            formControlName="author"
-            placeholder="Nombre para dejar en el comentario"
-            class="form-input"
-            [ngClass]="
+          <input type="text" formControlName="author" placeholder="Nombre para dejar en el comentario"
+            class="form-input" [ngClass]="
               author.invalid && (author.dirty || author.touched) ? 'is-invalid' : ''
-            "
-          />
+            " />
         </div>
         <div class="form-group">
           <label class="form-label">Comentario</label>
-          <textarea
-            formControlName="content"
-            cols="72"
-            wrap="soft"
-            rows="10"
-            class="form-input"
-            placeholder="Comentario"
-            [ngClass]="
+          <textarea formControlName="content" cols="72" wrap="soft" rows="10" class="form-input"
+            placeholder="Comentario" [ngClass]="
               content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''
-            "
-          ></textarea>
+            "></textarea>
         </div>
         <div class="form-group text-center">
           <button type="submit" class="btn btn-primary">Publicar comentario</button>

@@ -5,6 +5,7 @@ export interface Post {
     permalink: string;
     type: string;
     archive: string;
+    image: string;
     title: string;
     previous?: Post;
     next?: Post;
@@ -27,7 +28,8 @@ export interface Post {
 export interface PostBack {
     permalink: string;
     type: string;
-    archive: string;
+    file: string | ArrayBuffer;
+    filename: string;
     title: string;
     match_id: number;
     status: string;

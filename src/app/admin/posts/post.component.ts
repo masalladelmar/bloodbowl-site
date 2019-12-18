@@ -24,6 +24,8 @@ export class PostComponent implements OnInit {
   public config = {
     language: 'es'
   };
+  fileToUpload: File = null;
+  imgURL: string | ArrayBuffer;
 
   constructor(
     private commonsService: CommonsService,
@@ -112,6 +114,15 @@ export class PostComponent implements OnInit {
     return this.postform.get('comment_status');
   }
 
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    const reader = new FileReader();
+    reader.readAsDataURL(this.fileToUpload);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    };
+  }
+
   onSubmit() {
     // Submit form
     if (this.postform.valid) {
@@ -119,8 +130,9 @@ export class PostComponent implements OnInit {
       const post: PostBack = {
         title: this.postform.get('title').value,
         permalink: this.postform.get('permalink').value,
-        archive: this.postform.get('image').value,
         content: this.postform.get('content').value,
+        file: this.imgURL,
+        filename: this.fileToUpload.name,
         page_title: this.postform.get('page_title').value,
         page_keywords: this.postform.get('page_keywords').value,
         page_description: this.postform.get('page_description').value,
