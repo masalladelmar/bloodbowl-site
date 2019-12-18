@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'sass/variables.scss';
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 
+@import 'sass/variables.scss';
 $primary: $color-green;
 $success: $color-green;
 
@@ -211,6 +212,10 @@ a,
 .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(27, 121, 31, 0.5);
 }
+.form-control:focus{
+    border-color: $color-green;
+    box-shadow: 0 0 0 0.1rem rgba(27, 121, 31,.2);
+}
 /*
 .tab .tab-item a:focus, .tab .tab-item a:hover{
     color: $color-green;
@@ -218,10 +223,6 @@ a,
 .tab .tab-item a.active, .tab .tab-item.active a{
     border-bottom-color: $color-green;
     color: $color-green;
-}
-.form-input:focus{
-    border-color: $color-green;
-    box-shadow: 0 0 0 0.1rem rgba(85,128,0,.2);
 }
 .pagination .page-item a:focus, .pagination .page-item a:hover{
     color: white;

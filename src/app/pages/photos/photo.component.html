@@ -1,14 +1,8 @@
 <ng-container *ngIf="photo">
   <div class="clearfix">
     <small>
-      <a routerLink="/photos" title="Volver a la galería" class="btn btn-link"
-        >Volver a la galería</a
-      >
-      <button
-        class="btn btn-link float-right"
-        title="Ver comentarios"
-        (click)="scroll(comments)"
-      >
+      <a routerLink="/photos" title="Volver a la galería" class="btn btn-link">Volver a la galería</a>
+      <button class="btn btn-link float-right" title="Ver comentarios" (click)="scroll(comments)">
         {{
           photo.comment_count +
             ' ' +
@@ -21,22 +15,14 @@
   <figure class="ml-0 mr-0">
     <ul class="clearfix list-unstyled">
       <li class="float-left">
-        <a
-          *ngIf="photo.previous"
-          class="btn btn-primary anterior"
-          routerLink="/photos/{{ photo.previous.permalink }}"
-          title="Ver la foto anterior de la galer&iacute;a"
-          ><i class="fa fa-angle-left"></i><span class="sr-only">Anterior</span></a
-        >
+        <a *ngIf="photo.previous" class="btn btn-primary anterior" routerLink="/photos/{{ photo.previous.permalink }}"
+          title="Ver la foto anterior de la galer&iacute;a"><i class="fa fa-angle-left"></i><span
+            class="sr-only">Anterior</span></a>
       </li>
       <li class="float-right">
-        <a
-          *ngIf="photo.next"
-          class="btn btn-primary siguiente"
-          routerLink="/photos/{{ photo.next.permalink }}"
-          title="Ver la foto siguiente de la galer&iacute;a"
-          ><span class="sr-only">Siguiente</span><i class="fa fa-angle-right"></i
-        ></a>
+        <a *ngIf="photo.next" class="btn btn-primary siguiente" routerLink="/photos/{{ photo.next.permalink }}"
+          title="Ver la foto siguiente de la galer&iacute;a"><span class="sr-only">Siguiente</span><i
+            class="fa fa-angle-right"></i></a>
       </li>
     </ul>
     <img [src]="src" [alt]="photo.title" class="img-fluid" />
@@ -44,13 +30,9 @@
     <figcaption>
       <p *ngIf="match">
         Foto obtenida en el encuentro
-        <a
-          *ngIf="match"
-          title="Ver detalles del encuentro"
-          routerLink="/tournaments/{{ match.tournament_permalink }}/matches/{{
+        <a *ngIf="match" title="Ver detalles del encuentro" routerLink="/tournaments/{{ match.tournament_permalink }}/matches/{{
             match.id
-          }}"
-          >{{
+          }}">{{
             match.team_name_1 +
               ' vs ' +
               match.team_name_2 +
@@ -59,8 +41,7 @@
               ' - ' +
               match.tournament +
               ')'
-          }}</a
-        >
+          }}</a>
       </p>
       <small>Fecha foto: {{ photo.archive_date | date: 'dd/MM/yyyy' }}</small>
     </figcaption>
@@ -76,11 +57,8 @@
       <span class="comment_number">{{ i + 1 }}</span>
       <div class="comment_body">
         <p *ngIf="comment.author_url" class="comment_info">
-          <a
-            href="{{ comment.author_url }}"
-            title="La p&aacute;gina web del autor de este comentario"
-            >{{ comment.author }}</a
-          >
+          <a href="{{ comment.author_url }}"
+            title="La p&aacute;gina web del autor de este comentario">{{ comment.author }}</a>
           dijo...
         </p>
         <p *ngIf="!comment.author_url" class="comment_info">
@@ -89,9 +67,7 @@
         <div [innerHtml]="comment.content"></div>
       </div>
       <div class="comment_foot">
-        <i class="text-dark"
-          >Perpetrado el {{ comment.created_at | date: 'dd/MM/yyyy HH:mm' }}</i
-        >
+        <i class="text-dark">Perpetrado el {{ comment.created_at | date: 'dd/MM/yyyy HH:mm' }}</i>
       </div>
     </li>
   </ul>
@@ -102,29 +78,17 @@
         <legend>Escribe un comentario</legend>
         <div class="form-group">
           <label class="form-label">Nombre</label>
-          <input
-            type="text"
-            formControlName="author"
-            placeholder="Nombre para dejar en el comentario"
-            class="form-input"
-            [ngClass]="
+          <input type="text" formControlName="author" placeholder="Nombre para dejar en el comentario"
+            class="form-control" [ngClass]="
               author.invalid && (author.dirty || author.touched) ? 'is-invalid' : ''
-            "
-          />
+            " />
         </div>
         <div class="form-group">
           <label class="form-label">Comentario</label>
-          <textarea
-            formControlName="content"
-            cols="72"
-            wrap="soft"
-            rows="10"
-            class="form-input"
-            placeholder="Comentario"
-            [ngClass]="
+          <textarea formControlName="content" cols="72" wrap="soft" rows="10" class="form-control"
+            placeholder="Comentario" [ngClass]="
               content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''
-            "
-          ></textarea>
+            "></textarea>
         </div>
         <div class="form-group text-center">
           <button type="submit" class="btn btn-primary">Publicar comentario</button>
@@ -133,6 +97,4 @@
     </form>
   </div>
 </ng-container>
-<a routerLink="/photos" title="Volver a la galería" class="btn btn-primary"
-  >Volver a la galería</a
->
+<a routerLink="/photos" title="Volver a la galería" class="btn btn-primary">Volver a la galería</a>

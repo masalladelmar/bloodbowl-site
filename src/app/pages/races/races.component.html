@@ -1,8 +1,14 @@
 <div class="row">
 	<div class="col-md-3 col-sm-6" *ngFor="let race of races">
-		<a routerLink="/races/{{race.permalink}}" title="Ver los jugadores y detalles de la raza {{ race.name }}" class="btn-raza-item text-center">
-			<img *ngIf="race.coat_arms" src="assets/img/races/{{race.coat_arms}}.png" alt="{{ race.name }}" class="img-responsive p-centered" height="150" /><br />
-			<span>{{ race.name }}</span>
-		</a>
+		<div class="btn-raza-item text-center">
+			<a routerLink="/races/{{race.permalink}}" title="Ver los jugadores y detalles de la raza {{ race.name }}">
+				<img *ngIf="race.coat_arms" src="assets/img/races/{{race.coat_arms}}.png" alt="{{ race.name }}"
+					class="img-responsive p-centered" height="150" />
+			</a>
+			<br>
+			<a routerLink="/races/{{race.permalink}}"
+				title="Ver los jugadores y detalles de la raza {{ race.name }}"><span>{{ race.name }}</span></a>
+		</div>
 	</div>
+
 </div>

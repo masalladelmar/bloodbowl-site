@@ -45,13 +45,13 @@
         <div class="form-group">
           <label class="form-label">Nombre</label>
           <input type="text" formControlName="author" placeholder="Nombre para dejar en el comentario"
-            class="form-input" [ngClass]="
+            class="form-control" [ngClass]="
               author.invalid && (author.dirty || author.touched) ? 'is-invalid' : ''
             " />
         </div>
         <div class="form-group">
           <label class="form-label">Comentario</label>
-          <textarea formControlName="content" cols="72" wrap="soft" rows="10" class="form-input"
+          <textarea formControlName="content" cols="72" wrap="soft" rows="10" class="form-control"
             placeholder="Comentario" [ngClass]="
               content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''
             "></textarea>

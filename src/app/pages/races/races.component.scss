@@ -1,13 +1,17 @@
 @import '../../../sass/variables.scss';
 
 .btn-raza-item {
-	background-color: $color-green;
-	border:#a5a7aa solid 1px;
-	color: #ffffff;
+	background-color: rgba(255,255,255, 0.7);
+	color: $color-green;
 	margin-bottom: 20px;
-	display: block;
+	padding-top: 15px;
 
-	&:hover{
-		text-decoration: none;
+	img {
+		opacity: 0.6;
+		transition: ease-in opacity 0.5s;
+
+		&:hover{
+			opacity: 1;
+		}
 	}
 }
