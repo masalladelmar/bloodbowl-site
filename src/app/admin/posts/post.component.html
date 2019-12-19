@@ -33,22 +33,17 @@
         <input type="file" class="form-control" name="image" accept=".gif,.jpg,.png"
           [ngClass]="image.invalid && (image.dirty || image.touched) ? 'is-invalid' : ''"
           (change)="handleFileInput($event.target.files)">
-        <img [src]="imgURL" *ngIf="imgURL">
+        <img [src]="imgURL" *ngIf="imgURL" class="img-fluid">
       </div>
       <div class="form-group" *ngIf="hasPhoto">
         <label>Imagen actual</label><br>
-        <img [src]="item.image" alt="Foto del post" class="img-responsive" />
+        <img [src]="item.image" alt="Foto del post" class="img-fluid" />
       </div>
 
       <div class="form-group">
         <label>Contenido</label>
         <ckeditor [ngClass]="content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''"
           [editor]="Editor" [config]="config" formControlName="content" data=""></ckeditor>
-        <!--
-        <textarea class="form-control editor tinymce-editor"
-          [ngClass]="content.invalid && (content.dirty || content.touched) ? 'is-invalid' : ''"
-          formControlName="content"></textarea>
-          -->
       </div>
     </div>
     <div class="col-md-4">

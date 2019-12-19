@@ -1,7 +1,7 @@
 <div class="card-columns" *ngIf="photos">
   <div class="card" *ngFor="let photo of photos.results; index as i">
     <div class="card-image">
-      <img [src]="album[i].thumb" (click)="open(i)" class="img-responsive lightbox-image" title="Ver imagen ampliada" />
+      <img [src]="album[i].thumb" (click)="open(i)" class="img-fluid lightbox-image" title="Ver imagen ampliada" />
     </div>
     <div class="card-header">
       <h3 class="mb-0"><a routerLink="/photos/{{photo.permalink}}">{{photo.title}}</a></h3>
@@ -17,7 +17,9 @@
 
 <nav aria-label="paginacion de las fotos" *ngIf="totalPages > 1">
   <ul class="pagination">
-    <li *ngIf="page > 1" class="page-item page-prev"><button (click)="loadPage(page - 1)">Ver fotos más recientes <span aria-hidden="true">&rarr;</span></button></li>
-    <li *ngIf="page < totalPages" class="page-item page-next"><button (click)="loadPage(page + 1)"><span aria-hidden="true">&larr;</span> Ver fotos más antiguas</button></li>
+    <li *ngIf="page > 1" class="page-item page-prev"><button (click)="loadPage(page - 1)">Ver fotos más recientes <span
+          aria-hidden="true">&rarr;</span></button></li>
+    <li *ngIf="page < totalPages" class="page-item page-next"><button (click)="loadPage(page + 1)"><span
+          aria-hidden="true">&larr;</span> Ver fotos más antiguas</button></li>
   </ul>
 </nav>

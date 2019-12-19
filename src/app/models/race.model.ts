@@ -22,6 +22,6 @@ export interface PostRace {
     name: string;
     reroll_cost: number;
     description: string;
-    coat_arms: string;
+    coat_arms: string | ArrayBuffer;
     apothecary: boolean;
 }

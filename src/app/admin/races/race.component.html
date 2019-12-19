@@ -37,21 +37,19 @@
         </div>
         <div class="column col-md-4">
           <div class="form-group">
-            <label class="form-label">Escudo</label>
-            <input type="text" formControlName="coat_arms" placeholder="Escudo de armas" class="form-control" [ngClass]="
-                coat_arms.invalid && (coat_arms.dirty || coat_arms.touched)
-                  ? 'is-invalid'
-                  : ''
-              " />
+            <label>{{race?.coat_arms ? 'Cambiar' : 'Añadir'}} escudo <small>(jpg,png,gif)</small></label>
+            <input type="file" class="form-control" name="coat_arms" accept=".gif,.jpg,.png"
+              [ngClass]="coat_arms.invalid && (coat_arms.dirty || coat_arms.touched) ? 'is-invalid' : ''"
+              (change)="handleFileInput($event.target.files)">
+            <img [src]="imgURL" *ngIf="imgURL" class="img-fluid">
             <span *ngIf="coat_arms.invalid && (coat_arms.dirty || coat_arms.touched)" class="invalid-feedback">Debes
               rellenar el escudo de armas</span>
           </div>
-          <div class="form-group">
-            <p class="mb-1">Actual</p>
-            <figure *ngIf="race && race.coat_arms">
-              <img src="assets/img/races/{{ race.coat_arms }}.jpg" alt="Escudo de armas de la raza" />
-            </figure>
+          <div class="form-group" *ngIf="race?.coat_arms">
+            <label>Escudo actual</label><br>
+            <img [src]="race.coat_arms" alt="Escudo del equipo" class="img-fluid" />
           </div>
+
           <div class="form-group" *ngIf="race">
             <p class="mb-1">Permalink</p>
             <span *ngIf="race">{{ race.permalink }}</span>

@@ -27,6 +27,8 @@ export class RaceComponent implements OnInit {
   positions: Position[];
   modalRef: BsModalRef;
   skills: Skill[];
+  fileToUpload: File = null;
+  imgURL: string | ArrayBuffer;
 
   constructor(
     private racesService: RacesService,
@@ -46,10 +48,13 @@ export class RaceComponent implements OnInit {
       coat_arms: ['', Validators.required],
       apothecary: [''],
     });
-    this.commonsService.setLoading(true);
+  }
+
+  ngOnInit() {
     this.race_id = this.route.snapshot.paramMap.get('race');
     if (this.race_id !== 'new') {
       this.title = 'Editar';
+      this.commonsService.setLoading(true);
       forkJoin(
         this.racesService.getRace(this.race_id),
         this.positionsService.getAll(Number(this.race_id)),
@@ -79,8 +84,6 @@ export class RaceComponent implements OnInit {
       this.positions = [];
     }
   }
-
-  ngOnInit() { }
 
   getTypesSelected(types: string): string {
     let out = '';
@@ -239,13 +242,25 @@ export class RaceComponent implements OnInit {
     );
   }
 
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    const reader = new FileReader();
+    this.commonsService.setLoading(true);
+    reader.readAsDataURL(this.fileToUpload);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+      this.commonsService.setLoading(false);
+    };
+  }
+
   onSubmit() {
     if (this.raceform.valid) {
+      this.commonsService.setLoading(true);
       const postRace: PostRace = {
         name: this.raceform.get('name').value,
         reroll_cost: this.raceform.get('reroll_cost').value,
         description: this.raceform.get('description').value,
-        coat_arms: this.raceform.get('coat_arms').value,
+        coat_arms: this.imgURL,
         apothecary: this.raceform.get('apothecary').value,
       };
 

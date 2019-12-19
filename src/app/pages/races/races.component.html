@@ -2,7 +2,7 @@
 	<div class="col-md-3 col-sm-6" *ngFor="let race of races">
 		<div class="btn-raza-item text-center">
 			<a routerLink="/races/{{race.permalink}}" title="Ver los jugadores y detalles de la raza {{ race.name }}">
-				<img *ngIf="race.coat_arms" [src]="race.coat_arms" alt="{{ race.name }}" class="img-responsive p-centered"
+				<img *ngIf="race.coat_arms" [src]="race.coat_arms" alt="{{ race.name }}" class="img-fluid p-centered"
 					height="150" />
 			</a>
 			<br>
