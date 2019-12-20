@@ -26,6 +26,9 @@ export class CoachComponent implements OnInit {
     this.coachform = this.fb.group({
       name: ['', Validators.required]
     });
+  }
+
+  ngOnInit() {
     this.commonsService.setLoading(true);
     this.coach_id = this.route.snapshot.paramMap.get('coach');
     if (this.coach_id !== 'new') {
@@ -34,14 +37,17 @@ export class CoachComponent implements OnInit {
         response => {
           this.coach = response;
           this.coachform.get('name').setValue(this.coach.name);
+          this.commonsService.setLoading(false);
+        },
+        error => {
+          this.commonsService.handleError(error, 'Se ha producido un error al recuperar el entrenador');
+          this.commonsService.setLoading(false);
         }
       );
     } else {
       this.title = 'Nuevo';
+      this.commonsService.setLoading(false);
     }
-  }
-
-  ngOnInit() {
   }
 
   get name() {

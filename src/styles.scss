@@ -1,18 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import 'sass/variables.scss';
 $primary: $color-green;
 $success: $color-green;
+@import './assets/css/fontawesome.min.css';
+@import './assets/css/regular.min.css';
+@import './assets/css/solid.min.css';
 
 @import '~ngx-toastr/toastr-bs4-alert';
 
 @font-face {
   font-family: Gutcruncher;
-  src: url('assets/fonts/Gutcruncher.otf') format('opentype');
+  src: url('assets/webfonts/Gutcruncher.otf') format('opentype');
 }
 
 .background {

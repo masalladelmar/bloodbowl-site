@@ -64,6 +64,9 @@ export class TeamComponent implements OnInit {
       coach_id: ['', Validators.required],
       race_id: ['', Validators.required],
     });
+  }
+
+  ngOnInit() {
     this.commonsService.setLoading(true);
     this.team_id = this.route.snapshot.paramMap.get('team');
     this.canBuyPlayers = false;
@@ -115,6 +118,7 @@ export class TeamComponent implements OnInit {
               ) {
                 this.canBuyPlayers = true;
               }
+              this.commonsService.setLoading(false);
             },
             error => {
               this.commonsService.handleError(
@@ -139,10 +143,9 @@ export class TeamComponent implements OnInit {
       this.teamform.get('rerolls').setValue(0);
       this.teamform.get('treasury').setValue(1000000);
       this.teamform.get('treasury').disable();
+      this.commonsService.setLoading(false);
     }
   }
-
-  ngOnInit() { }
 
   get name() {
     return this.teamform.get('name');
