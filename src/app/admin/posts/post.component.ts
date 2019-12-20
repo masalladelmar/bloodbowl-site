@@ -132,7 +132,7 @@ export class PostComponent implements OnInit {
         permalink: this.postform.get('permalink').value,
         content: this.postform.get('content').value,
         file: this.imgURL,
-        filename: this.fileToUpload.name,
+        filename: this.fileToUpload ? this.fileToUpload.name : '',
         page_title: this.postform.get('page_title').value,
         page_keywords: this.postform.get('page_keywords').value,
         page_description: this.postform.get('page_description').value,
