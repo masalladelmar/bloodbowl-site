@@ -260,7 +260,8 @@ export class RaceComponent implements OnInit {
         name: this.raceform.get('name').value,
         reroll_cost: this.raceform.get('reroll_cost').value,
         description: this.raceform.get('description').value,
-        coat_arms: this.imgURL,
+        file: this.imgURL,
+        filename: this.fileToUpload.name,
         apothecary: this.raceform.get('apothecary').value,
       };
 
