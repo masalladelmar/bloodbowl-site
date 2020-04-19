@@ -42,7 +42,7 @@ const routes: Routes = [
       },
       {
         path: 'tournaments',
-        loadChildren: './tournaments/tournaments.module#TournamentsModule',
+        loadChildren: () => import('./tournaments/tournaments.module').then(m => m.TournamentsModule),
       },
     ],
   },
