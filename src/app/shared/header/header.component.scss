@@ -1,5 +1,10 @@
 @import '../../../sass/variables.scss';
 
+header {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
 h1{
     padding-top: 3rem;
     padding-bottom: 2rem;
@@ -16,4 +21,9 @@ h1{
             text-decoration: none;
         }
     }
+}
+
+.navbar{
+    padding: 0 1rem;
+    background-color: #669900;
 }
