@@ -2,12 +2,12 @@
 
 header {
     position: relative;
-    margin-bottom: 2rem;
 }
 
 h1{
     padding-top: 3rem;
     padding-bottom: 2rem;
+    margin-bottom: 0;
     a{
         color: $color-green;
         background-color: white;
@@ -21,9 +21,4 @@ h1{
             text-decoration: none;
         }
     }
-}
-
-.navbar{
-    padding: 0 1rem;
-    background-color: #669900;
 }
