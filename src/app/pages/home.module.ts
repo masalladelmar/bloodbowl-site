@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeLayoutModule } from '../shared/layouts/home-layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LightboxModule } from 'ngx-lightbox';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
@@ -45,7 +44,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HomeLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    LightboxModule,
     ModalModule.forRoot(),
   ],
   providers: [],

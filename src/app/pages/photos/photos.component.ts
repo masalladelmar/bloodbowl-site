@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonsService } from 'src/app/services/commons.service';
 import { PostsService } from 'src/app/services/posts.service';
-import { Post, Photo, PostsList } from 'src/app/models/post.model';
+import { Photo, PostsList } from 'src/app/models/post.model';
 import { HelperService } from 'src/app/services/helper.service';
-import { Lightbox } from 'ngx-lightbox';
 
 @Component({
   selector: 'app-photos',
@@ -20,7 +19,7 @@ export class PhotosComponent implements OnInit {
     private commonsService: CommonsService,
     private postsService: PostsService,
     public helper: HelperService,
-    private _lightbox: Lightbox
+    // private _lightbox: Lightbox
   ) {
     this.page = 1;
     this.commonsService.setLoading(true);
@@ -46,11 +45,11 @@ export class PhotosComponent implements OnInit {
   ngOnInit() {
   }
 
-  open(index: number): void {
+  /*open(index: number): void {
     this._lightbox.open(this.album, index);
   }
 
   close(): void {
     this._lightbox.close();
-  }
+  }*/
 }

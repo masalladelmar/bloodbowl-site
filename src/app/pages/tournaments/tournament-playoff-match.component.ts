@@ -6,7 +6,6 @@ import { Post, Photo } from 'src/app/models/post.model';
 import { CommonsService } from 'src/app/services/commons.service';
 import { ActivatedRoute } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
-import { Lightbox } from 'ngx-lightbox';
 import { PlayoffsService } from 'src/app/services/playoffs.service';
 
 @Component({
@@ -27,7 +26,7 @@ export class TournamentPlayoffMatchComponent implements OnInit, OnDestroy {
     private playoffsService: PlayoffsService,
     private route: ActivatedRoute,
     public helper: HelperService,
-    private _lightbox: Lightbox
+    // private _lightbox: Lightbox
   ) {
     this.commonsService.setLoading(true);
     this.toursubscript$ = this.route.data.subscribe(
@@ -65,11 +64,11 @@ export class TournamentPlayoffMatchComponent implements OnInit, OnDestroy {
     this.toursubscript$.unsubscribe();
   }
 
-  open(index: number): void {
+  /*open(index: number): void {
     this._lightbox.open(this.album, index);
   }
 
   close(): void {
     this._lightbox.close();
-  }
+  }*/
 }

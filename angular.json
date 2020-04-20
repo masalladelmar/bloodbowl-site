@@ -31,7 +31,6 @@
             ],
             "styles": [
               "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/ngx-lightbox/lightbox.css",
               "src/styles.scss"
             ],
             "scripts": []

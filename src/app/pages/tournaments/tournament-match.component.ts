@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs';
 import { MatchesService } from 'src/app/services/matches.service';
 import { Match } from 'src/app/models/match.model';
 import { Post, Photo } from 'src/app/models/post.model';
-import { Lightbox } from 'ngx-lightbox';
 
 @Component({
   selector: 'app-tournament-match',
@@ -27,7 +26,7 @@ export class TournamentMatchComponent implements OnInit, OnDestroy {
     private matchesService: MatchesService,
     private route: ActivatedRoute,
     public helper: HelperService,
-    private _lightbox: Lightbox
+    // private _lightbox: Lightbox
   ) {
     this.commonsService.setLoading(true);
     this.toursubscript$ = this.route.data.subscribe(
@@ -65,11 +64,11 @@ export class TournamentMatchComponent implements OnInit, OnDestroy {
     this.toursubscript$.unsubscribe();
   }
 
-  open(index: number): void {
+  /*open(index: number): void {
     this._lightbox.open(this.album, index);
   }
 
   close(): void {
     this._lightbox.close();
-  }
+  }*/
 }
