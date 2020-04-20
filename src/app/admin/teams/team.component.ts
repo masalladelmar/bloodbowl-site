@@ -318,4 +318,6 @@ export class TeamComponent implements OnInit {
       modalSubs$.unsubscribe();
     });
   }
+
+  onSubmit() { }
 }

@@ -92,7 +92,7 @@
             <div class="form-group">
               <label>Tirada normal</label><br />
               <label class="form-checkbox" formArrayName="normal"
-                *ngFor="let order of positionform.controls.normal.controls; let i = index">
+                *ngFor="let order of normal.controls; let i = index">
                 <input type="checkbox" [formControlName]="i" (click)="toggleType('normal', i)" [ngClass]="
                     normal.invalid && (normal.dirty || normal.touched) ? 'is-invalid' : ''
                   " />
@@ -105,7 +105,7 @@
             <div class="form-group">
               <label>Tirada dobles</label><br />
               <label class="form-checkbox" formArrayName="doubles" *ngFor="
-                  let order of positionform.controls.doubles.controls;
+                  let order of doubles.controls;
                   let i = index
                 ">
                 <input type="checkbox" [formControlName]="i" (click)="toggleType('doubles', i)" [ngClass]="

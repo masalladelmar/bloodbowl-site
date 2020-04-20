@@ -90,16 +90,14 @@ export class PositionComponent implements OnInit {
   ngOnInit() {
     this.buildTypes('normal');
     this.buildTypes('doubles');
-    const normal = <FormArray>this.positionform.get('normal');
-    const doubles = <FormArray>this.positionform.get('doubles');
     // Deshabilitar campos contrarios a los que están seleccionados
     SkillTypes.forEach((skill, index) => {
-      if (normal.controls[index].value === true) {
-        doubles.controls[index].disable();
+      if (this.normal.controls[index].value === true) {
+        this.doubles.controls[index].disable();
       }
 
-      if (doubles.controls[index].value === true) {
-        normal.controls[index].disable();
+      if (this.doubles.controls[index].value === true) {
+        this.normal.controls[index].disable();
       }
     });
 
@@ -201,11 +199,11 @@ export class PositionComponent implements OnInit {
   get av() {
     return this.positionform.get('av');
   }
-  get normal() {
-    return this.positionform.get('normal');
+  get normal(): FormArray {
+    return <FormArray>this.positionform.get('normal');
   }
-  get doubles() {
-    return this.positionform.get('doubles');
+  get doubles(): FormArray {
+    return <FormArray>this.positionform.get('doubles');
   }
 
   validateTypes(group: FormGroup): any {
