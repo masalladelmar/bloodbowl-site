@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeLayoutComponent } from './shared/layouts/home-layout.component';
-import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { AuthGuard } from './guards/auth-guard.service';
+import { PublicUrls } from './shared/publicUrls';
+import { NotfoundComponent } from './shared/components/notfound/notfound.component';
 
 const routes: Routes = [
   {
@@ -10,12 +11,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home.module').then(m => m.HomeModule),
   },
   {
-    path: 'admin',
+    path: PublicUrls.ADMIN,
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canLoad: [AuthGuard],
   },
   {
-    path: '**',
+    path: PublicUrls.NOT_FOUND,
     component: HomeLayoutComponent,
     children: [{ path: '', component: NotfoundComponent }],
   },

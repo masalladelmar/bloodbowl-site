@@ -4,7 +4,7 @@ import { LinksService } from 'src/app/services/links.service';
 import { NavigationLink } from 'src/app/models/link.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { LinkComponent } from './link.component';
-import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from 'src/app/shared/components/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-links',

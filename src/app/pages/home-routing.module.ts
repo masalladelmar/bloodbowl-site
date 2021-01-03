@@ -15,6 +15,7 @@ import { PostComponent } from './posts/post.component';
 import { HallFameComponent } from './hall-fame/hall-fame.component';
 import { HallDeadComponent } from './hall-dead/hall-dead.component';
 import { LoginComponent } from './login/login.component';
+import { PublicUrls } from '../shared/publicUrls';
 
 const routes: Routes = [
   {
@@ -22,26 +23,26 @@ const routes: Routes = [
     component: HomeLayoutComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'races', component: RacesComponent },
-      { path: 'races/:race', component: RaceComponent },
-      { path: 'coaches', component: CoachesComponent },
-      { path: 'coaches/:coach', component: CoachComponent },
-      { path: 'teams', component: TeamsComponent },
-      { path: 'teams/:team', component: TeamsComponent },
-      { path: 'teams/:team/print', component: TeamsComponent },
-      { path: 'skills', component: SkillsComponent },
-      { path: 'skills/:type', component: SkillComponent },
-      { path: 'photos', component: PhotosComponent },
-      { path: 'photos/:photo', component: PhotoComponent },
-      { path: 'posts/:post', component: PostComponent },
-      { path: 'hall-of-fame', component: HallFameComponent },
-      { path: 'hall-of-dead', component: HallDeadComponent },
+      { path: PublicUrls.RACES, component: RacesComponent },
+      { path: PublicUrls.RACES_DETAIL, component: RaceComponent },
+      { path: PublicUrls.COACHES, component: CoachesComponent },
+      { path: PublicUrls.COACHES_DETAIL, component: CoachComponent },
+      { path: PublicUrls.TEAMS, component: TeamsComponent },
+      { path: PublicUrls.TEAMS_DETAIL, component: TeamsComponent },
+      { path: PublicUrls.TEAMS_PRINT, component: TeamsComponent },
+      { path: PublicUrls.SKILLS, component: SkillsComponent },
+      { path: PublicUrls.SKILLS_TYPE, component: SkillComponent },
+      { path: PublicUrls.PHOTOS, component: PhotosComponent },
+      { path: PublicUrls.PHOTOS_DETAIL, component: PhotoComponent },
+      { path: PublicUrls.POSTS_DETAIL, component: PostComponent },
+      { path: PublicUrls.HALL_OF_FAME, component: HallFameComponent },
+      { path: PublicUrls.HALL_OF_DEAD, component: HallDeadComponent },
       {
-        path: 'login',
+        path: PublicUrls.LOGIN,
         component: LoginComponent,
       },
       {
-        path: 'tournaments',
+        path: PublicUrls.TOURNAMENTS,
         loadChildren: () => import('./tournaments/tournaments.module').then(m => m.TournamentsModule),
       },
     ],

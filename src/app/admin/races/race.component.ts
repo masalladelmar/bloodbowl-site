@@ -8,7 +8,7 @@ import { forkJoin } from 'rxjs';
 import { PositionsService } from 'src/app/services/positions.service';
 import { Position } from '../../models/position.model';
 import { PositionComponent } from '../positions/position.component';
-import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from 'src/app/shared/components/confirmation-modal/confirmation-modal.component';
 import { SkillTypes, Skill } from 'src/app/models/skill.model';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SkillsService } from 'src/app/services/skills.service';

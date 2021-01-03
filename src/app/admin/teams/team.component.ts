@@ -18,7 +18,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HelperService } from 'src/app/services/helper.service';
 import { SkillsService } from 'src/app/services/skills.service';
 import { Skill } from 'src/app/models/skill.model';
-import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from 'src/app/shared/components/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-team',

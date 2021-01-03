@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from 'src/app/shared/components/confirmation-modal/confirmation-modal.component';
 import { RacesService } from 'src/app/services/races.service';
 import { Race } from 'src/app/models/race.model';
 import { CommonsService } from 'src/app/services/commons.service';

@@ -13,10 +13,11 @@ import { TournamentMatchesComponent } from './tournament-matches.component';
 import { TournamentMatchComponent } from './tournament-match.component';
 import { TournamentPlayoffsComponent } from './tournament-playoffs.component';
 import { TournamentPlayoffMatchComponent } from './tournament-playoff-match.component';
+import { PublicUrls } from 'src/app/shared/publicUrls';
 
 const routes: Routes = [
   {
-    path: ':tournament',
+    path: PublicUrls.TOURNAMENTS_DETAIL,
     component: TournamentComponent,
     pathMatch: 'full',
     resolve: {
@@ -24,77 +25,77 @@ const routes: Routes = [
     },
   },
   {
-    path: ':tournament/teams',
+    path: PublicUrls.TOURNAMENTS_TEAMS,
     component: TournamentTeamsComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/teams/:team',
+    path: PublicUrls.TOURNAMENTS_TEAMS_DEAIL,
     component: TournamentTeamComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/stats',
+    path: PublicUrls.TOURNAMENTS_STATS,
     component: TournamentStatsComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/experience',
+    path: PublicUrls.TOURNAMENTS_XP,
     component: TournamentExperienceComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/ranking',
+    path: PublicUrls.TOURNAMENTS_RANKING,
     component: TournamentRankingComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/journeys',
+    path: PublicUrls.TOURNAMENTS_JOURNEYS,
     component: TournamentJourneysComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/journeys/:journey',
+    path: PublicUrls.TOURNAMENTS_JOURNEYS_DETAIL,
     component: TournamentJourneyComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/matches',
+    path: PublicUrls.TOURNAMENTS_MATCHES,
     component: TournamentMatchesComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/matches/:match',
+    path: PublicUrls.TOURNAMENTS_MATCHES_DETAIL,
     component: TournamentMatchComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/playoffs',
+    path: PublicUrls.TOURNAMENTS_PLAYOFFS,
     component: TournamentPlayoffsComponent,
     resolve: {
       tournament: TournamentResolverService,
     },
   },
   {
-    path: ':tournament/playoffs/:match',
+    path: PublicUrls.TOURNAMENTS_PLAYOFFS_DETAIL,
     component: TournamentPlayoffMatchComponent,
     resolve: {
       tournament: TournamentResolverService,

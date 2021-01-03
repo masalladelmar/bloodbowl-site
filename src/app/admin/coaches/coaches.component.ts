@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CoachesService } from 'src/app/services/coaches.service';
 import { CommonsService } from 'src/app/services/commons.service';
 import { Coach } from 'src/app/models/coach.model';
-import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from 'src/app/shared/components/confirmation-modal/confirmation-modal.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({

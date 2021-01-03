@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarRiaNurgle"
     aria-controls="navbarRiaNurgle" aria-expanded="false" aria-label="Ver o ocultar navegación">
     <span class="navbar-toggler-icon"></span>
@@ -34,13 +34,13 @@
         <a class="nav-link" routerLinkActive="active" routerLink="/hall-of-dead"
           title="Aquellos que nos han dejado tambi&eacute;n tienen aqu&iacute; su sitio">The Hall Of Dead</a>
       </li>
-      <li class="nav-item dropdown" *ngIf="tournaments" dropdown>
+      <li class="nav-item dropdown" *ngIf="(tournaments$ | async)" dropdown>
         <button class="btn btn-link nav-link dropdown-toggle" dropdownToggle aria-haspopup="true"
           aria-expanded="false" ngClass="{{isTournaments ? 'active' : ''}}">
           Trofeos
         </button>
         <ul class="dropdown-menu" *dropdownMenu role="menu">
-          <a class="dropdown-item" *ngFor="let tournament of tournaments" routerLinkActive="active"
+          <a class="dropdown-item" *ngFor="let tournament of tournaments$ | async" routerLinkActive="active"
             routerLink="/tournaments/{{tournament.permalink}}"
             title="{{tournament.name}} Ria de Nurgle">{{tournament.name}}</a>
         </ul>

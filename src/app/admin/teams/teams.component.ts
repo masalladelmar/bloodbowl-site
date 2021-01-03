@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamsService } from 'src/app/services/teams.service';
 import { CommonsService } from 'src/app/services/commons.service';
 import { Team } from 'src/app/models/team.model';
-import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from 'src/app/shared/components/confirmation-modal/confirmation-modal.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({

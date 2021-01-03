@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Tournament } from 'src/app/models/tournament.model';
 import { NavigationLink } from 'src/app/models/link.model';
-import { Subscription, forkJoin } from 'rxjs';
-import { TournamentsService } from 'src/app/services/tournaments.service';
+import { Subscription, forkJoin, Observable } from 'rxjs';
 import { LinksService } from 'src/app/services/links.service';
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { selectTournaments } from '../../selectors/tournaments.selectors';
+import { TournamentsActions } from '../../actions/tournaments.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -11,26 +14,25 @@ import { LinksService } from 'src/app/services/links.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  tournaments: Tournament[];
+  tournaments$: Observable<Tournament[]> = this.store.pipe(select(selectTournaments));
   links: NavigationLink[];
   subscriptions: Subscription = new Subscription();
 
   constructor(
-    private tournamentService: TournamentsService,
+    private store: Store<AppState>,
     private linksService: LinksService,
   ) { }
 
   ngOnInit(): void {
+    this.store.dispatch(TournamentsActions.getTournaments());
     // Datos para la navegación
     this.subscriptions.add(
       forkJoin([
-        this.tournamentService.getTournaments(),
         this.linksService.get()
       ])
       .subscribe(
         response => {
-          this.tournaments = response[0];
-          this.links = response[1];
+          this.links = response[0];
         },
         error => { }
       )

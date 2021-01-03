@@ -3,6 +3,8 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Tournament } from '../models/tournament.model';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PublicUrls } from '../shared/publicUrls';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ export class CommonsService {
   private _returnUrl: string;
 
   constructor(
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {
     this.tournament = new BehaviorSubject<Tournament>(null);
     this.title = new BehaviorSubject<string>('');
@@ -69,9 +72,11 @@ export class CommonsService {
           break;
         case 404:
           message = 'No se ha encontrado en la API el punto de acceso especificado';
+          this.router.navigate([PublicUrls.NOT_FOUND]);
           break;
         case 401:
           message = 'El token ha caducado. Debes iniciar sesión de nuevo';
+          this.router.navigate([PublicUrls.LOGIN]);
           break;
         default:
           message = error.statusText;

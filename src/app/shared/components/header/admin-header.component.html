@@ -6,7 +6,7 @@
         Torneos
       </button>
       <div class="dropdown-menu" *dropdownMenu>
-        <div class="dropdown-submenu" *ngFor="let tournament of tournaments">
+        <div class="dropdown-submenu" *ngFor="let tournament of tournaments$ | async">
           <a routerLink="/admin/tournaments/{{ tournament.id }}/edit"
             class="dropdown-item d-flex justify-content-between align-items-center">{{ tournament.name }} <i
               class="ml-2 fa fa-caret-right"></i></a>
